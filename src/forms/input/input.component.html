@@ -1,0 +1,11 @@
+<mat-form-field style="width: 100%" appearance="outline">
+  <mat-label>{{label}}</mat-label>
+  <input [type]="type" matInput [placeholder]="placeholder" [(ngModel)]="value">
+
+  <div *ngFor="let erro of erros">  
+    <mat-error *ngIf="control.hasError(erro.Validator) && !control.pristine">    
+      {{erro.Mensagem}}
+    </mat-error>  
+  </div>
+
+</mat-form-field>

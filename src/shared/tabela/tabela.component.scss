@@ -1,0 +1,52 @@
+.coluna-pequena{
+    width: 100px;
+}
+
+.coluna-media {
+    width: 300px;
+}
+
+.coluna-grande {
+    width: 500px;
+}
+
+.mat-column-Excluir {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 2% !important;
+    width: 2% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.mat-column-Alterar {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 2% !important;
+    width: 2% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.linha:hover {
+  background: whitesmoke;
+  cursor: pointer;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+  }

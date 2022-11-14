@@ -1,0 +1,7 @@
+.esquerda {
+    background-image: url(../../assets/saude.jpg); 
+    background-repeat: no-repeat; 
+    background-position: center center;
+    background-size: 550px 550px;
+    flex-grow: 0.6;
+}   

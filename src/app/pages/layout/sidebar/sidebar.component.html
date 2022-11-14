@@ -1,0 +1,14 @@
+<mat-sidenav-container class="example-container" style="height: 93vh">
+    <mat-sidenav #sidenav mode="side">
+
+      <mat-list *ngFor="let item of menu.Itens">
+        <app-item [Item]="item"></app-item>
+      </mat-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+ 
