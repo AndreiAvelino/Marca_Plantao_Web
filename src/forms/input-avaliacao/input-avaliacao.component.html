@@ -1,5 +1,6 @@
 <div style="margin-left: 10px;">
     <mat-icon *ngFor="let Estrela of Estrelas; let i = index" 
-              [ngClass]="Estrela.Status ? 'icon-display amarelo' : 'icon-display cinza'"
+              [ngStyle]="{'font-size': tamanhoEstrela, 'height': tamanhoEstrela, 'width': tamanhoEstrela }"
+              [ngClass]="Estrela.Status ? 'amarelo' : 'cinza'"
               (click)="AlterarNota(Estrela)"> star </mat-icon>
 </div>

@@ -13,28 +13,44 @@
 
         <mat-form-field appearance="fill" style="flex-grow: 2; margin-top: 3px;">
             <mat-label>Especialização</mat-label>
-            <mat-select formControlName="idEspecializacao">
+            <mat-select formControlName="idEspecializacao" multiple>
               <mat-option *ngFor="let especializacao of ListaEspecializacao" [value]="especializacao.Id">
                 {{especializacao.Descricao}}
               </mat-option>
             </mat-select>
         </mat-form-field>
-       
-        <mat-form-field appearance="outline" floatLabel="Valor" style="margin-left: 10px; margin-right: 10px; flex-grow: 1;">
-          <mat-label>Valor</mat-label>
-          <input matInput type="number" class="example-right-align" placeholder="0" formControlName="Valor">
-          <span matPrefix>R$&nbsp;</span>
-          <span matSuffix>.00</span>
-        </mat-form-field>
-    
-        <mat-form-field appearance="fill" style="flex-grow: 1; margin-top: 3px;">
+           
+        <mat-form-field appearance="fill" style="flex-grow: 1; margin-top: 3px; margin-left: 10px;">
           <mat-label>Data</mat-label>
           <input matInput type="date" formControlName="DataPlantao">
         </mat-form-field>
 
       </div>    
 
+      <div style="display: flex">
+      
+        <mat-form-field appearance="outline" floatLabel="Valor" style="margin-left: 10px; margin-right: 10px; flex-grow: 1;">
+          <mat-label>Valor</mat-label>
+          <input matInput type="number" class="example-right-align" placeholder="0" formControlName="Valor">
+          <span matPrefix>R$&nbsp;</span>
+          <span matSuffix>.00</span>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="flex-grow: 2; margin-top: 3px;">
+          <mat-label>Método de pagamento</mat-label>
+          <mat-select formControlName="MetodoPagamento">
+            <mat-option *ngFor="let metodo of ListaMetodosPagamento" [value]="metodo">
+              {{metodo}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+      
+      </div>
+
+
       <mp-radio label="Turno:" [opcoes]="[{Descricao: '24h', Valor: '24h'}, {Descricao: '12h', Valor: '12h'}]" layout="em-coluna"></mp-radio>
+
+
        
 
     </mat-card-content>
@@ -53,6 +69,6 @@
   </mat-card>
 </form>
 
-<app-tabela [Tabela]="TabelaUsuario"></app-tabela>
+<app-tabela [Tabela]="TabelaUsuario" (EmiteClickLinha)="VerPerfilUsuairo()"></app-tabela>
 
   <!-- <app-form-debug [form]="formulario"></app-form-debug> -->

@@ -1,4 +1,4 @@
-import { StatusPlantao, UF } from "../enum/enum";
+import { Rotas, StatusPlantao, TipoNotificacao, UF } from "../enum/enum";
 
 export interface Login {
     Id: number;
@@ -13,11 +13,6 @@ export interface Clinica {
     DataCadastro?: string
 }
 
-export interface Avaliacao {
-    Id: number,
-    idClinica: number,
-    Valor: number
-}
   
 export interface Endereco {
     Id?: number;
@@ -45,13 +40,17 @@ export interface Plantao {
     idOferta: number,
     idUsuario: number,
     Status: StatusPlantao,
-    DataCadastro?: string
+    DataCadastro?: string,
+    AvaliacaoClinica?: Avaliacao,
+    AvaliacaoProfissional?: Avaliacao,
+    Clinica?: String,
+    Valor?: String,
+    Profissional?: String
 }
 
-export interface AvaliacaoPlantao {
+export interface Avaliacao {
     Id: number,
     idPlantao: number,
-    idUsuario: number,
     Nota: number,
     Descricao: string,
     DataCadastro?: string
@@ -69,3 +68,10 @@ export interface Especializacao {
     Descricao: string
 }
 
+export interface Notificacao {
+    Id: number,
+    Descricao: String,
+    Tipo: TipoNotificacao,
+    Rota?: Rotas,
+    idRotaNotificacao?: number
+}

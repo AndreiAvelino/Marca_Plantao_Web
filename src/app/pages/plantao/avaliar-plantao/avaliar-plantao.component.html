@@ -1,24 +1,15 @@
 <form [formGroup]="formulario">
 
-    <mat-card style="margin: 30px">
-
-        <mat-card-title>
-            Nota
-        </mat-card-title>
-
-        <input-avaliacao formControlName="Nota"></input-avaliacao>
-    </mat-card>
-
-    <mat-card style="margin: 30px">
-        <mat-card-content>
-            <mat-form-field appearance="outline" style="width: 100%">
-                <mat-label>Descrição</mat-label>
-                <textarea matInput formControlName="Descricao"></textarea>
-            </mat-form-field>
-        </mat-card-content>
-    </mat-card>
+    <div style="display: flex">
+        <span style="margin-top: 10px; font-weight: 500; font-size: 20px;"> Nota: </span>
+        <input-avaliacao formControlName="Nota" tamanhoEstrela="40px"></input-avaliacao>
+    </div>
+    
+    <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput formControlName="Descricao"></textarea>
+    </mat-form-field>
 
 </form>
 
-
-<!-- <app-form-debug [form]="formulario"></app-form-debug> -->
+<button mat-raised-button color="primary" (click)="Avaliar()">Finalizar avaliação!</button>

@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { OfertaModule } from './oferta/oferta.module';
 import { PlantaoModule } from './plantao/plantao.module';
 import { ClinicaModule } from './clinica/clinica.module';
+import { InicioModule } from './inicio/inicio.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ClinicaModule } from './clinica/clinica.module';
     LayoutModule,
     OfertaModule,
     PlantaoModule,
-    ClinicaModule
+    ClinicaModule,
+    InicioModule,
+    UsuarioModule
   ]
 })
 export class PagesModule { }

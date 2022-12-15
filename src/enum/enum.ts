@@ -29,10 +29,17 @@ export enum UF {
 }
 
 export enum StatusPlantao {
-    NaoIniciado,
-    Andamento,
-    Finalizado,
-    Cancelado
+    NaoIniciado = 'Não iniciado',
+    Andamento = 'Em andamento',
+    Finalizado = 'Finalizado',
+    Cancelado = 'Cancelado'
+}
+
+export enum FormaPagamento {
+    Pix,
+    Dinheiro,
+    Cartao,
+    Cheque
 }
 
 export enum Rotas {
@@ -41,7 +48,15 @@ export enum Rotas {
     ConfigurarClinica = '/configurarclinica',
     HistoricoPlantao = '/historicoplantao',
     AvaliacaoPlantao = '/avaliacaoplantao',
-    Inicio = '/login'
+    InfoPlantao = '/infoplantao',
+    Login = '/login',
+    Inicio = '/inicio'
+}
+
+export enum TipoNotificacao {
+    Alerta,
+    Informacao,
+    Urgente
 }
 
 export enum TamanhoColunaTabela {

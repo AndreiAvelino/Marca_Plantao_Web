@@ -39,3 +39,11 @@ export const ListaEspecializacao: Array<Especializacao> = [
     {Id: 36, Descricao: "Medicina legal e perícia médica"},
     {Id: 37, Descricao: "Medicina nuclear"}
 ]
+
+export const MetodosPagamento: Array<String> = [
+    "Dinheiro",
+    "Pix",
+    "Cheque",
+    "Cartão de crédito",
+    "Cartão de débito"
+]

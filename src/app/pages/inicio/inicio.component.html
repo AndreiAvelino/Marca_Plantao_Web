@@ -1,0 +1,33 @@
+<mat-card style="margin: 30px">
+    <div id="linha">
+        <apx-chart
+          [series]="graficoLinhaOpcoes.series"
+          [chart]="graficoLinhaOpcoes.chart"
+          [dataLabels]="graficoLinhaOpcoes.dataLabels"
+          [plotOptions]="graficoLinhaOpcoes.plotOptions"
+          [yaxis]="graficoLinhaOpcoes.yaxis"
+          [legend]="graficoLinhaOpcoes.legend"
+          [fill]="graficoLinhaOpcoes.fill"
+          [stroke]="graficoLinhaOpcoes.stroke"
+          [tooltip]="graficoLinhaOpcoes.tooltip"
+          [xaxis]="graficoLinhaOpcoes.xaxis"
+        ></apx-chart>
+      </div>      
+</mat-card>
+
+<mat-card style="margin: 30px">
+    <div id="chart">
+        <apx-chart
+          [series]="graficoDoisOpcoes.series"
+          [chart]="graficoDoisOpcoes.chart"
+          [xaxis]="graficoDoisOpcoes.xaxis"
+          [stroke]="graficoDoisOpcoes.stroke"
+          [dataLabels]="graficoDoisOpcoes.dataLabels"
+          [yaxis]="graficoDoisOpcoes.yaxis"
+          [labels]="graficoDoisOpcoes.labels"
+          [legend]="graficoDoisOpcoes.legend"
+          [title]="graficoDoisOpcoes.title"
+          [subtitle]="graficoDoisOpcoes.subtitle"
+        ></apx-chart>
+      </div>      
+</mat-card>

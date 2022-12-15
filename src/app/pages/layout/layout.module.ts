@@ -11,9 +11,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatBadgeModule} from '@angular/material/badge';
 
 import { RouterModule } from '@angular/router';
 import { ItemComponent } from './item/item.component';
+import { NotificacoesComponent } from './navbar/notificacoes/notificacoes.component';
 
 const materialModules = [
   MatToolbarModule,
@@ -21,11 +23,12 @@ const materialModules = [
   MatButtonModule,
   MatSidenavModule,
   MatListModule,
-  MatMenuModule
+  MatMenuModule,
+  MatBadgeModule
 ]
 
 @NgModule({
-  declarations: [LayoutComponent, NavbarComponent, SidebarComponent, FooterComponent, ItemComponent],
+  declarations: [LayoutComponent, NavbarComponent, SidebarComponent, FooterComponent, ItemComponent, NotificacoesComponent],
   imports: [
     ...materialModules,
     CommonModule,

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Rotas } from 'src/enum/enum';
 import { Erro } from 'src/models/form';
 
 @Component({
@@ -13,13 +15,19 @@ export class AuthComponent implements OnInit {
 
   public formulario: FormGroup;
 
-  constructor(private _fb: FormBuilder) {}
+  constructor(
+    private _fb: FormBuilder,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.formulario = this._fb.group({
       Email: ["", [Validators.required, Validators.email]],
       Senha: [null, [Validators.required]]
     })
+  }
+
+  public Login(): void {
+    this.router.navigate([Rotas.Inicio])
   }
  
 

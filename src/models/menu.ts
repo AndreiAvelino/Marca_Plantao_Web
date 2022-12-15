@@ -7,4 +7,5 @@ export interface Menu {
 export interface Item {
     Descricao: String;
     Rota: Rotas;
+    Icon?: String
 }

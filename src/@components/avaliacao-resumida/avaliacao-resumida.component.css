@@ -1,0 +1,18 @@
+.escondetexto {
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis 
+}
+
+.textoescondeaparece{
+    color: rgba(255, 0, 0, 0.719);
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.textoescondeaparece:hover {
+    color: rgba(180, 2, 2, 0.719);
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+}

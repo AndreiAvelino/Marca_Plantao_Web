@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 interface Estrela {
@@ -9,7 +9,7 @@ interface Estrela {
 @Component({
   selector: 'input-avaliacao',
   templateUrl: './input-avaliacao.component.html',
-  styleUrls: ['./input-avaliacao.component.css'],
+  styleUrls: ['./input-avaliacao.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -19,6 +19,9 @@ interface Estrela {
   ]
 })
 export class InputAvaliacaoComponent implements ControlValueAccessor {
+
+  @Input() tamanhoEstrela: String = "55px";
+  @Input() disabled: boolean = false;
 
   public Estrelas: Array<Estrela> = [
     {
@@ -50,8 +53,7 @@ export class InputAvaliacaoComponent implements ControlValueAccessor {
   }
 
   set value(v: number){
-    this.innerValue = v;
-    this.onChange(this.innerValue)
+    this.onChange(v)
   }
 
   public onChange: (value: number) => void = () => {};
@@ -59,7 +61,16 @@ export class InputAvaliacaoComponent implements ControlValueAccessor {
   constructor() {}
 
   writeValue(v: number): void {
-    this.onChange(this.innerValue);
+    this.value = v;
+
+    this.Estrelas = this.Estrelas.map(e => {
+      return {
+        ...e,
+        Status: v >= e.Rank
+      }
+    })
+    
+    this.onChange(v);
   }
   registerOnChange(fn: any): void {
     this.onChange =fn;
@@ -74,14 +85,17 @@ export class InputAvaliacaoComponent implements ControlValueAccessor {
 
   public AlterarNota(Estrela: Estrela): void{
 
-    this.value = Estrela.Rank;
+    if(!this.disabled){
+      this.value = Estrela.Rank;
 
-    this.Estrelas = this.Estrelas.map(e => {
-      return {
-        ...e,
-        Status: Estrela.Rank >= e.Rank
-      }
-    })
+      this.Estrelas = this.Estrelas.map(e => {
+        return {
+          ...e,
+          Status: Estrela.Rank >= e.Rank
+        }
+      })
+    }
+
   }
 
 

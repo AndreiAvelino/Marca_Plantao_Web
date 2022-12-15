@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ListaEspecializacao } from 'src/const/const';
+import { MatDialog } from '@angular/material/dialog';
+import { ListaEspecializacao, MetodosPagamento } from 'src/const/const';
 import { Especializacao, Usuario } from 'src/models/models';
 import { ColunaTabela, Tabela } from 'src/models/table';
+import { PerfilUsuarioComponent } from '../../usuario/perfil-usuario/perfil-usuario.component';
 
 @Component({
   selector: 'app-configurar-oferta',
@@ -12,6 +14,7 @@ import { ColunaTabela, Tabela } from 'src/models/table';
 export class ConfigurarOfertaComponent implements OnInit {
   
   public ListaEspecializacao: Array<Especializacao> = ListaEspecializacao 
+  public ListaMetodosPagamento: Array<String> = MetodosPagamento
 
   public formulario: FormGroup; 
 
@@ -64,7 +67,10 @@ export class ConfigurarOfertaComponent implements OnInit {
     Titulo: "Candidatos:"
   }
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(
+    private _formBuilder: FormBuilder,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
 
@@ -77,10 +83,22 @@ export class ConfigurarOfertaComponent implements OnInit {
       ListaIdCandidatos: [],
       DataPlantao: "",
       DataCadastro: "",
+      MetodoPagamento: ""
     })
 
   }
 
+  VerPerfilUsuairo(): void {
+    const dialogRef = this.dialog.open(PerfilUsuarioComponent, {
+      width: '500px',
+      height: '700px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  
 
 
 }

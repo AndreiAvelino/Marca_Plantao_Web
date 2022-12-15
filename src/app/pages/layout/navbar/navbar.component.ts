@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
 
   public Logout(): void {
     this.appStore.dispatch(appRealizarLogout());
-    this.router.navigate([Rotas.Inicio])
+    this.router.navigate([Rotas.Login])
   }
 
 }

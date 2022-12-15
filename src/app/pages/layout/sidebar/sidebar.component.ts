@@ -21,12 +21,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   public menu: Menu = {
     Itens: [
       {
-        Descricao: 'Lista de ofertas',
-        Rota: Rotas.ListagemOferta
+        Descricao: 'Início',
+        Rota: Rotas.Inicio
       },
       {
-        Descricao: 'Configurar oferta',
-        Rota: Rotas.ConfigurarOferta
+        Descricao: 'Lista de ofertas',
+        Rota: Rotas.ListagemOferta
       },
       {
         Descricao: 'Configurar clínica',
@@ -35,10 +35,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       {
         Descricao: 'Histórico de plantões',
         Rota: Rotas.HistoricoPlantao
-      },
-      {
-        Descricao: 'Avaliar plantão',
-        Rota: Rotas.AvaliacaoPlantao
       }
     ]
   }

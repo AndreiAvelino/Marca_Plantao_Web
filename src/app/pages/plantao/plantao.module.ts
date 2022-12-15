@@ -9,19 +9,24 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { InfoPlantaoComponent } from './info-plantao/info-plantao.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 const materialModules = [
   MatCardModule,
   MatInputModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDialogModule,
+  MatButtonModule
 ]
 
 
 @NgModule({
   declarations: [
     HistoricoPlantaoComponent, 
-    AvaliarPlantaoComponent
+    AvaliarPlantaoComponent, InfoPlantaoComponent
   ],
   imports: [
     ...materialModules,

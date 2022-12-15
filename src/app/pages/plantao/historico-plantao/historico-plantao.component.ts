@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StatusPlantao, TamanhoColunaTabela } from 'src/enum/enum';
+import { Router } from '@angular/router';
+import { Rotas, StatusPlantao, TamanhoColunaTabela } from 'src/enum/enum';
 import { Plantao } from 'src/models/models';
 import { ColunaTabela, Tabela } from 'src/models/table';
 
@@ -16,35 +17,74 @@ export class HistoricoPlantaoComponent implements OnInit {
       idOferta: 1,
       idUsuario: 1,
       Status: StatusPlantao.Finalizado,
-      DataCadastro: "2020-10-21"
+      DataCadastro: "2020-10-21",
+      Clinica: "Clinica São João Batista",
+      Valor: "R$600,00",
+      Profissional: "Carlos José Maranhão",
+      AvaliacaoClinica: {
+        Id: 0,
+        idPlantao: 0,
+        Nota: 1,
+        Descricao: "",
+      }
     },
     {
       Id: 0,
       idOferta: 2,
       idUsuario: 2,
       Status: StatusPlantao.NaoIniciado,
-      DataCadastro: "2020-10-21"
+      DataCadastro: "2020-10-21",
+      Clinica: "Clinica São João Batista",
+      Valor: "R$700,00",
+      Profissional: "Carlos José Maranhão"
     },
     {
       Id: 0,
       idOferta: 1,
       idUsuario: 1,
       Status: StatusPlantao.Finalizado,
-      DataCadastro: "2020-10-21"
+      DataCadastro: "2020-10-21",
+      Clinica: "Clinica Icaraí",
+      Valor: "R$300,00",
+      Profissional: "Carlos José Maranhão",
     },
     {
       Id: 0,
       idOferta: 1,
       idUsuario: 1,
       Status: StatusPlantao.Finalizado,
-      DataCadastro: "2020-10-21"
+      DataCadastro: "2020-10-21",
+      Clinica: "Clinica São João Batista",
+      Valor: "R$666,00",
+      Profissional: "Carlos José Maranhão",
+      AvaliacaoClinica: {
+        Id: 0,
+        idPlantao: 0,
+        Nota: 1,
+        Descricao: "",
+      },
+      AvaliacaoProfissional: {
+        Id: 0,
+        idPlantao: 0,
+        Nota: 1,
+        Descricao: "",
+      }
     },
     {
       Id: 0,
       idOferta: 1,
       idUsuario: 1,
       Status: StatusPlantao.Finalizado,
-      DataCadastro: "2020-10-21"
+      DataCadastro: "2020-10-21",
+      Clinica: "Clinica São João Batista",
+      Valor: "R$600,00",
+      Profissional: "Carlos José Maranhão",
+      AvaliacaoProfissional: {
+        Id: 0,
+        idPlantao: 0,
+        Nota: 1,
+        Descricao: "",
+      }
     },
   ]
 
@@ -52,6 +92,26 @@ export class HistoricoPlantaoComponent implements OnInit {
     {
       Chave: "idOferta",
       Descricao: "Id da oferta",
+      Tamanho: "10"
+    },
+    {
+      Chave: "Clinica",
+      Descricao: "Clínica",
+      Tamanho: "30"
+    },
+    {
+      Chave: "Valor",
+      Descricao: "Valor",
+      Tamanho: "10"
+    },
+    {
+      Chave: "Profissional",
+      Descricao: "Profissional",
+      Tamanho: "30"
+    },
+    {
+      Chave: "Status",
+      Descricao: "Status",
       Tamanho: "80"
     }
   ]
@@ -66,9 +126,15 @@ export class HistoricoPlantaoComponent implements OnInit {
     Titulo: "Historico de plantões"
   }
   
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  public VerPlantao(): void {
+    this.router.navigate([Rotas.InfoPlantao])
   }
 
 }

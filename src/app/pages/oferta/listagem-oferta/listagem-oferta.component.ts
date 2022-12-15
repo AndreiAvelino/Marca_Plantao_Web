@@ -1,4 +1,6 @@
 import {  Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Rotas } from 'src/enum/enum';
 import { Oferta } from 'src/models/models';
 import { ColunaTabela, Tabela } from 'src/models/table';
 
@@ -81,9 +83,15 @@ export class ListagemOfertaComponent implements OnInit {
     Titulo: "Lista de ofertas"
   }
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  public VerOferta(): void {
+    this.router.navigate([Rotas.ConfigurarOferta])
   }
 
 }

@@ -1,0 +1,47 @@
+<mat-card style="margin: 30px; flex-grow: 1;">
+
+    <mat-card-title>Informações do plantão</mat-card-title>
+
+    <hr>
+
+    <mat-card-content>
+        <br/>
+        <p style="font-size: 17px"> <span style="font-weight: 500;"> Profissional: </span> José Augusto Gomes da Silva </p> 
+        <p style="font-size: 17px"> <span style="font-weight: 500;"> Especialidade: </span>Cardiologista </p> 
+        <p style="font-size: 17px"> <span style="font-weight: 500;"> Valor: </span> Cardiologista </p> 
+        <p style="font-size: 17px"> <span style="font-weight: 500;"> Forma de pagamento: </span> Cardiologista </p> 
+        <p style="font-size: 17px"> <span style="font-weight: 500;"> Status do plantão: </span> Cardiologista </p> 
+    </mat-card-content>
+
+</mat-card>
+
+<mat-card style="margin: 30px;">
+
+    <div *ngIf="plantao.AvaliacaoProfissional" style="display: flex">
+        <span style="margin-top: 5px; font-weight: 500; font-size: 20px;"> Avaliação da clínica para o profissional </span> 
+        <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoProfissional.Nota"></input-avaliacao>
+    </div>
+
+    <div *ngIf="!plantao.AvaliacaoProfissional" style="display: flex; justify-content: space-between;">
+        <span style="margin-top: 5px; font-weight: 500; font-size: 20px;"> Avaliação da clínica para o profissional </span> 
+        <button mat-raised-button color="primary" (click)="AvaliarProfissional()">Realizar avaliação</button>
+    </div>
+
+    <hr>
+    <div *ngIf="plantao.AvaliacaoProfissional">
+        <p> Comentários: </p>
+        <p> "{{plantao.AvaliacaoProfissional.Descricao}}" </p>
+    </div>
+</mat-card>
+
+<mat-card style="margin: 30px;">
+    <div style="display: flex">
+        <span style="margin-top: 5px; font-weight: 500; font-size: 20px;"> Avaliação do profissional para a clínica </span> 
+        <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoClinica.Nota"></input-avaliacao>
+    </div>
+    <hr>
+    <div *ngIf="plantao.AvaliacaoClinica">
+        <p> Comentários: </p>
+        <p> "{{plantao.AvaliacaoClinica.Descricao}}" </p>
+    </div>
+</mat-card>
