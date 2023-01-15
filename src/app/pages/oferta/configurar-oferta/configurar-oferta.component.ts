@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ListaEspecializacao, MetodosPagamento } from 'src/const/const';
 import { Especializacao, Usuario } from 'src/models/models';
@@ -16,7 +16,7 @@ export class ConfigurarOfertaComponent implements OnInit {
   public ListaEspecializacao: Array<Especializacao> = ListaEspecializacao 
   public ListaMetodosPagamento: Array<String> = MetodosPagamento
 
-  public formulario: FormGroup; 
+  public formulario: UntypedFormGroup; 
 
   public ListaUsuario: Array<Usuario> = [
     {
@@ -68,7 +68,7 @@ export class ConfigurarOfertaComponent implements OnInit {
   }
 
   constructor(
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     public dialog: MatDialog
   ) { }
 

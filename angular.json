@@ -119,7 +119,6 @@
       }
     }
   },
-  "defaultProject": "Marca-Plantao-Web",
   "cli": {
     "analytics": false
   }

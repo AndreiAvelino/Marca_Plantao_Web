@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-configurar-clinica',
@@ -8,9 +8,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ConfigurarClinicaComponent implements OnInit {
 
-  public formulario: FormGroup
+  public formulario: UntypedFormGroup
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: UntypedFormBuilder) { }
 
   ngOnInit(): void {
 
