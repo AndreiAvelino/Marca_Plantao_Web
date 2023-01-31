@@ -11,6 +11,7 @@ export interface Tabela {
     BotaoAlterar: boolean;
     BotaoExcluir: boolean;
     BotaoLinha: boolean;
+    BotaoAcoes?: boolean;
     Filtro: boolean;
     Titulo?: String;
 }

@@ -25,6 +25,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         Rota: Rotas.Inicio
       },
       {
+        Descricao: 'Agenda',
+        Rota: Rotas.Agenda
+      },
+      {
         Descricao: 'Lista de ofertas',
         Rota: Rotas.ListagemOferta
       },

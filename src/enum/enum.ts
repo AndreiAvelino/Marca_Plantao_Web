@@ -50,7 +50,8 @@ export enum Rotas {
     AvaliacaoPlantao = '/avaliacaoplantao',
     InfoPlantao = '/infoplantao',
     Login = '/login',
-    Inicio = '/inicio'
+    Inicio = '/inicio',
+    Agenda = '/agenda'
 }
 
 export enum TipoNotificacao {

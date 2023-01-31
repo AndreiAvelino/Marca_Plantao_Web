@@ -8,6 +8,7 @@ import { PlantaoModule } from './plantao/plantao.module';
 import { ClinicaModule } from './clinica/clinica.module';
 import { InicioModule } from './inicio/inicio.module';
 import { UsuarioModule } from './usuario/usuario.module';
+import { AgendaModule } from './agenda/agenda.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UsuarioModule } from './usuario/usuario.module';
     PlantaoModule,
     ClinicaModule,
     InicioModule,
-    UsuarioModule
+    UsuarioModule,
+    AgendaModule
   ]
 })
 export class PagesModule { }

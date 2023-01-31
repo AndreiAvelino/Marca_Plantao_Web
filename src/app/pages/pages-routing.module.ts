@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AgendaComponent } from './agenda/agenda.component';
 import { ConfigurarClinicaComponent } from './clinica/configurar-clinica/configurar-clinica.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { ConfigurarOfertaComponent } from './oferta/configurar-oferta/configurar-oferta.component';
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'listagemoferta',
         component: ListagemOfertaComponent,
+      },
+      {
+        path: 'agenda',
+        component: AgendaComponent,
       },
       {
         path: 'configuraroferta',

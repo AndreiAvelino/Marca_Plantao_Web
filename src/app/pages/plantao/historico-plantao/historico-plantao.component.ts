@@ -122,6 +122,7 @@ export class HistoricoPlantaoComponent implements OnInit {
     BotaoAlterar: true,
     BotaoExcluir: true,
     BotaoLinha: false,
+    BotaoAcoes: true,
     Filtro: false,
     Titulo: "Historico de plantões"
   }

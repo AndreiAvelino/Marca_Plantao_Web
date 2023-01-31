@@ -35,6 +35,10 @@ export class TabelaComponent implements AfterViewInit {
   private GerarColunasEChaves(): void {
     this.Colunas = this.Tabela.Colunas
 
+    if(this.Tabela.BotaoAcoes){
+      this.AdicionarColunaAcoes();
+    }
+
     if(this.Tabela.BotaoAlterar){
       this.AdicionarColunaAlterar();
     }
@@ -51,6 +55,13 @@ export class TabelaComponent implements AfterViewInit {
     console.log(this.paginator)
     this.DataSource.paginator = this.paginator;
     this.DataSource.sort = this.sort;
+  }
+
+  public AdicionarColunaAcoes(): void {
+    this.Colunas.unshift({
+      Chave: "Acoes",
+      Descricao: ''
+    })
   }
 
   public AdicionarColunaAlterar(): void {
@@ -89,7 +100,7 @@ export class TabelaComponent implements AfterViewInit {
   }
 
   public ColunasInformacoes(): Array<ColunaTabela> {
-    return this.Colunas.filter(c => c.Chave != "Alterar").filter(c => c.Chave != "Excluir")
+    return this.Colunas.filter(c => c.Chave != "Alterar").filter(c => c.Chave != "Excluir").filter(x => x.Chave != "Acoes")
   }
 
 }
