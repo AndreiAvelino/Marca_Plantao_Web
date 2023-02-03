@@ -1,18 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { FormBuilder, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { MatDialog , MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatStepper } from '@angular/material/stepper';
+import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { ListaEspecializacao, MetodosPagamento } from 'src/const/const';
-import { Especializacao, Usuario } from 'src/models/models';
+import { Especializacao, Oferta, Usuario } from 'src/models/models';
 import { ColunaTabela, Tabela } from 'src/models/table';
 import { PerfilUsuarioComponent } from '../../usuario/perfil-usuario/perfil-usuario.component';
+
 
 @Component({
   selector: 'app-configurar-oferta',
   templateUrl: './configurar-oferta.component.html',
   styleUrls: ['./configurar-oferta.component.css']
 })
-export class ConfigurarOfertaComponent implements OnInit {
+export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit {
+
+  @ViewChild('stepper') stepper: MatStepper;
   
+  private oferta: Oferta
+
   public ListaEspecializacao: Array<Especializacao> = ListaEspecializacao 
   public ListaMetodosPagamento: Array<String> = MetodosPagamento
 
@@ -68,9 +75,13 @@ export class ConfigurarOfertaComponent implements OnInit {
   }
 
   constructor(
-    private _formBuilder: UntypedFormBuilder,
-    public dialog: MatDialog
-  ) { }
+    private _formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<ConfigurarOfertaComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Oferta,
+  ){
+    super();
+    this.oferta = data
+  }
 
   ngOnInit(): void {
 
@@ -81,7 +92,10 @@ export class ConfigurarOfertaComponent implements OnInit {
       idEspecializacao: 0,
       Valor: "",
       ListaIdCandidatos: [],
-      DataPlantao: "",
+      DataInicial: this.oferta.DataPlantao,
+      HorarioInicial: "",
+      DataFinal: "",
+      HorarioFinal: "",
       DataCadastro: "",
       MetodoPagamento: ""
     })
@@ -96,6 +110,10 @@ export class ConfigurarOfertaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  public onClickButtonProsseguir(): void {
+    this.stepper.next()
   }
 
   

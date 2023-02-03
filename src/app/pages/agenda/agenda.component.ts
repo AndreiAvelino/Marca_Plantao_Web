@@ -2,11 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Calendar, CalendarOptions, EventClickArg } from '@fullcalendar/core';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { StatusPlantao } from 'src/enum/enum';
-import { Plantao } from 'src/models/models';
+import { Oferta, Plantao } from 'src/models/models';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import { EventoComponent } from './evento/evento.component';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import { ConfigurarOfertaComponent } from '../oferta/configurar-oferta/configurar-oferta.component';
 
 const ListaPlantoes: Array<Plantao> = [
   {
@@ -92,7 +94,7 @@ const ListaPlantoes: Array<Plantao> = [
 })
 export class AgendaComponent extends PadraoComponent implements OnInit {
 
-  @ViewChild('calendario') calendario: Calendar
+  @ViewChild('calendario') calendario: FullCalendarComponent
 
   public calendarOptions: CalendarOptions = null
 
@@ -109,6 +111,12 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
       plugins: [dayGridPlugin, interactionPlugin],
       eventClick: (e => this.onEventoClick(e)),
       dateClick: (e => this.onDataClick(e)),
+      height: "85vh",
+      headerToolbar: {
+        left:   '',
+        center: '',
+        right:  ''
+      },
       locale: 'pt-br',
       initialView: 'dayGridMonth',
     
@@ -122,7 +130,7 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
 
   private onDataClick(e: DateClickArg): void {
-    this.criarEvento();
+    this.criarEvento(e.dateStr);
   }
 
   private onEventoClick(e: EventClickArg): void {
@@ -130,21 +138,32 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
 
   public onButtonProximoDiaClick(): void {
-    this.calendario.prev()
+    this.calendario.getApi().prev()
   } 
 
   public onButtonAnteriorDiaClick(): void {
-    this.calendario.next()
+    this.calendario.getApi().next()
   } 
 
   public onButtonHojeDiaClick(): void {
-    this.calendario.today()
+    this.calendario.getApi().today()
   } 
 
-  private criarEvento(): void {
-    this.dialog.open(EventoComponent)
-  }
+  private criarEvento(date: string): void {
+    let layout = {
+      height: '650px',
+      width: '80%',
+    }
 
+    let data = {
+      DataPlantao: date
+    } as Oferta
+
+    this.dialog.open(ConfigurarOfertaComponent, {
+      data: data,
+      ...layout
+    })
+  }
   private alterarEvento(): void {
     this.dialog.open(EventoComponent)
   }

@@ -1,7 +1,22 @@
-<div>
-    <button (click)="onButtonAnteriorDiaClick()"> Anterior </button>
-    <button (click)="onButtonHojeDiaClick()"> Hoje </button>
-    <button (click)="onButtonProximoDiaClick()"> Proximo </button>
-</div>
+<div style="display: grid; grid-template-columns: 20% 80%;">
 
-<full-calendar #calendario [options]="calendarOptions"></full-calendar>
+    <div style="margin: 10px">
+            <div style="display: flex; justify-content: space-between;">        
+                <button mat-raised-button color="danger" style="width: 120px;" (click)="onButtonAnteriorDiaClick()"> <span style="font-size: 20px"> < </span> </button>
+                <button mat-raised-button color="danger" style="width: 120px; margin-left: 10px; margin-right: 10px;" (click)="onButtonHojeDiaClick()"> Hoje </button>
+                <button mat-raised-button color="danger" style="width: 120px" (click)="onButtonProximoDiaClick()"> <span style="font-size: 20px"> > </span> </button>
+            </div>
+
+            <mat-card style="margin-top: 10px; height: 80vh">
+                
+            </mat-card>
+    </div>
+
+    <div>
+        <mat-card style="margin: 10px; padding: 25px">
+
+        
+            <full-calendar #calendario [options]="calendarOptions"></full-calendar>
+        </mat-card>
+    </div>
+</div>

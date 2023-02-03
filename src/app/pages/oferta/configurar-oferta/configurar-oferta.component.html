@@ -1,65 +1,109 @@
-<form [formGroup]="formulario">
+  <mat-dialog-content>
 
-<mat-card style="margin: 30px">
-    <mat-card-header>
-      <mat-card-title>Oferta</mat-card-title>
-    </mat-card-header>
+    <h1> Criar oferta </h1>
 
-    <hr style="border-color: white">
+    <hr>
+    
+    <form [formGroup]="formulario">
 
-    <mat-card-content>
+      <mat-stepper #stepper>
+
+        <mat-step label="Informacoes" state="phone">
+
+          <div style="display: flex; margin-top: 20px;">
+    
+            <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label>Especialização</mat-label>
+                <mat-select formControlName="idEspecializacao" multiple>
+                  <mat-option *ngFor="let especializacao of ListaEspecializacao" [value]="especializacao.Id">
+                    {{especializacao.Descricao}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>       
+        
+          </div>    
+
+          <div style="display: flex;">        
+            <div>
+              <div>
+                <mat-form-field appearance="fill" style="width: 500px">
+                  <mat-label>Data de inicio</mat-label>
+                  <input matInput type="date" formControlName="DataInicial">
+                </mat-form-field>
+            
+                <mat-form-field appearance="fill" style="margin-left: 20px; width: 400px">
+                  <mat-label>Horario inicial</mat-label>
+                  <input matInput type="time" formControlName="HorarioInicial">
+                </mat-form-field>  
+              </div>
+          
+              <div>
+                <mat-form-field appearance="fill" style="width: 500px">
+                  <mat-label>Data de fim</mat-label>
+                  <input matInput type="date" formControlName="DataFinal">
+                </mat-form-field>
+            
+                <mat-form-field appearance="fill" style="margin-left: 20px; width: 400px">
+                  <mat-label>Horario final</mat-label>
+                  <input matInput type="time" formControlName="HorarioFinal">
+                </mat-form-field>
+              </div>  
+            </div>
+        
+            <div style="display: flex; align-items: center; margin-left: 150px;">
+              <mp-radio label="Turno:" 
+                        [opcoes]="[{Descricao: '24h', Valor: '24h'}, {Descricao: '12h', Valor: '12h'}]" 
+                        layout="em-coluna">
+              </mp-radio>
+            </div>
+        
+          </div>
+        
+          <div style="display: flex">
+          
+            <mat-form-field appearance="outline" style="width: 500px">
+              <input matInput type="number" class="example-right-align" formControlName="Valor">
+              <span matPrefix>R$&nbsp;</span>
+              <span matSuffix>.00</span>
+            </mat-form-field>
+        
+          <mat-form-field appearance="fill" style="margin-left: 20px; flex-grow: 2; margin-top: 3px;">
+              <mat-label>Método de pagamento</mat-label>
+              <mat-select formControlName="MetodoPagamento">
+                <mat-option *ngFor="let metodo of ListaMetodosPagamento" [value]="metodo">
+                  {{metodo}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          
+          </div>
+
+
+        </mat-step>
+        <mat-step label="Step 2" state="chat">
+          <p>Socialize with each other.</p>
+          <div>
+
+          </div>
+        </mat-step>
+        <mat-step label="Step 3">
+
+        </mat-step>
       
-      <div style="display: flex">
+      </mat-stepper>
 
-        <mat-form-field appearance="fill" style="flex-grow: 2; margin-top: 3px;">
-            <mat-label>Especialização</mat-label>
-            <mat-select formControlName="idEspecializacao" multiple>
-              <mat-option *ngFor="let especializacao of ListaEspecializacao" [value]="especializacao.Id">
-                {{especializacao.Descricao}}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
-           
-        <mat-form-field appearance="fill" style="flex-grow: 1; margin-top: 3px; margin-left: 10px;">
-          <mat-label>Data</mat-label>
-          <input matInput type="date" formControlName="DataPlantao">
-        </mat-form-field>
-
-      </div>    
-
-      <div style="display: flex">
+    
       
-        <mat-form-field appearance="outline" floatLabel="Valor" style="margin-left: 10px; margin-right: 10px; flex-grow: 1;">
-          <mat-label>Valor</mat-label>
-          <input matInput type="number" class="example-right-align" placeholder="0" formControlName="Valor">
-          <span matPrefix>R$&nbsp;</span>
-          <span matSuffix>.00</span>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" style="flex-grow: 2; margin-top: 3px;">
-          <mat-label>Método de pagamento</mat-label>
-          <mat-select formControlName="MetodoPagamento">
-            <mat-option *ngFor="let metodo of ListaMetodosPagamento" [value]="metodo">
-              {{metodo}}
-            </mat-option>
-          </mat-select>
-      </mat-form-field>
-      
-      </div>
+    </form>
+    
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button (click)="onClickButtonProsseguir()">Prosseguir</button>
+  </mat-dialog-actions>
 
 
-      <mp-radio label="Turno:" [opcoes]="[{Descricao: '24h', Valor: '24h'}, {Descricao: '12h', Valor: '12h'}]" layout="em-coluna"></mp-radio>
-
-
-       
-
-    </mat-card-content>
-    <mat-card-actions>
-
-    </mat-card-actions>
-  </mat-card>
-
-  <mat-card style="margin: 30px">
+  <!-- <mat-card style="margin: 30px">
     <mat-card-content>
         <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>Descrição</mat-label>
@@ -67,8 +111,8 @@
         </mat-form-field>
     </mat-card-content>
   </mat-card>
-</form>
+</form> -->
 
-<app-tabela [Tabela]="TabelaUsuario" (EmiteClickLinha)="VerPerfilUsuairo()"></app-tabela>
+<!-- <app-tabela [Tabela]="TabelaUsuario" (EmiteClickLinha)="VerPerfilUsuairo()"></app-tabela> -->
 
   <!-- <app-form-debug [form]="formulario"></app-form-debug> -->
