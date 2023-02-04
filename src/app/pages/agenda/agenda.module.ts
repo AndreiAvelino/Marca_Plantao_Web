@@ -5,9 +5,11 @@ import { AgendaComponent } from './agenda.component';
 import {MatCardModule} from '@angular/material/card';
 import { EventoComponent } from './evento/evento.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 const materialModules = [
-  MatButtonModule
+  MatButtonModule,
+  MatIconModule
 ]
 
 @NgModule({

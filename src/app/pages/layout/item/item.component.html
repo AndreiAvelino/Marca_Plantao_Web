@@ -1,2 +1,9 @@
-<mat-list-option style="height: 40px;" (click)="AlterarRota()">{{Item.Descricao}}</mat-list-option>
-<mat-divider></mat-divider>
+<mat-list-option style="height: 40px;" (click)="AlterarRota()">
+    <div style="display: flex; align-items: center;">
+        <mat-icon style="margin-right: 10px">{{Item.Icon ? Item.Icon : 'block'}}</mat-icon>
+        <span>{{Item.Descricao}}</span>
+    </div>
+
+    <mat-divider></mat-divider>
+
+</mat-list-option>

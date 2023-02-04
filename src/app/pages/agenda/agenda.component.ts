@@ -87,6 +87,10 @@ const ListaPlantoes: Array<Plantao> = [
   },
 ]
 
+const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+  "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+];
+
 @Component({
   selector: 'app-agenda',
   templateUrl: './agenda.component.html',
@@ -98,12 +102,15 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   public calendarOptions: CalendarOptions = null
 
+  public mesano: string 
+
   constructor() {
     super();
   }
 
   ngOnInit(): void {
     this.iniciaCalendario();
+    this.preencherDataInicial();
   }
 
   private iniciaCalendario(): void {
@@ -121,12 +128,20 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
       initialView: 'dayGridMonth',
     
       events: [
-        { title: 'Plantao medico X', date: '2023-01-03' },
-        { title: 'Plantao medico Y', date: '2023-01-16' }
+        { title: 'Plantao medico X', date: '2023-02-03' },
+        { title: 'Plantao medico Y', date: '2023-02-16' }
       ]
     };
-
     
+  }
+
+  private preencherDataInicial(): void {
+    let d = new Date();
+    this.mesano = `${monthNames[d.getMonth()]} de ${d.getFullYear()}`
+  }
+
+  private atualizarData(): void {
+    this.mesano = `${monthNames[this.calendario.getApi().getDate().getMonth()]} de ${this.calendario.getApi().getDate().getFullYear()}`
   }
 
   private onDataClick(e: DateClickArg): void {
@@ -138,15 +153,18 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
 
   public onButtonProximoDiaClick(): void {
-    this.calendario.getApi().prev()
+    this.calendario.getApi().next()
+    this.atualizarData();
   } 
 
   public onButtonAnteriorDiaClick(): void {
-    this.calendario.getApi().next()
+    this.calendario.getApi().prev()
+    this.atualizarData();
   } 
 
   public onButtonHojeDiaClick(): void {
     this.calendario.getApi().today()
+    this.atualizarData();
   } 
 
   private criarEvento(date: string): void {

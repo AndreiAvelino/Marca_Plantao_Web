@@ -1,12 +1,22 @@
-<mat-sidenav-container class="example-container" style="height: 93vh">
-    <mat-sidenav #sidenav mode="over">
-      <mat-selection-list  [multiple]="false">
-        <app-item *ngFor="let item of menu.Itens" [Item]="item"></app-item>
-      </mat-selection-list>
-    </mat-sidenav>
+<mat-sidenav-container class="example-container" style="height: 93vh;">
 
-    <mat-sidenav-content>
-      <ng-content></ng-content>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+  <mat-sidenav #sidenav mode="over">
+
+    <div style="margin-top: 15px; display: flex; justify-content: center; align-items: center;">
+    
+      <div>
+        <ngx-avatar size="130" name="Andrei Avelino"></ngx-avatar>
+        <h2 style="margin-top: 5px;"> Andrei Avelino </h2>
+      </div>
+
+    </div>
+    <mat-selection-list  [multiple]="false">
+      <app-item *ngFor="let item of menu.Itens" [Item]="item"></app-item>
+    </mat-selection-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
  

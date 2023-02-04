@@ -22,11 +22,13 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     Itens: [
       {
         Descricao: 'Início',
-        Rota: Rotas.Inicio
+        Rota: Rotas.Inicio,
+        Icon: 'bar_chart'
       },
       {
         Descricao: 'Agenda',
-        Rota: Rotas.Agenda
+        Rota: Rotas.Agenda,
+        Icon: 'calendar_today'
       },
       {
         Descricao: 'Lista de ofertas',

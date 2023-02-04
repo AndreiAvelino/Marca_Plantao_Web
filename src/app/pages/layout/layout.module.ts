@@ -16,6 +16,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { RouterModule } from '@angular/router';
 import { ItemComponent } from './item/item.component';
 import { NotificacoesComponent } from './navbar/notificacoes/notificacoes.component';
+import { AvatarModule } from 'ngx-avatar';
+import { HttpClientModule } from '@angular/common/http';
 
 const materialModules = [
   MatToolbarModule,
@@ -24,15 +26,17 @@ const materialModules = [
   MatSidenavModule,
   MatListModule,
   MatMenuModule,
-  MatBadgeModule
+  MatBadgeModule,
 ]
 
 @NgModule({
   declarations: [LayoutComponent, NavbarComponent, SidebarComponent, FooterComponent, ItemComponent, NotificacoesComponent],
   imports: [
-    ...materialModules,
+    HttpClientModule,
+    AvatarModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    ...materialModules,
   ],
   exports: [
     LayoutComponent
