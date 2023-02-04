@@ -1,0 +1,18 @@
+:root {
+    --hoverColor: white;
+}
+  
+::ng-deep .mat-checkbox-checked.oferta.mat-accent .mat-checkbox-background {
+    background-color: var(--hoverColor) !important;
+    transform: scale(1.2);
+}
+
+::ng-deep .mat-checkbox-checked.plantao.mat-accent .mat-checkbox-background {
+    background-color: var(--hoverColor) !important;
+    transform: scale(1.2);
+}
+
+.teste{
+    color: var(--hoverColor)
+}
+

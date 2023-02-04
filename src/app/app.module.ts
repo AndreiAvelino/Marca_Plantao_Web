@@ -12,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
 import { PagesRoutingModule } from './pages/pages-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { PadraoComponent } from './@padrao/padrao.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PadraoComponent } from './@padrao/padrao.component';
     PagesModule,
     StoreModule.forRoot({app: appReducer}),
     StoreModule.forRoot({layout: layoutReducer}),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

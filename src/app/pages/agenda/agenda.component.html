@@ -1,31 +1,49 @@
-<div style="display: grid; grid-template-columns: 20% 80%;">
+<div style="display: grid; grid-template-columns: 15% 85%;">
 
-    <div style="margin: 10px">
+    <div style="margin: 10px;">
 
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; justify-content: space-between;">      
-                
-                <button mat-stroked-button (click)="onButtonHojeDiaClick()"> Hoje</button>
-                
-                <button mat-icon-button color="accent" (click)="onButtonAnteriorDiaClick()">
-                    <mat-icon>navigate_before</mat-icon>
-                </button>
-
-                <button mat-icon-button color="accent" (click)="onButtonProximoDiaClick()">
-                    <mat-icon>navigate_next</mat-icon>
-                </button>
+        <div style="height: 8vh">
+            <div style="display: flex; justify-content: center; margin: 10px">
+                <span class="teste" style="font-size: 20px; font-weight: 500;">{{mesano}}</span>
             </div>
-
-            <div>
-                <span style="font-size: 22px; font-weight: 500;">{{mesano}}</span>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 15px;">      
+                    
+                <button mat-stroked-button (click)="onButtonHojeDiaClick()" style="width: 120px"> Hoje</button>
+                    
+                <div>
+                    <button mat-icon-button color="accent" (click)="onButtonAnteriorDiaClick()">
+                        <mat-icon>navigate_before</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" (click)="onButtonProximoDiaClick()">
+                        <mat-icon>navigate_next</mat-icon>
+                    </button>
+                </div>
             </div>
         </div>
-        
 
+        <mat-card style="margin-top: 10px; height: calc(85vh - 8vh);">
+            
+            <mat-checkbox class="oferta" 
+                          checked
+                          [style.--hoverColor]="CorEvento.Oferta"
+                          (change)="onChangeCheckBoxOferta($event)">
 
-            <mat-card style="margin-top: 10px; height: 80vh">
-                
-            </mat-card>
+                          <span style="font-size: 17px">Ofertas</span>
+
+            </mat-checkbox>
+            <br>
+            <mat-checkbox class="plantao" 
+                          checked
+                          [style.--hoverColor]="CorEvento.Plantao"
+                          (change)="onChangeCheckBoxPlantao($event)">
+
+                          <span style="font-size: 17px">Plantões</span>
+
+            </mat-checkbox>
+
+        </mat-card>
+
     </div>
 
     <div>

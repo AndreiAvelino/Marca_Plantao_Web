@@ -1,0 +1,54 @@
+<mat-tab-group>
+
+    <mat-tab label="Informações">
+
+        <mat-card-title>Informações do plantão</mat-card-title>
+
+        <hr>
+    
+        <mat-card-content>
+            <br/>
+            <p style="font-size: 17px"> <span style="font-weight: 500;"> Profissional: </span> José Augusto Gomes da Silva </p> 
+            <p style="font-size: 17px"> <span style="font-weight: 500;"> Especialidade: </span>Cardiologista </p> 
+            <p style="font-size: 17px"> <span style="font-weight: 500;"> Status do plantão: </span> Cardiologista </p> 
+        </mat-card-content>
+    </mat-tab>
+
+    <mat-tab label="Pagamento">
+
+        <p style="font-size: 17px"> <span style="font-weight: 500;"> Valor: </span> R$ 56,00 </p> 
+        <p style="font-size: 17px"> <span style="font-weight: 500;"> Forma de pagamento: </span> PIX </p> 
+        <p style="font-size: 17px"> <span style="font-weight: 500;"> Data do pagamento: </span> PIX </p> 
+        <p style="font-size: 17px"> <span style="font-weight: 500;"> Comprovante: </span> PIX </p> 
+
+    </mat-tab>
+
+
+
+    <mat-tab label="Avaliações">
+
+        <p>Avaliacao de José Augusto Gomes da Silva</p>
+
+        <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoProfissional.Nota"></input-avaliacao>
+   
+        <div *ngIf="plantao.AvaliacaoProfissional">
+            <p> Comentários: </p>
+            <p> "{{plantao.AvaliacaoProfissional.Descricao}}" </p>
+        </div>
+
+        <hr>
+
+        <p> Avalicao: </p> <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoClinica.Nota"></input-avaliacao>
+       
+        <div *ngIf="plantao.AvaliacaoClinica">
+            <p> Comentários: </p>
+            <p> "{{plantao.AvaliacaoClinica.Descricao}}" </p>
+        </div>
+
+    </mat-tab>
+</mat-tab-group>
+
+
+
+
+

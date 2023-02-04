@@ -35,6 +35,8 @@ const materialModules = [
     FormularioModule,
     SharedModule,
     CommonModule
+  ], exports: [
+    AvaliarPlantaoComponent
   ]
 })
 export class PlantaoModule { }
