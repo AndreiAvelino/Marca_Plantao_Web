@@ -1,14 +1,10 @@
-  <mat-dialog-content>
-
-    <h1> Criar oferta </h1>
-
-    <hr>
-    
+  <mat-dialog-content style="height: 90%">
+ 
     <form [formGroup]="formulario">
 
       <mat-stepper #stepper>
 
-        <mat-step label="Informacoes" state="phone">
+        <mat-step label="Informações" state="phone">
 
           <div style="display: flex; margin-top: 20px;">
     
@@ -23,37 +19,40 @@
         
           </div>    
 
-          <div style="display: flex;">        
+          <div style="display: flex; justify-content: space-between;">        
             <div>
-              <div>
-                <mat-form-field appearance="fill" style="width: 500px">
+
+              <div style="display: flex">
+                <mat-form-field appearance="fill">
                   <mat-label>Data de inicio</mat-label>
                   <input matInput type="date" formControlName="DataInicial">
                 </mat-form-field>
             
-                <mat-form-field appearance="fill" style="margin-left: 20px; width: 400px">
+                <mat-form-field appearance="fill" style="margin-left: 10px; ">
                   <mat-label>Horario inicial</mat-label>
                   <input matInput type="time" formControlName="HorarioInicial">
                 </mat-form-field>  
               </div>
           
-              <div>
-                <mat-form-field appearance="fill" style="width: 500px">
+              <div style="display: flex">
+                <mat-form-field appearance="fill">
                   <mat-label>Data de fim</mat-label>
                   <input matInput type="date" formControlName="DataFinal">
                 </mat-form-field>
             
-                <mat-form-field appearance="fill" style="margin-left: 20px; width: 400px">
+                <mat-form-field appearance="fill" style="margin-left: 10px;">
                   <mat-label>Horario final</mat-label>
                   <input matInput type="time" formControlName="HorarioFinal">
                 </mat-form-field>
               </div>  
             </div>
         
-            <div style="display: flex; align-items: center; margin-left: 150px;">
+            <div style="display: flex; align-items: center;">
               <mp-radio label="Turno:" 
                         [opcoes]="[{Descricao: '24h', Valor: '24h'}, {Descricao: '12h', Valor: '12h'}]" 
-                        layout="em-coluna">
+                        layout="em-coluna"
+                        [width]= "150"
+                        (change)="onChangeTurno($event)">
               </mp-radio>
             </div>
         
@@ -80,14 +79,11 @@
 
 
         </mat-step>
-        <mat-step label="Step 2" state="chat">
-          <p>Socialize with each other.</p>
-          <div>
-
-          </div>
-        </mat-step>
-        <mat-step label="Step 3">
-
+        <mat-step label="Descrição" state="chat">
+          <mat-form-field appearance="fill" style="width: 100%; margin-top: 20px;">
+            <mat-label>Avaliação</mat-label>
+            <textarea style="min-height: 230px; max-height: 230px;" formControlName="Avaliacao" matInput></textarea>
+           </mat-form-field>
         </mat-step>
       
       </mat-stepper>
@@ -96,23 +92,9 @@
       
     </form>
     
-  </mat-dialog-content>
+   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancelar</button>
-    <button mat-button (click)="onClickButtonProsseguir()">Prosseguir</button>
+    <button *ngIf="stepper.selectedIndex != 1" mat-button (click)="onClickButtonProsseguir()">Prosseguir</button>
+    <button *ngIf="stepper.selectedIndex == 1" mat-flat-button color="primary" (click)="onClickButtonFinalizar()">Finalizar</button>
   </mat-dialog-actions>
-
-
-  <!-- <mat-card style="margin: 30px">
-    <mat-card-content>
-        <mat-form-field appearance="outline" style="width: 100%">
-            <mat-label>Descrição</mat-label>
-            <textarea matInput formControlName="Descricao"></textarea>
-        </mat-form-field>
-    </mat-card-content>
-  </mat-card>
-</form> -->
-
-<!-- <app-tabela [Tabela]="TabelaUsuario" (EmiteClickLinha)="VerPerfilUsuairo()"></app-tabela> -->
-
-  <!-- <app-form-debug [form]="formulario"></app-form-debug> -->

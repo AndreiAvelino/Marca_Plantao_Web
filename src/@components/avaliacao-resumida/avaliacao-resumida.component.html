@@ -7,8 +7,8 @@
         </div>        
     </div>
     <div>
-        <p [ngClass]="{'escondetexto': !verMais}">
-            {{Avaliacao.Descricao}}
+        <p [ngClass]="{'escondetexto': !verMais}" style="font-style: italic;">
+            "{{Avaliacao.Descricao}}"
         </p>
     </div>
     <div *ngIf="!verMais" class="textoescondeaparece" (click)="VerMais()">

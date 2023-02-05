@@ -18,6 +18,7 @@ import { ItemComponent } from './item/item.component';
 import { NotificacoesComponent } from './navbar/notificacoes/notificacoes.component';
 import { AvatarModule } from 'ngx-avatar';
 import { HttpClientModule } from '@angular/common/http';
+import { MenuUsuarioComponent } from './navbar/menu-usuario/menu-usuario.component';
 
 const materialModules = [
   MatToolbarModule,
@@ -30,7 +31,7 @@ const materialModules = [
 ]
 
 @NgModule({
-  declarations: [LayoutComponent, NavbarComponent, SidebarComponent, FooterComponent, ItemComponent, NotificacoesComponent],
+  declarations: [LayoutComponent, NavbarComponent, SidebarComponent, FooterComponent, ItemComponent, NotificacoesComponent, MenuUsuarioComponent],
   imports: [
     HttpClientModule,
     AvatarModule,

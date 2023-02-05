@@ -15,6 +15,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { InfoPlantaoComponent } from '../plantao/info-plantao/info-plantao.component';
 import { PlantaoComponent } from './plantao/plantao.component';
 import { FinalizarPlantaoComponent } from './finalizar-plantao/finalizar-plantao.component';
+import { PerfilUsuarioComponent } from '../usuario/perfil-usuario/perfil-usuario.component';
 
 export enum Corevento {
   Oferta = '#00BFFF',
@@ -241,8 +242,8 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   private criarEvento(date: string): void {
     let layout = {
-      height: '650px',
-      width: '80%',
+      height: '500px',
+      width: '40%',
     }
 
     let data = {
@@ -253,6 +254,14 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
       data: data,
       ...layout
     })
+      .afterClosed()
+      .toPromise()
+      .then(x => this.criarObjetoEvento(x))
+  }
+
+  private criarObjetoEvento(x): void {
+    eventSources.find(x => x.id == '1').events.push({title: 'teste', date: x.DataInicial, extendedProps: {tipo: 1}})
+    this.calendario.getApi().getEventSourceById('1').refetch()
   }
 
   public onChangeCheckBoxOferta(event: MatCheckboxChange): void {
@@ -276,7 +285,14 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
 
   private verCandidatosOferta(): void {
+    let layout = {
+      height: '500px',
+      width: '40%',
+    }
 
+    this.dialog.open(PerfilUsuarioComponent, {
+      ...layout
+    })
   }
 
   private alterarOferta(): void {
@@ -296,8 +312,8 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   private visualizarPlantao(): void {
     let layout = {
-      height: '650px',
-      width: '60%',
+      height: '500px',
+      width: '40%',
     }
 
     this.dialog.open(PlantaoComponent, {

@@ -8,19 +8,23 @@
     
       <span style="padding-top: 4px">Marca plantão</span>
 
-      <div style="display: flex; justify-content: space-between;">
+      
+
+      <div style="display: flex; justify-content: space-between; align-items: center;">
 
         <div style="margin-right: 25px">
           <app-notificacoes></app-notificacoes>
         </div>
         
         <div style="margin-right: 30px"> 
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon> person </mat-icon>
-          </button>
-  
-          <!-- <ngx-avatar name="Andrei Avelino"></ngx-avatar> -->
+
+          <!-- <ngx-avatar mat-icon-button 
+                      [matMenuTriggerFor]="menu"
+                      name="Andrei Avelino">
+          </ngx-avatar> -->
                   
+          <menu-usuario style="margin-left: auto"></menu-usuario>
+
           <mat-menu #menu="matMenu">
             <button mat-menu-item
                     (click)="Logout()"> <mat-icon>exit_to_app</mat-icon> <span>Sair</span> </button>

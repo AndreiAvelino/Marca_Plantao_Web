@@ -8,6 +8,10 @@ import { Especializacao, Oferta, Usuario } from 'src/models/models';
 import { ColunaTabela, Tabela } from 'src/models/table';
 import { PerfilUsuarioComponent } from '../../usuario/perfil-usuario/perfil-usuario.component';
 
+enum Turno {
+  COMPLETO = '24h',
+  MEIO = '12h'
+}
 
 @Component({
   selector: 'app-configurar-oferta',
@@ -93,8 +97,8 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
       Valor: "",
       ListaIdCandidatos: [],
       DataInicial: this.oferta.DataPlantao,
-      HorarioInicial: "",
-      DataFinal: "",
+      HorarioInicial: "12:00",
+      DataFinal: "12:00",
       HorarioFinal: "",
       DataCadastro: "",
       MetodoPagamento: ""
@@ -102,21 +106,34 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
 
   }
 
-  VerPerfilUsuairo(): void {
-    const dialogRef = this.dialog.open(PerfilUsuarioComponent, {
-      width: '500px',
-      height: '700px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
+  public onClickButtonFinalizar(): void {
+    this.dialogRef.close(this.formulario.value)
   }
 
   public onClickButtonProsseguir(): void {
     this.stepper.next()
   }
 
-  
+  public onChangeTurno(evento: Turno): void {
+    switch(evento){
+      case Turno.MEIO:     this.aumentarDataFim(12);
+                           break;
+      case Turno.COMPLETO: this.aumentarDataFim(24);
+                           break;
+    }
+  }
+
+  private aumentarDataFim(horas: number): void {
+    this.formulario.patchValue({
+      DataFinal: this.addHours(new Date(this.formulario.value.DataInicial), horas)
+    })
+  }
+
+  public addHours(date, hours) {
+    const dateCopy = new Date(date);  
+    dateCopy.setHours(dateCopy.getHours() + hours);  
+    return dateCopy.toISOString().split('T')[0];
+  }
 
 
 }

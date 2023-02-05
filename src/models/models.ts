@@ -31,7 +31,7 @@ export interface Oferta {
     idEspecializacao: number,
     Valor: string,
     ListaIdCandidatos: Array<number>,
-    DataPlantao: string,
+    DataPlantao: string | Date,
     DataCadastro?: string
 }
 

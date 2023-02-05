@@ -13,6 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatRadioModule} from '@angular/material/radio';
 
 import { MPRadioComponent } from './radio/mp-radio/mp-radio.component';
+import { AdicionarArquivoProdutoComponent } from './adicionar-arquivo-produto/adicionar-arquivo-produto.component';
 
 const materialModules = [
   MatIconModule,
@@ -28,7 +29,8 @@ const materialModules = [
     InputAvaliacaoComponent,
     InputImagemComponent,
     MPRadioComponent,
-    FormEnderecoComponent
+    FormEnderecoComponent,
+    AdicionarArquivoProdutoComponent
   ],
   imports: [
     ...materialModules,
@@ -42,7 +44,8 @@ const materialModules = [
     InputAvaliacaoComponent,
     InputImagemComponent,
     MPRadioComponent,
-    FormDebugComponent
+    FormDebugComponent,
+    AdicionarArquivoProdutoComponent
   ]
 })
 export class FormularioModule { }

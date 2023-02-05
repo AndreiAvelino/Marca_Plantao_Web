@@ -1,30 +1,56 @@
-<mat-stepper #stepper style="height: 90%">
+<form [formGroup]="formulario" style="height: 90%">
+
+  <mat-stepper #stepper>
     <mat-step label="Avaliação" state="phone">
 
-      <div>
-
-        <form [formGroup]="formulario">
-            <div style="display: flex">
-                <span style="margin-top: 10px; font-weight: 500; font-size: 20px;"> Nota: </span>
-                <input-avaliacao tamanhoEstrela="40px"></input-avaliacao>
-            </div>
-    
-            <mat-form-field appearance="fill" style="width: 100%; height: 100%">
-                <mat-label>Avaliação</mat-label>
-                <textarea style="min-height: 250px; max-height: 250px;" formControlName="Avaliacao" matInput></textarea>
-            </mat-form-field>
-        </form>
-
+     
+      <div style="display: flex">
+        <span style="margin-top: 10px; font-weight: 500; font-size: 20px;"> Nota: </span>
+        <input-avaliacao tamanhoEstrela="40px"></input-avaliacao>
       </div>
+    
+      <mat-form-field appearance="fill" style="width: 100%; height: 100%">
+        <mat-label>Avaliação</mat-label>
+        <textarea style="min-height: 250px; max-height: 250px;" formControlName="Avaliacao" matInput></textarea>
+       </mat-form-field>
+        
+
     </mat-step>
     <mat-step label="Pagamento" state="chat">
 
+      <div style="display: flex; justify-content: center; margin-top: 50px;">
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 400px;">
+            <p style="font-size: 18px; margin-right: 10px;"> Valor da oferta: </p>
+            <p style="font-size: 18px;"> R$ 59,00 </p>
+          </div>
+  
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 400px">
+            <p style="font-size: 18px; margin-right: 10px;"> Valor pago: </p> 
+  
+            <mat-form-field appearance="outline" style="width: 130px">
+              <input matInput type="number" class="example-right-align">
+              <span matPrefix>R$&nbsp;</span>
+              <span matSuffix>.00</span>
+            </mat-form-field>
+  
+          </div>
+  
+          <div style="display: flex; align-items: center; margin-top: 50px;">
+            <app-adicionar-arquivo-produto> </app-adicionar-arquivo-produto>
+          </div>
+
+        </div>
+      </div>
 
     </mat-step>
 
   </mat-stepper>
 
+</form>
+
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancelar</button>
-    <button mat-button (click)="onClickButtonProsseguir()">Prosseguir</button>
+    <button *ngIf="stepper.selectedIndex != 1" mat-button (click)="onClickButtonProsseguir()">Prosseguir</button>
+    <button *ngIf="stepper.selectedIndex == 1" mat-flat-button color="primary" (click)="onClickButtonFinalizar()">Finalizar</button>
   </mat-dialog-actions>

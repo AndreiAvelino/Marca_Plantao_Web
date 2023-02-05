@@ -5,6 +5,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ComponentsModule } from 'src/@components/components.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { AvatarModule } from 'ngx-avatar';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { MatButtonModule } from '@angular/material/button';
     ComponentsModule,
     MatTabsModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    AvatarModule,
+    MatIconModule
   ],
   exports: [
     PerfilUsuarioComponent
