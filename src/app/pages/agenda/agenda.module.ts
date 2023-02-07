@@ -22,7 +22,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FinalizarPlantaoComponent } from './finalizar-plantao/finalizar-plantao.component';
 import { PlantaoModule } from '../plantao/plantao.module';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import { ModalListaCandidatosOfertaComponent } from './modal-lista-candidatos-oferta/modal-lista-candidatos-oferta.component';
+import { AvatarModule } from 'ngx-avatar';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
 
 const materialModules = [
   MatButtonModule,
@@ -35,7 +38,9 @@ const materialModules = [
   MatStepperModule,
   MatFormFieldModule,
   MatInputModule,
-  MatDialogModule
+  MatDialogModule,
+  MatExpansionModule,
+  CdkAccordionModule
 ]
 
 @NgModule({
@@ -44,7 +49,8 @@ const materialModules = [
     OpcoesOfertaComponent,
     OpcoesPlantaoComponent,
     PlantaoComponent,
-    FinalizarPlantaoComponent
+    FinalizarPlantaoComponent,
+    ModalListaCandidatosOfertaComponent
   ],
   imports: [
     ...materialModules,
@@ -54,7 +60,8 @@ const materialModules = [
     FormularioModule,
     ReactiveFormsModule,
     FormsModule,
-    PlantaoModule
+    PlantaoModule,
+    AvatarModule
   ]
 })
 export class AgendaModule { }

@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       {
         Descricao: 'Início',
         Rota: Rotas.Inicio,
-        Icon: 'bar_chart'
+        Icon: 'home'
       },
       {
         Descricao: 'Agenda',
@@ -31,17 +31,22 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         Icon: 'calendar_today'
       },
       {
-        Descricao: 'Lista de ofertas',
-        Rota: Rotas.ListagemOferta
+        Descricao: 'Indicadores',
+        Rota: Rotas.Indicadores,
+        Icon: 'bar_chart'
       },
-      {
-        Descricao: 'Configurar clínica',
-        Rota: Rotas.ConfigurarClinica
-      },
-      {
-        Descricao: 'Histórico de plantões',
-        Rota: Rotas.HistoricoPlantao
-      }
+      // {
+      //   Descricao: 'Lista de ofertas',
+      //   Rota: Rotas.ListagemOferta
+      // },
+      // {
+      //   Descricao: 'Configurar clínica',
+      //   Rota: Rotas.ConfigurarClinica
+      // },
+      // {
+      //   Descricao: 'Histórico de plantões',
+      //   Rota: Rotas.HistoricoPlantao
+      // }
     ]
   }
 

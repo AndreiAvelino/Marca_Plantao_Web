@@ -1,49 +1,168 @@
 <mat-tab-group>
 
     <mat-tab label="Informações">
-
-        <mat-card-title>Informações do plantão</mat-card-title>
-
-        <hr>
-    
         <mat-card-content>
             <br/>
-            <p style="font-size: 17px"> <span style="font-weight: 500;"> Profissional: </span> José Augusto Gomes da Silva </p> 
-            <p style="font-size: 17px"> <span style="font-weight: 500;"> Especialidade: </span>Cardiologista </p> 
-            <p style="font-size: 17px"> <span style="font-weight: 500;"> Status do plantão: </span> Cardiologista </p> 
+
+            <div>
+                <p style="font-size: 17px"> <span style="font-weight: 500;"> Profissional: </span> José Augusto Gomes da Silva </p> 
+                <p style="font-size: 17px"> <span style="font-weight: 500;"> Especialidade: </span>Cardiologista </p> 
+                <p style="font-size: 17px"> <span style="font-weight: 500;"> Status do plantão: </span> Finalizado </p> 
+            </div>
+
+
+            <div style="display: grid; grid-template-columns: 50% 50%; font-size: 17px; margin-top: 50px;" class="card red">
+                <div style="margin-right: 15px;">
+
+                    <span style="display: flex; justify-content: center; font-weight: 500; font-size: 20px; margin-bottom: 10px"> Informacoes da oferta </span>
+
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 500;"> Data de inicio: </span> <span> 10/09/2022 </span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 500;"> Hora de inicio: </span> <span> 08:46 </span>
+
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 500;"> Data de fim: </span> <span> 10/09/2022 </span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 500;"> Hora de fim: </span> <span> 08:46 </span>
+                    </div> 
+
+                </div>
+
+                <div>
+                    <span style="display: flex; justify-content: center; font-weight: 500; font-size: 20px; margin-bottom: 10px;"> Informacoes do plantao </span>
+
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 500;"> Data de inicio: </span> <span> 10/09/2022 </span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 500;"> Hora de inicio: </span> <span> 08:46 </span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 500;"> Data de fim: </span> <span> 10/09/2022 </span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 500;"> Hora de fim: </span> <span> 08:46 </span>
+                    </div>     
+                </div>
+            </div>
+
+
+
+
+            
+
+
         </mat-card-content>
     </mat-tab>
 
     <mat-tab label="Pagamento">
 
-        <p style="font-size: 17px"> <span style="font-weight: 500;"> Valor: </span> R$ 56,00 </p> 
-        <p style="font-size: 17px"> <span style="font-weight: 500;"> Forma de pagamento: </span> PIX </p> 
-        <p style="font-size: 17px"> <span style="font-weight: 500;"> Data do pagamento: </span> PIX </p> 
-        <p style="font-size: 17px"> <span style="font-weight: 500;"> Comprovante: </span> PIX </p> 
+        <div style="display: grid; grid-template-columns: 55% 45%; margin-top: 20px; font-size: 17px;">
+            <div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="font-weight: 500;"> Valor ofertado (12h): </span> <span> R$ 800,00 </span> 
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="font-weight: 500;"> Valor por hora extra: </span> <span style="color: blue"> R$ 100,00 </span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="font-weight: 500;"> Hora extra realizada: </span> <span> 2 </span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="font-weight: 500;"> Descontos: </span> <span style="color: red"> R$ 300,00 </span>
+                </div>
+            </div>
+
+            <div style="margin-top: 10px">
+                
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <div>
+                        <span> 800,00 </span> 
+                        <span> + 2 x (100,00) </span> 
+                        <span> - 300,00 </span>
+                    </div>                    
+                </div>
+
+                <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                    <span style="margin-right: 10px; font-weight: 600;"> Total: </span> <span> R$ 700,00 </span>
+                </div>
+
+            </div>            
+        </div>
+
+        <div style="font-size: 17px; margin-top: 30px; background-color: #e3e3e3; padding: 20px; border-radius: 10px; height: 120px; display: flex; align-items: center;">
+            
+            <div style="width: 100%">
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-weight: 500;"> Situacao: </span> <span> Pago </span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-weight: 500;"> Forma de pagamento: </span> <span> PIX </span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-weight: 500;"> Data do pagamento: </span> <span> 10/10/2023 </span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-weight: 500;"> Comprovante: </span> <span> N/A </span>
+                </div>
+            </div>
+            
+
+        </div>
+
 
     </mat-tab>
 
 
 
     <mat-tab label="Avaliações">
+        
 
-        <p>Avaliacao de José Augusto Gomes da Silva</p>
+        <div style="padding: 10px">
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z1">
+                 <mat-expansion-panel-header>
+                   <mat-panel-title style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 500;">Avaliacao de José Augusto Gomes da Silva</span>
+                    <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoProfissional.Nota"></input-avaliacao>
+                   </mat-panel-title>
+                 </mat-expansion-panel-header>
+        
+                 <div *ngIf="plantao.AvaliacaoClinica">
+                    <p style="font-style: italic;"> "{{plantao.AvaliacaoClinica.Descricao}}" </p>
+                </div>        
+    
+               </mat-expansion-panel>
+            </mat-accordion>
 
-        <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoProfissional.Nota"></input-avaliacao>
-   
-        <div *ngIf="plantao.AvaliacaoProfissional">
-            <p> Comentários: </p>
-            <p> "{{plantao.AvaliacaoProfissional.Descricao}}" </p>
+            <br>
+    
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z1">
+                 <mat-expansion-panel-header>
+                   <mat-panel-title style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 500;">Avalicao de Andrei Avelino (Rede D'Or - Niteroi)</span>
+                    <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoClinica.Nota"></input-avaliacao>
+                   </mat-panel-title>
+                 </mat-expansion-panel-header>    
+    
+                 <div *ngIf="plantao.AvaliacaoProfissional">
+                    <p style="font-style: italic;"> "{{plantao.AvaliacaoProfissional.Descricao}}" </p>
+                </div>
+            
+               </mat-expansion-panel>
+            </mat-accordion>
         </div>
 
-        <hr>
+        
 
-        <p> Avalicao: </p> <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoClinica.Nota"></input-avaliacao>
        
-        <div *ngIf="plantao.AvaliacaoClinica">
-            <p> Comentários: </p>
-            <p> "{{plantao.AvaliacaoClinica.Descricao}}" </p>
-        </div>
 
     </mat-tab>
 </mat-tab-group>

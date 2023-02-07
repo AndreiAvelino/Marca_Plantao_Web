@@ -11,48 +11,7 @@ import { ColunaTabela, Tabela } from 'src/models/table';
 })
 export class ListagemOfertaComponent implements OnInit {
 
-  private ofertas: Array<Oferta> = [
-    {
-      Id: 0,
-      Clinica: "Clinica um",
-      Descricao: "Serviço para um plantão de 24h e...",
-      idEspecializacao: 0,
-      Valor: "1200.00",
-      ListaIdCandidatos: [],
-      DataPlantao: "2020-02-20",
-      DataCadastro: "2020-02-20",
-    },
-    {
-      Id: 0,
-      Clinica: "Clinica um",
-      Descricao: "Precisamos de alguém para...",
-      idEspecializacao: 0,
-      Valor: "600.00",
-      ListaIdCandidatos: [],
-      DataPlantao: "2020-02-20",
-      DataCadastro: "2020-02-20",
-    },
-    {
-      Id: 0,
-      Clinica: "Clinica um",
-      Descricao: "O hospital tal necessita de tal...",
-      idEspecializacao: 0,
-      Valor: "10.00",
-      ListaIdCandidatos: [],
-      DataPlantao: "2020-02-20",
-      DataCadastro: "2020-02-20",
-    },
-    {
-      Id: 0,
-      Clinica: "Clinica um",
-      Descricao: "Precisamos de alguém para algo",
-      idEspecializacao: 0,
-      Valor: "10000.00",
-      ListaIdCandidatos: [],
-      DataPlantao: "2020-02-20",
-      DataCadastro: "2020-02-20",
-    }    
-  ]
+  private ofertas: Array<Oferta> = []
 
   private Colunas: Array<ColunaTabela> = [
     {

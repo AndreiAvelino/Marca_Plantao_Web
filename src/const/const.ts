@@ -47,3 +47,7 @@ export const MetodosPagamento: Array<String> = [
     "Cartão de crédito",
     "Cartão de débito"
 ]
+
+export const Meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+"Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+];

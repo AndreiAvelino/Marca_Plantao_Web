@@ -18,30 +18,42 @@
     </mat-step>
     <mat-step label="Pagamento" state="chat">
 
-      <div style="display: flex; justify-content: center; margin-top: 50px;">
+    <div style="display: grid; grid-template-columns: 55% 45%; margin-top: 20px; font-size: 17px;">
         <div>
-          <div style="display: flex; align-items: center; justify-content: space-between; width: 400px;">
-            <p style="font-size: 18px; margin-right: 10px;"> Valor da oferta: </p>
-            <p style="font-size: 18px;"> R$ 59,00 </p>
-          </div>
-  
-          <div style="display: flex; align-items: center; justify-content: space-between; width: 400px">
-            <p style="font-size: 18px; margin-right: 10px;"> Valor pago: </p> 
-  
-            <mat-form-field appearance="outline" style="width: 130px">
-              <input matInput type="number" class="example-right-align">
-              <span matPrefix>R$&nbsp;</span>
-              <span matSuffix>.00</span>
-            </mat-form-field>
-  
-          </div>
-  
-          <div style="display: flex; align-items: center; margin-top: 50px;">
-            <app-adicionar-arquivo-produto> </app-adicionar-arquivo-produto>
-          </div>
-
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span style="font-weight: 500;"> Valor ofertado (12h): </span> <span> R$ 800,00 </span> 
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span style="font-weight: 500;"> Valor por hora extra: </span> <span style="color: blue"> R$ 100,00 </span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span style="font-weight: 500;"> Hora extra realizada: </span> <span> 2 </span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span style="font-weight: 500;"> Descontos: </span> <span style="color: red"> R$ 300,00 </span>
+            </div>
         </div>
-      </div>
+
+        <div style="margin-top: 10px">
+            
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <div>
+                    <span> 800,00 </span> 
+                    <span> + 2 x (100,00) </span> 
+                    <span> - 300,00 </span>
+                </div>                    
+            </div>
+
+            <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                <span style="margin-right: 10px; font-weight: 600;"> Total: </span> <span> R$ 700,00 </span>
+            </div>
+
+        </div>            
+    </div>
+
+    <div style="display: flex; justify-content: center; margin-top: 30px;">
+      <app-adicionar-arquivo-produto> </app-adicionar-arquivo-produto>
+    </div>
 
     </mat-step>
 

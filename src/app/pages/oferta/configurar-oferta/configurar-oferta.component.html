@@ -4,6 +4,20 @@
 
       <mat-stepper #stepper>
 
+        <mat-step label="Descrição" state="chat">
+
+          <mat-form-field appearance="fill" style="width: 100%; margin-top: 20px;">
+            <mat-label>Titulo</mat-label>
+            <input matInput placeholder="Ex. Pizza">
+          </mat-form-field>
+        
+
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Avaliação</mat-label>
+            <textarea style="min-height: 160px; max-height: 160px;" formControlName="Avaliacao" matInput></textarea>
+           </mat-form-field>
+        </mat-step>
+
         <mat-step label="Informações" state="phone">
 
           <div style="display: flex; margin-top: 20px;">
@@ -57,34 +71,30 @@
             </div>
         
           </div>
-        
-          <div style="display: flex">
-          
-            <mat-form-field appearance="outline" style="width: 500px">
-              <input matInput type="number" class="example-right-align" formControlName="Valor">
-              <span matPrefix>R$&nbsp;</span>
-              <span matSuffix>.00</span>
-            </mat-form-field>
-        
-          <mat-form-field appearance="fill" style="margin-left: 20px; flex-grow: 2; margin-top: 3px;">
-              <mat-label>Método de pagamento</mat-label>
-              <mat-select formControlName="MetodoPagamento">
-                <mat-option *ngFor="let metodo of ListaMetodosPagamento" [value]="metodo">
-                  {{metodo}}
-                </mat-option>
-              </mat-select>
-          </mat-form-field>
-          
-          </div>
 
+          <mat-step label="Pagamento" state="chat">
+            <div style="display: flex">
+          
+              <mat-form-field appearance="outline" style="width: 500px">
+                <input matInput type="number" class="example-right-align" formControlName="Valor">
+                <span matPrefix>R$&nbsp;</span>
+                <span matSuffix>.00</span>
+              </mat-form-field>
+          
+              <mat-form-field appearance="fill" style="margin-left: 20px; flex-grow: 2; margin-top: 3px;">
+                  <mat-label>Método de pagamento</mat-label>
+                  <mat-select formControlName="MetodoPagamento">
+                    <mat-option *ngFor="let metodo of ListaMetodosPagamento" [value]="metodo">
+                      {{metodo}}
+                    </mat-option>
+                  </mat-select>
+              </mat-form-field>
+            
+            </div>
+          </mat-step>
 
         </mat-step>
-        <mat-step label="Descrição" state="chat">
-          <mat-form-field appearance="fill" style="width: 100%; margin-top: 20px;">
-            <mat-label>Avaliação</mat-label>
-            <textarea style="min-height: 230px; max-height: 230px;" formControlName="Avaliacao" matInput></textarea>
-           </mat-form-field>
-        </mat-step>
+
       
       </mat-stepper>
 

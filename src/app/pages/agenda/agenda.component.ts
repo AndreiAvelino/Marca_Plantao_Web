@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Calendar, CalendarOptions, EventClickArg, EventSourceInput } from '@fullcalendar/core';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
-import { StatusPlantao } from 'src/enum/enum';
+import { Corevento, StatusPlantao } from 'src/enum/enum';
 import { Oferta, Plantao } from 'src/models/models';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -16,88 +16,12 @@ import { InfoPlantaoComponent } from '../plantao/info-plantao/info-plantao.compo
 import { PlantaoComponent } from './plantao/plantao.component';
 import { FinalizarPlantaoComponent } from './finalizar-plantao/finalizar-plantao.component';
 import { PerfilUsuarioComponent } from '../usuario/perfil-usuario/perfil-usuario.component';
+import { Meses } from 'src/const/const';
+import { ModalListaCandidatosOfertaComponent } from './modal-lista-candidatos-oferta/modal-lista-candidatos-oferta.component';
+import { MatDialogConfig } from '@angular/material/dialog';
 
-export enum Corevento {
-  Oferta = '#00BFFF',
-  Plantao = '#556B2F'
-}
 
-const ListaPlantoes: Array<Plantao> = [
-  {
-    Id: 0,
-    idOferta: 1,
-    idUsuario: 1,
-    Status: StatusPlantao.Finalizado,
-    DataCadastro: "2020-10-21",
-    Clinica: "Clinica São João Batista",
-    Valor: "R$600,00",
-    Profissional: "Carlos José Maranhão",
-    AvaliacaoClinica: {
-      Id: 0,
-      idPlantao: 0,
-      Nota: 1,
-      Descricao: "",
-    }
-  },
-  {
-    Id: 0,
-    idOferta: 2,
-    idUsuario: 2,
-    Status: StatusPlantao.NaoIniciado,
-    DataCadastro: "2020-10-21",
-    Clinica: "Clinica São João Batista",
-    Valor: "R$700,00",
-    Profissional: "Carlos José Maranhão"
-  },
-  {
-    Id: 0,
-    idOferta: 1,
-    idUsuario: 1,
-    Status: StatusPlantao.Finalizado,
-    DataCadastro: "2020-10-21",
-    Clinica: "Clinica Icaraí",
-    Valor: "R$300,00",
-    Profissional: "Carlos José Maranhão",
-  },
-  {
-    Id: 0,
-    idOferta: 1,
-    idUsuario: 1,
-    Status: StatusPlantao.Finalizado,
-    DataCadastro: "2020-10-21",
-    Clinica: "Clinica São João Batista",
-    Valor: "R$666,00",
-    Profissional: "Carlos José Maranhão",
-    AvaliacaoClinica: {
-      Id: 0,
-      idPlantao: 0,
-      Nota: 1,
-      Descricao: "",
-    },
-    AvaliacaoProfissional: {
-      Id: 0,
-      idPlantao: 0,
-      Nota: 1,
-      Descricao: "",
-    }
-  },
-  {
-    Id: 0,
-    idOferta: 1,
-    idUsuario: 1,
-    Status: StatusPlantao.Finalizado,
-    DataCadastro: "2020-10-21",
-    Clinica: "Clinica São João Batista",
-    Valor: "R$600,00",
-    Profissional: "Carlos José Maranhão",
-    AvaliacaoProfissional: {
-      Id: 0,
-      idPlantao: 0,
-      Nota: 1,
-      Descricao: "",
-    }
-  },
-]
+
 
 const eventSources = [
   {
@@ -119,9 +43,6 @@ const eventSources = [
   }
 ]
 
-const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-  "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-];
 
 
 
@@ -133,28 +54,24 @@ const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
 export class AgendaComponent extends PadraoComponent implements OnInit {
 
   @ViewChild('calendario') calendario: FullCalendarComponent
-
-  public CorEvento = Corevento
-
   public calendarOptions: CalendarOptions = null
 
-  public mesano: string 
+  public CorEvento = Corevento;
+  public mesano: string; 
+  public eventos: EventSourceInput[] = [];
 
-  public eventos: EventSourceInput[] = [
-    {}
-  ]
-
-  constructor(private _bottomSheet: MatBottomSheet) {
+  constructor(
+    private _bottomSheet: MatBottomSheet
+  ){
     super();
-
   }
 
   ngOnInit(): void {
-    this.iniciaCalendario();
+    this.criarCalendario();
     this.preencherDataInicial();
   }
 
-  private iniciaCalendario(): void {
+  private criarCalendario(): void {
     this.calendarOptions = {
       plugins: [dayGridPlugin, interactionPlugin],
       eventClick: (e => this.onEventoClick(e)),
@@ -167,25 +84,15 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
       },
       locale: 'pt-br',
       initialView: 'dayGridMonth',
-      eventSources: eventSources
-           
-    };
-    
-  }
-
-  private preencherDataInicial(): void {
-    let d = new Date();
-    this.mesano = `${monthNames[d.getMonth()]} de ${d.getFullYear()}`
-  }
-
-  private atualizarData(): void {
-    this.mesano = `${monthNames[this.calendario.getApi().getDate().getMonth()]} de ${this.calendario.getApi().getDate().getFullYear()}`
+      eventSources: eventSources           
+    };    
   }
 
   private onDataClick(e: DateClickArg): void {
     this.criarEvento(e.dateStr);
   }
 
+  //#region METODOS REFERETES AS ACOES AO CLICAR EM UM EVENTO
   private onEventoClick(e: EventClickArg): void {
     switch(e.event.extendedProps.tipo){
       case 1: this.abrirBottonSheetOferta();
@@ -211,6 +118,25 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
       });
   }
 
+  private verCandidatosOferta(): void {
+    let layout = {
+      height: '500px',
+      width: '40%',
+    }
+
+    this.dialog.open(ModalListaCandidatosOfertaComponent, {
+      ...layout
+    })
+  }
+
+  private alterarOferta(): void {
+
+  }
+
+  private cancelarOferta(): void {
+    this.toastr.success('Hello world!', 'Toastr fun!');
+  }
+
   private abrirBottonSheetPlantao(): void {
     this._bottomSheet.open(OpcoesPlantaoComponent).afterDismissed().toPromise()
     .then(r => {
@@ -223,80 +149,6 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
       }
 
     })
-  }
-
-  public onButtonProximoDiaClick(): void {
-    this.calendario.getApi().next()
-    this.atualizarData();
-  } 
-
-  public onButtonAnteriorDiaClick(): void {
-    this.calendario.getApi().prev()
-    this.atualizarData();
-  } 
-
-  public onButtonHojeDiaClick(): void {
-    this.calendario.getApi().today()
-    this.atualizarData();
-  } 
-
-  private criarEvento(date: string): void {
-    let layout = {
-      height: '500px',
-      width: '40%',
-    }
-
-    let data = {
-      DataPlantao: date
-    } as Oferta
-
-    this.dialog.open(ConfigurarOfertaComponent, {
-      data: data,
-      ...layout
-    })
-      .afterClosed()
-      .toPromise()
-      .then(x => this.criarObjetoEvento(x))
-  }
-
-  private criarObjetoEvento(x): void {
-    eventSources.find(x => x.id == '1').events.push({title: 'teste', date: x.DataInicial, extendedProps: {tipo: 1}})
-    this.calendario.getApi().getEventSourceById('1').refetch()
-  }
-
-  public onChangeCheckBoxOferta(event: MatCheckboxChange): void {
-    if(event.checked){
-      this.calendario.getApi().addEventSource(eventSources.find(x => x.id == '1'))
-    } else {
-      this.calendario.getApi().getEventSourceById('1').remove()
-    }
-  }
-
-  public onChangeCheckBoxPlantao(event: MatCheckboxChange): void {
-    if(event.checked){
-      this.calendario.getApi().addEventSource(eventSources.find(x => x.id == '2'))
-    } else {
-      this.calendario.getApi().getEventSourceById('2').remove()
-    }
-  }
-
-  private cancelarOferta(): void {
-    this.toastr.success('Hello world!', 'Toastr fun!');
-  }
-
-  private verCandidatosOferta(): void {
-    let layout = {
-      height: '500px',
-      width: '40%',
-    }
-
-    this.dialog.open(PerfilUsuarioComponent, {
-      ...layout
-    })
-  }
-
-  private alterarOferta(): void {
-
   }
 
   private finalizarPlantao(): void {
@@ -314,11 +166,82 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     let layout = {
       height: '500px',
       width: '40%',
-    }
+      panelClass: 'custom-modalbox'
+    } as MatDialogConfig
 
     this.dialog.open(PlantaoComponent, {
       ...layout
     })
   }
+  //#endregion
+
+  //#region METODOS REFERENTES AO MENU LATERAL
+  private preencherDataInicial(): void {
+    let d = new Date();
+    this.mesano = `${Meses[d.getMonth()]} de ${d.getFullYear()}`
+  }
+
+
+  private atualizarData(): void {
+    this.mesano = `${Meses[this.calendario.getApi().getDate().getMonth()]} de ${this.calendario.getApi().getDate().getFullYear()}`
+  }
+
+  public onButtonProximoDiaClick(): void {
+    this.calendario.getApi().next()
+    this.atualizarData();
+  } 
+
+  public onButtonAnteriorDiaClick(): void {
+    this.calendario.getApi().prev()
+    this.atualizarData();
+  } 
+
+  public onButtonHojeDiaClick(): void {
+    this.calendario.getApi().today()
+    this.atualizarData();
+  } 
+  //#endregion
+
+  //#region METODOS REFERNENTES AOS CHECKBOX DE EVENTOS
+  public onChangeCheckBoxOferta(event: MatCheckboxChange): void {
+    if(event.checked){
+      this.calendario.getApi().addEventSource(eventSources.find(x => x.id == '1'))
+    } else {
+      this.calendario.getApi().getEventSourceById('1').remove()
+    }
+  }
+
+  public onChangeCheckBoxPlantao(event: MatCheckboxChange): void {
+    if(event.checked){
+      this.calendario.getApi().addEventSource(eventSources.find(x => x.id == '2'))
+    } else {
+      this.calendario.getApi().getEventSourceById('2').remove()
+    }
+  }
+  //#endregion
+
+  private criarEvento(date: string): void {
+    let layout = {
+      height: '500px',
+      width: '40%',
+    }
+
+    let data = {
+      DataInicial: date
+    } as Oferta
+
+    this.dialog.open(ConfigurarOfertaComponent, {
+      data: data,
+      ...layout
+    })
+      .afterClosed()
+      .toPromise()
+      .then(x => this.criarObjetoEvento(x))
+  }
+
+  private criarObjetoEvento(x): void {
+    eventSources.find(x => x.id == '1').events.push({title: 'teste', date: x.DataInicial, extendedProps: {tipo: 1}})
+    this.calendario.getApi().getEventSourceById('1').refetch()
+  }  
 
 }

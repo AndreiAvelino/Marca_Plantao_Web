@@ -1,0 +1,16 @@
+<mat-list role="list">
+    <mat-list-item *ngFor="let candidato of candidatos" role="listitem" style="height: 60px">
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;"> 
+            <div style="display: flex; align-items: center;">
+                <ngx-avatar [src]="candidato.Src ? candidato.Src : ''" [name]="candidato.Nome"></ngx-avatar>
+                <span style="margin-left: 15px">{{candidato.Nome}}</span>
+            </div>
+            <div>
+                <button mat-icon-button>
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>

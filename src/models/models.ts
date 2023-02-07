@@ -1,8 +1,9 @@
-import { Rotas, StatusPlantao, TipoNotificacao, UF } from "../enum/enum";
+import { Rotas, StatusPagamento, StatusPlantao, TipoEvento, TipoNotificacao, UF } from "../enum/enum";
 
 export interface Login {
     Id: number;
-    Nome: String;
+    Nome: string;
+    Senha: string;
 }
 
 export interface Clinica {
@@ -26,13 +27,24 @@ export interface Endereco {
 
 export interface Oferta {
     Id: number,
-    Clinica: string,
-    Descricao: string
-    idEspecializacao: number,
+    Titulo: string,
+    Descricao: string,
+    DataInicial: string,
+    DataFinal: string,
+    Turno: string,
     Valor: string,
-    ListaIdCandidatos: Array<number>,
-    DataPlantao: string | Date,
-    DataCadastro?: string
+    ValorHoraExtra: string,
+    MetodoPagamento: string,
+    DataCadastro: string,
+    IdClinica: number,
+    ListaIdEspecializacao: number,
+    ListaIdCandidatos: Candidato[],
+}
+
+export interface Candidato {
+    Id: number;
+    Nome: string;
+    Src: string;
 }
 
 export interface Plantao {
@@ -40,13 +52,25 @@ export interface Plantao {
     idOferta: number,
     idUsuario: number,
     Status: StatusPlantao,
-    DataCadastro?: string,
+    DataInicial: string,
+    DataFinal: string,
+    HoraExtra: string,
+    ValorTotal: string,
+    Desconto: string,
+    StatusPagamento: StatusPagamento,
+    DataPagamento: string,
+    Comprovante: string,
     AvaliacaoClinica?: Avaliacao,
-    AvaliacaoProfissional?: Avaliacao,
-    Clinica?: String,
-    Valor?: String,
-    Profissional?: String
+    AvaliacaoProfissional?: Avaliacao    
+    DataCadastro?: string   
 }
+
+export interface Evento {
+    Id: string;
+    Titulo: string;
+    Tipo: TipoEvento
+}
+
 
 export interface Avaliacao {
     Id: number,
@@ -58,9 +82,15 @@ export interface Avaliacao {
 
 export interface Usuario {
     Id: number,
-    Nome: String,
+    Nome: string,
+    Profissao: string,
+    Sobre: string,
     Especializacoes: Array<Especializacao>,
     DataCadastro?: string
+    QtdPlantoesRealizados: number,
+    QtdAvaliacoes: number,
+    MediaAvaliacao: number,
+    ListaAvaliacao: Array<Avaliacao>
 }
 
 export interface Especializacao {
@@ -70,7 +100,7 @@ export interface Especializacao {
 
 export interface Notificacao {
     Id: number,
-    Descricao: String,
+    Descricao: string,
     Tipo: TipoNotificacao,
     Rota?: Rotas,
     idRotaNotificacao?: number

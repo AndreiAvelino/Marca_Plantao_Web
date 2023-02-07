@@ -9,10 +9,12 @@ import { ClinicaModule } from './clinica/clinica.module';
 import { InicioModule } from './inicio/inicio.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AgendaModule } from './agenda/agenda.module';
+import { IndicadoresModule } from './indicadores/indicadores.module';
 
 @NgModule({
   declarations: [
-    PagesComponent
+    PagesComponent,
+    
   ],
   imports: [
     RouterModule,
@@ -23,7 +25,8 @@ import { AgendaModule } from './agenda/agenda.module';
     ClinicaModule,
     InicioModule,
     UsuarioModule,
-    AgendaModule
+    AgendaModule,
+    IndicadoresModule
   ]
 })
 export class PagesModule { }

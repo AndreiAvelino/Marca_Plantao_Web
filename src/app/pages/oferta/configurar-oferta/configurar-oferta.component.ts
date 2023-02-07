@@ -30,36 +30,6 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
   public formulario: UntypedFormGroup; 
 
   public ListaUsuario: Array<Usuario> = [
-    {
-      Id: 0,
-      Nome: "Carlos",
-      Especializacoes: []
-    },
-    {
-      Id: 0,
-      Nome: "Maria",
-      Especializacoes: []
-    },
-    {
-      Id: 0,
-      Nome: "José",
-      Especializacoes: []
-    },
-    {
-      Id: 0,
-      Nome: "Plínio",
-      Especializacoes: []
-    },
-    {
-      Id: 0,
-      Nome: "Bianca",
-      Especializacoes: []
-    },
-    {
-      Id: 0,
-      Nome: "Rafaela",
-      Especializacoes: []
-    }
   ]
   public ColunasTabelaUsuario: Array<ColunaTabela> = [
     {
@@ -96,7 +66,7 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
       idEspecializacao: 0,
       Valor: "",
       ListaIdCandidatos: [],
-      DataInicial: this.oferta.DataPlantao,
+      DataInicial: this.oferta.DataInicial,
       HorarioInicial: "12:00",
       DataFinal: "12:00",
       HorarioFinal: "",
@@ -105,6 +75,8 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
     })
 
   }
+
+
 
   public onClickButtonFinalizar(): void {
     this.dialogRef.close(this.formulario.value)

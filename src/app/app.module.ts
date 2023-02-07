@@ -13,6 +13,7 @@ import { PagesRoutingModule } from './pages/pages-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { PadraoComponent } from './@padrao/padrao.component';
 import { ToastrModule } from 'ngx-toastr';
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ToastrModule } from 'ngx-toastr';
     StoreModule.forRoot({app: appReducer}),
     StoreModule.forRoot({layout: layoutReducer}),
     EffectsModule.forRoot([]),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    CookieModule.withOptions()
   ],
   providers: [],
   bootstrap: [AppComponent]

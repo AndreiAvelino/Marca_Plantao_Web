@@ -35,11 +35,20 @@ export enum StatusPlantao {
     Cancelado = 'Cancelado'
 }
 
+export enum StatusPagamento {
+    Pendente = 'Pendente'
+}
+
 export enum FormaPagamento {
     Pix,
     Dinheiro,
     Cartao,
     Cheque
+}
+
+export enum Corevento {
+    Oferta = '#00BFFF',
+    Plantao = '#556B2F'
 }
 
 export enum Rotas {
@@ -51,7 +60,8 @@ export enum Rotas {
     InfoPlantao = '/infoplantao',
     Login = '/login',
     Inicio = '/inicio',
-    Agenda = '/agenda'
+    Agenda = '/agenda',
+    Indicadores = '/indicadores'
 }
 
 export enum TipoNotificacao {
@@ -64,4 +74,9 @@ export enum TamanhoColunaTabela {
     Pequena,
     Media,
     Grande
+}
+
+export enum TipoEvento {
+    Oferta,
+    Plantao
 }

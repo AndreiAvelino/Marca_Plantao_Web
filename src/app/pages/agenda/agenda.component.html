@@ -22,34 +22,52 @@
             </div>
         </div>
 
-        <mat-card style="margin-top: 10px; height: calc(85vh - 8vh);">
+        <mat-card style="margin-top: 10px; height: calc(85vh - 5vh); padding: 0">
             
-            <mat-checkbox class="oferta" 
-                          checked
-                          [style.--hoverColor]="CorEvento.Oferta"
-                          (change)="onChangeCheckBoxOferta($event)">
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>                        
+                        <mat-panel-title> <span style="font-weight: 500;">Categorias</span> </mat-panel-title>
+                    </mat-expansion-panel-header>
 
-                          <span style="font-size: 17px">Ofertas</span>
 
-            </mat-checkbox>
-            <br>
-            <mat-checkbox class="plantao" 
-                          checked
-                          [style.--hoverColor]="CorEvento.Plantao"
-                          (change)="onChangeCheckBoxPlantao($event)">
+                    <div style="margin-left: 10px;">
+                        <mat-checkbox class="oferta" 
+                                    checked
+                                    [style.--hoverColor]="CorEvento.Oferta"
+                                    (change)="onChangeCheckBoxOferta($event)">
 
-                          <span style="font-size: 17px">Plantões</span>
+                            <span>Ofertas</span>
 
-            </mat-checkbox>
+                        </mat-checkbox>
+                        <br>
+                        <mat-checkbox class="plantao" 
+                                    checked
+                                    [style.--hoverColor]="CorEvento.Plantao"
+                                    (change)="onChangeCheckBoxPlantao($event)">
+
+                            <span>Plantões</span>
+
+                        </mat-checkbox>
+                    </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+            
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0">
+                 <mat-expansion-panel-header>
+                   <mat-panel-title> <span style="font-weight: 500;">Filtros</span> </mat-panel-title>
+                 </mat-expansion-panel-header>
+               </mat-expansion-panel>
+            </mat-accordion>
 
         </mat-card>
 
     </div>
 
     <div>
-        <mat-card style="margin: 10px; padding: 25px">
-
-        
+        <mat-card style="margin: 10px; padding: 25px">        
             <full-calendar #calendario [options]="calendarOptions"></full-calendar>
         </mat-card>
     </div>
