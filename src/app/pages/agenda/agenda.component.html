@@ -68,7 +68,7 @@
 
     <div>
         <mat-card style="margin: 10px; padding: 25px">        
-            <full-calendar #calendario [options]="calendarOptions"></full-calendar>
+            <full-calendar *ngIf="eventos.length > 0" #calendario [options]="calendarOptions"></full-calendar>
         </mat-card>
     </div>
 </div>

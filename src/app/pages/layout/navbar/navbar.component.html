@@ -1,38 +1,38 @@
 <mat-toolbar color="primary" style="height: 7vh;">
     
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="MudarEstadoSidenav()">
-      <mat-icon>menu</mat-icon>
-    </button>
-
-    <div style="display: flex; justify-content: space-between; width: 100%;">
-    
-      <span style="padding-top: 4px">Marca plantão</span>
-
-      
-
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-
-        <div style="margin-right: 25px">
-          <app-notificacoes></app-notificacoes>
-        </div>
-        
-        <div style="margin-right: 30px"> 
-
-          <!-- <ngx-avatar mat-icon-button 
-                      [matMenuTriggerFor]="menu"
-                      name="Andrei Avelino">
-          </ngx-avatar> -->
-                  
-          <menu-usuario style="margin-left: auto"></menu-usuario>
-
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item
-                    (click)="Logout()"> <mat-icon>exit_to_app</mat-icon> <span>Sair</span> </button>
-          </mat-menu>
-        </div>
+  <div style="display: flex; justify-content: space-between; width: 100%">
+    <div style="display: flex; align-items: center;">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="MudarEstadoSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+  
+      <div>
+        <span style="padding-top: 4px">Marca plantão</span>
       </div>
-
+    </div>  
+  
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+  
+      <div style="margin-right: 25px">
+        <app-notificacoes></app-notificacoes>
+      </div>
+      
+      <div style="margin-right: 30px"> 
+  
+        <!-- <ngx-avatar mat-icon-button 
+                    [matMenuTriggerFor]="menu"
+                    name="Andrei Avelino">
+        </ngx-avatar> -->
+                
+        <menu-usuario style="margin-left: auto"></menu-usuario>
+  
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item
+                  (click)="Logout()"> <mat-icon>exit_to_app</mat-icon> <span>Sair</span> </button>
+        </mat-menu>
+      </div>
     </div>
+  </div>
     
 
-  </mat-toolbar>
+</mat-toolbar>
