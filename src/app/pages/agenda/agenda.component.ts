@@ -242,7 +242,7 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
 
   private async alterar_plantao(e: EventClickArg): Promise<void> {
-    await this.get_oferta(1)
+    await this.get_oferta("0")
       .then(x => this.modal_oferta(x))
       .then(x => this.put_oferta(x))
       .then(x => this.alterarEventoCalendario(x))
@@ -269,7 +269,7 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
 
   private async alterar_oferta(e: EventClickArg): Promise<void> {
-    await this.get_oferta(1)
+    await this.get_oferta("0")
       .then(x => this.modal_oferta(x))
       .then(x => this.put_oferta(x))
       .then(x => this.alterarEventoCalendario(x))
@@ -297,11 +297,11 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     return this.ofertaService.put(oferta).toPromise();
   }
 
-  private get_oferta(idOferta: number): Promise<Oferta> {  
+  private get_oferta(idOferta: string): Promise<Oferta> {  
     return this.ofertaService.get(idOferta).toPromise() 
   }
 
-  private delete_oferta(idOferta: number): Promise<any> {  
+  private delete_oferta(idOferta: string): Promise<any> {  
     return this.ofertaService.delete(idOferta).toPromise() 
   }
   //#endregion

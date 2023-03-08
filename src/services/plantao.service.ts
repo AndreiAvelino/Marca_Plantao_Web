@@ -10,15 +10,19 @@ export class PlantaoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public get_all(idClinica: number): Observable<Plantao> {
+  public get_all(idClinica: number): Observable<Plantao[]> {
     return null
   }
 
-  public post(oferta: Plantao): Observable<any> {
+  public get(idPlantao: number): Observable<Plantao> {
+    return null
+  }
+
+  public post(oferta: Plantao): Observable<Plantao> {
     return null;
   }
 
-  public put(oferta: Plantao): Observable<any> {
+  public put(oferta: Plantao): Observable<Plantao> {
     return null;
   }
 

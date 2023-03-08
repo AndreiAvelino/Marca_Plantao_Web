@@ -12,18 +12,18 @@ export class NotificacoesComponent implements OnInit {
 
   public ListaNotificacoes: Array<Notificacao> = [
     {
-      Id: 0,
+      Id: "0",
       Descricao: "Há 26 candidatos para o plantão X",
       Tipo: TipoNotificacao.Informacao,
       Rota: Rotas.ConfigurarOferta
     },
     {
-      Id: 0,
+      Id: "0",
       Descricao: "O plantão Y foi encerrado por falta de médico",
       Tipo: TipoNotificacao.Alerta
     },
     {
-      Id: 0,
+      Id: "0",
       Descricao: "O médico não comparecerá",
       Tipo: TipoNotificacao.Urgente
     }

@@ -10,19 +10,23 @@ export class OfertaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public get_all(idClinica: number): Observable<Oferta> {
+  public get_all(idClinica: number): Observable<Oferta[]> {
     return null
   }
 
-  public post(oferta: Oferta): Observable<any> {
+  public get(idOferta: string): Observable<Oferta> {
     return null;
   }
 
-  public put(oferta: Oferta): Observable<any> {
+  public post(oferta: Oferta): Observable<Oferta> {
     return null;
   }
 
-  public delete(idOferta: number): Observable<any> {
+  public put(oferta: Oferta): Observable<Oferta> {
+    return null;
+  }
+
+  public delete(idOferta: string): Observable<any> {
     return null;
   }
 

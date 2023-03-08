@@ -19,4 +19,12 @@ export class PadraoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public MensagemSucesso(mensagem: string){
+    this.toastr.success(mensagem);
+  }
+
+  public MensagemErro(mensagem: string){
+    this.toastr.error(mensagem);
+  }
+
 }

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
+import { PadraoComponent } from 'src/app/@padrao/padrao.component';
+import { PerfilUsuarioComponent } from '../../usuario/perfil-usuario/perfil-usuario.component';
 
 interface Candidato {
   Id: number;
@@ -12,7 +17,7 @@ interface Candidato {
   styleUrls: ['./modal-lista-candidatos-oferta.component.css']
 })
 
-export class ModalListaCandidatosOfertaComponent implements OnInit {
+export class ModalListaCandidatosOfertaComponent extends PadraoComponent implements OnInit {
 
   public candidatos: Candidato[] = [
     {
@@ -87,9 +92,16 @@ export class ModalListaCandidatosOfertaComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor() {
+    super();
+  }
+
 
   ngOnInit(): void {
+  }
+
+  public abrirPerfilUsuario(): void {
+    this.dialog.open(PerfilUsuarioComponent)
   }
 
 }

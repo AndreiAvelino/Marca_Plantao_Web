@@ -1,0 +1,83 @@
+<mat-card style="margin-top: 10px; height: calc(85vh - 5vh); padding: 0">
+            
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0">
+            <mat-expansion-panel-header>                        
+                <mat-panel-title> <span style="font-weight: 500;">Categorias</span> </mat-panel-title>
+            </mat-expansion-panel-header>
+
+
+            <div style="margin-left: 10px;">
+                <mat-checkbox class="oferta" 
+                            checked
+                            [style.--hoverColor]="CorEvento.Oferta"
+                            (change)="onChangeCheckBoxOferta($event)">
+
+                    <span>Ofertas</span>
+
+                </mat-checkbox>
+                <br>
+                <mat-checkbox class="plantao" 
+                            checked
+                            [style.--hoverColor]="CorEvento.Plantao"
+                            (change)="onChangeCheckBoxPlantao($event)">
+
+                    <span>Plantões</span>
+
+                </mat-checkbox>
+            </div>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+    
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0">
+         <mat-expansion-panel-header>
+           <mat-panel-title> <span style="font-weight: 500;">Filtros</span> </mat-panel-title>
+
+
+         </mat-expansion-panel-header>
+
+         <div>
+            <mat-slider min="200" max="500">
+                <input value="300" matSliderStartThumb>
+                <input value="400" matSliderEndThumb>
+             </mat-slider>
+    
+             <app-input label="Profissional"></app-input>
+         </div>
+
+         <mp-select-especializacao></mp-select-especializacao>
+
+         <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Método de pagamento</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let metodo of ListaMetodosPagamento" [value]="metodo">
+                {{metodo}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Status do pagamento</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let metodo of ListaStatusPagamento" [value]="metodo">
+                {{metodo}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Status do plantao</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let metodo of ListaStatusPlatao" [value]="metodo">
+                {{metodo}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+       </mat-expansion-panel>
+    </mat-accordion>
+
+</mat-card>

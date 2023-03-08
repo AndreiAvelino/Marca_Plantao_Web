@@ -38,8 +38,8 @@ export class InfoPlantaoComponent implements OnInit {
       .subscribe(
         r => {
           this.plantao.AvaliacaoProfissional = {
-            Id: 0,
-            idPlantao: 0,
+            Id: "0",
+            idPlantao: "0",
             Nota: r.Nota,
             Descricao: r.Descricao,
             DataCadastro: ""

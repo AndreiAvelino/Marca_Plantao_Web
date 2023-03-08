@@ -11,15 +11,18 @@ import { InputImagemComponent } from './input-imagem/input-imagem.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
 
 import { MPRadioComponent } from './radio/mp-radio/mp-radio.component';
 import { AdicionarArquivoProdutoComponent } from './adicionar-arquivo-produto/adicionar-arquivo-produto.component';
+import { SelectEspecializacaoComponent } from './select/select-especializacao/select-especializacao.component';
 
 const materialModules = [
   MatIconModule,
   MatCardModule,
   MatButtonModule,
-  MatRadioModule
+  MatRadioModule,
+  MatSelectModule,
 ]
 
 @NgModule({
@@ -30,7 +33,8 @@ const materialModules = [
     InputImagemComponent,
     MPRadioComponent,
     FormEnderecoComponent,
-    AdicionarArquivoProdutoComponent
+    AdicionarArquivoProdutoComponent,
+    SelectEspecializacaoComponent
   ],
   imports: [
     ...materialModules,
@@ -45,7 +49,8 @@ const materialModules = [
     InputImagemComponent,
     MPRadioComponent,
     FormDebugComponent,
-    AdicionarArquivoProdutoComponent
+    AdicionarArquivoProdutoComponent,
+    SelectEspecializacaoComponent
   ]
 })
 export class FormularioModule { }

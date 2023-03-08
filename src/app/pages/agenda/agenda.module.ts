@@ -23,9 +23,13 @@ import { FinalizarPlantaoComponent } from './finalizar-plantao/finalizar-plantao
 import { PlantaoModule } from '../plantao/plantao.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSliderModule} from '@angular/material/slider';
 import { ModalListaCandidatosOfertaComponent } from './modal-lista-candidatos-oferta/modal-lista-candidatos-oferta.component';
 import { AvatarModule } from 'ngx-avatar';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { OpcoesAgendaComponent } from './opcoes-agenda/opcoes-agenda.component';
+import { MatSelectModule } from '@angular/material/select';
+
 
 const materialModules = [
   MatButtonModule,
@@ -40,6 +44,8 @@ const materialModules = [
   MatInputModule,
   MatDialogModule,
   MatExpansionModule,
+  MatSliderModule,
+  MatSelectModule,
   CdkAccordionModule
 ]
 
@@ -50,7 +56,8 @@ const materialModules = [
     OpcoesPlantaoComponent,
     PlantaoComponent,
     FinalizarPlantaoComponent,
-    ModalListaCandidatosOfertaComponent
+    ModalListaCandidatosOfertaComponent,
+    OpcoesAgendaComponent
   ],
   imports: [
     ...materialModules,

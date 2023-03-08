@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Especialização</mat-label>
+    <mat-select formControlName="idEspecializacao" multiple>
+      <mat-option *ngFor="let especializacao of ListaEspecializacao" [value]="especializacao.Id">
+        {{especializacao.Descricao}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>      

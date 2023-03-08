@@ -1,13 +1,31 @@
 import { Rotas, StatusPagamento, StatusPlantao, TipoEvento, TipoNotificacao, UF } from "../enum/enum";
 
 export interface Login {
-    Id: number;
-    Nome: string;
+    Email: string;
     Senha: string;
 }
 
+export interface RegistrarUsuario {
+    Email: string;
+    Password: string;
+    ConfirmPassword: string;
+    Nome: string;
+    DataNascimento: string;
+    Genero: string;
+    Telefone: string;
+    Imagem: string;
+    EspecializacaoId: string;
+}
+
+export interface RegistrarAdministrador {
+    Email: string;
+    Password: string;
+    ConfirmPassword: string;
+    Mater: boolean;
+}
+
 export interface Clinica {
-    Id?: number,
+    Id?: string,
     RazaoSocial: string,
     Imagem: string
     Endereco?: Endereco,
@@ -16,7 +34,7 @@ export interface Clinica {
 
   
 export interface Endereco {
-    Id?: number;
+    Id?: string;
     Logradouro: string,
     CEP: string,
     Bairro?: string,
@@ -26,7 +44,7 @@ export interface Endereco {
 }
 
 export interface Oferta {
-    Id: number,
+    Id: string,
     Titulo: string,
     Descricao: string,
     DataInicial: string,
@@ -42,15 +60,15 @@ export interface Oferta {
 }
 
 export interface Candidato {
-    Id: number;
+    Id: string;
     Nome: string;
     Src: string;
 }
 
 export interface Plantao {
-    Id: number,
-    idOferta: number,
-    idUsuario: number,
+    Id: string,
+    idOferta: string,
+    idUsuario: string,
     Status: StatusPlantao,
     DataInicial: string,
     DataFinal: string,
@@ -73,15 +91,15 @@ export interface Evento {
 
 
 export interface Avaliacao {
-    Id: number,
-    idPlantao: number,
+    Id: string,
+    idPlantao: string,
     Nota: number,
     Descricao: string,
     DataCadastro?: string
 }
 
 export interface Usuario {
-    Id: number,
+    Id: string,
     Nome: string,
     Profissao: string,
     Sobre: string,
@@ -94,12 +112,12 @@ export interface Usuario {
 }
 
 export interface Especializacao {
-    Id: number,
+    Id: string,
     Descricao: string
 }
 
 export interface Notificacao {
-    Id: number,
+    Id: string,
     Descricao: string,
     Tipo: TipoNotificacao,
     Rota?: Rotas,

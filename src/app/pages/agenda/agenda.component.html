@@ -22,47 +22,9 @@
             </div>
         </div>
 
-        <mat-card style="margin-top: 10px; height: calc(85vh - 5vh); padding: 0">
-            
-            <mat-accordion>
-                <mat-expansion-panel class="mat-elevation-z0">
-                    <mat-expansion-panel-header>                        
-                        <mat-panel-title> <span style="font-weight: 500;">Categorias</span> </mat-panel-title>
-                    </mat-expansion-panel-header>
-
-
-                    <div style="margin-left: 10px;">
-                        <mat-checkbox class="oferta" 
-                                    checked
-                                    [style.--hoverColor]="CorEvento.Oferta"
-                                    (change)="onChangeCheckBoxOferta($event)">
-
-                            <span>Ofertas</span>
-
-                        </mat-checkbox>
-                        <br>
-                        <mat-checkbox class="plantao" 
-                                    checked
-                                    [style.--hoverColor]="CorEvento.Plantao"
-                                    (change)="onChangeCheckBoxPlantao($event)">
-
-                            <span>Plantões</span>
-
-                        </mat-checkbox>
-                    </div>
-
-                </mat-expansion-panel>
-            </mat-accordion>
-            
-            <mat-accordion>
-                <mat-expansion-panel class="mat-elevation-z0">
-                 <mat-expansion-panel-header>
-                   <mat-panel-title> <span style="font-weight: 500;">Filtros</span> </mat-panel-title>
-                 </mat-expansion-panel-header>
-               </mat-expansion-panel>
-            </mat-accordion>
-
-        </mat-card>
+        <opcoes-agenda (emitChangeCheckBoxOferta)="onChangeCheckBoxOferta($event)"
+                       (emitChangeCheckBoxPlantao)="onChangeCheckBoxPlantao($event)">            
+        </opcoes-agenda>
 
     </div>
 
