@@ -5,6 +5,20 @@ export interface Login {
     Senha: string;
 }
 
+export interface Response<T> {
+    data: T;
+    success: boolean;
+}
+
+export interface ResponseLogin {
+    bloqueado: boolean;
+    clinicaId: string;
+    email: string;
+    master: boolean;
+    profissional: string;
+    token: string;
+}
+
 export interface RegistrarUsuario {
     Email: string;
     Password: string;
@@ -86,7 +100,9 @@ export interface Plantao {
 export interface Evento {
     Id: string;
     Titulo: string;
-    Tipo: TipoEvento
+    Tipo: TipoEvento;
+    DataInicial: string;
+    DataFinal?: string;
 }
 
 

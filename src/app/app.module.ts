@@ -14,6 +14,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { PadraoComponent } from './@padrao/padrao.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CookieModule } from 'ngx-cookie';
+import { AuthInterceptor } from 'src/interceptor/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,14 @@ import { CookieModule } from 'ngx-cookie';
     ToastrModule.forRoot(),
     CookieModule.withOptions()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }

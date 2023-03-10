@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Calendar, CalendarOptions, EventClickArg, EventSourceInput } from '@fullcalendar/core';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { Corevento, StatusPlantao } from 'src/enum/enum';
-import { Oferta, Plantao } from 'src/models/models';
+import { Oferta, Plantao, ResponseLogin } from 'src/models/models';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
@@ -22,7 +22,14 @@ import { MatDialogConfig } from '@angular/material/dialog';
 import { AgendaService } from 'src/services/agenda.service';
 import { OfertaService } from 'src/services/oferta.service';
 import { PlantaoService } from 'src/services/plantao.service';
+import { EventImpl } from '@fullcalendar/core/internal';
 
+interface EventSource {
+  id: string
+  events: EventImpl[],
+  color: string,
+  extendedProps: EventSourceInput
+}
 
 
 
@@ -41,6 +48,8 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   public eventos: any[] = [];
 
+  public extendedProps: EventImpl
+
   constructor(
     private _bottomSheet: MatBottomSheet,
     private agendaService: AgendaService,
@@ -57,8 +66,12 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
 
   private async get_all_evento(): Promise<void> {
-    this.agendaService.get_all_evento().toPromise()
+    this.agendaService.get_all_evento_por_clinica(this.usuarioLogado.clinicaId).toPromise()
       .then(x => this.eventos = x)
+  }
+
+  private gerarEventosFormatoAgente(): EventSource[] {
+    return null;
   }
 
   //#region METODOS REFERENTES AO CALENDARIO

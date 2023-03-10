@@ -14,8 +14,6 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    console.log(this.cookieService.get('usuario'))
-    
     if(this.cookieService.get('usuario')){
       return true;
     }

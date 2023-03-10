@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AuthInterceptor } from 'src/interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   ],
   exports: [
     AuthComponent
+  ], 
+  providers: [
+    AuthInterceptor
   ]
 })
 export class AuthModule { }

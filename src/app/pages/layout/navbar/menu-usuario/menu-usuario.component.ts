@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie';
+import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { Rotas } from 'src/enum/enum';
 
 @Component({
@@ -7,19 +9,22 @@ import { Rotas } from 'src/enum/enum';
   templateUrl: './menu-usuario.component.html',
   styleUrls: ['./menu-usuario.component.scss']
 })
-export class MenuUsuarioComponent implements OnInit {
+export class MenuUsuarioComponent extends PadraoComponent implements OnInit {
 
   public fotoPerfil: String = "";
 
   constructor(
     private _router: Router
-  ){}
+  ){
+    super();
+  }
 
   ngOnInit(): void {
     this.RecuperarFoto();
   }
 
   public sair(){
+    this.RemoverCookie("usuario");
     this._router.navigate([Rotas.Login])
   }
 
@@ -35,4 +40,7 @@ export class MenuUsuarioComponent implements OnInit {
     //     }
     //   })
   }
+
+
+ 
 }

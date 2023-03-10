@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { CookieService } from 'ngx-cookie';
 import { Rotas } from 'src/enum/enum';
 import { appRealizarLogout, AppState } from 'src/store/app/app.state';
 import { layoutMudarEstadoSideNav, LayoutState } from 'src/store/layout/layout.state';
@@ -14,7 +15,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(public layoutStore: Store<{layout: LayoutState}>,
               public appStore: Store<{app: AppState}>,
-              private router: Router) { }
+              private router: Router,
+              private cookieService: CookieService) { }
 
   ngOnInit(): void {
   }
@@ -27,5 +29,4 @@ export class NavbarComponent implements OnInit {
     this.appStore.dispatch(appRealizarLogout());
     this.router.navigate([Rotas.Login])
   }
-
 }

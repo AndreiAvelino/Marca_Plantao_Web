@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Corevento } from 'src/enum/enum';
+import { environment } from 'src/environments/environment';
+import { Evento } from 'src/models/models';
 
 const eventSources = [
   {
@@ -31,7 +33,7 @@ export class AgendaService {
 
   constructor(private httpCliente: HttpClient) { }
 
-  public get_all_evento(): Observable<any[]> {
-    return of(eventSources);
+  public get_all_evento_por_clinica(clinicaId: string): Observable<Evento[]> {
+    return this.httpCliente.get<Evento[]>(environment.api + clinicaId);
   }
 }
