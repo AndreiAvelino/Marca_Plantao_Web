@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Calendar, CalendarOptions, EventClickArg, EventSourceInput } from '@fullcalendar/core';
+import { CalendarOptions, EventClickArg, EventSourceInput } from '@fullcalendar/core';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
-import { Corevento, StatusPlantao } from 'src/enum/enum';
-import { Oferta, Plantao, ResponseLogin } from 'src/models/models';
+import { Corevento, TipoEvento } from 'src/enum/enum';
+import { Response } from 'src/models/response';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
@@ -12,10 +12,8 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { OpcoesOferta, OpcoesOfertaComponent } from './opcoes-oferta/opcoes-oferta.component';
 import { OpcoesPlantao, OpcoesPlantaoComponent } from './opcoes-plantao/opcoes-plantao.component';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { InfoPlantaoComponent } from '../plantao/info-plantao/info-plantao.component';
 import { PlantaoComponent } from './plantao/plantao.component';
 import { FinalizarPlantaoComponent } from './finalizar-plantao/finalizar-plantao.component';
-import { PerfilUsuarioComponent } from '../usuario/perfil-usuario/perfil-usuario.component';
 import { Meses } from 'src/const/const';
 import { ModalListaCandidatosOfertaComponent } from './modal-lista-candidatos-oferta/modal-lista-candidatos-oferta.component';
 import { MatDialogConfig } from '@angular/material/dialog';
@@ -23,14 +21,25 @@ import { AgendaService } from 'src/services/agenda.service';
 import { OfertaService } from 'src/services/oferta.service';
 import { PlantaoService } from 'src/services/plantao.service';
 import { EventImpl } from '@fullcalendar/core/internal';
+import { Plantao } from 'src/models/entidades/plantao';
+import { Oferta } from 'src/models/entidades/oferta';
+import { Evento } from 'src/models/entidades/evento';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ResponseLoginAdministrador, ResponseLoginProfissional } from 'src/models/entidades/usuario';
 
 interface EventSource {
   id: string
-  events: EventImpl[],
+  events: Event[],
   color: string,
-  extendedProps: EventSourceInput
+  extendedProps?: EventSourceInput
 }
 
+interface Event { 
+  id: string,
+  title: string, 
+  date: string, 
+  extendedProps: Object
+}
 
 
 @Component({
@@ -66,12 +75,50 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
 
   private async get_all_evento(): Promise<void> {
-    this.agendaService.get_all_evento_por_clinica(this.usuarioLogado.clinicaId).toPromise()
-      .then(x => this.eventos = x)
+
+    if(this.isResponseLoginAdministrador(this.usuarioLogado)){
+      this.agendaService.get_all_evento_por_clinica(this.usuarioLogado.clinicaId).toPromise()
+        .then(x => this.eventos = this.gerarEventosSource_Agenda(x.data))
+    }
+
+    if(this.isResponseLoginProfissional(this.usuarioLogado)){
+      this.agendaService.get_all_evento_por_profissional(this.usuarioLogado.id).toPromise()
+        .then(x => this.eventos = this.gerarEventosSource_Agenda(x.data))
+    }
+
+    
   }
 
-  private gerarEventosFormatoAgente(): EventSource[] {
-    return null;
+  private gerarEventosSource_Agenda(eventos: Evento[]): EventSource[] {
+    return [
+      {
+        id: '1',
+        events: this.gerarEvents_Agenda(eventos.filter(x => x.Tipo = TipoEvento.Oferta)),
+        color: Corevento.Oferta,
+        extendedProps: {}
+      },
+      {
+        id: '2',
+        events: this.gerarEvents_Agenda(eventos.filter(x => x.Tipo = TipoEvento.Plantao)),
+        color: Corevento.Plantao,
+        extendedProps: {}
+      }
+    ]
+  }
+
+  private gerarEvents_Agenda(eventos: Evento[]): Event[] {
+    let events = [] as Event[]
+
+    eventos.forEach(x => {
+      events.push({
+        id: x.Id,
+        title: x.Titulo, 
+        date: x.DataInicial, 
+        extendedProps: x
+      })
+    })
+
+    return events;
   }
 
   //#region METODOS REFERENTES AO CALENDARIO
@@ -250,13 +297,16 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     let plantao = {} as Plantao
 
     await this.post_plantao(plantao)
-      .then(x => this.criarEventoCalendario(x))
-      .then(() => this.toastr.success('Hello world!', 'Toastr fun!'))
+      .then(x => {
+        this.criarEventoCalendario(x)
+        this.mensagem_sucesso("Plantao criado com sucesso!")
+      })
+      .catch((e: HttpErrorResponse) => this.mensagem_erro(e.error))
   }
 
   private async alterar_plantao(e: EventClickArg): Promise<void> {
     await this.get_oferta("0")
-      .then(x => this.modal_oferta(x))
+      .then(x => this.modal_oferta(x.data))
       .then(x => this.put_oferta(x))
       .then(x => this.alterarEventoCalendario(x))
   }
@@ -273,7 +323,8 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   //#region METODOS DE CRUD DE OFERTA
   private async criar_oferta(e: DateClickArg): Promise<void> {
     let oferta = {
-      DataInicial: e.dateStr
+      DataInicial: e.dateStr,
+      ClinicaId: (this.usuarioLogado as ResponseLoginAdministrador).clinicaId
     } as Oferta
 
     await this.modal_oferta(oferta)
@@ -283,8 +334,8 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   private async alterar_oferta(e: EventClickArg): Promise<void> {
     await this.get_oferta("0")
-      .then(x => this.modal_oferta(x))
-      .then(x => this.put_oferta(x))
+      .then(x => this.modal_oferta.bind(null, (x.data)))
+      .then(x => this.put_oferta.bind(null, (x)))
       .then(x => this.alterarEventoCalendario(x))
   }
 
@@ -302,37 +353,37 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   //#endregion
 
   //#region METODOS PARA REQUISICOES DE OFERTA
-  private post_oferta(oferta: Oferta): Promise<Oferta> {
+  private post_oferta(oferta: Oferta): Promise<Response<Oferta>> {
     return this.ofertaService.post(oferta).toPromise();
   }
 
-  private put_oferta(oferta: Oferta): Promise<Oferta> {
+  private put_oferta(oferta: Oferta): Promise<Response<Oferta>> {
     return this.ofertaService.put(oferta).toPromise();
   }
 
-  private get_oferta(idOferta: string): Promise<Oferta> {  
+  private get_oferta(idOferta: string): Promise<Response<Oferta>> {  
     return this.ofertaService.get(idOferta).toPromise() 
   }
 
-  private delete_oferta(idOferta: string): Promise<any> {  
+  private delete_oferta(idOferta: string): Promise<Response<any>> {  
     return this.ofertaService.delete(idOferta).toPromise() 
   }
   //#endregion
 
   //#region METODOS PARA REQUISICOES DE PLANTAO
-  private async get_plantao(idPlantao: number): Promise<Plantao> {
+  private async get_plantao(idPlantao: string): Promise<Response<Plantao>> {
     return this.plantaoService.get(idPlantao).toPromise()
   }
 
-  private post_plantao(plantao: Plantao): Promise<Plantao> {
+  private post_plantao(plantao: Plantao): Promise<Response<Plantao>> {
     return this.plantaoService.post(plantao).toPromise();
   }
 
-  private put_plantao(plantao: Plantao): Promise<Plantao> {
+  private put_plantao(plantao: Plantao): Promise<Response<Plantao>> {
     return this.plantaoService.put(plantao).toPromise();
   }
 
-  private delete_plantao(idPlantao: number): Promise<any>{
+  private delete_plantao(idPlantao: string): Promise<any>{
     return this.plantaoService.delete(idPlantao).toPromise();
   }
   //#endregion

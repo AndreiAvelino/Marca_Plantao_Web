@@ -3,9 +3,11 @@
       
       <span> {{label}} </span>
 
-      <mat-radio-group (change)="EmitirMudanca($event)" >
-        <mat-radio-button *ngFor="let opcao of opcoes" [value]="opcao.Valor" color="warn" [ngClass]="{'em-coluna': layout == 'em-coluna', 'em-linha' : layout === 'em-linha' }">
-          {{opcao.Descricao}}
+      <mat-radio-group (change)="EmitirMudanca($event)" [(ngModel)]="value">
+        <mat-radio-button *ngFor="let opcao of opcoes" 
+                          [value]="opcao.Valor"  
+                          color="warn" 
+                          [ngClass]="{'em-coluna': layout == 'em-coluna', 'em-linha' : layout === 'em-linha' }">  {{opcao.Descricao}}
         </mat-radio-button>             
       </mat-radio-group> 
 

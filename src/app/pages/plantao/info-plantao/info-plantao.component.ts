@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { StatusPlantao } from 'src/enum/enum';
-import { Plantao } from 'src/models/models';
+import { Plantao } from 'src/models/entidades/plantao';
 import { AvaliarPlantaoComponent } from '../avaliar-plantao/avaliar-plantao.component';
 
 @Component({

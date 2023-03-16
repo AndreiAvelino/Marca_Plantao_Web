@@ -36,6 +36,7 @@ export class MPRadioComponent implements ControlValueAccessor {
 
   set value(v){
     this.innerValue = v;
+    console.log(v)
     this.onChange(v);
   }
 

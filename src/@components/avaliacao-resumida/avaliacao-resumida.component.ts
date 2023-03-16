@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Avaliacao } from 'src/models/models';
+import { Avaliacao } from 'src/models/entidades/avaliacao';
 
 @Component({
   selector: 'avaliacao-resumida',

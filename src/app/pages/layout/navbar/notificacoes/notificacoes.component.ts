@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Rotas, TipoNotificacao } from 'src/enum/enum';
-import { Notificacao } from 'src/models/models';
+import { Notificacao } from 'src/models/entidades/notificacao';
 
 @Component({
   selector: 'app-notificacoes',

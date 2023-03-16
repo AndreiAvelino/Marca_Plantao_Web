@@ -2,15 +2,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BaseComponent } from '@fullcalendar/core/internal';
-import { CookieService } from 'ngx-cookie';
 import { Rotas } from 'src/enum/enum';
 import { Erro } from 'src/models/form';
 import { LoginService } from 'src/services/login.service';
 import { PadraoComponent } from '../@padrao/padrao.component';
-import { Response, ResponseLogin } from '../../models/models';
 import { Store } from '@ngrx/store';
-import { appInsereUsuario, AppState } from 'src/store/app/app.state';
+import { AppState } from 'src/store/app/app.state';
 
 @Component({
   selector: 'app-auth',
@@ -42,19 +39,19 @@ export class AuthComponent extends PadraoComponent implements OnInit {
   public async Login(): Promise<void> {
 
     if(!this.formulario.value.Email){
-      this.MensagemErro("Informa o e-mail");
+      this.mensagem_erro("Informa o e-mail");
       return;
     }
 
     if(!this.formulario.value.Senha){
-      this.MensagemErro("Informe a senha");
+      this.mensagem_erro("Informe a senha");
       return;
     }
 
     this.loginService.login(this.formulario.value).toPromise()
-      .then(x => this.InserirCookie("usuario", JSON.stringify(x.data)))
+      .then(x => this.inserir_cookie("usuario", JSON.stringify(x.data)))
       .then(() => this.router.navigate([Rotas.Inicio]))
-      .catch((e: HttpErrorResponse) => this.MensagemErro(e.error))
+      .catch((e: HttpErrorResponse) => this.mensagem_erro(e.error))
     
   }
 

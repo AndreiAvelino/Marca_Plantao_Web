@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Rotas, StatusPlantao, TamanhoColunaTabela } from 'src/enum/enum';
-import { Plantao } from 'src/models/models';
+import { Plantao } from 'src/models/entidades/plantao';
 import { ColunaTabela, Tabela } from 'src/models/table';
 
 @Component({

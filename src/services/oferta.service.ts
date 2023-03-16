@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Oferta } from 'src/models/models';
+import { environment } from 'src/environments/environment';
+import { Oferta } from 'src/models/entidades/oferta';
+import { Response } from 'src/models/response';
 
 @Injectable({
   providedIn: 'root'
@@ -10,24 +12,29 @@ export class OfertaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public get_all(idClinica: number): Observable<Oferta[]> {
-    return null
+  public get_all(): Observable<Response<Oferta[]>> {
+    return this.httpClient.get<Response<Oferta[]>>(environment.api + "ObterTodasOfertas");
   }
 
-  public get(idOferta: string): Observable<Oferta> {
-    return null;
+  public get(idPlantao: string): Observable<Response<Oferta>> {
+    return this.httpClient.get<Response<Oferta>>(environment.api + "ObterOferta?Id=" + idPlantao);
   }
 
-  public post(oferta: Oferta): Observable<Oferta> {
-    return null;
+  public post(plantao: Oferta): Observable<Response<Oferta>> {
+    return this.httpClient.post<Response<Oferta>>(environment.api + "AdicionarOferta", plantao);
   }
 
-  public put(oferta: Oferta): Observable<Oferta> {
-    return null;
+  public put(plantao: Oferta): Observable<Response<Oferta>> {
+    return this.httpClient.put<Response<Oferta>>(environment.api + "AtualizarOferta", plantao);
   }
 
-  public delete(idOferta: string): Observable<any> {
-    return null;
+  public delete(idPlantao: string): Observable<any> {
+    return this.httpClient.delete<Response<any>>(environment.api + "RemoverOferta?Id=" + idPlantao);
   }
+
+  // public adicionar_profissional_na_oferta(): Observable<Response> {
+
+  // }
+
 
 }

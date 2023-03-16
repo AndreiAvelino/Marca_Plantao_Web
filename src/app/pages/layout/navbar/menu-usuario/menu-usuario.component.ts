@@ -24,7 +24,7 @@ export class MenuUsuarioComponent extends PadraoComponent implements OnInit {
   }
 
   public sair(){
-    this.RemoverCookie("usuario");
+    this.remover_cookie("usuario");
     this._router.navigate([Rotas.Login])
   }
 

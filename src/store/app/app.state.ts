@@ -1,15 +1,15 @@
 import { createAction, createReducer, on, props } from "@ngrx/store";
-import { Login, ResponseLogin } from "src/models/models";
+import { ResponseLoginProfissional, ResponseLoginAdministrador } from 'src/models/entidades/usuario';
 
 export interface AppState {
-    Usuario: ResponseLogin
+    Usuario: ResponseLoginProfissional | ResponseLoginAdministrador
 }
 
 export const initialAppState: AppState = {
     Usuario: null
 }
 
-export const appInsereUsuario = createAction('[App] Insere o usuário logado na aplicação', props<{payload: ResponseLogin}>())
+export const appInsereUsuario = createAction('[App] Insere o usuário logado na aplicação', props<{payload: ResponseLoginProfissional | ResponseLoginAdministrador}>())
 export const appRealizarLogout = createAction('[App] Realiza logout')
 
 export const appReducer = createReducer(

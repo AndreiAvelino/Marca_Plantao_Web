@@ -1,12 +1,16 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { FormBuilder, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { MatDialog , MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
-import { ListaEspecializacao, MetodosPagamento } from 'src/const/const';
-import { Especializacao, Oferta, Usuario } from 'src/models/models';
+import { MetodosPagamento } from 'src/const/const';
+import { Especializacao } from 'src/models/entidades/especializacao';
+import { Oferta } from 'src/models/entidades/oferta';
+import { Usuario } from 'src/models/entidades/usuario';
 import { ColunaTabela, Tabela } from 'src/models/table';
-import { PerfilUsuarioComponent } from '../../usuario/perfil-usuario/perfil-usuario.component';
+import { EspecializacaoService } from 'src/services/especializacao.service';
 
 enum Turno {
   COMPLETO = '24h',
@@ -24,10 +28,10 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
   
   private oferta: Oferta
 
-  public ListaEspecializacao: Array<Especializacao> = ListaEspecializacao 
+  public ListaEspecializacao: Observable<Especializacao[]> = this.especializacaoService.get_all().pipe(map(x => x.data));  
   public ListaMetodosPagamento: Array<String> = MetodosPagamento
 
-  public formulario: UntypedFormGroup; 
+  public formulario: FormGroup; 
 
   public ListaUsuario: Array<Usuario> = [
   ]
@@ -51,6 +55,7 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
   constructor(
     private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ConfigurarOfertaComponent>,
+    private especializacaoService: EspecializacaoService,
     @Inject(MAT_DIALOG_DATA) public data: Oferta,
   ){
     super();
@@ -60,26 +65,36 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
   ngOnInit(): void {
 
     this.formulario = this._formBuilder.group({
-      Id: 0,
-      Clinica: "",
+      Id: "00000000-0000-0000-0000-000000000000",
+      Titulo: "",
       Descricao: "",
-      idEspecializacao: 0,
+      Turno: "",
       Valor: "",
-      ListaIdCandidatos: [],
+      ValorHoraExtra: "",
+      DataCadastro: this.gerar_data_hora_atual(),
+      MetodoPagamento: 0,
+      Especializacoes: [],
+      Profissionais: [],
       DataInicial: this.oferta.DataInicial,
       HorarioInicial: "12:00",
       DataFinal: "12:00",
       HorarioFinal: "",
-      DataCadastro: "",
-      MetodoPagamento: ""
+      ClinicaId: this.oferta.ClinicaId,
+      Pagamento: 0
     })
 
   }
 
-
-
   public onClickButtonFinalizar(): void {
-    this.dialogRef.close(this.formulario.value)
+    let oferta = {
+      ...this.formulario.value,
+      DataInicial: this.formulario.value.DataInicial + 'T' + this.formulario.value.HorarioInicial + ':00',
+      DataFinal: this.formulario.value.DataFinal + 'T' + this.formulario.value.HorarioFinal + ':00',
+    } as Oferta
+
+    console.log(JSON.stringify(oferta))
+
+    this.dialogRef.close(oferta)
   }
 
   public onClickButtonProsseguir(): void {

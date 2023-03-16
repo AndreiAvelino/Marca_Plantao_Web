@@ -8,14 +8,18 @@
 
           <mat-form-field appearance="fill" style="width: 100%; margin-top: 20px;">
             <mat-label>Titulo</mat-label>
-            <input matInput placeholder="Ex. Pizza">
+            <input matInput formControlName="Titulo">
           </mat-form-field>
         
 
           <mat-form-field appearance="fill" style="width: 100%;">
-            <mat-label>Avaliação</mat-label>
-            <textarea style="min-height: 160px; max-height: 160px;" formControlName="Avaliacao" matInput></textarea>
+            <mat-label>Descrição</mat-label>
+            <textarea style="min-height: 160px; max-height: 160px;" 
+                      formControlName="Descricao" 
+                      matInput>
+            </textarea>
            </mat-form-field>
+
         </mat-step>
 
         <mat-step label="Informações" state="phone">
@@ -24,9 +28,9 @@
     
             <mat-form-field appearance="fill" style="width: 100%">
                 <mat-label>Especialização</mat-label>
-                <mat-select formControlName="idEspecializacao" multiple>
-                  <mat-option *ngFor="let especializacao of ListaEspecializacao" [value]="especializacao.Id">
-                    {{especializacao.Descricao}}
+                <mat-select formControlName="Especializacoes" multiple>
+                  <mat-option *ngFor="let especializacao of ListaEspecializacao | async" [value]="especializacao.id">
+                    {{especializacao.descricao}}
                   </mat-option>
                 </mat-select>
             </mat-form-field>       
@@ -62,7 +66,8 @@
             </div>
         
             <div style="display: flex; align-items: center;">
-              <mp-radio label="Turno:" 
+              <mp-radio label="Turno:"
+                        formControlName="Turno" 
                         [opcoes]="[{Descricao: '24h', Valor: '24h'}, {Descricao: '12h', Valor: '12h'}]" 
                         layout="em-coluna"
                         [width]= "150"
@@ -91,10 +96,15 @@
               </mat-form-field>
             
             </div>
+
+            <mat-form-field appearance="outline" style="width: 500px">
+              <input matInput type="number" class="example-right-align" formControlName="ValorHoraExtra">
+              <span matPrefix>R$&nbsp;</span>
+              <span matSuffix>.00</span>
+            </mat-form-field>
           </mat-step>
 
         </mat-step>
-
       
       </mat-stepper>
 
@@ -108,3 +118,8 @@
     <button *ngIf="stepper.selectedIndex != 1" mat-button (click)="onClickButtonProsseguir()">Prosseguir</button>
     <button *ngIf="stepper.selectedIndex == 1" mat-flat-button color="primary" (click)="onClickButtonFinalizar()">Finalizar</button>
   </mat-dialog-actions>
+
+
+  <app-form-debug [form]="formulario">
+    
+  </app-form-debug>

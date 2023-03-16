@@ -1,7 +1,7 @@
 import {  Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Rotas } from 'src/enum/enum';
-import { Oferta } from 'src/models/models';
+import { Oferta } from 'src/models/entidades/oferta';
 import { ColunaTabela, Tabela } from 'src/models/table';
 
 @Component({

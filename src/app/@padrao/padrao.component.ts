@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
-import { ResponseLogin } from 'src/models/models';
+import { ResponseLoginAdministrador, ResponseLoginProfissional } from 'src/models/entidades/usuario';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-padrao',
@@ -17,8 +17,8 @@ export class PadraoComponent implements OnInit {
   public toastr = inject(ToastrService)
   public cookieService = inject(CookieService)
 
-  get usuarioLogado(): ResponseLogin{
-    return this.RetornarUsuarioLogado();
+  get usuarioLogado(): ResponseLoginAdministrador | ResponseLoginProfissional {
+    return this.retornar_usuario_logado();
   }
 
   constructor() { }
@@ -26,28 +26,40 @@ export class PadraoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public MensagemSucesso(mensagem: string): void{
+  public mensagem_sucesso(mensagem: string): void{
     this.toastr.success(mensagem);
   }
 
-  public MensagemErro(mensagem: string): void{
+  public mensagem_erro(mensagem: string): void{
     this.toastr.error(mensagem);
   }
 
-  public InserirCookie(chave: string, valor: string): void {
+  public inserir_cookie(chave: string, valor: string): void {
     this.cookieService.put(chave, valor);
   }
 
-  public RemoverCookie(chave: string): void {
+  public remover_cookie(chave: string): void {
     this.cookieService.remove(chave);    
   }
 
-  public RetornarCookie(chave: string){
+  public retornar_cookie(chave: string){
     this.cookieService.get(chave);  
   }
 
-  private RetornarUsuarioLogado(): ResponseLogin {
+  private retornar_usuario_logado(): ResponseLoginAdministrador | ResponseLoginProfissional {
     return this.cookieService.get("usuario") ? JSON.parse(this.cookieService.get("usuario")) : null;
+  }
+
+  protected isResponseLoginAdministrador(item: any): item is ResponseLoginAdministrador {
+    return 'clinicaId' in item;
+  }
+
+  protected isResponseLoginProfissional(item: any): item is ResponseLoginProfissional {
+      return 'especializacoes' in item;
+  }
+
+  protected gerar_data_hora_atual(): string {
+    return moment().format(); 
   }
 
 }
