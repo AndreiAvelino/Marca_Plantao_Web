@@ -3,6 +3,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { MetodosPagamento, StatusPagamento, StatusPlantao } from 'src/const/const';
 import { Corevento } from 'src/enum/enum';
+import { MetodoPagamento } from 'src/models/entidades/@shared';
 
 @Component({
   selector: 'opcoes-agenda',
@@ -16,7 +17,7 @@ export class OpcoesAgendaComponent implements OnInit {
 
   public CorEvento = Corevento;
 
-  public ListaMetodosPagamento: Array<String> = MetodosPagamento
+  public ListaMetodosPagamento: Array<MetodoPagamento> = MetodosPagamento
   public ListaStatusPlatao: Array<String> = StatusPlantao
   public ListaStatusPagamento: Array<String> = StatusPagamento
 

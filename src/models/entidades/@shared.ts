@@ -9,3 +9,8 @@ export interface Endereco {
     UF?: UF,
     DataCadastro?: string
 }
+
+export interface MetodoPagamento {
+    Valor: number;
+    Descricao: string;
+}

@@ -12,23 +12,23 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
-import { OpcoesOfertaComponent } from './opcoes-oferta/opcoes-oferta.component';
-import { OpcoesPlantaoComponent } from './opcoes-plantao/opcoes-plantao.component';
-import { PlantaoComponent } from './plantao/plantao.component';
+import { PlantaoComponent } from './modals-plantao/plantao/plantao.component';
 import { FormularioModule } from 'src/forms/formulario.module';
 import { SharedModule } from 'src/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FinalizarPlantaoComponent } from './finalizar-plantao/finalizar-plantao.component';
+import { FinalizarPlantaoComponent } from './modals-plantao/finalizar-plantao/finalizar-plantao.component';
 import { PlantaoModule } from '../plantao/plantao.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
-import { ModalListaCandidatosOfertaComponent } from './modal-lista-candidatos-oferta/modal-lista-candidatos-oferta.component';
+import { ModalListaCandidatosOfertaComponent } from './modals-oferta/modal-lista-candidatos-oferta/modal-lista-candidatos-oferta.component';
 import { AvatarModule } from 'ngx-avatar';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
-import { OpcoesAgendaComponent } from './opcoes-agenda/opcoes-agenda.component';
+import { OpcoesAgendaComponent } from './componentes-agenda/opcoes-agenda/opcoes-agenda.component';
 import { MatSelectModule } from '@angular/material/select';
+import { OpcoesPlantaoComponent } from './botoes-opcoes-eventos/opcoes-plantao/opcoes-plantao.component';
+import { OpcoesOfertaComponent } from './botoes-opcoes-eventos/opcoes-oferta/opcoes-oferta.component';
+import { DataAgendaComponent } from './componentes-agenda/data-agenda/data-agenda.component';
 
 
 const materialModules = [
@@ -57,7 +57,8 @@ const materialModules = [
     PlantaoComponent,
     FinalizarPlantaoComponent,
     ModalListaCandidatosOfertaComponent,
-    OpcoesAgendaComponent
+    OpcoesAgendaComponent,
+    DataAgendaComponent
   ],
   imports: [
     ...materialModules,

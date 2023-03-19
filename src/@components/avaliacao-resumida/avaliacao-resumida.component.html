@@ -2,13 +2,13 @@
     <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
         <span style="font-weight: 550; font-size: 17px"> Nome da clínica </span>
         <div style="display: flex;">
-            <span style="margin-right: 5px; margin-top: 2px; font-size: 15px; font-weight: 500;"> {{Avaliacao.Nota}} </span> 
+            <span style="margin-right: 5px; margin-top: 2px; font-size: 15px; font-weight: 500;"> {{Avaliacao.nota}} </span> 
             <mat-icon style="color: yellow">star</mat-icon>
         </div>        
     </div>
     <div>
         <p [ngClass]="{'escondetexto': !verMais}" style="font-style: italic;">
-            "{{Avaliacao.Descricao}}"
+            "{{Avaliacao.descricao}}"
         </p>
     </div>
     <div *ngIf="!verMais" class="textoescondeaparece" (click)="VerMais()">

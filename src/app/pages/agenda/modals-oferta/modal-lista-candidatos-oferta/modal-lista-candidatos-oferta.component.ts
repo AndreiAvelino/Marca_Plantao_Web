@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
-import { PerfilUsuarioComponent } from '../../usuario/perfil-usuario/perfil-usuario.component';
+import { PerfilUsuarioComponent } from '../../../usuario/perfil-usuario/perfil-usuario.component';
 
 interface Candidato {
   Id: number;

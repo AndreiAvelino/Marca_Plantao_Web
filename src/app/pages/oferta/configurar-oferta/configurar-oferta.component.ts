@@ -11,6 +11,8 @@ import { Oferta } from 'src/models/entidades/oferta';
 import { Usuario } from 'src/models/entidades/usuario';
 import { ColunaTabela, Tabela } from 'src/models/table';
 import { EspecializacaoService } from 'src/services/especializacao.service';
+import * as moment from 'moment';
+import { MetodoPagamento } from 'src/models/entidades/@shared';
 
 enum Turno {
   COMPLETO = '24h',
@@ -29,7 +31,7 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
   private oferta: Oferta
 
   public ListaEspecializacao: Observable<Especializacao[]> = this.especializacaoService.get_all().pipe(map(x => x.data));  
-  public ListaMetodosPagamento: Array<String> = MetodosPagamento
+  public ListaMetodosPagamento: Array<MetodoPagamento> = MetodosPagamento
 
   public formulario: FormGroup; 
 
@@ -63,24 +65,45 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
   }
 
   ngOnInit(): void {
-
     this.formulario = this._formBuilder.group({
-      Id: "00000000-0000-0000-0000-000000000000",
-      Titulo: "",
-      Descricao: "",
-      Turno: "",
-      Valor: "",
-      ValorHoraExtra: "",
-      DataCadastro: this.gerar_data_hora_atual(),
-      MetodoPagamento: 0,
-      Especializacoes: [],
-      Profissionais: [],
-      DataInicial: this.oferta.DataInicial,
-      HorarioInicial: "12:00",
-      DataFinal: "12:00",
-      HorarioFinal: "",
-      ClinicaId: this.oferta.ClinicaId,
-      Pagamento: 0
+      id: this.oferta.id ? this.oferta.id : "00000000-0000-0000-0000-000000000000",
+      titulo: this.oferta.titulo,
+      descricao: this.oferta.descricao,
+      turno: this.oferta.turno ? this.oferta.turno : '24h',
+      valor: this.oferta.valor,
+      valorHoraExtra: this.oferta.valorHoraExtra,
+      dataCadastro: this.oferta.dataCadastro ? this.oferta.dataCadastro : this.gerar_data_hora_atual(),
+      especializacoes: [],
+      profissionais: this.oferta.profissionais ? this.oferta.profissionais : [],
+      dataInicial: moment(this.oferta.dataInicial).format("yyyy-MM-DD"),
+      horarioInicial: this.oferta.dataInicial ? moment(this.oferta.dataInicial).format("HH:mm") : "00:00",
+      dataFinal: this.oferta.dataFinal ? moment(this.oferta.dataFinal).format("yyyy-MM-DD") : "",
+      horarioFinal: this.oferta.dataFinal? moment(this.oferta.dataFinal).format("HH:mm") : "00:00",
+      clinicaId: this.oferta.clinicaId,
+      pagamento: this.oferta.pagamento ? this.oferta.pagamento : 0
+    })
+
+
+    this.formulario.patchValue({
+      especializacoes: this.oferta.especializacoes ? (this.oferta.especializacoes as Especializacao[]).map(x => x.id) : []
+    })
+
+    this.formulario.controls.dataInicial.valueChanges.subscribe(x => {
+      switch(this.formulario.value.turno){
+        case Turno.MEIO:     this.muda_data_hora_final(12);
+                             break;
+        case Turno.COMPLETO: this.muda_data_hora_final(24);
+                             break;
+      }
+    })
+
+    this.formulario.controls.horarioInicial.valueChanges.subscribe(x => {
+      switch(this.formulario.value.turno){
+        case Turno.MEIO:     this.muda_data_hora_final(12);
+                             break;
+        case Turno.COMPLETO: this.muda_data_hora_final(24);
+                             break;
+      }
     })
 
   }
@@ -88,8 +111,8 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
   public onClickButtonFinalizar(): void {
     let oferta = {
       ...this.formulario.value,
-      DataInicial: this.formulario.value.DataInicial + 'T' + this.formulario.value.HorarioInicial + ':00',
-      DataFinal: this.formulario.value.DataFinal + 'T' + this.formulario.value.HorarioFinal + ':00',
+      dataInicial: this.formulario.value.dataInicial + 'T' + this.formulario.value.horarioInicial + ':00',
+      dataFinal: this.formulario.value.dataFinal + 'T' + this.formulario.value.horarioFinal + ':00',
     } as Oferta
 
     console.log(JSON.stringify(oferta))
@@ -103,18 +126,22 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
 
   public onChangeTurno(evento: Turno): void {
     switch(evento){
-      case Turno.MEIO:     this.aumentarDataFim(12);
+      case Turno.MEIO:     this.muda_data_hora_final(12);
                            break;
-      case Turno.COMPLETO: this.aumentarDataFim(24);
+      case Turno.COMPLETO: this.muda_data_hora_final(24);
                            break;
     }
   }
 
-  private aumentarDataFim(horas: number): void {
+  public muda_data_hora_final(horas: number): void {
+    var dataFinal = moment(this.formulario.value.dataInicial + ' ' + this.formulario.value.horarioInicial + ':00').add(horas, 'hours').format("YYYY-MM-DD HH:mm:ss")
+
     this.formulario.patchValue({
-      DataFinal: this.addHours(new Date(this.formulario.value.DataInicial), horas)
+      dataFinal: moment(dataFinal).format("yyyy-MM-DD"),
+      horarioFinal: moment(dataFinal).format("HH:mm:ss"),
     })
   }
+
 
   public addHours(date, hours) {
     const dateCopy = new Date(date);  

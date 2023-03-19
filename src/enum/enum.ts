@@ -40,10 +40,10 @@ export enum StatusPagamento {
 }
 
 export enum FormaPagamento {
-    Pix,
-    Dinheiro,
-    Cartao,
-    Cheque
+    Pix = 0,
+    Dinheiro = 1,
+    Cartao = 2,
+    Cheque = 3
 }
 
 export enum Corevento {
@@ -77,6 +77,6 @@ export enum TamanhoColunaTabela {
 }
 
 export enum TipoEvento {
-    Oferta,
-    Plantao
+    Oferta = 'Oferta',
+    Plantao = 'Plantao'
 }

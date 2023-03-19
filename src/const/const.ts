@@ -1,3 +1,4 @@
+import { MetodoPagamento } from "src/models/entidades/@shared";
 import { Especializacao } from "src/models/entidades/especializacao";
 
 // export const ListaEspecializacao: Array<Especializacao> = [
@@ -40,12 +41,27 @@ import { Especializacao } from "src/models/entidades/especializacao";
 //     {Id: "37", Descricao: "Medicina nuclear"}
 // ]
 
-export const MetodosPagamento: Array<String> = [
-    "Dinheiro",
-    "Pix",
-    "Cheque",
-    "Cartão de crédito",
-    "Cartão de débito"
+export const MetodosPagamento: Array<MetodoPagamento> = [
+    {
+        Valor: 0,
+        Descricao: "Dinheiro"
+    },
+    {
+        Valor: 1,
+        Descricao: "Pix"
+    },
+    {
+        Valor: 2,
+        Descricao: "Cheque"
+    },
+    {
+        Valor: 4,
+        Descricao: "Cartão de crédito"
+    },
+    {
+        Valor: 5,
+        Descricao: "Cartão de débito"
+    }
 ]
 
 export const StatusPlantao: Array<String> = [

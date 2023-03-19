@@ -17,31 +17,31 @@
 
 <mat-card style="margin: 30px;">
 
-    <div *ngIf="plantao.AvaliacaoProfissional" style="display: flex">
+    <div *ngIf="plantao.avaliacaoProfissional" style="display: flex">
         <span style="margin-top: 5px; font-weight: 500; font-size: 20px;"> Avaliação da clínica para o profissional </span> 
         <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoProfissional.Nota"></input-avaliacao>
     </div>
 
-    <div *ngIf="!plantao.AvaliacaoProfissional" style="display: flex; justify-content: space-between;">
+    <div *ngIf="!plantao.avaliacaoProfissional" style="display: flex; justify-content: space-between;">
         <span style="margin-top: 5px; font-weight: 500; font-size: 20px;"> Avaliação da clínica para o profissional </span> 
         <button mat-raised-button color="primary" (click)="AvaliarProfissional()">Realizar avaliação</button>
     </div>
 
     <hr>
-    <div *ngIf="plantao.AvaliacaoProfissional">
+    <div *ngIf="plantao.avaliacaoProfissional">
         <p> Comentários: </p>
-        <p> "{{plantao.AvaliacaoProfissional.Descricao}}" </p>
+        <p> "{{plantao.avaliacaoProfissional.descricao}}" </p>
     </div>
 </mat-card>
 
 <mat-card style="margin: 30px;">
     <div style="display: flex">
         <span style="margin-top: 5px; font-weight: 500; font-size: 20px;"> Avaliação do profissional para a clínica </span> 
-        <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoClinica.Nota"></input-avaliacao>
+        <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.avaliacaoClinica.nota"></input-avaliacao>
     </div>
     <hr>
-    <div *ngIf="plantao.AvaliacaoClinica">
+    <div *ngIf="plantao.avaliacaoClinica">
         <p> Comentários: </p>
-        <p> "{{plantao.AvaliacaoClinica.Descricao}}" </p>
+        <p> "{{plantao.avaliacaoClinica.descricao}}" </p>
     </div>
 </mat-card>

@@ -36,12 +36,12 @@ export class InfoPlantaoComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(
         r => {
-          this.plantao.AvaliacaoProfissional = {
-            Id: "0",
+          this.plantao.avaliacaoProfissional = {
+            id: "0",
             idPlantao: "0",
-            Nota: r.Nota,
-            Descricao: r.Descricao,
-            DataCadastro: ""
+            nota: r.Nota,
+            descricao: r.Descricao,
+            dataCadastro: ""
           }
         });
   }

@@ -1,7 +1,7 @@
 export interface Avaliacao {
-    Id: string,
+    id: string,
     idPlantao: string,
-    Nota: number,
-    Descricao: string,
-    DataCadastro?: string
+    nota: number,
+    descricao: string,
+    dataCadastro?: string
 }

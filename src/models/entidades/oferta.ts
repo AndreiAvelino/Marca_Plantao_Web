@@ -1,18 +1,20 @@
+import { Especializacao } from "./especializacao";
+
 export interface Oferta {
-    Id: string,
-    Titulo: string,
-    Descricao: string,
-    DataInicial: string,
-    DataFinal: string,
-    Turno: string,
-    Valor: string,
-    ValorHoraExtra: string,
-    DataCadastro: string,
-    MetodoPagamento: number,
-    Pagamento?: number;
-    Profissionais?: Candidato[],
-    Especializacoes: string[],
-    ClinicaId: string,
+    id: string,
+    titulo: string,
+    descricao: string,
+    dataInicial: string,
+    dataFinal: string,
+    turno: string,
+    valor: string,
+    valorHoraExtra: string,
+    dataCadastro: string,
+    metodoPagamento: number,
+    pagamento?: number;
+    profissionais?: Candidato[],
+    especializacoes: string[] | Especializacao[],
+    clinicaId: string,
 }
 
 export interface Candidato {

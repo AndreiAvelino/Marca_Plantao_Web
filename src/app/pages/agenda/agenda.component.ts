@@ -9,13 +9,10 @@ import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { ConfigurarOfertaComponent } from '../oferta/configurar-oferta/configurar-oferta.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { OpcoesOferta, OpcoesOfertaComponent } from './opcoes-oferta/opcoes-oferta.component';
-import { OpcoesPlantao, OpcoesPlantaoComponent } from './opcoes-plantao/opcoes-plantao.component';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { PlantaoComponent } from './plantao/plantao.component';
-import { FinalizarPlantaoComponent } from './finalizar-plantao/finalizar-plantao.component';
-import { Meses } from 'src/const/const';
-import { ModalListaCandidatosOfertaComponent } from './modal-lista-candidatos-oferta/modal-lista-candidatos-oferta.component';
+import { PlantaoComponent } from './modals-plantao/plantao/plantao.component';
+import { FinalizarPlantaoComponent } from './modals-plantao/finalizar-plantao/finalizar-plantao.component';
+import { ModalListaCandidatosOfertaComponent } from './modals-oferta/modal-lista-candidatos-oferta/modal-lista-candidatos-oferta.component';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { AgendaService } from 'src/services/agenda.service';
 import { OfertaService } from 'src/services/oferta.service';
@@ -26,6 +23,8 @@ import { Oferta } from 'src/models/entidades/oferta';
 import { Evento } from 'src/models/entidades/evento';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ResponseLoginAdministrador, ResponseLoginProfissional } from 'src/models/entidades/usuario';
+import { OpcoesOferta, OpcoesOfertaComponent } from './botoes-opcoes-eventos/opcoes-oferta/opcoes-oferta.component';
+import { OpcoesPlantao, OpcoesPlantaoComponent } from './botoes-opcoes-eventos/opcoes-plantao/opcoes-plantao.component';
 
 interface EventSource {
   id: string
@@ -53,7 +52,6 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   public calendarOptions: CalendarOptions = null
 
   public CorEvento = Corevento;
-  public mesano: string; 
 
   public eventos: any[] = [];
 
@@ -70,19 +68,19 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.get_all_evento();
-    this.criarCalendario();
-    this.preencherDataInicial();
+    this.criar_calendario();
   }
 
+  //#region METODOS DE GERACAO DE EVENTOS 
   private async get_all_evento(): Promise<void> {
 
     if(this.isResponseLoginAdministrador(this.usuarioLogado)){
-      this.agendaService.get_all_evento_por_clinica(this.usuarioLogado.clinicaId).toPromise()
+      await this.agendaService.get_all_evento_por_clinica(this.usuarioLogado.clinicaId).toPromise()
         .then(x => this.eventos = this.gerarEventosSource_Agenda(x.data))
     }
 
     if(this.isResponseLoginProfissional(this.usuarioLogado)){
-      this.agendaService.get_all_evento_por_profissional(this.usuarioLogado.id).toPromise()
+      await this.agendaService.get_all_evento_por_profissional(this.usuarioLogado.id).toPromise()
         .then(x => this.eventos = this.gerarEventosSource_Agenda(x.data))
     }
 
@@ -93,13 +91,13 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     return [
       {
         id: '1',
-        events: this.gerarEvents_Agenda(eventos.filter(x => x.Tipo = TipoEvento.Oferta)),
+        events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Oferta)),
         color: Corevento.Oferta,
         extendedProps: {}
       },
       {
         id: '2',
-        events: this.gerarEvents_Agenda(eventos.filter(x => x.Tipo = TipoEvento.Plantao)),
+        events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao)),
         color: Corevento.Plantao,
         extendedProps: {}
       }
@@ -111,18 +109,19 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
     eventos.forEach(x => {
       events.push({
-        id: x.Id,
-        title: x.Titulo, 
-        date: x.DataInicial, 
+        id: x.id,
+        title: x.titulo, 
+        date: x.dataInicial, 
         extendedProps: x
       })
     })
 
     return events;
   }
+  //#endregion
 
   //#region METODOS REFERENTES AO CALENDARIO
-  private criarCalendario(): void {
+  private criar_calendario(): void {
     this.calendarOptions = {
       plugins: [dayGridPlugin, interactionPlugin],
       eventClick: (e => this.onEventoClick(e)),
@@ -139,31 +138,32 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     };    
   }
 
-  private criarEventoCalendario(x): void {
-    this.eventos.find(x => x.id == '1').events.push({title: 'teste', date: x.DataInicial, extendedProps: {tipo: 1}})
+  private criar_evento(x: Plantao | Oferta): void {
+    this.eventos.find(x => x.id == '1').events.push({title: 'teste', date: x.dataInicial, extendedProps: {tipo: 1}})
     this.calendario.getApi().getEventSourceById('1').refetch()
   }  
 
-  private alterarEventoCalendario(x): void {
-    this.eventos.find(x => x.id == '1').events.push({title: 'teste', date: x.DataInicial, extendedProps: {tipo: 1}})
-    this.calendario.getApi().getEventSourceById('1').refetch()
-  } 
+  private alterar_evento_plantao(x: Plantao){
+
+  }
+
+  private alterar_evento_oferta(x: Oferta){
+
+  }
 
   private remover_evento(evento): void {
      this.calendario.getApi().getEventById('1').remove()
 
     this.calendario.getApi().addEventSource(this.eventos.find(x => x.id == '1'))
-
-
   }
   //#endregion
 
   //#region METODOS REFERETES AS ACOES AO CLICAR EM UM EVENTO
   private onEventoClick(e: EventClickArg): void {
     switch(e.event.extendedProps.tipo){
-      case 1: this.abrirBottonSheetOferta(e);
+      case TipoEvento.Oferta:  this.abrirBottonSheetOferta(e);
               break;
-      case 2: this.abrirBottonSheetPlantao();
+      case TipoEvento.Plantao: this.abrirBottonSheetPlantao();
               break;
     }
   }
@@ -234,31 +234,6 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
   //#endregion
 
-  //#region METODOS REFERENTES AO MENU LATERAL
-  private preencherDataInicial(): void {
-    let d = new Date();
-    this.mesano = `${Meses[d.getMonth()]} de ${d.getFullYear()}`
-  }
-
-  private atualizarData(): void {
-    this.mesano = `${Meses[this.calendario.getApi().getDate().getMonth()]} de ${this.calendario.getApi().getDate().getFullYear()}`
-  }
-
-  public onButtonProximoDiaClick(): void {
-    this.calendario.getApi().next()
-    this.atualizarData();
-  } 
-
-  public onButtonAnteriorDiaClick(): void {
-    this.calendario.getApi().prev()
-    this.atualizarData();
-  } 
-
-  public onButtonHojeDiaClick(): void {
-    this.calendario.getApi().today()
-    this.atualizarData();
-  } 
-  //#endregion
 
   //#region METODOS REFERENTES AOS CHECKBOX DE EVENTOS
   public onChangeCheckBoxOferta(event: MatCheckboxChange): void {
@@ -298,7 +273,7 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
     await this.post_plantao(plantao)
       .then(x => {
-        this.criarEventoCalendario(x)
+        this.criar_evento(x.data)
         this.mensagem_sucesso("Plantao criado com sucesso!")
       })
       .catch((e: HttpErrorResponse) => this.mensagem_erro(e.error))
@@ -308,7 +283,7 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     await this.get_oferta("0")
       .then(x => this.modal_oferta(x.data))
       .then(x => this.put_oferta(x))
-      .then(x => this.alterarEventoCalendario(x))
+      // .then(x => this.alterar_evento(x.data))
   }
 
   private async cancelar_plantao(evento: EventClickArg): Promise<void> {
@@ -323,20 +298,22 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   //#region METODOS DE CRUD DE OFERTA
   private async criar_oferta(e: DateClickArg): Promise<void> {
     let oferta = {
-      DataInicial: e.dateStr,
-      ClinicaId: (this.usuarioLogado as ResponseLoginAdministrador).clinicaId
+      dataInicial: e.dateStr,
+      clinicaId: (this.usuarioLogado as ResponseLoginAdministrador).clinicaId
     } as Oferta
 
     await this.modal_oferta(oferta)
       .then(x => this.post_oferta(x))
-      .then(x => this.criarEventoCalendario(x))
+      .then(x => this.criar_evento(x.data))
   }
 
   private async alterar_oferta(e: EventClickArg): Promise<void> {
-    await this.get_oferta("0")
-      .then(x => this.modal_oferta.bind(null, (x.data)))
-      .then(x => this.put_oferta.bind(null, (x)))
-      .then(x => this.alterarEventoCalendario(x))
+    await this.get_oferta(e.event.extendedProps.id)
+      .then(x => this.modal_oferta(x.data))
+      .then(x => this.put_oferta(x))
+      // .then(x => this.alterar_evento(x.data))
+      .then(() => this.mensagem_sucesso('Oferta atualizada com sucesso!'))
+      .catch((e: HttpErrorResponse) => e.error.errors.forEach(erro => this.mensagem_erro(erro)))
   }
 
   private async cancelar_oferta(evento: EventClickArg): Promise<void> {
@@ -345,10 +322,6 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
       .then(() => this.eventos = this.eventos.filter(x => x.id == evento.event.extendedProps.id))
       .then(() => this.toastr.success('Hello world!', 'Toastr fun!'))
   }
-
-  //#endregion
-
-  //#region METODOS DE CRUD DE PLANTAO
 
   //#endregion
 

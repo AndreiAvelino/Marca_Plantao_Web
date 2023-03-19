@@ -1,0 +1,19 @@
+<div style="height: 8vh">
+    <div style="display: flex; justify-content: center; margin: 10px">
+        <span class="teste" style="font-size: 20px; font-weight: 500;">{{mesano}}</span>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; margin-top: 15px;">      
+            
+        <button mat-stroked-button (click)="onButtonHojeDiaClick()" style="width: 120px"> Hoje </button>
+            
+        <div>
+            <button mat-icon-button color="accent" (click)="onButtonAnteriorDiaClick()">
+                <mat-icon>navigate_before</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="onButtonProximoDiaClick()">
+                <mat-icon>navigate_next</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

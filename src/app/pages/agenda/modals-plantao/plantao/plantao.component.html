@@ -130,12 +130,12 @@
                  <mat-expansion-panel-header>
                    <mat-panel-title style="display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-weight: 500;">Avaliacao de José Augusto Gomes da Silva</span>
-                    <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoProfissional.Nota"></input-avaliacao>
+                    <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.avaliacaoProfissional.nota"></input-avaliacao>
                    </mat-panel-title>
                  </mat-expansion-panel-header>
         
-                 <div *ngIf="plantao.AvaliacaoClinica">
-                    <p style="font-style: italic;"> "{{plantao.AvaliacaoClinica.Descricao}}" </p>
+                 <div *ngIf="plantao.avaliacaoClinica">
+                    <p style="font-style: italic;"> "{{plantao.avaliacaoClinica.descricao}}" </p>
                 </div>        
     
                </mat-expansion-panel>
@@ -148,12 +148,12 @@
                  <mat-expansion-panel-header>
                    <mat-panel-title style="display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-weight: 500;">Avalicao de Andrei Avelino (Rede D'Or - Niteroi)</span>
-                    <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoClinica.Nota"></input-avaliacao>
+                    <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.avaliacaoClinica.nota"></input-avaliacao>
                    </mat-panel-title>
                  </mat-expansion-panel-header>    
     
-                 <div *ngIf="plantao.AvaliacaoProfissional">
-                    <p style="font-style: italic;"> "{{plantao.AvaliacaoProfissional.Descricao}}" </p>
+                 <div *ngIf="plantao.avaliacaoProfissional">
+                    <p style="font-style: italic;"> "{{plantao.avaliacaoProfissional.descricao}}" </p>
                 </div>
             
                </mat-expansion-panel>
