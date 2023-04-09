@@ -1,0 +1,17 @@
+
+<div style="display: grid; grid-template-columns: 15% 85%;">
+
+    <div style="margin: 10px;">
+        <data-agenda [calendario]="calendario"></data-agenda>
+
+        <!-- <opcoes-agenda (emitChangeCheckBoxOferta)="onChangeCheckBoxOferta($event)"
+                       (emitChangeCheckBoxPlantao)="onChangeCheckBoxPlantao($event)">            
+        </opcoes-agenda> -->
+    </div>
+
+    <div>
+        <mat-card style="margin: 10px; padding: 25px">        
+            <full-calendar *ngIf="eventos.length > 0" #calendario [options]="calendarOptions"></full-calendar>
+        </mat-card>
+    </div>
+</div>

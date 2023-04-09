@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
+import { Candidato, Oferta } from 'src/models/entidades/oferta';
+import { GerarPlantao } from 'src/models/entidades/plantao';
 import { PerfilUsuarioComponent } from '../../../usuario/perfil-usuario/perfil-usuario.component';
 
-interface Candidato {
-  Id: number;
-  Nome: string;
-  Src: string;
-}
 
 @Component({
   selector: 'app-modal-lista-candidatos-oferta',
@@ -19,81 +16,13 @@ interface Candidato {
 
 export class ModalListaCandidatosOfertaComponent extends PadraoComponent implements OnInit {
 
-  public candidatos: Candidato[] = [
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    },
-    {
-      Id: 0,
-      Nome: "Andrei Avelino",
-      Src: ''
-    }
-  ]
-
-  constructor() {
+  public candidatos: Candidato[]
+  constructor(
+    public dialogRef: MatDialogRef<ModalListaCandidatosOfertaComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Oferta
+  ){
     super();
+    this.candidatos = data.profissionais ? data.profissionais : [];
   }
 
 
@@ -102,6 +31,16 @@ export class ModalListaCandidatosOfertaComponent extends PadraoComponent impleme
 
   public abrirPerfilUsuario(): void {
     this.dialog.open(PerfilUsuarioComponent)
+  }
+
+  public selecionar_candidato(x: Candidato): void {
+    this.dialogRef.close({
+      gerar: true,
+      obj: {
+        ofertaId: this.data.id,
+        profissionalId: x.id
+      } as GerarPlantao
+    })
   }
 
 }

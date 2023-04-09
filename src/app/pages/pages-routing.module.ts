@@ -7,6 +7,7 @@ import { IndicadoresComponent } from './indicadores/indicadores.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { ConfigurarOfertaComponent } from './oferta/configurar-oferta/configurar-oferta.component';
 import { ListagemOfertaComponent } from './oferta/listagem-oferta/listagem-oferta.component';
+import { PesquisarOfertaComponent } from './oferta/pesquisar-oferta/pesquisar-oferta.component';
 import { PagesComponent } from './pages.component';
 import { AvaliarPlantaoComponent } from './plantao/avaliar-plantao/avaliar-plantao.component';
 import { HistoricoPlantaoComponent } from './plantao/historico-plantao/historico-plantao.component';
@@ -53,6 +54,10 @@ const routes: Routes = [
       {
         path: 'indicadores',
         component: IndicadoresComponent
+      },
+      {
+        path: 'pesquisar-oferta',
+        component: PesquisarOfertaComponent
       }
     ]
   }

@@ -29,10 +29,10 @@ export enum UF {
 }
 
 export enum StatusPlantao {
-    NaoIniciado = 'Não iniciado',
-    Andamento = 'Em andamento',
-    Finalizado = 'Finalizado',
-    Cancelado = 'Cancelado'
+    NaoIniciado,
+    Andamento,
+    Finalizado,
+    Cancelado
 }
 
 export enum StatusPagamento {
@@ -53,6 +53,7 @@ export enum Corevento {
 
 export enum Rotas {
     ListagemOferta = '/listagemoferta',
+    PesquisarOferta = '/pesquisar-oferta',
     ConfigurarOferta = '/configuraroferta',
     ConfigurarClinica = '/configurarclinica',
     HistoricoPlantao = '/historicoplantao',

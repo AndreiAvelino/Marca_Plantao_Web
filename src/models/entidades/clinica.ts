@@ -1,7 +1,10 @@
+import { Endereco } from "./@shared"
+import { Avaliacao } from "./avaliacao"
+
 export interface Clinica {
-    Id?: string,
-    RazaoSocial: string,
-    Imagem: string
-    Endereco?: Endereco,
-    DataCadastro?: string
+    id?: string,
+    razaoSocial: string,
+    imagem: string
+    endereco?: Endereco,
+    avaliacoes: Avaliacao[]
 }

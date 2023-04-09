@@ -111,11 +111,9 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
   public onClickButtonFinalizar(): void {
     let oferta = {
       ...this.formulario.value,
-      dataInicial: this.formulario.value.dataInicial + 'T' + this.formulario.value.horarioInicial + ':00',
-      dataFinal: this.formulario.value.dataFinal + 'T' + this.formulario.value.horarioFinal + ':00',
+      dataInicial: this.formulario.value.dataInicial + 'T' + this.formulario.value.horarioInicial,
+      dataFinal: this.formulario.value.dataFinal + 'T' + this.formulario.value.horarioFinal,
     } as Oferta
-
-    console.log(JSON.stringify(oferta))
 
     this.dialogRef.close(oferta)
   }

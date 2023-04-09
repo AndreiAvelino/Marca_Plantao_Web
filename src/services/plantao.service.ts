@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Plantao } from 'src/models/entidades/plantao';
+import { GerarPlantao, Plantao } from 'src/models/entidades/plantao';
 import { Response } from 'src/models/response';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class PlantaoService {
     return this.httpClient.get<Response<Plantao>>(environment.api + "ObterPlantao?Id=" + idPlantao);
   }
 
-  public post(plantao: Plantao): Observable<Response<Plantao>> {
+  public post(plantao: GerarPlantao): Observable<Response<Plantao>> {
     return this.httpClient.post<Response<Plantao>>(environment.api + "AdicionarPlantao", plantao);
   }
 

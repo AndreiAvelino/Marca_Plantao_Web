@@ -29,7 +29,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { OpcoesPlantaoComponent } from './botoes-opcoes-eventos/opcoes-plantao/opcoes-plantao.component';
 import { OpcoesOfertaComponent } from './botoes-opcoes-eventos/opcoes-oferta/opcoes-oferta.component';
 import { DataAgendaComponent } from './componentes-agenda/data-agenda/data-agenda.component';
-
+import {MatMenuModule} from '@angular/material/menu';
+import { CalendarioAgendaComponent } from './componentes-agenda/calendario-agenda/calendario-agenda.component';
+import { BotoesOpcoesAgendaComponent } from './componentes-agenda/botoes-opcoes-agenda/botoes-opcoes-agenda.component';
 
 const materialModules = [
   MatButtonModule,
@@ -46,6 +48,7 @@ const materialModules = [
   MatExpansionModule,
   MatSliderModule,
   MatSelectModule,
+  MatMenuModule,
   CdkAccordionModule
 ]
 
@@ -58,7 +61,9 @@ const materialModules = [
     FinalizarPlantaoComponent,
     ModalListaCandidatosOfertaComponent,
     OpcoesAgendaComponent,
-    DataAgendaComponent
+    DataAgendaComponent,
+    CalendarioAgendaComponent,
+    BotoesOpcoesAgendaComponent
   ],
   imports: [
     ...materialModules,

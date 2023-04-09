@@ -5,9 +5,9 @@
             <br/>
 
             <div>
-                <p style="font-size: 17px"> <span style="font-weight: 500;"> Profissional: </span> José Augusto Gomes da Silva </p> 
-                <p style="font-size: 17px"> <span style="font-weight: 500;"> Especialidade: </span>Cardiologista </p> 
-                <p style="font-size: 17px"> <span style="font-weight: 500;"> Status do plantão: </span> Finalizado </p> 
+                <p style="font-size: 17px"> <span style="font-weight: 500;"> Profissional: </span> {{profissional.nome}} </p> 
+                <p style="font-size: 17px"> <span style="font-weight: 500;"> Especialidade: </span> {{especializacoes}} </p> 
+                <p style="font-size: 17px"> <span style="font-weight: 500;"> Status do plantão: </span> {{retorna_status_plantao(plantao.status)}} </p> 
             </div>
 
 
@@ -17,18 +17,18 @@
                     <span style="display: flex; justify-content: center; font-weight: 500; font-size: 20px; margin-bottom: 10px"> Informacoes da oferta </span>
 
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Data de inicio: </span> <span> 10/09/2022 </span>
+                        <span style="font-weight: 500;"> Data de inicio: </span> <span> {{ oferta.dataInicial | date: 'dd/MM/yyyy' }} </span>
                     </div>
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Hora de inicio: </span> <span> 08:46 </span>
+                        <span style="font-weight: 500;"> Hora de inicio: </span> <span> {{ oferta.dataInicial | date: 'HH:mm' }} </span>
 
                     </div>
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Data de fim: </span> <span> 10/09/2022 </span>
+                        <span style="font-weight: 500;"> Data de fim: </span> <span> {{ oferta.dataFinal | date: 'dd/MM/yyyy' }} </span>
                     </div>
 
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Hora de fim: </span> <span> 08:46 </span>
+                        <span style="font-weight: 500;"> Hora de fim: </span> <span> {{ oferta.dataFinal | date: 'HH:mm' }} </span>
                     </div> 
 
                 </div>
@@ -37,17 +37,17 @@
                     <span style="display: flex; justify-content: center; font-weight: 500; font-size: 20px; margin-bottom: 10px;"> Informacoes do plantao </span>
 
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Data de inicio: </span> <span> 10/09/2022 </span>
+                        <span style="font-weight: 500;"> Data de inicio: </span> <span> {{ plantao.dataInicial | date: 'dd/MM/yyyy' }} </span>
                     </div>
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Hora de inicio: </span> <span> 08:46 </span>
+                        <span style="font-weight: 500;"> Hora de inicio: </span> <span> {{ plantao.dataInicial | date: 'HH:mm' }} </span>
                     </div>
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Data de fim: </span> <span> 10/09/2022 </span>
+                        <span style="font-weight: 500;"> Data de fim: </span> <span> {{ plantao.dataFinal | date: 'dd/MM/yyyy' }} </span>
                     </div>
 
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Hora de fim: </span> <span> 08:46 </span>
+                        <span style="font-weight: 500;"> Hora de fim: </span> <span> {{ plantao.dataFinal | date: 'HH:mm' }} </span>
                     </div>     
                 </div>
             </div>
@@ -66,31 +66,31 @@
         <div style="display: grid; grid-template-columns: 55% 45%; margin-top: 20px; font-size: 17px;">
             <div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="font-weight: 500;"> Valor ofertado (12h): </span> <span> R$ 800,00 </span> 
+                    <span style="font-weight: 500;"> Valor ofertado ({{oferta.turno}}): </span> <span> R$ {{oferta.valor}} </span> 
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="font-weight: 500;"> Valor por hora extra: </span> <span style="color: blue"> R$ 100,00 </span>
+                    <span style="font-weight: 500;"> Valor por hora extra: </span> <span style="color: blue"> R$ {{oferta.valorHoraExtra}} </span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="font-weight: 500;"> Hora extra realizada: </span> <span> 2 </span>
+                    <span style="font-weight: 500;"> Hora extra realizada: </span> <span> {{plantao.horaExtra ? plantao.horaExtra : '-'}} </span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="font-weight: 500;"> Descontos: </span> <span style="color: red"> R$ 300,00 </span>
+                    <span style="font-weight: 500;"> Descontos: </span> <span style="color: red"> {{plantao.desconto ? plantao.desconto : '-'}} </span>
                 </div>
             </div>
 
             <div style="margin-top: 10px">
                 
                 <div style="display: flex; justify-content: center; align-items: center;">
-                    <div>
-                        <span> 800,00 </span> 
-                        <span> + 2 x (100,00) </span> 
-                        <span> - 300,00 </span>
+                    <div *ngIf="plantao.horaExtra || plantao.desconto">
+                        <span> {{oferta.valor}} </span> 
+                        <span *ngIf="plantao.horaExtra"> + {{plantao.horaExtra}} x ({{oferta.valorHoraExtra}}) </span> 
+                        <span *ngIf="plantao.desconto"> - {{plantao.desconto}} </span>
                     </div>                    
                 </div>
 
                 <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-                    <span style="margin-right: 10px; font-weight: 600;"> Total: </span> <span> R$ 700,00 </span>
+                    <span style="margin-right: 10px; font-weight: 600;"> Total: </span> <span> R$ {{retorna_total_a_pagar()}} </span>
                 </div>
 
             </div>            
@@ -125,7 +125,7 @@
         
 
         <div style="padding: 10px">
-            <mat-accordion>
+            <mat-accordion  *ngIf="plantao.avaliacaoClinica">
                 <mat-expansion-panel class="mat-elevation-z1">
                  <mat-expansion-panel-header>
                    <mat-panel-title style="display: flex; justify-content: space-between; align-items: center;">
@@ -143,7 +143,7 @@
 
             <br>
     
-            <mat-accordion>
+            <mat-accordion  *ngIf="plantao.avaliacaoProfissional">
                 <mat-expansion-panel class="mat-elevation-z1">
                  <mat-expansion-panel-header>
                    <mat-panel-title style="display: flex; justify-content: space-between; align-items: center;">

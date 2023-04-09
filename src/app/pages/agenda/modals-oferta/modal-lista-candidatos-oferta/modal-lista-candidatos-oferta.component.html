@@ -2,15 +2,22 @@
     <mat-list-item *ngFor="let candidato of candidatos" role="listitem" style="height: 60px">
         <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;"> 
             <div style="display: flex; align-items: center;">
-                <ngx-avatar [src]="candidato.Src ? candidato.Src : ''" [name]="candidato.Nome"></ngx-avatar>
-                <span style="margin-left: 15px">{{candidato.Nome}}</span>
+                <ngx-avatar [src]="candidato.src ? candidato.src : ''" [name]="candidato.nome"></ngx-avatar>
+                <span style="margin-left: 15px">{{candidato.nome}}</span>
             </div>
             <div>
-                <button mat-icon-button (click)="abrirPerfilUsuario()">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>
                 </button>
             </div>
         </div>
         <mat-divider></mat-divider>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="abrirPerfilUsuario()">Ver perfil</button>
+            <button mat-menu-item (click)="selecionar_candidato(candidato)">Selecionar</button>
+          </mat-menu>
+
     </mat-list-item>
   </mat-list>
+

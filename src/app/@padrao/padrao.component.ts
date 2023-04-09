@@ -58,6 +58,14 @@ export class PadraoComponent implements OnInit {
       return 'especializacoes' in item;
   }
 
+  protected retorna_yyyymmdd_de_yyyymmddhhmmss(datahora: string): string{
+    return moment(datahora).format("yyyy-MM-DD")
+  }
+
+  protected retorna_hhmmss_de_yyyymmddhhmmss(datahora: string): string{
+    return moment(datahora).format("HH:mm")
+  }
+
   protected gerar_data_hora_atual(): string {
     return moment().format(); 
   }

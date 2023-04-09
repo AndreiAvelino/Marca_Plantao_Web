@@ -12,6 +12,10 @@ import { FormularioModule } from 'src/forms/formulario.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import {MatStepperModule} from '@angular/material/stepper';
+import { CardOfertaComponent } from './card-oferta/card-oferta.component';
+import { PesquisarOfertaComponent } from './pesquisar-oferta/pesquisar-oferta.component';
+import { MatIconModule } from '@angular/material/icon';
+import { FlipModule } from 'ngx-flip';
 
 const materialModules = [
   MatCardModule,
@@ -20,22 +24,25 @@ const materialModules = [
   MatSelectModule,
   MatDialogModule,
   MatButtonModule,
-  MatStepperModule
+  MatStepperModule,
+  MatIconModule
 ]
 
 
 @NgModule({
-  declarations: [ListagemOfertaComponent, ConfigurarOfertaComponent],
+  declarations: [ListagemOfertaComponent, ConfigurarOfertaComponent, CardOfertaComponent, PesquisarOfertaComponent],
   imports: [
     ...materialModules,
     CommonModule,
     SharedModule,
     FormsModule,
     FormularioModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlipModule
   ],
   exports: [
-    ListagemOfertaComponent
+    ListagemOfertaComponent,
+    CardOfertaComponent
   ]
 })
 export class OfertaModule { }

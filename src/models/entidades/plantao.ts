@@ -3,8 +3,8 @@ import { Avaliacao } from "./avaliacao"
 
 export interface Plantao {
     id: string,
-    idOferta: string,
-    idUsuario: string,
+    ofertaId: string,
+    profissionalId: string,
     status: StatusPlantao,
     dataInicial: string,
     dataFinal: string,
@@ -17,4 +17,9 @@ export interface Plantao {
     avaliacaoClinica?: Avaliacao,
     avaliacaoProfissional?: Avaliacao    
     dataCadastro?: string   
+}
+
+export interface GerarPlantao {
+    ofertaId: string
+    profissionalId: string
 }

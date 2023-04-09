@@ -1,4 +1,4 @@
-<div style="display: grid; grid-template-columns: 15% 85%;">
+<!-- <div style="display: grid; grid-template-columns: 15% 85%;">
 
     <div style="margin: 10px;">
         <data-agenda [calendario]="calendario"></data-agenda>
@@ -13,4 +13,11 @@
             <full-calendar *ngIf="eventos.length > 0" #calendario [options]="calendarOptions"></full-calendar>
         </mat-card>
     </div>
+</div> -->
+
+<div style="background-color: #fff; padding: 2px">
+    <data-agenda [calendario]="calendario"></data-agenda>
+
+    <full-calendar *ngIf="eventos.length > 0" #calendario [options]="calendarOptions"></full-calendar>
+    <botoes-opcoes-agenda></botoes-opcoes-agenda>
 </div>

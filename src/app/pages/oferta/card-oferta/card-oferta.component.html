@@ -1,0 +1,121 @@
+  <div class="cardzada">
+
+    <ngx-flip [flip]="mostrarOferta">
+      <div front class="borda cardzada">
+        
+        <div style="width:100%; height: 10%; margin-left: 15px; display: flex; flex-direction: column; justify-content: center;">
+          <div style="font-size: 20px; font-weight: 600;"> {{oferta.titulo}} </div>
+          <div *ngIf="(clinica$ | async) as clinica" style="font-size: 15px; font-weight: 500; color: #8f8f8f;"> {{clinica.razaoSocial}} </div>
+        </div>
+    
+        <div style="width: 100%; height: 50%; background-color: #eee;">
+          <span style="color: #888; font-weight: 550; margin-left: 15px; font-size: 15px;">
+            {{oferta.descricao}}
+          </span>    
+        </div>
+    
+        <div style="width: 100%; height: 40%; display: flex; flex-direction: column; justify-content: center;">
+    
+          <div (click)="onClickBtnVerOferta(oferta)" class="block botao-branco"> 
+            <mat-icon style="margin-left: 15px; margin-right: 10px">remove_red_eye</mat-icon> 
+            <div> Ver oferta </div>
+          </div>
+    
+          <div (click)="onClickBtnVerClinica()" class="block botao-branco">
+             <mat-icon style="margin-left: 15px; margin-right: 10px">store</mat-icon>
+             <span> Perfil da clinica </span>
+          </div>
+    
+          <div (click)="onClickBtnLocalizacao()" class="block botao-branco"> 
+            <mat-icon style="margin-left: 15px; margin-right: 10px"> location_on</mat-icon> 
+            <div>A menos de 1km (Ver Localizacao)</div>
+          </div>
+         
+          <div (click)="onClickBtnCandidatar()" class="block botao-verde">
+            <mat-icon style="margin-left: 15px; margin-right: 10px">event_available</mat-icon>
+            <span> Candidatar-se</span>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div back class="cardzada card-oferta borda" style="background-color: #eee;">
+
+        <div style="width:100%; height: 10%; margin-left: 15px; display: flex; flex-direction: column; justify-content: center;">
+          <div style="font-size: 20px; font-weight: 600;"> {{oferta.titulo}} </div>
+          <div *ngIf="(clinica$ | async) as clinica" style="font-size: 15px; font-weight: 500; color: #8f8f8f;"> {{clinica.razaoSocial}} </div>
+        </div>
+      
+        <div>
+          <div class="card-info" style="height: 100px;">
+
+            <div style="position: relative; margin: 10px;">
+              <div style="color: #56b880; font-weight: 500; font-size: 16px;"> Data </div>
+
+              <div style="margin-top: 10px; margin-left: 15px;">
+                <div>Inicio: {{oferta.dataInicial}}</div>
+                <div>Fim: {{oferta.dataInicial}}</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-info" style="height: 100px;">
+
+            <div style="color: #56b880; font-weight: 500; font-size: 16px;"> Valor </div>
+
+            <div>
+              
+              <p> Valor: {{oferta.valor}} </p>
+              <p> Valor por hora extra: {{oferta.valorHoraExtra}} </p>
+            </div>
+
+          </div>
+
+          <div class="card-info" style="height: 100px;">
+
+            <div style="color: #56b880; font-weight: 500; font-size: 16px;"> Forma de pagamento </div>
+
+            <div>
+              {{retornaMetodoPagamento(oferta.pagamento)}}
+            </div>
+
+          </div>
+
+          <div class="card-info" style="height: 100px;">
+
+            <div style="color: #56b880; font-weight: 500; font-size: 16px;"> Especializacoes </div>
+
+            <div>
+              <p *ngFor="let especializacao of oferta.especializacoes"> {{especializacao.descricao}} </p>
+            </div>
+
+          </div>
+
+          <div class="card-info" style="height: 100px;">
+
+            <div style="color: #56b880; font-weight: 500; font-size: 16px;"> Endereco </div>
+
+            <div *ngIf="(clinica$ | async) as clinica">
+              {{clinica.endereco.logradouro}}
+              {{clinica.endereco.bairro}}
+              {{clinica.endereco.cidade}}
+              {{clinica.endereco.cep}}
+            </div>
+
+          </div>
+  
+        </div>
+
+
+ 
+      
+      
+      </div>
+    
+    </ngx-flip>
+
+    
+
+  </div>
+

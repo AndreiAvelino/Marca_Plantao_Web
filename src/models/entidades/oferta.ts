@@ -10,7 +10,6 @@ export interface Oferta {
     valor: string,
     valorHoraExtra: string,
     dataCadastro: string,
-    metodoPagamento: number,
     pagamento?: number;
     profissionais?: Candidato[],
     especializacoes: string[] | Especializacao[],
@@ -18,7 +17,13 @@ export interface Oferta {
 }
 
 export interface Candidato {
-    Id: string;
-    Nome: string;
-    Imagem: string;
+    id: string;
+    nome: string;
+    imagem: string;
+}
+
+export class AdicionarRemoverProfissionalOfertaDados
+{
+    profissionalId: string
+    ofertaId: string
 }
