@@ -28,7 +28,7 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
 
   @ViewChild('stepper') stepper: MatStepper;
   
-  private oferta: Oferta
+  private oferta: Oferta;
 
   public ListaEspecializacao: Observable<Especializacao[]> = this.especializacaoService.get_all().pipe(map(x => x.data));  
   public ListaMetodosPagamento: Array<MetodoPagamento> = MetodosPagamento
@@ -94,6 +94,12 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
                              break;
         case Turno.COMPLETO: this.muda_data_hora_final(24);
                              break;
+      }
+
+      if(x < this.gerar_data_hora_atual("yyyy-MM-DD")){
+        this.formulario.patchValue({
+          dataInicial: this.gerar_data_hora_atual("yyyy-MM-DD")
+        })
       }
     })
 

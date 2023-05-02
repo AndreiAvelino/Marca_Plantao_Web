@@ -6,9 +6,10 @@
                 <span style="margin-left: 15px">{{candidato.nome}}</span>
             </div>
             <div>
-                <button mat-icon-button [matMenuTriggerFor]="menu">
+                <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>
-                </button>
+                </button> -->
+                <button (click)="selecionar_candidato(candidato)" mat-stroked-button color="primary">Selecionar</button>
             </div>
         </div>
         <mat-divider></mat-divider>

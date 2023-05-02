@@ -19,15 +19,17 @@ export interface ResponseLoginProfissional extends ResponseLogin {
 }
 
 export interface RegistrarUsuario {
-    Email: string;
-    Password: string;
-    ConfirmPassword: string;
-    Nome: string;
-    DataNascimento: string;
-    Genero: string;
-    Telefone: string;
-    Imagem: string;
-    EspecializacaoId: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    nome: string;
+    dataNascimento: string;
+    genero: string;
+    telefone: string;
+    imagem: string;
+    crm: string;
+    cpf: string;
+    especializacoes: Especializacao[]
 }
 
 export interface RegistrarAdministrador {

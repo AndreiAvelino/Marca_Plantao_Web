@@ -1,0 +1,39 @@
+%base-opcoes {
+    margin-bottom: 15px;
+}
+
+.turno {
+    @extend %base-opcoes;
+}
+
+.especializacao {
+    @extend %base-opcoes;
+}
+
+.botoes {
+    @extend %base-opcoes;
+}
+
+.botoes-ordenar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.botao-ordenar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+%base-titulo {
+    color: #9f9f9f;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.titulo {
+    @extend %base-titulo;
+}

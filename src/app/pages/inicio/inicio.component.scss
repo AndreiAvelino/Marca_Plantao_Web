@@ -1,6 +1,15 @@
 body{
     background-color: #e5e5fa;
 }
+
+.cards {
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: 50% 50%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
 .pulse{
     height: 150px;
     width: 150px;
@@ -64,4 +73,18 @@ body{
     place-items: center;
     font-size: 50px;
     color: #ffffff;
+}
+
+@media (max-width: 1400px) {
+    .cards {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
+@media (max-width: 700px) {
+    .cards {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
 }

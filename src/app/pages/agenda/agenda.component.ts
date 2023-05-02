@@ -26,6 +26,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ResponseLoginAdministrador, ResponseLoginProfissional } from 'src/models/entidades/usuario';
 import { OpcoesOferta, OpcoesOfertaComponent } from './botoes-opcoes-eventos/opcoes-oferta/opcoes-oferta.component';
 import { OpcoesPlantao, OpcoesPlantaoComponent } from './botoes-opcoes-eventos/opcoes-plantao/opcoes-plantao.component';
+import { switchMap } from 'rxjs/operators';
+import { ConfirmarComponent } from 'src/shared/confirmar/confirmar.component';
+import * as moment from 'moment';
 
 interface EventSource {
   id: string
@@ -40,10 +43,6 @@ interface Event {
   extendedProps: Object
 }
 
-export enum TipoUsuario {
-  ADMIN,
-  PROFISSIONAL
-}
 
 @Component({
   selector: 'app-agenda',
@@ -78,25 +77,35 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
     if(this.isResponseLoginAdministrador(this.usuarioLogado)){
       await this.agendaService.get_all_evento_por_clinica(this.usuarioLogado.clinicaId).toPromise()
-        .then(x => this.eventos = this.gerarEventosSource_Agenda(x.data))
+        .then(x => this.eventos = this.gerarEventosSource_Agenda_Clinica(x.data))
     }
 
     if(this.isResponseLoginProfissional(this.usuarioLogado)){
       await this.agendaService.get_all_evento_por_profissional(this.usuarioLogado.id).toPromise()
-        .then(x => this.eventos = this.gerarEventosSource_Agenda(x.data))
+        .then(x => this.eventos = this.gerarEventosSource_Agenda_Profissional(x.data))
     }
     
   }
 
 
 
-  private gerarEventosSource_Agenda(eventos: Evento[]): EventSource[] {
+  private gerarEventosSource_Agenda_Clinica(eventos: Evento[]): EventSource[] {
     return [
       {
         id: '1',
         events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Oferta)),
         color: Corevento.Oferta
       },
+      {
+        id: '2',
+        events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao)),
+        color: Corevento.Plantao
+      }
+    ]
+  }
+
+  private gerarEventosSource_Agenda_Profissional(eventos: Evento[]): EventSource[] {
+    return [
       {
         id: '2',
         events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao)),
@@ -123,20 +132,39 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   //#region METODOS REFERENTES AO CALENDARIO
   private criar_calendario(): void {
-    this.calendarOptions = {
-      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-      eventClick: (e => this.onEventoClick(e)),
-      dateClick: (e => this.criar_oferta(e)),
-      height: "85vh",
-      headerToolbar: {
-        left:   '',
-        center: '',
-        right:  ''
-      },
-      locale: 'pt-br',
-      initialView: 'timeGridWeek',
-      eventSources: this.eventos           
-    };    
+ 
+    if(this.verifica_usuario_administrador()){
+      this.calendarOptions = {
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+        eventClick: (e => this.onEventoClick(e)),
+        dateClick: (e => this.criar_oferta(e)),
+        height: "84vh",
+        headerToolbar: {
+          left:   '',
+          center: '',
+          right:  ''
+        },
+        locale: 'pt-br',
+        initialView: 'dayGridMonth',
+        eventSources: this.eventos           
+      };   
+    }
+
+    if(this.verifica_usuario_profissional()){
+      this.calendarOptions = {
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+        height: "83vh",
+        headerToolbar: {
+          left:   '',
+          center: '',
+          right:  ''
+        },
+        locale: 'pt-br',
+        initialView: 'timeGridWeek',
+        eventSources: this.eventos           
+      }; 
+    }
+
   }
   
   private atualizar_eventos(): void {
@@ -169,6 +197,11 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
     await this.get_oferta(e.event.id)
       .then(x => oferta = x.data)
+
+    if(oferta.profissionais.length == 0){
+      this.mensagem_erro("A oferta nao possui nenhum candidato!")
+      return;
+    }
 
     let layout = {
       height: '500px',
@@ -237,13 +270,14 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   private abrirBottonSheetPlantao(e: EventClickArg): void {
     this._bottomSheet.open(OpcoesPlantaoComponent).afterDismissed().toPromise()
     .then(r => {
-
       switch(r){
-        case OpcoesPlantao.VISUALIZAR: this.visualizar_plantao(e.event.id)
+        case OpcoesPlantao.VISUALIZAR: this.visualizar_plantao(e.event.extendedProps.id)
                                        break;
-        case OpcoesPlantao.FINALIZAR:  this.finalizar_plantao(e.event.id)
+        case OpcoesPlantao.FINALIZAR:  this.finalizar_plantao(e.event.extendedProps.id)
                                        break;
-      }
+        case OpcoesPlantao.CANCELAR:   this.cancelar_plantao(e);
+                                       break;
+      } 
 
     })
   }
@@ -253,15 +287,46 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
       .then(x => this.modal_plantao(x.data))
   }
 
-  private finalizar_plantao(id: string): void {
-    let layout = {
-      height: '500px',
-      width: '40%',
+  private async finalizar_plantao(id: string): Promise<void> {
+
+    let oferta: Oferta;
+    let resp: boolean = true;
+
+    await this.get_oferta_by_plantao(id)
+      .then(x => oferta = x.data)
+      .catch((e: HttpErrorResponse) => {
+        this.mensagem_erro(e.message)
+        return;
+      })
+    
+
+    // VALIDA SE O PLANTAO TEM A DATA PARA SER INICIADO
+    if(oferta.dataInicial > this.gerar_data_hora_atual()){
+      this.mensagem_erro("Não é possível finalizar um plantão que não foi iniciado!")
+      return;
     }
 
-    this.dialog.open(FinalizarPlantaoComponent, {
-      ...layout
-    })
+    // VALIDA SE O PLANTAO TEM A DATA PARA SER FINALIZADO
+    if(oferta.dataFinal > this.gerar_data_hora_atual()){
+      let mensagem: string = `Ainda faltam ${Math.abs(moment().diff(oferta.dataFinal, 'hours'))}:${moment.utc(moment(oferta.dataFinal, "HH:mm:ss").diff(moment(this.gerar_data_hora_atual(), "HH:mm:ss"))).format("mm")} horas para o término do plantao, deseja confirmar a finalização?`;
+
+      await this.dialog.open(ConfirmarComponent, {
+        data: mensagem
+      }).afterClosed().toPromise()
+        .then((x: boolean) => resp = x)
+    }
+
+    if(resp == true){
+      let layout = {
+        height: '500px',
+        width: '40%',
+      }
+  
+      this.dialog.open(FinalizarPlantaoComponent, {
+        ...layout,
+        data: oferta
+      })
+    }
   }
 
   //#endregion
@@ -288,23 +353,18 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   private async criar_plantao(gerarPlantao: GerarPlantao): Promise<void> {
      await this.post_plantao(gerarPlantao)
       .then(() => this.mensagem_sucesso("Plantao criado com sucesso!"))
+      .then(() => this.get_all_evento())
       .catch((e: HttpErrorResponse) => this.mensagem_erro(e.error))
 
-    await this.get_all_evento()  
+      this.atualizar_eventos()
   }
-
-  private async alterar_plantao(e: EventClickArg): Promise<void> {
-    await this.get_oferta("0")
-      .then(x => this.modal_oferta(x.data))
-      .then(x => this.put_oferta(x))
-      // .then(x => this.alterar_evento(x.data))
-  }
-
   private async cancelar_plantao(evento: EventClickArg): Promise<void> {
-    await this.delete_oferta(evento.event.id)
-      .then(() => this.remover_evento(evento.event.id))
-      .then(() => this.eventos = this.eventos.filter(x => x.id == evento.event.id))
-      .then(() => this.toastr.success('Hello world!', 'Toastr fun!'))
+    await this.delete_plantao(evento.event.extendedProps.id)
+      .then(() => this.mensagem_sucesso("Plantão cancelado!"))
+      .then(() => this.get_all_evento())
+      .catch((e: HttpErrorResponse) => this.mensagem_erro(e.message))
+
+      this.atualizar_eventos()
   }
   //#endregion
 
@@ -318,6 +378,7 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     await this.modal_oferta(oferta)
       .then(x => this.post_oferta(x))
       .then(() => this.mensagem_sucesso('Oferta criada com sucesso!'))
+      .then(() => this.get_all_evento())
 
     this.atualizar_eventos()
   }
@@ -357,6 +418,12 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     return this.ofertaService.get(idOferta).toPromise() 
   }
 
+  private get_oferta_by_plantao(idPlantao: string): Promise<Response<Oferta>> {
+    return this.plantaoService.get(idPlantao)
+      .pipe(switchMap(x => this.ofertaService.get(x.data.ofertaId)))
+      .toPromise()
+  }
+
   private delete_oferta(idOferta: string): Promise<Response<any>> {  
     return this.ofertaService.delete(idOferta).toPromise() 
   }
@@ -379,15 +446,6 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     return this.plantaoService.delete(idPlantao).toPromise();
   }
   //#endregion
-
-  public retorna_tipo_usuario(): TipoUsuario {
-    if(this.isResponseLoginAdministrador(this.usuarioLogado)){
-      return TipoUsuario.ADMIN
-    }
-    if(this.isResponseLoginProfissional(this.usuarioLogado)){
-      return TipoUsuario.PROFISSIONAL
-    }
-  } 
 
   
 

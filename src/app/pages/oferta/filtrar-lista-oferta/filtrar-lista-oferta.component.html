@@ -1,0 +1,77 @@
+
+<div class="botoes">
+
+    <span class="titulo">Ordenar por</span>
+
+    <div class="botoes-ordenar">
+    
+        <div class="botao-ordenar">
+            <button mat-mini-fab color="primary">
+                <mat-icon>calendar_today</mat-icon>
+            </button>
+            <span> Mais recentes </span>
+        </div>
+    
+        <div class="botao-ordenar">
+            <button mat-mini-fab color="primary">
+                <mat-icon> attach_money</mat-icon>
+            </button>
+            <span> Maior valor </span>
+        </div>
+    
+        <div class="botao-ordenar">
+            <button mat-mini-fab color="primary">
+                <mat-icon>star</mat-icon>
+            </button>
+            <span> Melhor avaliação </span>
+        </div>
+        
+    </div>
+
+</div>
+
+
+<form [formGroup]="formulario">
+
+    <div class="turno">
+        <span class="titulo"> Turno </span>
+        <mat-radio-group formControlName="turno">
+            <mat-radio-button value="12h">12h</mat-radio-button>
+            <br>
+            <mat-radio-button value="24h">24h</mat-radio-button>
+        </mat-radio-group>    
+    </div>
+
+    <br>
+
+    <div class="especializacao">
+        <span class="titulo"> Especialização </span>
+        <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Especialização</mat-label>
+            <mat-select formControlName="especializacoes" multiple>
+              <mat-option *ngFor="let especializacao of ListaEspecializacao | async" [value]="especializacao.id">
+                {{especializacao.descricao}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>    
+    </div>        
+
+    <br>
+
+    <!-- <div style="display: flex">
+        <mat-form-field appearance="fill">
+          <mat-label>Data de inicio</mat-label>
+          <input matInput type="date" formControlName="dataInicial">
+        </mat-form-field>
+      </div>
+  
+      <div style="display: flex">
+        <mat-form-field appearance="fill">
+          <mat-label>Data de fim</mat-label>
+          <input matInput type="date" formControlName="dataFinal">
+        </mat-form-field>
+      </div>   -->
+
+    <mat-checkbox formControlName="mostrarOfertasCandidatadas">Mostrar ofertas que estou candidatado</mat-checkbox>
+</form>
+

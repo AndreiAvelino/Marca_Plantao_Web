@@ -1,3 +1,16 @@
+::ng-deep .mat-step-header .mat-step-icon-state-number {
+    background-color: #65c368; 
+    color: #fff;
+  }
+  
+::ng-deep .mat-step-header .mat-step-icon-selected,
+::ng-deep .mat-step-header .mat-step-icon-state-done,
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+    background-color: #65c368; 
+    color: #fff;
+}
+  
+
 .linha {
     display: flex;
     justify-content: space-between;

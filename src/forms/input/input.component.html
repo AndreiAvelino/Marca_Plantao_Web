@@ -1,6 +1,6 @@
-<mat-form-field style="width: 100%" appearance="outline">
+<mat-form-field style="width: 100%" [appearance]="appearance">
   <mat-label>{{label}}</mat-label>
-  <input [type]="type" matInput [placeholder]="placeholder" [(ngModel)]="value">
+  <input [mask]="mask" [type]="type" matInput [placeholder]="placeholder" [(ngModel)]="value">
 
   <div *ngFor="let erro of erros">  
     <mat-error *ngIf="control.hasError(erro.Validator) && !control.pristine">    

@@ -1,28 +1,41 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthComponent } from './auth.component';
 import { FormularioModule } from 'src/forms/formulario.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { AuthInterceptor } from 'src/interceptor/auth.interceptor';
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { LoginComponent } from './login/login.component';
+import { AvatarModule } from 'ngx-avatar';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
-    AuthComponent
+    LoginComponent,
+    CadastroComponent
   ],
   imports: [
     MatCardModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatSelectModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     FormularioModule,
+    AvatarModule
   ],
   exports: [
-    AuthComponent
+    LoginComponent,
+    CadastroComponent
   ], 
   providers: [
     AuthInterceptor

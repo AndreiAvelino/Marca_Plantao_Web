@@ -15,7 +15,7 @@ import { OfertaService } from 'src/services/oferta.service';
 @Component({
   selector: 'card-oferta',
   templateUrl: './card-oferta.component.html',
-  styleUrls: ['./card-oferta.component.css']
+  styleUrls: ['./card-oferta.component.scss']
 })
 export class CardOfertaComponent extends PadraoComponent implements OnInit {
 

@@ -67,7 +67,6 @@ export class InputImagemComponent implements ControlValueAccessor {
 
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.value = event.target.result;
-        //console.log(event.target.result)
       }
     }
   }

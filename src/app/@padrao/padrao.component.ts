@@ -5,6 +5,8 @@ import { CookieService } from 'ngx-cookie';
 import { ToastrService } from 'ngx-toastr';
 import { ResponseLoginAdministrador, ResponseLoginProfissional } from 'src/models/entidades/usuario';
 import * as moment from 'moment';
+import { TipoUsuario } from 'src/enum/enum';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-padrao',
@@ -50,6 +52,23 @@ export class PadraoComponent implements OnInit {
     return this.cookieService.get("usuario") ? JSON.parse(this.cookieService.get("usuario")) : null;
   }
 
+  public retorna_tipo_usuario(): TipoUsuario {
+    if(this.isResponseLoginAdministrador(this.usuarioLogado)){
+      return TipoUsuario.Administrador;
+    }
+    if(this.isResponseLoginProfissional(this.usuarioLogado)){
+      return TipoUsuario.Profissional;
+    }
+  }
+
+  public verifica_usuario_administrador(): boolean {
+    return this.retorna_tipo_usuario() == TipoUsuario.Administrador
+  }
+
+  public verifica_usuario_profissional(): boolean {
+    return this.retorna_tipo_usuario() == TipoUsuario.Profissional
+  }
+
   protected isResponseLoginAdministrador(item: any): item is ResponseLoginAdministrador {
     return 'clinicaId' in item;
   }
@@ -66,8 +85,8 @@ export class PadraoComponent implements OnInit {
     return moment(datahora).format("HH:mm")
   }
 
-  protected gerar_data_hora_atual(): string {
-    return moment().format(); 
+  protected gerar_data_hora_atual(format?: string): string {
+    return moment().format(format ? format : ""); 
   }
 
 }

@@ -1,3 +1,5 @@
-<div class="cards">
+<div>
     <card-oferta [oferta]="oferta" *ngFor="let oferta of ofertas"></card-oferta>
 </div>
+
+<botoes-opcoes-oferta (emiteClickBotao)="onClickBotaoFiltro()"></botoes-opcoes-oferta>

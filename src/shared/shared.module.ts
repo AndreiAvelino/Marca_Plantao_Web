@@ -9,9 +9,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CardComponent } from './card/card.component';
+import { ConfirmarComponent } from './confirmar/confirmar.component';
 
 @NgModule({
-  declarations: [TabelaComponent],
+  declarations: [TabelaComponent, CardComponent, ConfirmarComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -21,10 +24,13 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   exports: [
-    TabelaComponent
+    TabelaComponent,
+    CardComponent,
+    ConfirmarComponent
   ]
 })
 export class SharedModule { }

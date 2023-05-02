@@ -62,7 +62,8 @@ export enum Rotas {
     Login = '/login',
     Inicio = '/inicio',
     Agenda = '/agenda',
-    Indicadores = '/indicadores'
+    Indicadores = '/indicadores',
+    Cadastro = '/cadastro'
 }
 
 export enum TipoNotificacao {
@@ -80,4 +81,9 @@ export enum TamanhoColunaTabela {
 export enum TipoEvento {
     Oferta = 'Oferta',
     Plantao = 'Plantao'
+}
+
+export enum TipoUsuario {
+    Administrador = 'Administrador',
+    Profissional = 'Profissional'
 }

@@ -40,5 +40,8 @@ export class OfertaService {
     return this.httpClient.put<Response<boolean>>(environment.api + "RemoverProfissionalOferta", obj);
   }
 
+  public obterOfertasParaProfissional(ProfissionalId: string): Observable<Response<Oferta>> {
+    return this.httpClient.get<Response<Oferta>>(environment.api + "ObterOfertasParaProfissional?ProfissionalId" + ProfissionalId);
+  }
 
 }

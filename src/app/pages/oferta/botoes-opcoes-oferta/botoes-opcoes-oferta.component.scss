@@ -5,15 +5,14 @@
   position:fixed;
   width:60px;
   height:60px;
-  bottom:20px;   
-  right:10px;  
-  background-color:#F33;
+  bottom:20px;   //fixa o botão à 40px do fim da página
+  right:20px;    //fixa o botão a 10px da borda direita da página
   color:#FFF;
   border: 1px dotted rgba(130, 130, 130, 0.3);
   border-radius:50px;
   text-align:center;
-  z-index:1000;
-  animation: bot-to-top 2s ease-out; 
+  z-index:1000; //posiciona o botão acima dos demais componentes da página
+  animation: bot-to-top 2s ease-out; //animação executada quando a página é carregada
 }
 
 
@@ -42,7 +41,7 @@
 }
 
 
-.fab-tooltip{ 
+.fab-tooltip{ //posicionamento do tooltip que aparece ao passar o mouse sobre o botão
   position:relative;
   bottom:30px;
   right:70px;
@@ -54,7 +53,7 @@
 
 ul{
   position:fixed;
-  right:10px;
+  right:20px;
   padding-bottom:20px;
   bottom:80px;
   z-index:100;
@@ -68,12 +67,7 @@ ul li{
 
 
 ul li button{
-  background-color:#F33;
-  color:#FFF;
-  border-radius:50px;
   text-align:center;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  border: 1px solid rgba(130, 130, 130, 0.3);
   width:60px;
   height:60px;
   display:block;
@@ -84,18 +78,18 @@ ul li button{
   margin-top:18px;
 }
 
-button#menu-share + ul{ 
+button#menu-share + ul{ //esconde a lista de opções
   visibility: hidden;
 }
 
 
-button#menu-share:hover + ul{ 
+button#menu-share:focus   + ul{ //mostra a lista de opções
   visibility: visible;
   animation: scale-in 0.5s;
 }
 
 
-ul:hover{ 
+ul:focus  { //mantem os botões de opções visíveis
   visibility:visible!important;
   opacity:1!important;
 }
@@ -106,24 +100,24 @@ button#menu-share i{
 }
 
 
-button#menu-share:hover > i{
+button#menu-share:focus   > i{
   animation: rotate-out 0.5s;
 }
 
 
-button.fab-btn>div.label-container { 
+button.fab-btn>div.label-container { //esconde o tooltip
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.5s ease;
 }
 
 
-button.fab-btn:hover>div.label-container{
+button.fab-btn:focus  >div.label-container{ 
   visibility: visible;
   opacity: 1;
 }
 
-
+//animações aplicadas aos botões
 
 @keyframes bot-to-top {
     0%   {bottom:-40px}

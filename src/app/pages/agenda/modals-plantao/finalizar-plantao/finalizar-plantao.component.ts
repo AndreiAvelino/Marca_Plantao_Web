@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
+import { Oferta } from 'src/models/entidades/oferta';
 
 @Component({
   selector: 'app-finalizar-plantao',
@@ -11,15 +12,21 @@ import { MatStepper } from '@angular/material/stepper';
 export class FinalizarPlantaoComponent implements OnInit {
 
   @ViewChild('stepper') stepper: MatStepper;
-
+  public oferta: Oferta;
   public formulario: FormGroup
 
   constructor(
     private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<FinalizarPlantaoComponent>
+    public dialogRef: MatDialogRef<FinalizarPlantaoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Oferta,
   ) {
+    
+    this.oferta = data;
+
     this.formulario = this.formBuilder.group({
-      Avaliacao: ""
+      Avaliacao: "",
+      QuantidadeHoraExtra: null,
+      Descontos: null
     })
   }
 
@@ -28,11 +35,14 @@ export class FinalizarPlantaoComponent implements OnInit {
 
   public onClickButtonProsseguir(): void {
     this.stepper.next()
-    console.log(this.stepper)
   }
 
   public onClickButtonFinalizar(): void {
     this.dialogRef.close(this.formulario.value)
+  }
+
+  public total(): number {
+    return parseInt(this.oferta.valor) + ((this.formulario.value.QuantidadeHoraExtra ? this.formulario.value.QuantidadeHoraExtra : 0) * parseInt(this.oferta.valorHoraExtra)) - (this.formulario.value.Descontos ? this.formulario.value.Descontos : 0);
   }
 
 }

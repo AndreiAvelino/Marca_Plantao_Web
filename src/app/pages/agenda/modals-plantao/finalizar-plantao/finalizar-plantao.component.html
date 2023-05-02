@@ -21,16 +21,16 @@
     <div style="display: grid; grid-template-columns: 55% 45%; margin-top: 20px; font-size: 17px;">
         <div>
             <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span style="font-weight: 500;"> Valor ofertado (12h): </span> <span> R$ 800,00 </span> 
+                <span style="font-weight: 500;"> Valor ofertado ({{oferta.turno}}): </span> <span> R$ {{oferta.valor}} </span> 
             </div>
             <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span style="font-weight: 500;"> Valor por hora extra: </span> <span style="color: blue"> R$ 100,00 </span>
+                <span style="font-weight: 500;"> Valor por hora extra: </span> <span style="color: blue"> R$ {{oferta.valorHoraExtra}} </span>
             </div>
             <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span style="font-weight: 500;"> Hora extra realizada: </span> <span> 2 </span>
+                <span style="font-weight: 500;"> Hora extra realizada: </span> <input style="width: 50px" type="number" formControlName="QuantidadeHoraExtra">
             </div>
             <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span style="font-weight: 500;"> Descontos: </span> <span style="color: red"> R$ 300,00 </span>
+                <span style="font-weight: 500;"> Descontos: </span> <input style="width: 50px" type="number" formControlName="Descontos">
             </div>
         </div>
 
@@ -38,14 +38,14 @@
             
             <div style="display: flex; justify-content: center; align-items: center;">
                 <div>
-                    <span> 800,00 </span> 
-                    <span> + 2 x (100,00) </span> 
-                    <span> - 300,00 </span>
+                    <span> {{oferta.valor}} </span> 
+                    <span *ngIf="formulario.value.QuantidadeHoraExtra"> + {{formulario.value.QuantidadeHoraExtra}} x {{oferta.valorHoraExtra}} </span> 
+                    <span *ngIf="formulario.value.Descontos"> - {{formulario.value.Descontos}} </span>
                 </div>                    
             </div>
 
             <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-                <span style="margin-right: 10px; font-weight: 600;"> Total: </span> <span> R$ 700,00 </span>
+                <span style="margin-right: 10px; font-weight: 600;"> Total: </span> <span> R$ {{total()}} </span>
             </div>
 
         </div>            

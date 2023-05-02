@@ -3,7 +3,8 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 export enum OpcoesPlantao {
   VISUALIZAR,
-  FINALIZAR
+  FINALIZAR,
+  CANCELAR
 }
 
 @Component({
@@ -26,4 +27,7 @@ export class OpcoesPlantaoComponent implements OnInit {
     this._bottomSheetRef.dismiss(OpcoesPlantao.FINALIZAR)
   }
 
+  public onClickCancelar(): void {
+    this._bottomSheetRef.dismiss(OpcoesPlantao.CANCELAR)
+  }
 }

@@ -5,26 +5,27 @@ import { Router } from '@angular/router';
 import { Rotas } from 'src/enum/enum';
 import { Erro } from 'src/models/form';
 import { LoginService } from 'src/services/login.service';
-import { PadraoComponent } from '../@padrao/padrao.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/store/app/app.state';
+import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class AuthComponent extends PadraoComponent implements OnInit {
+export class LoginComponent extends PadraoComponent implements OnInit {
 
   public ErrosEmail: Array<Erro> = [{Validator: 'email', Mensagem: 'Informe um e-mail válido', Peso: 1}, {Validator: 'required', Mensagem: 'Informe um e-mail', Peso: 2}]
 
   public formulario: FormGroup;
 
+  public logando: boolean = false;
+
   constructor(
     private _fb: FormBuilder,
     private router: Router,
-    private loginService: LoginService,
-    private store: Store<{app: AppState}>
+    private loginService: LoginService
   ) {
     super();
   }
@@ -39,7 +40,7 @@ export class AuthComponent extends PadraoComponent implements OnInit {
   public async Login(): Promise<void> {
 
     if(!this.formulario.value.Email){
-      this.mensagem_erro("Informa o e-mail");
+      this.mensagem_erro("Informe o e-mail");
       return;
     }
 
@@ -48,11 +49,19 @@ export class AuthComponent extends PadraoComponent implements OnInit {
       return;
     }
 
-    this.loginService.login(this.formulario.value).toPromise()
+    this.logando = true;
+
+    await this.loginService.login(this.formulario.value).toPromise()
       .then(x => this.inserir_cookie("usuario", JSON.stringify(x.data)))
       .then(() => this.router.navigate([Rotas.Inicio]))
       .catch((e: HttpErrorResponse) => this.mensagem_erro(e.error))
+
+    this.logando = false;
     
+  }
+
+  public Cadastro() {
+    this.router.navigate([Rotas.Cadastro]);
   }
 
 

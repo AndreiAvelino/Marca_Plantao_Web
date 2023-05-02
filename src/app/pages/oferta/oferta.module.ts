@@ -16,6 +16,12 @@ import { CardOfertaComponent } from './card-oferta/card-oferta.component';
 import { PesquisarOfertaComponent } from './pesquisar-oferta/pesquisar-oferta.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FlipModule } from 'ngx-flip';
+import { BotoesOpcoesOfertaComponent } from './botoes-opcoes-oferta/botoes-opcoes-oferta.component';
+import { FiltrarListaOfertaComponent } from './filtrar-lista-oferta/filtrar-lista-oferta.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSliderModule} from '@angular/material/slider';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
 
 const materialModules = [
   MatCardModule,
@@ -25,12 +31,16 @@ const materialModules = [
   MatDialogModule,
   MatButtonModule,
   MatStepperModule,
-  MatIconModule
+  MatIconModule,
+  MatCheckboxModule,
+  MatRadioModule,
+  MatSliderModule,
+  CdkAccordionModule
 ]
 
 
 @NgModule({
-  declarations: [ListagemOfertaComponent, ConfigurarOfertaComponent, CardOfertaComponent, PesquisarOfertaComponent],
+  declarations: [ListagemOfertaComponent, ConfigurarOfertaComponent, CardOfertaComponent, PesquisarOfertaComponent, BotoesOpcoesOfertaComponent, FiltrarListaOfertaComponent],
   imports: [
     ...materialModules,
     CommonModule,

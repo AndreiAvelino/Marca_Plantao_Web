@@ -16,6 +16,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { MPRadioComponent } from './radio/mp-radio/mp-radio.component';
 import { AdicionarArquivoProdutoComponent } from './adicionar-arquivo-produto/adicionar-arquivo-produto.component';
 import { SelectEspecializacaoComponent } from './select/select-especializacao/select-especializacao.component';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 const materialModules = [
   MatIconModule,
@@ -23,6 +25,7 @@ const materialModules = [
   MatButtonModule,
   MatRadioModule,
   MatSelectModule,
+  MatInputModule
 ]
 
 @NgModule({
@@ -40,8 +43,8 @@ const materialModules = [
     ...materialModules,
     CommonModule,
     FormsModule,    
-    ReactiveFormsModule,
-    MatInputModule
+    ReactiveFormsModule,    
+    NgxMaskModule.forRoot()
   ],
   exports: [
     InputComponent,

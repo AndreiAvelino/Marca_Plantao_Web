@@ -1,14 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthComponent } from './auth/auth.component';
-import { AuthGuard } from './guards/auth.guard';
+import { CadastroComponent } from './auth/cadastro/cadastro.component';
+import { LoginComponent } from './auth/login/login.component';
 
 const routes: Routes = [
   { 
     path: 'pages',
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
   },
-  {path: 'login', component: AuthComponent}
+  {
+    path: 'login', 
+    component: LoginComponent
+  },
+  {
+    path: 'cadastro', 
+    component: CadastroComponent
+  }  
 ];
 
 @NgModule({

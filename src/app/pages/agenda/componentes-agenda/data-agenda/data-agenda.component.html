@@ -1,4 +1,4 @@
-<div style="height: 8vh">
+<div style="height: 8vh" *ngIf="layout_administrador()">
     <div style="display: flex; justify-content: center; margin: 10px">
         <span class="teste" style="font-size: 20px; font-weight: 500;">{{mesano}}</span>
     </div>
@@ -16,4 +16,21 @@
             </button>
         </div>
     </div>
+</div>
+
+
+<div *ngIf="layout_profissional()" style="display: flex; justify-content: space-between; align-items: center;">    
+
+    <button mat-icon-button color="accent" (click)="onButtonAnteriorDiaClick()">
+        <mat-icon>navigate_before</mat-icon>
+    </button>  
+            
+    <div style="display: flex; justify-content: center; margin: 10px">
+        <span style="font-size: 20px; font-weight: 500;">{{mesano}}</span>
+    </div>
+       
+    <button mat-icon-button color="accent" (click)="onButtonProximoDiaClick()">
+        <mat-icon>navigate_next</mat-icon>
+    </button>
+
 </div>

@@ -10,6 +10,7 @@ import { Meses } from 'src/const/const';
 export class DataAgendaComponent implements OnInit {
 
   @Input() calendario: FullCalendarComponent;
+  @Input() layout: string;
   
   @Output() emiteClickButtonHoje = new EventEmitter();
   @Output() emiteClickAnterior = new EventEmitter();
@@ -45,6 +46,22 @@ export class DataAgendaComponent implements OnInit {
 
   private atualizarData(): void {
     this.mesano = `${Meses[this.calendario.getApi().getDate().getMonth()]} de ${this.calendario.getApi().getDate().getFullYear()}`
+  }
+
+  public layout_profissional(): boolean{
+    if(this.layout == "profissional"){
+      return true;
+    }
+
+    return false;
+  }
+
+  public layout_administrador(): boolean{
+    if(this.layout == "administrador"){
+      return true;
+    }
+
+    return false;
   }
 
 }

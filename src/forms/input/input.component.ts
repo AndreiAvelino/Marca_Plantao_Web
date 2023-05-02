@@ -35,7 +35,8 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input('placeholder') placeholder: String = "";
   @Input('control') control;
   @Input('erros') erros;
-
+  @Input('mask') mask = "";
+  @Input('appearance') appearance = "outline";
 
   constructor() { }
 

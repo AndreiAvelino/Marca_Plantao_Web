@@ -1,3 +1,15 @@
-<button [ngClass]="buscando ? 'pulse' : 'sempulse'" (click)="Buscar()">
-      
-</button>
+<div *ngIf="verifica_usuario_administrador()" class="cards">
+    <app-card *ngFor="let card of cards"
+              [color]="card.color"
+              [titulo]="card.data"
+              [descricao]="card.info">
+    </app-card>
+</div>
+
+<div *ngIf="verifica_usuario_profissional()">
+    <button [ngClass]="buscando ? 'pulse' : 'sempulse'" (click)="buscar()">      
+    </button>
+</div>
+
+
+

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Login } from 'src/models/entidades/auth';
-import { ResponseLogin } from 'src/models/entidades/usuario';
+import { RegistrarUsuario, ResponseLogin } from 'src/models/entidades/usuario';
 import { Response } from 'src/models/response';
 
 @Injectable({
@@ -19,6 +19,10 @@ export class LoginService {
 
   public logout(): void {
     
+  }
+
+  public registrar_usuario(usuario: RegistrarUsuario): Observable<Response<any>> {
+    return this.httpClient.post<Response<ResponseLogin>>(environment.api + `registrarusuario`, usuario)
   }
   
 }

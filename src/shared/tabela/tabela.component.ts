@@ -52,7 +52,6 @@ export class TabelaComponent implements AfterViewInit {
 
   private GerarDataSource(): void {
     this.DataSource = new MatTableDataSource(this.Tabela.Registros);
-    console.log(this.paginator)
     this.DataSource.paginator = this.paginator;
     this.DataSource.sort = this.sort;
   }

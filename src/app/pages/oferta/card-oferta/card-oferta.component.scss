@@ -1,0 +1,134 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+%basic-card {
+  max-width: 450px;
+  height: 500px;
+}
+
+%basic-card-button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  @extend %basic-card;
+  
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: transparent;
+  margin: 20px;  
+}
+
+.card-front {
+  @extend %basic-card; 
+
+  &-header {
+    height: 15%;
+    display: flex;
+    align-items: center;
+
+    &-descricao {
+      margin-left: 15px;
+    }
+
+    &-descricao-titulo {
+      font-size: 20px; 
+      font-weight: 550;
+    }
+
+    &-descricao-sub-titulo {
+      font-size: 15px; 
+      font-weight: 500; 
+      color: #8f8f8f;
+    }
+    
+  }
+
+  &-body {
+    height: 55%;
+    background-color: #e9e9e9;
+
+    &-descricao {
+      color: #888; 
+      font-weight: 550; 
+      margin-left: 15px;
+      margin-top: 15px; 
+      font-size: 15px;
+    }
+    
+  }
+
+  &-buttons {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+
+    &-botao-branco {
+      @extend %basic-card-button; 
+      background-color: #fff;
+    }
+
+    &-botao-verde {
+      @extend %basic-card-button; 
+      background-color: #65c368;
+      color: #fff
+    }
+
+    &-botao-branco:hover {
+      background-color: #eee;
+    }
+
+    &-botao-verde:hover {
+      background-color: #5eb861;
+      color: #fff
+    }
+  }
+}
+
+.card-back {
+  @extend %basic-card; 
+
+  background-color: #eee;
+
+  &-header {
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+
+    &-descricao {
+      margin-left: 15px;
+    }
+
+    &-descricao-titulo {
+      font-size: 20px; 
+      font-weight: 550;
+    }
+
+    &-descricao-sub-titulo {
+      font-size: 15px; 
+      font-weight: 500; 
+      color: #8f8f8f;
+    }
+    
+  }
+
+  &-content {
+    text-align: center;
+    overflow: auto; 
+    height: 85%;
+
+    &-info {
+      text-align: left;
+      display: inline-block;
+      background-color: #fff;
+      margin-top: 10px;
+      width: 95%;
+    }
+  }
+
+
+}

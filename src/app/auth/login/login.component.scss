@@ -1,0 +1,143 @@
+.mat-spinner-color::ng-deep circle{
+    stroke: #FFFFFF !important;
+}
+
+.esquerda {
+    background-image: url(../../../assets/saude.jpg); 
+    background-repeat: no-repeat; 
+    background-position: center center;
+    background-size: 550px 550px;
+    flex-grow: 0.6;
+}   
+
+.layout-pagina {
+    display: grid; 
+    grid-template-columns: 60% 40%; height: 100vh;
+}
+
+%botao { 
+    width: 100%;
+    height: 40px;
+}
+
+
+.tela-login {
+    display: grid; 
+    grid-template-columns: 60% 40%; height: 100vh;
+    
+    &-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-formulario {
+        text-align: center;
+        background-color: #65c368;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+         
+    &-formulario-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #fff;
+        width: 70%;
+        height: 600px;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    &-formulario-content-botao-login {
+        @extend %botao;
+        background-color: #65c368;
+
+        &-label {
+            font-size: 17px;
+            font-weight: 550;
+            color: #fff;
+        }
+
+        &-spinner {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    &-formulario-content-botao-cadastrese {
+        @extend %botao;
+        margin-top: 10px;
+
+        &-label {
+            font-size: 17px;
+            font-weight: 550;
+            color: #65c368;
+        }
+    }
+    
+}    
+
+@media (max-width: 800px) {
+
+    %botao { 
+        width: 100%;
+        height: 40px;
+    }
+
+    .tela-login {
+        display: block;
+        margin-top: 50px;
+
+        &-logo {
+            text-align: center;
+        }
+    
+        &-formulario {
+            background-color: #fff;
+            margin-top: 30px;
+            text-align: center;
+        }
+ 
+        &-formulario-content {
+            display: block;
+            width: 100%;
+            background-color: #fff;
+            margin: 0px;
+            box-shadow: none;
+            border-radius: 0px;
+        }
+
+        &-formulario-content-botao {
+            width: 100%;
+            height: 40px;
+            background-color: #65c368;
+    
+            &-label {
+                font-size: 17px;
+                font-weight: 550;
+                color: #fff;
+            }
+    
+            &-spinner {
+                display: flex;
+                justify-content: center;
+            }
+        }
+   
+        &-formulario-content-botao-cadastrese {
+            width: 100%;
+            height: 40px;
+                
+            &-label {
+                font-size: 17px;
+                font-weight: 550;
+                color: #65c368;
+            }
+        }
+
+    }    
+
+}

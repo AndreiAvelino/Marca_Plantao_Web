@@ -1,23 +1,22 @@
-<mat-sidenav-container class="example-container" style="height: 93vh;">
+<mat-sidenav-container class="example-container" style="height: calc(100vh - 65px);">
 
-  <mat-sidenav #sidenav mode="over">
+  <mat-sidenav #sidenav mode="over" style="width: 300px">
 
     <div style="display: flex; justify-content: center; align-items: center;">
     
-      <!-- <div style="width: 300px;">
-        <div style="display: flex; align-items: center; margin-top:10px">
+      <div *ngIf="isResponseLoginProfissional(usuarioLogado)" style="width: 300px; box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; height: 160px;">
+        <div style="display: flex; align-items: center; margin-top:10px; margin-bottom: 10px;">
           <div style="margin-left: 10px; margin-right: 10px;">
-            <ngx-avatar src="assets/fachada-niteroi-dor2.jpg" size="100" name="Andrei Avelino"></ngx-avatar>
+            <ngx-avatar size="100" [name]="profissional.nome"></ngx-avatar>
           </div>
-          <span style="font-size: 20px; font-weight: 550;"> Rede D'Or - Niteroi </span>
+          <span style="font-size: 20px; font-weight: 550;"> {{profissional.nome}} </span>
         </div>
-        <div style="margin-top: 10px; display: flex; justify-content: space-around;">
-          <span style="font-size: 17px; font-weight: 550;"> 15 Plantoes </span>
-          <span style="font-size: 17px; font-weight: 550;"> 17 Ofertas </span>
+        <div style="margin-bottom: 10px; display: flex; justify-content: space-around;">
+          <button mat-stroked-button color="primary" style="width: 280px">Perfil</button>
         </div>
-      </div> -->
+      </div>
 
-      <div>
+      <div *ngIf="isResponseLoginAdministrador(usuarioLogado)">
         <img src="assets/fachada-niteroi-dor2.jpg" width="300">
 
         <div style="margin-top: 10px; display: flex; justify-content: center;">

@@ -37,9 +37,6 @@ export class NotificacoesComponent implements OnInit {
   }
 
   public RealizarAcao(notificacao: Notificacao): void {
-
-    console.log(notificacao)
-
     if(notificacao.Rota){
       this.router.navigate([notificacao.Rota])
     }

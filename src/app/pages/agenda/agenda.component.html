@@ -1,7 +1,8 @@
-<!-- <div style="display: grid; grid-template-columns: 15% 85%;">
+<div *ngIf="verifica_usuario_administrador()" style="display: grid; grid-template-columns: 15% 85%;">
 
     <div style="margin: 10px;">
-        <data-agenda [calendario]="calendario"></data-agenda>
+        <data-agenda [calendario]="calendario"
+                     layout="administrador"></data-agenda>
 
         <opcoes-agenda (emitChangeCheckBoxOferta)="onChangeCheckBoxOferta($event)"
                        (emitChangeCheckBoxPlantao)="onChangeCheckBoxPlantao($event)">            
@@ -13,11 +14,16 @@
             <full-calendar *ngIf="eventos.length > 0" #calendario [options]="calendarOptions"></full-calendar>
         </mat-card>
     </div>
-</div> -->
+</div>
 
-<div style="background-color: #fff; padding: 2px">
-    <data-agenda [calendario]="calendario"></data-agenda>
+<div *ngIf="verifica_usuario_profissional()" style="background-color: #fff; padding: 3px">
+    <data-agenda [calendario]="calendario"
+                 layout="profissional"></data-agenda>
 
     <full-calendar *ngIf="eventos.length > 0" #calendario [options]="calendarOptions"></full-calendar>
     <botoes-opcoes-agenda></botoes-opcoes-agenda>
+    
 </div>
+
+
+

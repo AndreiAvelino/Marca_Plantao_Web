@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
              <app-sidebar>
               <router-outlet></router-outlet>
              </app-sidebar>`,
+  styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
 
