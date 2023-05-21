@@ -4,19 +4,19 @@
 
     <div style="display: flex; justify-content: center; align-items: center;">
     
-      <div *ngIf="isResponseLoginProfissional(usuarioLogado)" style="width: 300px; box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; height: 160px;">
+      <div *ngIf="isResponseLoginProfissional()" style="width: 300px; box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; height: 160px;">
         <div style="display: flex; align-items: center; margin-top:10px; margin-bottom: 10px;">
           <div style="margin-left: 10px; margin-right: 10px;">
-            <ngx-avatar size="100" [name]="profissional.nome"></ngx-avatar>
+            <ngx-avatar size="100" [name]="profissional?.nome"></ngx-avatar>
           </div>
-          <span style="font-size: 20px; font-weight: 550;"> {{profissional.nome}} </span>
+          <span style="font-size: 20px; font-weight: 550;"> {{profissional?.nome}} </span>
         </div>
         <div style="margin-bottom: 10px; display: flex; justify-content: space-around;">
           <button mat-stroked-button color="primary" style="width: 280px">Perfil</button>
         </div>
       </div>
 
-      <div *ngIf="isResponseLoginAdministrador(usuarioLogado)">
+      <div *ngIf="isResponseLoginAdministrador()">
         <img src="assets/fachada-niteroi-dor2.jpg" width="300">
 
         <div style="margin-top: 10px; display: flex; justify-content: center;">
@@ -28,6 +28,11 @@
     <mat-selection-list  [multiple]="false">
       <app-item *ngFor="let item of menu.Itens" [Item]="item"></app-item>
     </mat-selection-list>
+
+    <div *ngIf="isResponseLoginProfissional()" style="display: flex; justify-content: center;">
+      <button mat-flat-button color="warn" style="position: fixed; bottom: 10px; width: 280px;" (click)="sair()">Sair</button>
+    </div>
+
   </mat-sidenav>
 
   <mat-sidenav-content>

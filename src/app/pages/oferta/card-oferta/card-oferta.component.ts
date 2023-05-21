@@ -71,4 +71,6 @@ export class CardOfertaComponent extends PadraoComponent implements OnInit {
 
   } 
 
+  
+
 }

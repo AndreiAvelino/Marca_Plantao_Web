@@ -8,6 +8,7 @@ export interface ResponseLogin {
 }
 
 export interface ResponseLoginAdministrador extends ResponseLogin {
+    nome: string;
     master: boolean;
     clinicaId: string;
 }

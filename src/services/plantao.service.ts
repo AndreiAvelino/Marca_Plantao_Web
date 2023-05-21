@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { GerarPlantao, Plantao } from 'src/models/entidades/plantao';
+import { EncerrarPlantao, GerarPlantao, Plantao } from 'src/models/entidades/plantao';
 import { Response } from 'src/models/response';
 
 @Injectable({
@@ -32,5 +32,8 @@ export class PlantaoService {
     return this.httpClient.delete<Response<any>>(environment.api + "RemoverPlantao?Id=" + idPlantao);
   }
   
+  public encerrar(encerrar: EncerrarPlantao): Observable<any> {
+    return this.httpClient.put<Response<any>>(environment.api + "EncerrarPlantao", encerrar);
+  }
   
 }

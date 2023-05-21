@@ -19,6 +19,20 @@ export interface Plantao {
     dataCadastro?: string   
 }
 
+export interface EncerrarPlantao {
+    id: string,
+    profissionalId: string
+    clinicaId: string 
+    descricao: string
+    nota: number,
+    comprovante: string, 
+    dataAvaliacao: string,
+    desconto: string,
+    valorTotal: string,
+    dataFinal: string
+    horaExtra: string,
+}
+
 export interface GerarPlantao {
     ofertaId: string
     profissionalId: string

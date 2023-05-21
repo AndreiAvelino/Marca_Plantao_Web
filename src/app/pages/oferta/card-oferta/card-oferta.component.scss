@@ -130,5 +130,20 @@
     }
   }
 
+  &-content-little {
+    text-align: center;
+    overflow: auto; 
+    height: 50px;
+
+    &-info {
+      text-align: left;
+      display: inline-block;
+      background-color: #fff;
+      margin-top: 10px;
+      width: 95%;
+    }
+  }
+
+
 
 }

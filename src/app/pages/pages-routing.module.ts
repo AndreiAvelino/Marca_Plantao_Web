@@ -12,6 +12,7 @@ import { PagesComponent } from './pages.component';
 import { AvaliarPlantaoComponent } from './plantao/avaliar-plantao/avaliar-plantao.component';
 import { HistoricoPlantaoComponent } from './plantao/historico-plantao/historico-plantao.component';
 import { InfoPlantaoComponent } from './plantao/info-plantao/info-plantao.component';
+import { HistoricoPlantaoResolver } from './plantao/historico-plantao/historico-plantao.resolve';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
       {
         path: 'listagemoferta',
         component: ListagemOfertaComponent,
+        resolve: { eventos: HistoricoPlantaoResolver }
       },
       {
         path: 'agenda',
@@ -34,6 +36,7 @@ const routes: Routes = [
       {
         path: 'historicoplantao',
         component: HistoricoPlantaoComponent,
+        resolve: { eventos: HistoricoPlantaoResolver }
       },
       {
         path: 'avaliacaoplantao',

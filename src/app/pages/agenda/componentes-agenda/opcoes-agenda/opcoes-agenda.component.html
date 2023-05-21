@@ -19,10 +19,28 @@
                 <br>
                 <mat-checkbox class="plantao" 
                             checked
-                            [style.--hoverColor]="CorEvento.Plantao"
-                            (change)="onChangeCheckBoxPlantao($event)">
+                            [style.--hoverColor]="CorEvento.Plantao_NaoIniciado"
+                            (change)="onChangeCheckBoxPlantaoNaoInciado($event)">
 
-                    <span>Plantões</span>
+                    <span>Plantões à iniciar</span>
+
+                </mat-checkbox>
+
+                            <mat-checkbox class="plantao" 
+                            checked
+                            [style.--hoverColor]="CorEvento.Plantao_Andamento"
+                            (change)="onChangeCheckBoxPlantaoAndamento($event)">
+
+                    <span>Plantões em andamento</span>
+
+                </mat-checkbox>
+
+                <mat-checkbox class="plantao" 
+                            checked
+                            [style.--hoverColor]="CorEvento.Plantao_Finalizado"
+                            (change)="onChangeCheckBoxPlantaoFinalizado($event)">
+
+                    <span>Plantões finalizados</span>
 
                 </mat-checkbox>
             </div>
@@ -34,49 +52,7 @@
         <mat-expansion-panel class="mat-elevation-z0">
          <mat-expansion-panel-header>
            <mat-panel-title> <span style="font-weight: 500;">Filtros</span> </mat-panel-title>
-
-
          </mat-expansion-panel-header>
-
-         <!-- <div>
-            <mat-slider min="200" max="500">
-                <input value="300" matSliderStartThumb>
-                <input value="400" matSliderEndThumb>
-             </mat-slider>
-    
-             <app-input label="Profissional"></app-input>
-         </div>
-
-         <mp-select-especializacao></mp-select-especializacao>
-
-         <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Método de pagamento</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let metodo of ListaMetodosPagamento" [value]="metodo">
-                {{metodo}}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Status do pagamento</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let metodo of ListaStatusPagamento" [value]="metodo">
-                {{metodo}}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Status do plantao</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let metodo of ListaStatusPlatao" [value]="metodo">
-                {{metodo}}
-              </mat-option>
-            </mat-select>
-        </mat-form-field> -->
-
-
        </mat-expansion-panel>
     </mat-accordion>
 

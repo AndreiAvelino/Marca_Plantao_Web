@@ -1,0 +1,6 @@
+<p> Escolha o horario de inicio: </p>
+<hr>
+<div style="display: flex; flex-direction: column; height: 100px; justify-content: space-around" >
+    <button class="botao" (click)="fechar(dataInicialOferta)" mat-stroked-button>Horario da oferta ({{retorna_hhmmss_de_yyyymmddhhmmss(dataInicialOferta)}})</button>
+    <button class="botao" (click)="fechar(gerar_data_hora_atual())" mat-stroked-button>Horario atual ({{gerar_hora_atual()}})</button>
+</div>

@@ -69,11 +69,11 @@ export class PadraoComponent implements OnInit {
     return this.retorna_tipo_usuario() == TipoUsuario.Profissional
   }
 
-  protected isResponseLoginAdministrador(item: any): item is ResponseLoginAdministrador {
+  protected isResponseLoginAdministrador(item: any = this.usuarioLogado): item is ResponseLoginAdministrador {
     return 'clinicaId' in item;
   }
 
-  protected isResponseLoginProfissional(item: any): item is ResponseLoginProfissional {
+  protected isResponseLoginProfissional(item: any = this.usuarioLogado): item is ResponseLoginProfissional {
       return 'especializacoes' in item;
   }
 
@@ -81,12 +81,24 @@ export class PadraoComponent implements OnInit {
     return moment(datahora).format("yyyy-MM-DD")
   }
 
+  protected retorna_legivel_de_yyyymmddhhmmss(datahora: string): string {
+    return moment(datahora).format("DD/MM/yy HH:mm")
+  }
+
   protected retorna_hhmmss_de_yyyymmddhhmmss(datahora: string): string{
     return moment(datahora).format("HH:mm")
   }
 
-  protected gerar_data_hora_atual(format?: string): string {
-    return moment().format(format ? format : ""); 
+  protected gerar_hora_atual(add: number = 0): string {
+    return moment().add(add, 'hours').format("HH:mm")
+  }
+
+  protected gerar_data_hora_atual(format?: string, add: number = 0, data: string = 'hora'): string {
+    switch(data){
+      case 'hora': return moment().add(add, 'hours').format(format ? format : "");
+    }
+
+     
   }
 
 }

@@ -30,6 +30,7 @@ export class TabelaComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.GerarColunasEChaves();
     this.GerarDataSource();
+    console.log(this.Tabela.Registros)
   }
 
   private GerarColunasEChaves(): void {

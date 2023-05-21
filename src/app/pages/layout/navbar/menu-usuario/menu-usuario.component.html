@@ -2,14 +2,10 @@
             [matMenuTriggerFor]="menu" 
             size="50" 
             [src]="fotoPerfil ? fotoPerfil : ''" 
-            name="Andrei Avelino">
+            [name]="usuarioLogado.email">
 </ngx-avatar>
 
 <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="mudar_foto()">
-      <mat-icon>photo_camera</mat-icon>
-      <span>Mudar foto</span>
-    </button>
     <button mat-menu-item (click)="sair()">
       <mat-icon>perm_identity</mat-icon>
       <span>Sair</span>

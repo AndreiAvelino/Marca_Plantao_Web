@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
-import { Rotas, TipoEvento, TipoUsuario } from 'src/enum/enum';
+import { Corevento, Rotas, StatusPlantao, TipoEvento, TipoUsuario } from 'src/enum/enum';
 import { Evento } from 'src/models/entidades/evento';
 import { AgendaService } from 'src/services/agenda.service';
 import { OfertaService } from 'src/services/oferta.service';
@@ -47,20 +47,26 @@ export class InicioComponent extends PadraoComponent {
     let datahora = this.gerar_data_hora_atual();
 
     this.cards.push({
-      color: "red",
+      color: "3px solid" + Corevento.Oferta,
       data: eventos.filter(x => x.tipo == TipoEvento.Oferta).length,
       info: "Ofertas"
     })
     this.cards.push({
-      color: "green",
-      data: eventos.filter(x => x.tipo == TipoEvento.Plantao && (x.dataInicial <= datahora && x.dataFinal > datahora)).length,
+      color: "3px solid" + Corevento.Plantao_NaoIniciado,
+      data: eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.NaoIniciado).length,
+      info: "Plantoes a iniciar"
+    })
+    this.cards.push({
+      color: "3px solid" + Corevento.Plantao_Andamento,
+      data: eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.Andamento).length,
       info: "Plantoes em andamento"
     })
     this.cards.push({
-      color: "green",
-      data: eventos.filter(x => x.tipo == TipoEvento.Plantao && x.dataInicial >= datahora).length,
-      info: "Plantoes a iniciar"
+      color: "3px solid" + Corevento.Plantao_Finalizado,
+      data: eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.Finalizado).length,
+      info: "Plantoes a finalizados"
     })
+
   }
 
   public buscar(): void{

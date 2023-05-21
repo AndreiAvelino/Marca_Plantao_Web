@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -27,7 +28,8 @@ export class SidebarComponent extends PadraoComponent implements OnInit, AfterVi
 
   constructor(
     public layoutStore: Store<{layout: LayoutState}>,
-    private profissionalService: ProfissionalService
+    private profissionalService: ProfissionalService,
+    private _router: Router
   ) {
     super();
   }
@@ -110,6 +112,11 @@ export class SidebarComponent extends PadraoComponent implements OnInit, AfterVi
       await this.profissionalService.get(this.usuarioLogado.id).toPromise()
         .then(x => this.profissional = x.data)
     } 
+  }
+
+  public sair(){
+    this.remover_cookie("usuario");
+    this._router.navigate([Rotas.Login])
   }
 
 }

@@ -1,11 +1,16 @@
 <mat-nav-list>
+    <a *ngIf="status === 0"  mat-list-item (click)="onClickIniciar()">
+      <span matLine>Iniciar plantão</span>
+    </a>
+    <a *ngIf="status === 0" mat-list-item (click)="onClickCancelar()">
+      <span matLine>Cancelar plantão</span>
+    </a>
+    <a *ngIf="status === 1" mat-list-item (click)="onClickFinalizar()">
+      <span matLine>Finalizar plantão</span>
+    </a>
     <a mat-list-item (click)="onClickVisualizar()">
       <span matLine>Visualizar plantão</span>
     </a>
-    <a mat-list-item (click)="onClickFinalizar()">
-      <span matLine>Finalizar plantão</span>
-    </a>
-    <a mat-list-item (click)="onClickCancelar()">
-      <span matLine>Cancelar plantão</span>
-    </a>
+    
+
 </mat-nav-list>

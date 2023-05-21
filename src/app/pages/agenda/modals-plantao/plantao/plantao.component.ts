@@ -1,13 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
-import { StatusPagamento, StatusPlantao } from 'src/enum/enum';
+import { FormaPagamento, StatusPagamento, StatusPlantao } from 'src/enum/enum';
 import { Oferta } from 'src/models/entidades/oferta';
 import { Plantao } from 'src/models/entidades/plantao';
 import { Profissional } from 'src/models/entidades/profissional';
 import { OfertaService } from 'src/services/oferta.service';
 import { ProfissionalService } from 'src/services/profissional.service';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-plantao',
@@ -20,36 +20,6 @@ export class PlantaoComponent extends PadraoComponent implements OnInit {
   public profissional: Profissional
 
   public especializacoes: string;
-
-  // public plantao: Plantao = {
-  //   id: "0",
-  //   ofertaId: "0",
-  //   profissionalId: "0",
-  //   status: StatusPlantao.Andamento,
-  //   avaliacaoClinica: {
-  //     id: "0",
-  //     idPlantao: "0",
-  //     nota: 4,
-  //     descricao: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.",
-  //     dataCadastro: "2020-02-03T12:00:00",
-  //   },
-  //   avaliacaoProfissional: {
-  //     id: "0",
-  //     idPlantao: "0",
-  //     nota: 4,
-  //     descricao: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.",
-  //     dataCadastro: "2020-02-03T12:00:00",
-  //   },
-  //   dataInicial: '',
-  //   dataFinal: '',
-  //   horaExtra: '',
-  //   valorTotal: '',
-  //   desconto: '',
-  //   statusPagamento: StatusPagamento.Pendente,
-  //   dataPagamento: '',
-  //   comprovante: ''
-  // }
-
 
   public plantao: Plantao
 
@@ -82,6 +52,10 @@ export class PlantaoComponent extends PadraoComponent implements OnInit {
   }
 
 
+  public retorna_total_a_pagar(): number {
+    return parseFloat(this.oferta.valor) + (this.plantao.horaExtra ? parseInt(this.plantao.horaExtra) * parseFloat(this.oferta.valorHoraExtra) : 0) - (this.plantao.desconto ? parseFloat(this.plantao.desconto) : 0)       
+  }
+
   public retorna_status_plantao(index: number): string {
     switch(index){
       case StatusPlantao.NaoIniciado: return "Não inciado";
@@ -91,11 +65,56 @@ export class PlantaoComponent extends PadraoComponent implements OnInit {
     }
   }
 
-  public retorna_total_a_pagar(): number {
-    return parseFloat(this.oferta.valor) + (this.plantao.horaExtra ? parseInt(this.plantao.horaExtra) * parseFloat(this.oferta.valorHoraExtra) : 0) - (this.plantao.desconto ? parseFloat(this.plantao.desconto) : 0)
-    
-    
+  public retorna_status_pagamento(index: number): string {
+    switch(index){
+      case StatusPagamento.Pendente: return "Pendente";
+      case StatusPagamento.Efetuado: return "Efetuado";
+    }
   }
 
+  public retorna_metodo_pagamento(index: number): string {
+    switch(index){
+      case FormaPagamento.Pix: return "Pix";
+      case FormaPagamento.Dinheiro: return "Dinheiro";
+      case FormaPagamento.Cartao: return "Cartão";
+      case FormaPagamento.Cheque: return "Cheque";
+    }
+  }
+
+  public retorna_data_inicial_plantao(): string {
+    if(this.plantao.status != StatusPlantao.NaoIniciado){
+      return moment(this.plantao.dataInicial).format('DD/MM/yy')
+    } else {
+      return "-"
+    }
+  }
+
+  public retorna_hora_inicial_plantao(): string {
+    if(this.plantao.status != StatusPlantao.NaoIniciado){
+      return this.retorna_hhmmss_de_yyyymmddhhmmss(this.plantao.dataInicial)
+    } else {
+      return "-"
+    }    
+  }
+
+  public retorna_data_final_plantao(): string {
+    if(this.plantao.status == StatusPlantao.Finalizado){
+      return moment(this.plantao.dataFinal).format('DD/MM/yy')
+    } else {
+      return "-"
+    }
+  }
+
+  public retorna_hora_final_plantao(): string {
+    if(this.plantao.status == StatusPlantao.Finalizado){
+      return this.retorna_hhmmss_de_yyyymmddhhmmss(this.plantao.dataFinal)
+    } else {
+      return "-"
+    }
+  }
+
+  public retorna_datapagamento(): string {
+    return moment(this.plantao.dataPagamento).format('DD/MM/yy HH:mm')
+  }
 
 }

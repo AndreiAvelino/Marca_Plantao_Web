@@ -34,29 +34,24 @@
                 </div>
 
                 <div>
-                    <span style="display: flex; justify-content: center; font-weight: 500; font-size: 20px; margin-bottom: 10px;"> Informacoes do plantao </span>
+                    <span style="display: flex; justify-content: center; font-weight: 500; font-size: 20px; margin-bottom: 10px;"> Informacoes do plantão </span>
 
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Data de inicio: </span> <span> {{ plantao.dataInicial | date: 'dd/MM/yyyy' }} </span>
+                        <span style="font-weight: 500;"> Data de inicio: </span> <span> {{ retorna_data_inicial_plantao() }} </span>
                     </div>
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Hora de inicio: </span> <span> {{ plantao.dataInicial | date: 'HH:mm' }} </span>
+                        <span style="font-weight: 500;"> Hora de inicio: </span> <span> {{ retorna_hora_inicial_plantao() }} </span>
+    
                     </div>
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Data de fim: </span> <span> {{ plantao.dataFinal | date: 'dd/MM/yyyy' }} </span>
+                        <span style="font-weight: 500;"> Data de fim: </span> <span> {{ retorna_data_final_plantao()  }} </span>
                     </div>
-
+    
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="font-weight: 500;"> Hora de fim: </span> <span> {{ plantao.dataFinal | date: 'HH:mm' }} </span>
-                    </div>     
+                        <span style="font-weight: 500;"> Hora de fim: </span> <span> {{ retorna_hora_final_plantao() }} </span>
+                    </div>  
                 </div>
             </div>
-
-
-
-
-            
-
 
         </mat-card-content>
     </mat-tab>
@@ -100,13 +95,13 @@
             
             <div style="width: 100%">
                 <div style="display: flex; justify-content: space-between;">
-                    <span style="font-weight: 500;"> Situacao: </span> <span> Pago </span>
+                    <span style="font-weight: 500;"> Situacao: </span> <span> {{ retorna_status_pagamento(plantao.statusPagamento) }} </span>
                 </div>
                 <div style="display: flex; justify-content: space-between;">
-                    <span style="font-weight: 500;"> Forma de pagamento: </span> <span> PIX </span>
+                    <span style="font-weight: 500;"> Forma de pagamento: </span> <span> {{plantao.status == 2 ? retorna_metodo_pagamento(oferta.pagamento) : '-'}} </span>
                 </div>
                 <div style="display: flex; justify-content: space-between;">
-                    <span style="font-weight: 500;"> Data do pagamento: </span> <span> 10/10/2023 </span>
+                    <span style="font-weight: 500;"> Data do pagamento: </span> <span> {{plantao.dataPagamento ? retorna_datapagamento() : '-'}} </span>
                 </div>
                 <div style="display: flex; justify-content: space-between;">
                     <span style="font-weight: 500;"> Comprovante: </span> <span> N/A </span>

@@ -70,7 +70,8 @@ export class CadastroComponent extends PadraoComponent implements OnInit, AfterV
     this.logando = true;
 
     await this.loginService.registrar_usuario(this.formulario.value).toPromise()
-      .then((e) => console.log(e))
+      .then(x => this.inserir_cookie("usuario", JSON.stringify(x.data)))
+      .then(() => this.redirecionar())
       .catch((e: HttpErrorResponse) => this.mensagem_erro(e.message))
       .finally(() => this.logando = false)
   }

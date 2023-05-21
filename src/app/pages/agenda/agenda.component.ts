@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CalendarOptions, EventClickArg, EventSourceInput } from '@fullcalendar/core';
+import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
-import { Corevento, TipoEvento } from 'src/enum/enum';
+import { Corevento, StatusPlantao, TipoEvento } from 'src/enum/enum';
 import { Response } from 'src/models/response';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -18,17 +18,17 @@ import { MatDialogConfig } from '@angular/material/dialog';
 import { AgendaService } from 'src/services/agenda.service';
 import { OfertaService } from 'src/services/oferta.service';
 import { PlantaoService } from 'src/services/plantao.service';
-import { EventImpl } from '@fullcalendar/core/internal';
-import { GerarPlantao, Plantao } from 'src/models/entidades/plantao';
+import { EncerrarPlantao, GerarPlantao, Plantao } from 'src/models/entidades/plantao';
 import { Oferta } from 'src/models/entidades/oferta';
 import { Evento } from 'src/models/entidades/evento';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ResponseLoginAdministrador, ResponseLoginProfissional } from 'src/models/entidades/usuario';
+import { ResponseLoginAdministrador } from 'src/models/entidades/usuario';
 import { OpcoesOferta, OpcoesOfertaComponent } from './botoes-opcoes-eventos/opcoes-oferta/opcoes-oferta.component';
 import { OpcoesPlantao, OpcoesPlantaoComponent } from './botoes-opcoes-eventos/opcoes-plantao/opcoes-plantao.component';
 import { switchMap } from 'rxjs/operators';
 import { ConfirmarComponent } from 'src/shared/confirmar/confirmar.component';
 import * as moment from 'moment';
+import { InicializarPlantaoComponent } from './modals-plantao/inicializar-plantao/inicializar-plantao.component';
 
 interface EventSource {
   id: string
@@ -83,11 +83,9 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     if(this.isResponseLoginProfissional(this.usuarioLogado)){
       await this.agendaService.get_all_evento_por_profissional(this.usuarioLogado.id).toPromise()
         .then(x => this.eventos = this.gerarEventosSource_Agenda_Profissional(x.data))
-    }
-    
+        .then(() => console.log(this.eventos))
+    }    
   }
-
-
 
   private gerarEventosSource_Agenda_Clinica(eventos: Evento[]): EventSource[] {
     return [
@@ -98,8 +96,18 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
       },
       {
         id: '2',
-        events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao)),
-        color: Corevento.Plantao
+        events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.NaoIniciado)),
+        color: Corevento.Plantao_NaoIniciado
+      },
+      {
+        id: '3',
+        events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.Andamento)),
+        color: Corevento.Plantao_Andamento
+      },      
+      {
+        id: '4',
+        events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.Finalizado)),
+        color: Corevento.Plantao_Finalizado
       }
     ]
   }
@@ -108,8 +116,18 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     return [
       {
         id: '2',
-        events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao)),
-        color: Corevento.Plantao
+        events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.NaoIniciado)),
+        color: Corevento.Plantao_NaoIniciado
+      },
+      {
+        id: '3',
+        events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.Andamento)),
+        color: Corevento.Plantao_Andamento
+      },      
+      {
+        id: '4',
+        events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.Finalizado)),
+        color: Corevento.Plantao_Finalizado
       }
     ]
   }
@@ -172,6 +190,8 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
     this.calendario.getApi().getEventSourceById('1').refetch()
     this.calendario.getApi().getEventSourceById('2').refetch()
+    this.calendario.getApi().getEventSourceById('3').refetch()
+    this.calendario.getApi().getEventSourceById('4').refetch()
   }
 
   private remover_evento(evento): void {
@@ -268,9 +288,13 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
 
   private abrirBottonSheetPlantao(e: EventClickArg): void {
-    this._bottomSheet.open(OpcoesPlantaoComponent).afterDismissed().toPromise()
+    this._bottomSheet.open(OpcoesPlantaoComponent, {
+      data: e.event.extendedProps.status
+    }).afterDismissed().toPromise()
     .then(r => {
       switch(r){
+        case OpcoesPlantao.INICIAR:    this.iniciar_plantao(e)
+                                       break;
         case OpcoesPlantao.VISUALIZAR: this.visualizar_plantao(e.event.extendedProps.id)
                                        break;
         case OpcoesPlantao.FINALIZAR:  this.finalizar_plantao(e.event.extendedProps.id)
@@ -282,6 +306,39 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     })
   }
 
+  private async iniciar_plantao(e: EventClickArg): Promise<void> {
+
+    let plantao: Plantao
+    let horarioInicial: string
+
+    // if(0 > moment().diff(e.event.extendedProps.dataInicial, 'minutes')){
+    //   this.mensagem_erro("O plantão só poderá ser iniciado no horário correto!")
+    //   return;
+    // }
+
+    await this.get_plantao(e.event.extendedProps.id)
+      .then(x => plantao = x.data)
+
+    await this.dialog.open(InicializarPlantaoComponent, {data: e.event.extendedProps.dataInicial}).afterClosed().toPromise()
+      .then(x => horarioInicial = x)
+ 
+    if(horarioInicial){
+      await this.put_plantao({
+        ...plantao,
+        status: 1,
+        comprovante: "",
+        desconto: "",
+        dataInicial: horarioInicial
+      })
+      .then(() => this.mensagem_sucesso('Plantão Iniciado!'))
+      .then(() => this.get_all_evento())
+      .catch((e: HttpErrorResponse) => this.mensagem_erro(e.message))
+
+      await this.atualizar_eventos()
+    }
+
+  }
+
   private async visualizar_plantao(id: string): Promise<void>{    
     await this.get_plantao(id)
       .then(x => this.modal_plantao(x.data))
@@ -290,6 +347,7 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   private async finalizar_plantao(id: string): Promise<void> {
 
     let oferta: Oferta;
+    let plantao: Plantao;
     let resp: boolean = true;
 
     await this.get_oferta_by_plantao(id)
@@ -298,13 +356,13 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
         this.mensagem_erro(e.message)
         return;
       })
-    
 
-    // VALIDA SE O PLANTAO TEM A DATA PARA SER INICIADO
-    if(oferta.dataInicial > this.gerar_data_hora_atual()){
-      this.mensagem_erro("Não é possível finalizar um plantão que não foi iniciado!")
-      return;
-    }
+    await this.get_plantao(id)
+      .then(x => plantao = x.data)
+      .catch((e: HttpErrorResponse) => {
+        this.mensagem_erro(e.message)
+        return;
+      })
 
     // VALIDA SE O PLANTAO TEM A DATA PARA SER FINALIZADO
     if(oferta.dataFinal > this.gerar_data_hora_atual()){
@@ -322,10 +380,21 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
         width: '40%',
       }
   
-      this.dialog.open(FinalizarPlantaoComponent, {
+      await this.dialog.open(FinalizarPlantaoComponent, {
         ...layout,
-        data: oferta
+        data: {
+          oferta: oferta,
+          plantao: plantao
+        }
       })
+      .afterClosed()
+      .toPromise()
+        .then((x: EncerrarPlantao) => this.encerrar_plantao(x))
+        .then(x => this.get_all_evento())
+        .then(() => this.mensagem_sucesso("Plantão finalizado com sucesso"))
+        .catch(() => this.mensagem_erro("Ocorreu um erro ao tentar encerrar o plantao"))
+
+      this.atualizar_eventos();
     }
   }
 
@@ -340,11 +409,27 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     }
   }
 
-  public onChangeCheckBoxPlantao(event: MatCheckboxChange): void {
+  public onChangeCheckBoxPlantaoNaoIniciado(event: MatCheckboxChange): void {
     if(event.checked){
       this.calendario.getApi().addEventSource(this.eventos.find(x => x.id == '2'))
     } else {
       this.calendario.getApi().getEventSourceById('2').remove()
+    }
+  }
+
+  public onChangeCheckBoxPlantaoAndamento(event: MatCheckboxChange): void {
+    if(event.checked){
+      this.calendario.getApi().addEventSource(this.eventos.find(x => x.id == '3'))
+    } else {
+      this.calendario.getApi().getEventSourceById('3').remove()
+    }
+  }
+
+  public onChangeCheckBoxPlantaoFinalizado(event: MatCheckboxChange): void {
+    if(event.checked){
+      this.calendario.getApi().addEventSource(this.eventos.find(x => x.id == '4'))
+    } else {
+      this.calendario.getApi().getEventSourceById('4').remove()
     }
   }
   //#endregion
@@ -370,6 +455,12 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   //#region METODOS DE CRUD DE OFERTA
   private async criar_oferta(e: DateClickArg): Promise<void> {
+
+    if(moment(e.dateStr).format("yyyy-MM-DD") < this.gerar_data_hora_atual("yyyy-MM-DD")){
+      this.mensagem_erro("Não é possível criar ofetas para datas anteriores")
+      return;
+    }
+
     let oferta = {
       dataInicial: e.dateStr,
       clinicaId: (this.usuarioLogado as ResponseLoginAdministrador).clinicaId
@@ -444,6 +535,10 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   private delete_plantao(idPlantao: string): Promise<any>{
     return this.plantaoService.delete(idPlantao).toPromise();
+  }
+
+  private encerrar_plantao(encerrar: EncerrarPlantao): Promise<any> {
+    return this.plantaoService.encerrar(encerrar).toPromise();
   }
   //#endregion
 

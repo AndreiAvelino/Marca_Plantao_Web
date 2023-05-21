@@ -36,7 +36,8 @@ export enum StatusPlantao {
 }
 
 export enum StatusPagamento {
-    Pendente = 'Pendente'
+    Pendente = 0,
+    Efetuado = 1
 }
 
 export enum FormaPagamento {
@@ -48,7 +49,9 @@ export enum FormaPagamento {
 
 export enum Corevento {
     Oferta = '#00BFFF',
-    Plantao = '#556B2F'
+    Plantao_NaoIniciado = '#556B2F',
+    Plantao_Andamento = '#92bb4c',
+    Plantao_Finalizado = '#df2424'
 }
 
 export enum Rotas {

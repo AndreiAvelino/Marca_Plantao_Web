@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 export enum OpcoesPlantao {
+  INICIAR,
   VISUALIZAR,
   FINALIZAR,
   CANCELAR
@@ -14,9 +15,20 @@ export enum OpcoesPlantao {
 })
 export class OpcoesPlantaoComponent implements OnInit {
 
-  constructor(private _bottomSheetRef: MatBottomSheetRef<OpcoesPlantaoComponent>) { }
+  public status: number;
+
+  constructor(private _bottomSheetRef: MatBottomSheetRef<OpcoesPlantaoComponent>,
+              @Inject(MAT_BOTTOM_SHEET_DATA) public data: number) {
+
+    this.status = data;
+
+  }
 
   ngOnInit(): void {
+  }
+
+  public onClickIniciar(): void {
+    this._bottomSheetRef.dismiss(OpcoesPlantao.INICIAR)
   }
 
   public onClickVisualizar(): void {

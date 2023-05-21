@@ -104,12 +104,20 @@ export class ConfigurarOfertaComponent extends PadraoComponent implements OnInit
     })
 
     this.formulario.controls.horarioInicial.valueChanges.subscribe(x => {
+      if((this.formulario.value.dataInicial == this.gerar_data_hora_atual("yyyy-MM-DD")) && (x < this.gerar_hora_atual(1))){
+        this.formulario.patchValue({
+          horarioInicial: this.gerar_hora_atual(1)
+        })
+      }
+
       switch(this.formulario.value.turno){
         case Turno.MEIO:     this.muda_data_hora_final(12);
                              break;
         case Turno.COMPLETO: this.muda_data_hora_final(24);
                              break;
       }
+
+
     })
 
   }

@@ -14,4 +14,5 @@ export interface Tabela {
     BotaoAcoes?: boolean;
     Filtro: boolean;
     Titulo?: String;
+    Margem?: string;
 }

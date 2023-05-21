@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { Rotas } from 'src/enum/enum';
+import { Profissional } from 'src/models/entidades/profissional';
+import { ProfissionalService } from 'src/services/profissional.service';
 
 @Component({
   selector: 'menu-usuario',
@@ -13,13 +15,15 @@ export class MenuUsuarioComponent extends PadraoComponent implements OnInit {
 
   public fotoPerfil: String = "";
 
+
   constructor(
+    private profissionalService: ProfissionalService,
     private _router: Router
   ){
     super();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.RecuperarFoto();
   }
 
@@ -40,7 +44,5 @@ export class MenuUsuarioComponent extends PadraoComponent implements OnInit {
     //     }
     //   })
   }
-
-
  
 }

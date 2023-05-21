@@ -1,62 +1,80 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Rotas, StatusPlantao, TamanhoColunaTabela } from 'src/enum/enum';
-import { Plantao } from 'src/models/entidades/plantao';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Rotas, StatusPlantao, TipoEvento } from 'src/enum/enum';
+import { Evento } from 'src/models/entidades/evento';
+import { Response } from 'src/models/response';
 import { ColunaTabela, Tabela } from 'src/models/table';
+import { AgendaService } from 'src/services/agenda.service';
+import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 
 @Component({
   selector: 'app-historico-plantao',
   templateUrl: './historico-plantao.component.html',
   styleUrls: ['./historico-plantao.component.css']
 })
-export class HistoricoPlantaoComponent implements OnInit {
+export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit {
 
-  public ListaPlantoes: Array<Plantao> = []
+  public eventos: Evento[]
 
   public Colunas: Array<ColunaTabela> = [
     {
-      Chave: "idOferta",
-      Descricao: "Id da oferta",
-      Tamanho: "10"
-    },
-    {
-      Chave: "Clinica",
+      Chave: "razaoSocial",
       Descricao: "Clínica",
-      Tamanho: "30"
+      Tamanho: "55"
     },
     {
-      Chave: "Valor",
-      Descricao: "Valor",
-      Tamanho: "10"
-    },
-    {
-      Chave: "Profissional",
-      Descricao: "Profissional",
-      Tamanho: "30"
-    },
-    {
-      Chave: "Status",
+      Chave: "status",
       Descricao: "Status",
-      Tamanho: "80"
+      Tamanho: "15"
+    },
+    {
+      Chave: "dataInicial",
+      Descricao: "Data inicial",
+      Tamanho: "15"
+    },
+    {
+      Chave: "dataFinal",
+      Descricao: "Data final",
+      Tamanho: "15"
     }
   ]
 
   public Tabela: Tabela = {
-    Registros: this.ListaPlantoes,
+    Registros: [],
     Colunas: this.Colunas,
-    BotaoAlterar: true,
-    BotaoExcluir: true,
+    BotaoAlterar: false,
+    BotaoExcluir: false,
     BotaoLinha: false,
     BotaoAcoes: true,
     Filtro: false,
-    Titulo: "Historico de plantões"
+    Titulo: "Historico de plantões",
+    Margem: "10px"
   }
   
   constructor(
-    private router: Router
-  ) { }
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    super();
+  }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.Tabela.Registros = this.route.snapshot.data.eventos.filter(x => x.tipo == TipoEvento.Plantao).map(x => {
+      return {
+        ...x,
+        dataInicial: this.retorna_legivel_de_yyyymmddhhmmss(x.dataInicial),
+        dataFinal: this.retorna_legivel_de_yyyymmddhhmmss(x.dataFinal),
+        status: this.retorna_status_plantao(x.status)
+      }
+    })
+  }
+  public retorna_status_plantao(index: number): string {
+    switch(index){
+      case StatusPlantao.NaoIniciado: return "Não inciado";
+      case StatusPlantao.Andamento:   return "Em andamento";
+      case StatusPlantao.Finalizado:  return "Finalizado";
+      case StatusPlantao.Cancelado:   return "Cancelado";
+    }
   }
 
   public VerPlantao(): void {

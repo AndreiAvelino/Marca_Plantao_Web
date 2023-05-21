@@ -13,7 +13,9 @@ import { MetodoPagamento } from 'src/models/entidades/@shared';
 export class OpcoesAgendaComponent implements OnInit {
 
   @Output() emitChangeCheckBoxOferta = new EventEmitter()
-  @Output() emitChangeCheckBoxPlantao = new EventEmitter()
+  @Output() emitChangeCheckBoxPlantaoNaoIniciado = new EventEmitter()
+  @Output() emitChangeCheckBoxPlantaoAndamento = new EventEmitter()
+  @Output() emitChangeCheckBoxPlantaoFinalizado = new EventEmitter()
 
   public CorEvento = Corevento;
 
@@ -31,9 +33,18 @@ export class OpcoesAgendaComponent implements OnInit {
     this.emitChangeCheckBoxOferta.emit(event)
   }
 
-  public onChangeCheckBoxPlantao(event: MatCheckboxChange): void {
-    this.emitChangeCheckBoxPlantao.emit(event)
+  public onChangeCheckBoxPlantaoNaoInciado(event: MatCheckboxChange): void {
+    this.emitChangeCheckBoxPlantaoNaoIniciado.emit(event)
   }
+
+  public onChangeCheckBoxPlantaoAndamento(event: MatCheckboxChange): void {
+    this.emitChangeCheckBoxPlantaoAndamento.emit(event)
+  }
+
+  public onChangeCheckBoxPlantaoFinalizado(event: MatCheckboxChange): void {
+    this.emitChangeCheckBoxPlantaoFinalizado.emit(event)
+  }
+  
   //#endregion
 
   //#region METODOS REFERENTES AOS FILTROS

@@ -56,57 +56,70 @@
       <div class="card-back-content">
         <div class="card-back-content-info" style="height: 100px;">
 
-          <div style="position: relative; margin: 10px;">
-            <div style="color: #56b880; font-weight: 500; font-size: 16px;"> Data </div>
+          <div style="color: #56b880; font-weight: 550; font-size: 18px; margin: 10px;"> Data e hora</div>
 
-            <div style="margin-top: 10px; margin-left: 15px;">
-              <div>Inicio: {{oferta.dataInicial}}</div>
-              <div>Fim: {{oferta.dataInicial}}</div>
+          <div style="position: relative; margin: 20px;">
+                        <div style="margin-top: 10px;">
+              <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 17px; font-weight: 550;">Inicio: </span> <span style="font-size: 15px;">{{retorna_legivel_de_yyyymmddhhmmss(oferta.dataInicial)}}h</span>
+              </div>   
+              <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 17px; font-weight: 550;">Fim: </span> <span style="font-size: 15px;">{{retorna_legivel_de_yyyymmddhhmmss(oferta.dataFinal)}}h</span>
+              </div>
             </div>
           </div>
 
         </div>
 
-        <div class="card-back-content-info" style="height: 100px;">
+        <div class="card-back-content-info" style="height: 120px;">
 
-          <div style="color: #56b880; font-weight: 500; font-size: 16px;"> Valor </div>
+          <div style="color: #56b880; font-weight: 550; font-size: 18px; margin: 10px;"> Valor </div>
 
-          <div>            
-            <p> Valor: {{oferta.valor}} </p>
-            <p> Valor por hora extra: {{oferta.valorHoraExtra}} </p>
+          <div style="position: relative; margin: 20px;">            
+
+            <div style="margin-top: 10px;">
+              <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 17px; font-weight: 550;">Valor: </span> <span style="font-size: 15px;"> R$ {{oferta.valor}} </span>
+              </div>   
+              <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 17px; font-weight: 550;">Valor por hora extra: </span> <span style="font-size: 15px;">R$ {{oferta.valorHoraExtra}}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 17px; font-weight: 550;">Forma de pagamento: </span> <span style="font-size: 15px;">{{retornaMetodoPagamento(oferta.pagamento)}}</span>
+              </div>
+            </div>
+  
           </div>
 
         </div>
 
-        <div class="card-back-content-info" style="height: 100px;">
+        <div class="card-back-content-info" style="min-height: 100px;">
+          <div style="color: #56b880; font-weight: 550; font-size: 18px; margin: 10px;"> Especializações </div>
 
-          <div style="color: #56b880; font-weight: 500; font-size: 16px;"> Forma de pagamento </div>
 
-          <div>
-            {{retornaMetodoPagamento(oferta.pagamento)}}
+          <div style="margin-left: 20px;">
+            <p *ngFor="let especializacao of oferta.especializacoes" style="font-size: 17px;"> {{especializacao.descricao}} </p>
           </div>
 
         </div>
 
-        <div class="card-back-content-info" style="height: 100px;">
+        <div class="card-back-content-info" style="height: 150px;">
 
-          <div style="color: #56b880; font-weight: 500; font-size: 16px;"> Especializacoes </div>
+          <div style="color: #56b880; font-weight: 550; font-size: 18px; margin: 10px;"> Endereço </div>
 
-          <div>
-            <p *ngFor="let especializacao of oferta.especializacoes"> {{especializacao.descricao}} </p>
-          </div>
-
-        </div>
-
-        <div class="card-back-content-info" style="height: 100px;">
-
-          <div style="color: #56b880; font-weight: 500; font-size: 16px;"> Endereco </div>
-
-          <div *ngIf="(clinica$ | async) as clinica">
-            {{clinica.endereco.logradouro}}
-            {{clinica.endereco.bairro}}
-            {{clinica.endereco.cidade}}
-            {{clinica.endereco.cep}}
+          <div *ngIf="(clinica$ | async) as clinica" style="position: relative; margin: 20px;">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="font-size: 17px; font-weight: 550;">Bairro: </span> <span style="font-size: 15px;">{{clinica.endereco.bairro}}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="font-size: 17px; font-weight: 550;">Cidade: </span> <span style="font-size: 15px;">{{clinica.endereco.cidade}}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="font-size: 17px; font-weight: 550;">CEP: </span> <span style="font-size: 15px;"> {{clinica.endereco.cep}} </span>
+            </div>   
+            <div style="display: flex; justify-content: space-between;">
+              <span style="font-size: 17px; font-weight: 550;">Logradouro: </span> <span style="font-size: 15px;"> {{clinica.endereco.logradouro}} </span>
+            </div>  
           </div>
 
         </div>

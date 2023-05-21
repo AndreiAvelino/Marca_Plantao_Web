@@ -32,6 +32,7 @@ import { DataAgendaComponent } from './componentes-agenda/data-agenda/data-agend
 import {MatMenuModule} from '@angular/material/menu';
 import { CalendarioAgendaComponent } from './componentes-agenda/calendario-agenda/calendario-agenda.component';
 import { BotoesOpcoesAgendaComponent } from './componentes-agenda/botoes-opcoes-agenda/botoes-opcoes-agenda.component';
+import { InicializarPlantaoComponent } from './modals-plantao/inicializar-plantao/inicializar-plantao.component';
 
 const materialModules = [
   MatButtonModule,
@@ -63,7 +64,8 @@ const materialModules = [
     OpcoesAgendaComponent,
     DataAgendaComponent,
     CalendarioAgendaComponent,
-    BotoesOpcoesAgendaComponent
+    BotoesOpcoesAgendaComponent,
+    InicializarPlantaoComponent
   ],
   imports: [
     ...materialModules,

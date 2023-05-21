@@ -10,6 +10,7 @@ import { InicioModule } from './inicio/inicio.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AgendaModule } from './agenda/agenda.module';
 import { IndicadoresModule } from './indicadores/indicadores.module';
+import { HistoricoPlantaoResolver } from './plantao/historico-plantao/historico-plantao.resolve';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,9 @@ import { IndicadoresModule } from './indicadores/indicadores.module';
     UsuarioModule,
     AgendaModule,
     IndicadoresModule
+  ],
+  providers: [
+    HistoricoPlantaoResolver
   ]
 })
 export class PagesModule { }

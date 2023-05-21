@@ -17,7 +17,7 @@
         <app-notificacoes></app-notificacoes>
       </div>
       
-      <div> 
+      <div *ngIf="isResponseLoginAdministrador()"> 
           <menu-usuario style="margin-left: auto"></menu-usuario>
       </div>
     </div>

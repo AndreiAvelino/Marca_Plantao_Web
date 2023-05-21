@@ -1,7 +1,7 @@
 import {  Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
-import { Rotas } from 'src/enum/enum';
+import { Rotas, TipoEvento } from 'src/enum/enum';
 import { Oferta } from 'src/models/entidades/oferta';
 import { ColunaTabela, Tabela } from 'src/models/table';
 import { AgendaService } from 'src/services/agenda.service';
@@ -18,48 +18,44 @@ export class ListagemOfertaComponent extends PadraoComponent implements OnInit {
 
   private Colunas: Array<ColunaTabela> = [
     {
-      Chave: "Descricao",
-      Descricao: "Descrição",
-      Tamanho: "50"
+      Chave: "razaoSocial",
+      Descricao: "Clínica",
+      Tamanho: "70"
     },
     {
-      Chave: "DataPlantao",
+      Chave: "dataInicial",
       Descricao: "Data do plantão",
-      Tamanho: "15"
-    },
-    {
-      Chave: "Valor",
-      Descricao: "Valor",
-      Tamanho: "10"
-    },
+      Tamanho: "30"
+    }
   ]
 
 
   public Tabela: Tabela = {
     Registros: this.ofertas,
     Colunas: this.Colunas,
-    BotaoAlterar: true,
-    BotaoExcluir: true,
+    BotaoAlterar: false,
+    BotaoExcluir: false,
     BotaoLinha: false,
+    BotaoAcoes: true,
     Filtro: false,
-    Titulo: "Lista de ofertas"
+    Titulo: "Lista de ofertas",
+    Margem: "10px"
   }
 
   constructor(
     private router: Router,
-    private agendaService: AgendaService,
-    private ofertasService: OfertaService
+    private route: ActivatedRoute
   ) {
     super();
   }
 
   async ngOnInit(): Promise<void> {
-    if(this.isResponseLoginProfissional(this.usuarioLogado)){
-      await this.ofertasService.obterOfertasParaProfissional(this.usuarioLogado.id).toPromise()
-        .then(x => console.log(x))
-    }
-
-
+    this.Tabela.Registros = this.route.snapshot.data.eventos.filter(x => x.tipo == TipoEvento.Oferta).map(x => {
+      return {
+        ...x,
+        dataInicial: this.retorna_legivel_de_yyyymmddhhmmss(x.dataInicial),
+      }
+    })
   }
 
   public VerOferta(): void {

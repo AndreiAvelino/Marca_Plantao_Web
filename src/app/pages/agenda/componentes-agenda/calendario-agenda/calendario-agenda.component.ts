@@ -3,7 +3,7 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
-import { Corevento, TipoEvento } from 'src/enum/enum';
+import { Corevento, StatusPlantao, TipoEvento } from 'src/enum/enum';
 import { Evento } from 'src/models/entidades/evento';
 
 interface EventSource {
@@ -81,8 +81,18 @@ export class CalendarioAgendaComponent implements OnInit {
     },
     {
       id: '2',
-      events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao)),
-      color: Corevento.Plantao
+      events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.NaoIniciado)),
+      color: Corevento.Plantao_NaoIniciado
+    },
+    {
+      id: '3',
+      events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.Andamento)),
+      color: Corevento.Plantao_Andamento
+    },
+    {
+      id: '4',
+      events: this.gerarEvents_Agenda(eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.Finalizado)),
+      color: Corevento.Plantao_Finalizado
     }
   ]
 }
