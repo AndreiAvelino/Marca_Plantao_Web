@@ -1,0 +1,65 @@
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0">
+            <mat-expansion-panel-header>                        
+                <mat-panel-title> <span style="font-weight: 500;">Categorias</span> </mat-panel-title>
+            </mat-expansion-panel-header>
+
+
+            <div style="margin-left: 10px;">
+                <mat-checkbox #checkOferta
+                              [checked]="filtros_layout_profissional.filtrar.oferta"
+                              class="oferta"
+                              [style.--hoverColor]="CorEvento.Oferta">
+
+                    <span>Ofertas</span>
+
+                </mat-checkbox>
+
+                <br>
+
+                <mat-checkbox #checkPlantaoNaoIniciado
+                              [checked]="filtros_layout_profissional.filtrar.plantao_naoIniciado"
+                              class="plantao"
+                              [style.--hoverColor]="CorEvento.Plantao_NaoIniciado">
+
+                    <span>Plantões à iniciar</span>
+
+                </mat-checkbox>
+
+                <br>
+
+                <mat-checkbox #checkPlantaoAndamento
+                              [checked]="filtros_layout_profissional.filtrar.plantao_andamento"
+                              class="plantao"
+                              [style.--hoverColor]="CorEvento.Plantao_Andamento">
+
+                    <span>Plantões em andamento</span>
+
+                </mat-checkbox>
+
+                <br>
+
+                <mat-checkbox #checkPlantaoFinalizado
+                              [checked]="filtros_layout_profissional.filtrar.plantao_finalizado"
+                              class="plantao"                               
+                              [style.--hoverColor]="CorEvento.Plantao_Finalizado">
+
+                    <span>Plantões finalizados</span>
+
+                </mat-checkbox>
+            </div>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+    
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0">
+         <mat-expansion-panel-header>
+           <mat-panel-title> <span style="font-weight: 500;">Filtros</span> </mat-panel-title>
+         </mat-expansion-panel-header>
+       </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <button (click)="fechar()" style="width: 100%; height: 35px; background-color: #65c368; color: white; border-radius: 5px; border: #65c368 solid 1px;"> Concluir </button>
+

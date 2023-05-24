@@ -13,6 +13,7 @@ import { AvaliarPlantaoComponent } from './plantao/avaliar-plantao/avaliar-plant
 import { HistoricoPlantaoComponent } from './plantao/historico-plantao/historico-plantao.component';
 import { InfoPlantaoComponent } from './plantao/info-plantao/info-plantao.component';
 import { HistoricoPlantaoResolver } from './plantao/historico-plantao/historico-plantao.resolve';
+import { InfoOfertaComponent } from './oferta/info-oferta/info-oferta.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
       {
         path: 'infoplantao',
         component: InfoPlantaoComponent,
+      },
+      {
+        path: 'infooferta',
+        component: InfoOfertaComponent,
       },
       {
         path: 'configurarclinica',

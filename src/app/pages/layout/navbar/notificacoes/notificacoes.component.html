@@ -1,9 +1,9 @@
-<button mat-icon-button [matMenuTriggerFor]="menu" matBadge="3" matBadgeColor="warn">
+<button [disabled]="[].length == 0" mat-icon-button [matMenuTriggerFor]="menu" matBadgeColor="warn">
     <mat-icon> notifications </mat-icon>
 </button>
 
 <mat-menu #menu="matMenu">
-    <button *ngFor="let notificacao of ListaNotificacoes" mat-menu-item (click)="RealizarAcao(notificacao)">
+    <button *ngFor="let notificacao of []" mat-menu-item (click)="RealizarAcao(notificacao)">
 
         <mat-icon *ngIf="notificacao.Tipo == 0" style="color: yellow;">warning</mat-icon>
         <mat-icon *ngIf="notificacao.Tipo == 1" style="color: green">notifications_none</mat-icon>

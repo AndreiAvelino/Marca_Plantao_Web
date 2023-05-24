@@ -1,47 +1,70 @@
-<mat-card style="margin: 30px; flex-grow: 1;">
+<div style="display: flex; align-items: center; font-size: 17px; margin-top: 50px; margin: 15px; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;" class="card" (click)="voltar()">
+    <mat-icon>arrow_back_ios</mat-icon> <span style="font-size: 19px; font-weight: 550;"> Voltar </span>
+</div>
 
-    <mat-card-title>Informações do plantão</mat-card-title>
-
-    <hr>
-
-    <mat-card-content>
-        <br/>
-        <p style="font-size: 17px"> <span style="font-weight: 500;"> Profissional: </span> José Augusto Gomes da Silva </p> 
-        <p style="font-size: 17px"> <span style="font-weight: 500;"> Especialidade: </span>Cardiologista </p> 
-        <p style="font-size: 17px"> <span style="font-weight: 500;"> Valor: </span> Cardiologista </p> 
-        <p style="font-size: 17px"> <span style="font-weight: 500;"> Forma de pagamento: </span> Cardiologista </p> 
-        <p style="font-size: 17px"> <span style="font-weight: 500;"> Status do plantão: </span> Cardiologista </p> 
-    </mat-card-content>
-
-</mat-card>
-
-<mat-card style="margin: 30px;">
-
-    <div *ngIf="plantao.avaliacaoProfissional" style="display: flex">
-        <span style="margin-top: 5px; font-weight: 500; font-size: 20px;"> Avaliação da clínica para o profissional </span> 
-        <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.AvaliacaoProfissional.Nota"></input-avaliacao>
+<div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Status: </span> <span> {{retorna_status_plantao(plantao.status)}} </span> 
     </div>
+</div>
 
-    <div *ngIf="!plantao.avaliacaoProfissional" style="display: flex; justify-content: space-between;">
-        <span style="margin-top: 5px; font-weight: 500; font-size: 20px;"> Avaliação da clínica para o profissional </span> 
-        <button mat-raised-button color="primary" (click)="AvaliarProfissional()">Realizar avaliação</button>
+<div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Clinica: </span> <span> {{clinica.razaoSocial}} </span> 
     </div>
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Data de inicio: </span> <span> {{plantao.dataInicial | date: 'dd/MM/yyyy HH:mm'}} </span>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Data de fim: </span> <span> {{retorna_data_final_plantao()}} </span>
+    </div> 
+</div>
 
-    <hr>
-    <div *ngIf="plantao.avaliacaoProfissional">
-        <p> Comentários: </p>
-        <p> "{{plantao.avaliacaoProfissional.descricao}}" </p>
+<div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Cidade: </span> <span> {{clinica.endereco.cidade}} </span> 
     </div>
-</mat-card>
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Bairro: </span> <span> {{clinica.endereco.bairro}} </span> 
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Logradouro: </span> <span> {{clinica.endereco.logradouro}} </span> 
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> CEP: </span> <span> {{clinica.endereco.cep}} </span> 
+    </div>
+</div>
 
-<mat-card style="margin: 30px;">
-    <div style="display: flex">
-        <span style="margin-top: 5px; font-weight: 500; font-size: 20px;"> Avaliação do profissional para a clínica </span> 
-        <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.avaliacaoClinica.nota"></input-avaliacao>
+
+<div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Valor ofertado  </span> <span> R$ {{oferta.valor}} </span> 
     </div>
-    <hr>
-    <div *ngIf="plantao.avaliacaoClinica">
-        <p> Comentários: </p>
-        <p> "{{plantao.avaliacaoClinica.descricao}}" </p>
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Valor por hora extra: </span> <span> R$ {{oferta.valorHoraExtra}} </span> 
     </div>
-</mat-card>
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Hora extra realizada: </span> <span> {{plantao.horaExtra ? plantao.horaExtra + ' horas' : '-'}} </span> 
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Descontos: </span> <span style="color: red">  {{plantao.desconto ? 'R$ ' + plantao.desconto : '-' }} </span>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Total: </span> <span style="color: blue"> R$ {{retorna_total_a_pagar()}} </span>
+    </div>
+</div>
+
+<div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Situacao: </span> <span> {{retorna_status_plantao(plantao.statusPagamento)}} </span>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Forma de pagamento: </span> <span> {{retorna_metodo_pagamento(oferta.pagamento)}} </span>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+        <span style="font-weight: 500;"> Data do pagamento: </span> <span> {{plantao.dataPagamento | date: 'dd/MM/yyyy HH:mm'}} </span>
+    </div>
+</div>
+
+
+

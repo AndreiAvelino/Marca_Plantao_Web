@@ -4,7 +4,8 @@
         <data-agenda [calendario]="calendario"
                      layout="administrador"></data-agenda>
 
-        <opcoes-agenda (emitChangeCheckBoxOferta)="onChangeCheckBoxOferta($event)"
+        <opcoes-agenda [modovisualizacao]="2"
+                       (emitChangeCheckBoxOferta)="onChangeCheckBoxOferta($event)"
                        (emitChangeCheckBoxPlantaoNaoIniciado)="onChangeCheckBoxPlantaoNaoIniciado($event)"
                        (emitChangeCheckBoxPlantaoAndamento)="onChangeCheckBoxPlantaoAndamento($event)"
                        (emitChangeCheckBoxPlantaoFinalizado)="onChangeCheckBoxPlantaoFinalizado($event)">            
@@ -23,7 +24,7 @@
                  layout="profissional"></data-agenda>
 
     <full-calendar *ngIf="eventos.length > 0" #calendario [options]="calendarOptions"></full-calendar>
-    <botoes-opcoes-agenda></botoes-opcoes-agenda>
+    <botoes-opcoes-agenda (emitClickButtonFilter)="onClickButtonFilter()"></botoes-opcoes-agenda>
     
 </div>
 

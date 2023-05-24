@@ -60,13 +60,14 @@ export enum Rotas {
     ConfigurarOferta = '/configuraroferta',
     ConfigurarClinica = '/configurarclinica',
     HistoricoPlantao = '/historicoplantao',
-    AvaliacaoPlantao = '/avaliacaoplantao',
-    InfoPlantao = '/infoplantao',
+    AvaliacaoPlantao = '/avaliacaoplantao',    
     Login = '/login',
     Inicio = '/inicio',
     Agenda = '/agenda',
     Indicadores = '/indicadores',
-    Cadastro = '/cadastro'
+    Cadastro = '/cadastro',
+    InfoOferta = '/infooferta',
+    InfoPlantao = '/infoplantao'
 }
 
 export enum TipoNotificacao {

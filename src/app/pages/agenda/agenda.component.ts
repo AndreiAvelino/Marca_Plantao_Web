@@ -29,6 +29,8 @@ import { switchMap } from 'rxjs/operators';
 import { ConfirmarComponent } from 'src/shared/confirmar/confirmar.component';
 import * as moment from 'moment';
 import { InicializarPlantaoComponent } from './modals-plantao/inicializar-plantao/inicializar-plantao.component';
+import { OpcoesAgendaComponent } from './componentes-agenda/opcoes-agenda/opcoes-agenda.component';
+import { OpcoesAgendaModalComponent } from './componentes-agenda/opcoes-agenda-modal/opcoes-agenda-modal.component';
 
 interface EventSource {
   id: string
@@ -58,6 +60,15 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   public eventos: EventSource[] = [];
 
+  public filtros_layout_profissional = {
+    filtrar: {
+      oferta: true,
+      plantao_naoIniciado: true,
+      plantao_andamento: true,
+      plantao_finalizado: true
+    }
+  }
+
   constructor(
     private _bottomSheet: MatBottomSheet,
     private agendaService: AgendaService,
@@ -83,7 +94,6 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     if(this.isResponseLoginProfissional(this.usuarioLogado)){
       await this.agendaService.get_all_evento_por_profissional(this.usuarioLogado.id).toPromise()
         .then(x => this.eventos = this.gerarEventosSource_Agenda_Profissional(x.data))
-        .then(() => console.log(this.eventos))
     }    
   }
 
@@ -542,6 +552,57 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
   //#endregion
 
+  public async onClickButtonFilter(): Promise<void> {
+    await this.dialog.open(OpcoesAgendaModalComponent, {
+      data: this.filtros_layout_profissional
+    })
+    .afterClosed()
+    .toPromise()
+      .then(x => {
+        if(x){
+
+          if(x.oferta != this.filtros_layout_profissional.filtrar.oferta){
+            if(x.oferta){
+              this.calendario.getApi().addEventSource(this.eventos.find(x => x.id == '1'))
+            } else {
+              this.calendario.getApi().getEventSourceById('1').remove()
+            }
+          }
+
+          if(x.plantao_naoIniciado != this.filtros_layout_profissional.filtrar.plantao_naoIniciado){
+            if(x.plantao_naoIniciado){
+              this.calendario.getApi().addEventSource(this.eventos.find(x => x.id == '2'))
+            } else {
+              this.calendario.getApi().getEventSourceById('2').remove()
+            } 
+          }
+
+          if(x.plantao_andamento != this.filtros_layout_profissional.filtrar.plantao_andamento){
+            if(x.plantao_andamento){
+              this.calendario.getApi().addEventSource(this.eventos.find(x => x.id == '3'))
+            } else {
+              this.calendario.getApi().getEventSourceById('3').remove()
+            }
+          }
+
+          if(x.plantao_finalizado != this.filtros_layout_profissional.filtrar.plantao_finalizado){
+            if(x.plantao_finalizado){
+              this.calendario.getApi().addEventSource(this.eventos.find(x => x.id == '4'))
+            } else {
+              this.calendario.getApi().getEventSourceById('4').remove()
+            }
+          }
+
+          this.filtros_layout_profissional.filtrar = x
+        }
+      })
+
+
+
+ 
+
+
+  }
   
 
 }

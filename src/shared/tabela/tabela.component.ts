@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,13 +9,15 @@ import { ColunaTabela, Tabela } from 'src/models/table';
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.scss']
 })
-export class TabelaComponent implements AfterViewInit {
+export class TabelaComponent implements AfterViewInit, OnChanges {
+
 
   @Input("Tabela") Tabela: Tabela;
 
   @Output() EmiteClickBotaoAlterar = new EventEmitter();
   @Output() EmiteClickBotaoExcluir = new EventEmitter();
   @Output() EmiteClickLinha = new EventEmitter();
+  @Output() EmiteClickBotaoAcoes = new EventEmitter();
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -30,7 +32,12 @@ export class TabelaComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.GerarColunasEChaves();
     this.GerarDataSource();
-    console.log(this.Tabela.Registros)
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes?.Tabela?.currentValue?.Registros){
+      this.GerarDataSource(changes.Tabela.currentValue.Registros);
+    }
   }
 
   private GerarColunasEChaves(): void {
@@ -51,8 +58,8 @@ export class TabelaComponent implements AfterViewInit {
     this.Chaves = this.Colunas.map(x => x.Chave)  
   } 
 
-  private GerarDataSource(): void {
-    this.DataSource = new MatTableDataSource(this.Tabela.Registros);
+  private GerarDataSource(Registros?: any[]): void {
+    this.DataSource = new MatTableDataSource(Registros ? Registros : this.Tabela.Registros);
     this.DataSource.paginator = this.paginator;
     this.DataSource.sort = this.sort;
   }
@@ -76,6 +83,10 @@ export class TabelaComponent implements AfterViewInit {
       Chave: "Excluir",
       Descricao: ''
     })
+  }
+
+  public onClickBotaoAcoes(linha: any): void {
+    this.EmiteClickBotaoAcoes.emit(linha);
   }
 
   public EmitirClickAlterar(linha: any): void {

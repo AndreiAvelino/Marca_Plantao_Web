@@ -1,4 +1,69 @@
+<form [formGroup]="formulario">
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0">        
+            <mat-expansion-panel-header>                        
+                <mat-panel-title> <span style="font-weight: 500;">Ordenar por</span> </mat-panel-title>
+            </mat-expansion-panel-header>
 
+            <div>
+                <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button value="1">Mais recentes</mat-radio-button>
+                    <mat-radio-button value="2">Maior valor</mat-radio-button>
+                    <mat-radio-button value="2">Melhor avaliacao</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0">        
+            <mat-expansion-panel-header>                        
+                <mat-panel-title> <span style="font-weight: 500;">Turno</span> </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="turno">
+                <mat-radio-group formControlName="turno">
+                    <mat-radio-button value="12h">12h</mat-radio-button>
+                    <br>
+                    <mat-radio-button value="24h">24h</mat-radio-button>
+                </mat-radio-group>    
+            </div>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0">        
+            <mat-expansion-panel-header>                        
+                <mat-panel-title> <span style="font-weight: 500;">Especialização</span></mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="especializacao">
+                <mat-form-field appearance="fill" style="width: 100%">
+                    <mat-label>Especialização</mat-label>
+                    <mat-select formControlName="especializacoes" multiple>
+                      <mat-option *ngFor="let especializacao of ListaEspecializacao | async" [value]="especializacao.id">
+                        {{especializacao.descricao}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>    
+            </div>  
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-checkbox formControlName="mostrarOfertasCandidatadas">Mostrar ofertas que estou candidatado</mat-checkbox>
+</form>
+
+<button style="width: 100%; height: 35px; background-color: #65c368; color: white; border-radius: 5px; border: #65c368 solid 1px;"> Concluir </button>
+
+
+
+
+
+
+<!-- 
 <div class="botoes">
 
     <span class="titulo">Ordenar por</span>
@@ -56,7 +121,7 @@
         </mat-form-field>    
     </div>        
 
-    <br>
+    <br> -->
 
     <!-- <div style="display: flex">
         <mat-form-field appearance="fill">
@@ -71,7 +136,7 @@
           <input matInput type="date" formControlName="dataFinal">
         </mat-form-field>
       </div>   -->
+<!-- 
 
-    <mat-checkbox formControlName="mostrarOfertasCandidatadas">Mostrar ofertas que estou candidatado</mat-checkbox>
 </form>
-
+ -->

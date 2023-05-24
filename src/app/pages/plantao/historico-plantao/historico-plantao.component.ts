@@ -6,6 +6,12 @@ import { Response } from 'src/models/response';
 import { ColunaTabela, Tabela } from 'src/models/table';
 import { AgendaService } from 'src/services/agenda.service';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { BotoesOpcoesHistoricoPlantaoComponent, OpcoesPlantao } from './botoes-opcoes-historico-plantao/botoes-opcoes-historico-plantao.component';
+import { PlantaoComponent } from '../../agenda/modals-plantao/plantao/plantao.component';
+import { Plantao } from 'src/models/entidades/plantao';
+import { PlantaoService } from 'src/services/plantao.service';
+import { MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-historico-plantao',
@@ -53,7 +59,9 @@ export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit
   
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _bottomSheet: MatBottomSheet,
+    private plantaoService: PlantaoService
   ) {
     super();
   }
@@ -77,8 +85,21 @@ export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit
     }
   }
 
-  public VerPlantao(): void {
-    this.router.navigate([Rotas.InfoPlantao])
+  public async abrir_sheet(linha: any): Promise<void>{
+    await this._bottomSheet.open(BotoesOpcoesHistoricoPlantaoComponent).afterDismissed().toPromise()
+      .then(x => {
+        switch(x){
+          case OpcoesPlantao.VER_PLANTAO: this.ver_plantao(linha);
+                                          break;
+        }
+      })      
   }
+
+  private ver_plantao(linha: any): void{
+    this.router.navigate([Rotas.InfoPlantao],  {
+      queryParams: { id: linha.id},
+    })
+  }
+
 
 }

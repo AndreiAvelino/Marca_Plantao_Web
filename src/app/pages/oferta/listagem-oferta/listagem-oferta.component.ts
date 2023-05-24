@@ -1,11 +1,15 @@
 import {  Component, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { Rotas, TipoEvento } from 'src/enum/enum';
-import { Oferta } from 'src/models/entidades/oferta';
+import { AdicionarRemoverProfissionalOfertaDados, Oferta } from 'src/models/entidades/oferta';
 import { ColunaTabela, Tabela } from 'src/models/table';
-import { AgendaService } from 'src/services/agenda.service';
 import { OfertaService } from 'src/services/oferta.service';
+import { BotoesOpcoesListagemOfertaComponent, OpcoesOferta } from './botoes-opcoes-listagem-oferta/botoes-opcoes-listagem-oferta.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Evento } from 'src/models/entidades/evento';
+
 
 @Component({
   selector: 'app-listagem-oferta',
@@ -44,7 +48,9 @@ export class ListagemOfertaComponent extends PadraoComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _bottomSheet: MatBottomSheet,
+    private ofertaService: OfertaService
   ) {
     super();
   }
@@ -58,8 +64,39 @@ export class ListagemOfertaComponent extends PadraoComponent implements OnInit {
     })
   }
 
-  public VerOferta(): void {
-    this.router.navigate([Rotas.ConfigurarOferta])
+  public async abrir_sheet(linha: any): Promise<void>{
+    await this._bottomSheet.open(BotoesOpcoesListagemOfertaComponent).afterDismissed().toPromise()
+      .then(x => {
+        switch(x) {
+          case OpcoesOferta.VER_OFERTA: this.ver_oferta(linha);
+                                        break;
+          case OpcoesOferta.CANCELAR:   this.cancelar_oferta(linha.id);
+                                        break;
+        }
+      })
   }
 
+  private ver_oferta(linha: any): void{
+    this.router.navigate([Rotas.InfoOferta],  {
+      queryParams: { id: linha.id},
+    })
+  }
+
+
+  private async cancelar_oferta(id: string): Promise<void> {
+    let obj: AdicionarRemoverProfissionalOfertaDados = {
+      profissionalId: this.usuarioLogado.id,
+      ofertaId: id
+    }
+
+    await this.ofertaService.remover_candidato_oferta(obj).toPromise()
+      .then(() => this.toastr.success('Candidatura cancelada'))
+      .then(() => {
+        this.Tabela = {
+          ...this.Tabela,
+          Registros: this.Tabela.Registros.filter((x: Evento) => x.id != id)
+        }
+      })
+      .catch((e: HttpErrorResponse) => this.toastr.error(e.message))
+  }
 }

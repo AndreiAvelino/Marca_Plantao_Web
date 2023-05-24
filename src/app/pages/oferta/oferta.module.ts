@@ -22,6 +22,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSliderModule} from '@angular/material/slider';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { BotoesOpcoesListagemOfertaComponent } from './listagem-oferta/botoes-opcoes-listagem-oferta/botoes-opcoes-listagem-oferta.component';
+import { InfoOfertaComponent } from './info-oferta/info-oferta.component';
 
 const materialModules = [
   MatCardModule,
@@ -35,12 +40,15 @@ const materialModules = [
   MatCheckboxModule,
   MatRadioModule,
   MatSliderModule,
-  CdkAccordionModule
+  CdkAccordionModule,
+  MatBottomSheetModule,
+  MatListModule,
+  MatExpansionModule
 ]
 
 
 @NgModule({
-  declarations: [ListagemOfertaComponent, ConfigurarOfertaComponent, CardOfertaComponent, PesquisarOfertaComponent, BotoesOpcoesOfertaComponent, FiltrarListaOfertaComponent],
+  declarations: [ListagemOfertaComponent, ConfigurarOfertaComponent, CardOfertaComponent, PesquisarOfertaComponent, BotoesOpcoesOfertaComponent, FiltrarListaOfertaComponent, BotoesOpcoesListagemOfertaComponent, InfoOfertaComponent],
   imports: [
     ...materialModules,
     CommonModule,
