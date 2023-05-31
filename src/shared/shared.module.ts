@@ -12,9 +12,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CardComponent } from './card/card.component';
 import { ConfirmarComponent } from './confirmar/confirmar.component';
+import { AvaliacoesPlantaoComponent } from './avaliacoes-plantao/avaliacoes-plantao.component';
 
 @NgModule({
-  declarations: [TabelaComponent, CardComponent, ConfirmarComponent],
+  declarations: [TabelaComponent, CardComponent, ConfirmarComponent, AvaliacoesPlantaoComponent],
   imports: [
     CommonModule,
     MatTableModule,

@@ -29,8 +29,11 @@ export class ModalListaCandidatosOfertaComponent extends PadraoComponent impleme
   ngOnInit(): void {
   }
 
-  public abrirPerfilUsuario(): void {
-    this.dialog.open(PerfilUsuarioComponent)
+  public abrirPerfilUsuario(candidato: Candidato): void {
+    this.dialogRef.close({
+      gerar: false,
+      obj: candidato
+    })
   }
 
   public selecionar_candidato(x: Candidato): void {

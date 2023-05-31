@@ -14,6 +14,7 @@ import { HistoricoPlantaoComponent } from './plantao/historico-plantao/historico
 import { InfoPlantaoComponent } from './plantao/info-plantao/info-plantao.component';
 import { HistoricoPlantaoResolver } from './plantao/historico-plantao/historico-plantao.resolve';
 import { InfoOfertaComponent } from './oferta/info-oferta/info-oferta.component';
+import { PerfilUsuarioComponent } from './usuario/perfil-usuario/perfil-usuario.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
       {
         path: 'pesquisar-oferta',
         component: PesquisarOfertaComponent
+      },
+      {
+        path: 'perfilusuario',
+        component: PerfilUsuarioComponent
       }
     ]
   }

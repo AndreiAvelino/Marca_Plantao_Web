@@ -1,15 +1,21 @@
-<form [formGroup]="formulario">
+<div class="container">
+    <form [formGroup]="formulario">
 
-    <div style="display: flex">
-        <span style="margin-top: 10px; font-weight: 500; font-size: 20px;"> Nota: </span>
-        <input-avaliacao formControlName="Nota" tamanhoEstrela="40px"></input-avaliacao>
-    </div>
+        <div style="display: flex">
+            <span style="margin-top: 10px; font-weight: 500; font-size: 20px;"> Nota: </span>
+            <input-avaliacao formControlName="nota" tamanhoEstrela="40px"></input-avaliacao>
+        </div>
+        
+        <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Descrição</mat-label>
+            <textarea style="min-height: 300px; max-height: 300px;" formControlName="descricao" matInput></textarea>
+        </mat-form-field>
     
-    <mat-form-field appearance="outline" style="width: 100%">
-        <mat-label>Descrição</mat-label>
-        <textarea matInput formControlName="Descricao"></textarea>
-    </mat-form-field>
+    </form>
+    
+    
+</div>
 
-</form>
-
-<button mat-raised-button color="primary" (click)="Avaliar()">Finalizar avaliação!</button>
+<div style="width: 100%; bottom: 20px; display: flex; justify-content: center;">
+    <button style="margin: 10px; width: 90%; background-color: #65c368; color: #ffffff" mat-raised-button (click)="Avaliar()">Finalizar avaliação!</button>
+</div>

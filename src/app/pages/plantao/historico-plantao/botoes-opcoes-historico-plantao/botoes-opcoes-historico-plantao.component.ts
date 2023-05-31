@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { StatusPlantao } from 'src/enum/enum';
 
 export enum OpcoesPlantao {
-  VER_PLANTAO
+  VER_PLANTAO,
+  AVALIAR
 }
 
 @Component({
@@ -12,15 +14,33 @@ export enum OpcoesPlantao {
 })
 export class BotoesOpcoesHistoricoPlantaoComponent implements OnInit {
 
+  public linha: any;
+
   constructor(
-    private _bottomSheetRef: MatBottomSheetRef<BotoesOpcoesHistoricoPlantaoComponent>
-  ) { }
+    private _bottomSheetRef: MatBottomSheetRef<BotoesOpcoesHistoricoPlantaoComponent>,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
+  ) {
+    this.linha = data;
+  }
 
   ngOnInit(): void {
+    
   }
 
   public onClickVerPlantao(): void {
     this._bottomSheetRef.dismiss(OpcoesPlantao.VER_PLANTAO)
+  }
+
+  public onClickAvaliar(): void {
+    this._bottomSheetRef.dismiss(OpcoesPlantao.AVALIAR)
+  }
+
+  public habilitar_avaliar(): boolean {
+    if(this.linha.status == "Finalizado"){
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

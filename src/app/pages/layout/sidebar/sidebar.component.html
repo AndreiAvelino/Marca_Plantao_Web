@@ -12,12 +12,12 @@
           <span style="font-size: 20px; font-weight: 550;"> {{profissional?.nome}} </span>
         </div>
         <div style="margin-bottom: 10px; display: flex; justify-content: space-around;">
-          <button mat-stroked-button color="primary" style="width: 280px">Perfil</button>
+          <button (click)="perfil_usuario()" mat-stroked-button color="primary" style="width: 280px">Perfil</button>
         </div>
       </div>
 
       <div *ngIf="isResponseLoginAdministrador()">
-        <img src="assets/sem-imagem-clinica.png" width="300">
+        <img src="assets/fachada-niteroi-dor2.jpg" width="300">
 
         <div style="margin-top: 10px; display: flex; justify-content: center;">
           <span style="font-size: 20px; font-weight: 550;"> {{clinica.razaoSocial}} </span>

@@ -7,6 +7,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { AvatarModule } from 'ngx-avatar';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedModule } from 'src/shared/shared.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     MatButtonModule,
     AvatarModule,
-    MatIconModule
+    MatIconModule,
+    SharedModule
   ],
   exports: [
     PerfilUsuarioComponent

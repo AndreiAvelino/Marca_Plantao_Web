@@ -1,66 +1,69 @@
+<mat-dialog-content>
 
-<mat-dialog-content class="mat-typography" style="height: 90%">
-    <!-- <div class="image">
-
-        <img  width="450" height="350" style="border-radius: 20px;"/>
-        <h1>Magazine Luiza</h1>
-        <h2>Enfermeira</h2>
+    <div class="content">
+        
+        <div class="cabecalho">
     
-    </div>
-    
-     -->
-
-    <div style="display: grid; grid-template-columns: 30% 70%;">
-    
-        <div>
             <div style="display: flex; justify-content: center;">
-                <ngx-avatar size="170" name="Magazine Luiza" src="/assets/site-magazine-luiza-reprodu-o-facebook.jpg"></ngx-avatar>
+                <ngx-avatar size="150" name="Magazine Luiza" src="/assets/site-magazine-luiza-reprodu-o-facebook.jpg"></ngx-avatar>
             </div>
-
-            <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-                <mat-icon style="color: rgb(236, 236, 93); font-size: 25px">star</mat-icon> <span style="font-size: 20px; font-weight: 500; margin-left: 5px;"> 4,8 </span>
-            </div>
-
-            <div style="align-items: center; padding-left: 15px; margin-top: 20px;">
-                <span style="font-size: 17px; font-weight: 500;">546</span> <span style="font-size: 17px;"> Plantoes realizados </span>
-                <br>
-                <span style="font-size: 17px; font-weight: 500;"> 400 </span> <span style="font-size: 17px;"> Avaliacoes </span>
-            </div>
-
-        </div>
-
-        <div >
-
-            <div style="height: 110px;  margin-top: 20px;">
+    
+            <div>
                 <div>
-                    <span style="font-size: 30px; font-weight: 500;"> Magazine Luiza </span>
-                    <span style="font-size: 22px; color: #9f9f9f; font-weight: 500;"> Varejista </span>
+                    <span class="perfil-nome"> Magazine Luiza </span>
                 </div>
-
-                <div style="margin-top: 10px;">
+                <div class="perfil-data-entrada">
                     <span> Entrou em novembro de 2016 </span>
                 </div>
             </div>
+    
+        </div>
+    
+        <div class="info">
 
+            <div class="card" style="color: #ffffff">
+                <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                    <mat-icon class="estrela">star</mat-icon> <span style="font-size: 20px; font-weight: 500; margin-left: 5px;"> 4,8 </span>
+                </div>
+                
+                <div> 
+                    <span style="font-size: 17px; font-weight: 500;">546</span> <span style="font-size: 17px;"> Plantoes realizados </span>
+                </div>
+
+                <div> 
+                    <span style="font-size: 17px; font-weight: 500;"> 400 </span> <span style="font-size: 17px;"> Avaliacoes </span> 
+                </div>                     
+            </div>
+    
             <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
                 <mat-tab label="Sobre">
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                    <p class="sobre">
+                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                    </p>
                 </mat-tab>
-
+            
                 <mat-tab label="Avaliações">
                     <avaliacao-resumida></avaliacao-resumida>
                     <avaliacao-resumida></avaliacao-resumida>
                     <avaliacao-resumida></avaliacao-resumida>
                 </mat-tab>
-
+            
             </mat-tab-group>
-
+    
         </div>
 
     </div>
 
+    
+
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+
+
+
+
+
+
+<!-- <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Voltar</button>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Escolher</button>
-</mat-dialog-actions>
+</mat-dialog-actions> -->

@@ -132,4 +132,8 @@ export class SidebarComponent extends PadraoComponent implements OnInit, AfterVi
     this._router.navigate([Rotas.Login])
   }
 
+  public perfil_usuario(): void {
+    this._router.navigate([Rotas.PerfilUsuario])
+  }
+
 }

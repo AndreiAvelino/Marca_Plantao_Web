@@ -10,12 +10,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { InfoPlantaoComponent } from './info-plantao/info-plantao.component';
-import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatListModule} from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import { BotoesOpcoesHistoricoPlantaoComponent } from './historico-plantao/botoes-opcoes-historico-plantao/botoes-opcoes-historico-plantao.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 const materialModules = [
   MatCardModule,
@@ -26,7 +27,8 @@ const materialModules = [
   MatButtonModule,
   MatBottomSheetModule,
   MatListModule,
-  MatIconModule
+  MatIconModule,
+  MatTabsModule
 ]
 
 

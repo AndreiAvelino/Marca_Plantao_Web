@@ -60,8 +60,7 @@ export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private _bottomSheet: MatBottomSheet,
-    private plantaoService: PlantaoService
+    private _bottomSheet: MatBottomSheet
   ) {
     super();
   }
@@ -86,10 +85,12 @@ export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit
   }
 
   public async abrir_sheet(linha: any): Promise<void>{
-    await this._bottomSheet.open(BotoesOpcoesHistoricoPlantaoComponent).afterDismissed().toPromise()
+    await this._bottomSheet.open(BotoesOpcoesHistoricoPlantaoComponent, {data: linha}).afterDismissed().toPromise()
       .then(x => {
         switch(x){
           case OpcoesPlantao.VER_PLANTAO: this.ver_plantao(linha);
+                                          break;
+          case OpcoesPlantao.AVALIAR:     this.avaliar_plantao(linha);
                                           break;
         }
       })      
@@ -97,7 +98,13 @@ export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit
 
   private ver_plantao(linha: any): void{
     this.router.navigate([Rotas.InfoPlantao],  {
-      queryParams: { id: linha.id},
+      queryParams: { id: linha.id}
+    })
+  }
+
+  private avaliar_plantao(linha: any): void {
+    this.router.navigate([Rotas.AvaliacaoPlantao],  {
+      queryParams: { id: linha.id}
     })
   }
 

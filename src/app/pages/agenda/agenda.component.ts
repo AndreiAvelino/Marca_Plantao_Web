@@ -31,6 +31,7 @@ import * as moment from 'moment';
 import { InicializarPlantaoComponent } from './modals-plantao/inicializar-plantao/inicializar-plantao.component';
 import { OpcoesAgendaComponent } from './componentes-agenda/opcoes-agenda/opcoes-agenda.component';
 import { OpcoesAgendaModalComponent } from './componentes-agenda/opcoes-agenda-modal/opcoes-agenda-modal.component';
+import { PerfilUsuarioComponent } from '../usuario/perfil-usuario/perfil-usuario.component';
 
 interface EventSource {
   id: string
@@ -247,8 +248,19 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
         if(x.gerar){
           this.criar_plantao(x.obj);
         }
+        if(!x.gerar && x.obj.id){
+          this.ver_perfil_usuario();
+        } 
       })
 
+  }
+
+  private ver_perfil_usuario(): void {
+    let layout = {
+      width: '500px',
+    }
+
+    this.dialog.open(PerfilUsuarioComponent, {...layout})
   }
 
   private async modal_plantao(plantao: Plantao): Promise<void> {
