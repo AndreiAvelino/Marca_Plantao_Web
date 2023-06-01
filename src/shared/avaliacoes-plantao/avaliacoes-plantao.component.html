@@ -1,1 +1,41 @@
-<p>avaliacoes-plantao works!</p>
+<div *ngIf="avaliacoes.avaliacaoClinica[0] || avaliacoes.avaliacaoProfissional[0]">
+    <div *ngIf="layout == 'profissional'" style="display: flex; flex-direction: column; justify-content: space-around; overflow-y: hidden;"> 
+        
+        <avaliacao-individual *ngIf="avaliacoes.avaliacaoClinica[0]"
+                              [descricao]="avaliacoes.avaliacaoClinica[0].descricao" 
+                              [nota]="avaliacoes.avaliacaoClinica[0].nota"
+                              icone="store"
+                              [autor]="AutorClinica"
+                              layout="direita">
+        </avaliacao-individual>    
+    
+        <avaliacao-individual *ngIf="avaliacoes.avaliacaoProfissional[0]"
+                              [descricao]="avaliacoes.avaliacaoProfissional[0].descricao" 
+                              [nota]="avaliacoes.avaliacaoProfissional[0].nota"
+                              icone="person"
+                              [autor]="AutorProfissional"
+                              layout="esquerda">
+        </avaliacao-individual>    
+    
+    </div>
+    
+    <div *ngIf="layout == 'clinica'" style="display: flex; flex-direction: column; justify-content: space-around; overflow-y: hidden;"> 
+            
+        <avaliacao-individual *ngIf="avaliacoes.avaliacaoProfissional[0]"
+                              [descricao]="avaliacoes.avaliacaoProfissional[0].descricao" 
+                              [nota]="avaliacoes.avaliacaoProfissional[0].nota"
+                              icone="person"
+                              [autor]="AutorProfissional"
+                              layout="esquerda">
+        </avaliacao-individual>    
+    
+        <avaliacao-individual *ngIf="avaliacoes.avaliacaoClinica[0]"
+                              [descricao]="avaliacoes.avaliacaoClinica[0].descricao" 
+                              [nota]="avaliacoes.avaliacaoClinica[0].nota"
+                              icone="store"
+                              [autor]="AutorClinica"
+                              layout="direita">
+        </avaliacao-individual>    
+    
+    </div>
+</div>

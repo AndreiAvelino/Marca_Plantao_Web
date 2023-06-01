@@ -13,9 +13,12 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { CardComponent } from './card/card.component';
 import { ConfirmarComponent } from './confirmar/confirmar.component';
 import { AvaliacoesPlantaoComponent } from './avaliacoes-plantao/avaliacoes-plantao.component';
+import { AvaliacaoIndividualComponent } from './avaliacoes-plantao/avaliacao-individual/avaliacao-individual.component';
+import { FormularioModule } from 'src/forms/formulario.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [TabelaComponent, CardComponent, ConfirmarComponent, AvaliacoesPlantaoComponent],
+  declarations: [TabelaComponent, CardComponent, ConfirmarComponent, AvaliacoesPlantaoComponent, AvaliacaoIndividualComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -26,12 +29,16 @@ import { AvaliacoesPlantaoComponent } from './avaliacoes-plantao/avaliacoes-plan
     MatCardModule,
     MatIconModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    FormularioModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     TabelaComponent,
     CardComponent,
-    ConfirmarComponent
+    ConfirmarComponent,
+    AvaliacoesPlantaoComponent
   ]
 })
 export class SharedModule { }

@@ -1,18 +1,11 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Rotas, StatusPlantao, TipoEvento } from 'src/enum/enum';
 import { Evento } from 'src/models/entidades/evento';
-import { Response } from 'src/models/response';
 import { ColunaTabela, Tabela } from 'src/models/table';
-import { AgendaService } from 'src/services/agenda.service';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BotoesOpcoesHistoricoPlantaoComponent, OpcoesPlantao } from './botoes-opcoes-historico-plantao/botoes-opcoes-historico-plantao.component';
-import { PlantaoComponent } from '../../agenda/modals-plantao/plantao/plantao.component';
-import { Plantao } from 'src/models/entidades/plantao';
-import { PlantaoService } from 'src/services/plantao.service';
-import { MatDialogConfig } from '@angular/material/dialog';
-
 @Component({
   selector: 'app-historico-plantao',
   templateUrl: './historico-plantao.component.html',

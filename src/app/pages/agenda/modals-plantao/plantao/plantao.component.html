@@ -116,49 +116,11 @@
 
 
 
-    <mat-tab label="Avaliações">
-        
-
-        <div style="padding: 10px">
-            <mat-accordion  *ngIf="plantao.avaliacaoClinica">
-                <mat-expansion-panel class="mat-elevation-z1">
-                 <mat-expansion-panel-header>
-                   <mat-panel-title style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-weight: 500;">Avaliacao de José Augusto Gomes da Silva</span>
-                    <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.avaliacaoProfissional.nota"></input-avaliacao>
-                   </mat-panel-title>
-                 </mat-expansion-panel-header>
-        
-                 <div *ngIf="plantao.avaliacaoClinica">
-                    <p style="font-style: italic;"> "{{plantao.avaliacaoClinica.descricao}}" </p>
-                </div>        
-    
-               </mat-expansion-panel>
-            </mat-accordion>
-
-            <br>
-    
-            <mat-accordion  *ngIf="plantao.avaliacaoProfissional">
-                <mat-expansion-panel class="mat-elevation-z1">
-                 <mat-expansion-panel-header>
-                   <mat-panel-title style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-weight: 500;">Avalicao de Andrei Avelino (Rede D'Or - Niteroi)</span>
-                    <input-avaliacao [disabled]="true" tamanhoEstrela="30px" [(ngModel)]="plantao.avaliacaoClinica.nota"></input-avaliacao>
-                   </mat-panel-title>
-                 </mat-expansion-panel-header>    
-    
-                 <div *ngIf="plantao.avaliacaoProfissional">
-                    <p style="font-style: italic;"> "{{plantao.avaliacaoProfissional.descricao}}" </p>
-                </div>
-            
-               </mat-expansion-panel>
-            </mat-accordion>
-        </div>
-
-        
-
-       
-
+    <mat-tab label="Avaliações">        
+        <avaliacoes-plantao [idPlantao]="plantao.id"
+                            layout="clinica"
+                            [AutorProfissional]="profissional.nome">            
+        </avaliacoes-plantao>
     </mat-tab>
 </mat-tab-group>
 

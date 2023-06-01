@@ -69,45 +69,10 @@
         </div>
     </mat-tab>
     <mat-tab label="Avaliações">
-
         
-        
-        <div style="display: flex; flex-direction: column; justify-content: space-around; overflow-y: hidden;">
-
-            <form [formGroup]="formulario" *ngIf="formulario"> 
-                
-                <div style="display: grid; grid-template-columns: 75% 25%; align-items:center;">                
-                    <div style="margin: 10px; padding: 10px; background-color: #ffffff; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius: 12px; word-wrap: break-word;">
-                        <input-avaliacao [disabled]="true" formControlName="notaAvaliacaoProfissional" tamanhoEstrela="25x"></input-avaliacao>    
-                        
-                        <p style="font-style: italic;">
-                            "{{formulario.value.descricaoAvaliacaoProfissional}}"
-                        </p>
-                    </div>
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <mat-icon style="width: 70px; font-size: 70px; height: 70px;">person</mat-icon>
-                        <p> Você </p>
-                    </div>
-                </div> 
-                
-
-                <div style="display: grid; grid-template-columns: 25% 75%; align-items:center;">
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <mat-icon style="width: 70px; font-size: 70px; height: 70px;">store</mat-icon>
-                        <p> Cliníca </p>
-                    </div>
-                    <div style="margin: 10px; padding: 10px; background-color: #ffffff; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius: 12px; word-wrap: break-word;">
-                        <input-avaliacao [disabled]="true" formControlName="notaAvaliacaoClinica" tamanhoEstrela="25x"></input-avaliacao>
-                       
-                        <p style="font-style: italic;">
-                            "{{formulario.value.descricaoAvaliacaoClinica}}"
-                        </p>
-                    </div>
-                </div>
-
-               
-            </form>
-        </div>
+        <avaliacoes-plantao [idPlantao]="plantao.id"
+                            layout="profissional">            
+        </avaliacoes-plantao>
 
     </mat-tab>
   </mat-tab-group>

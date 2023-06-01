@@ -65,7 +65,7 @@
                 </mat-form-field>
               </div>  
             </div>
-        
+
             <div style="display: flex; align-items: center;">
               <mp-radio label="Turno:"
                         formControlName="turno" 
@@ -78,33 +78,31 @@
         
           </div>
 
-          <mat-step label="Pagamento" state="chat">
-            <div style="display: flex">
-          
-              <mat-form-field appearance="outline" style="width: 500px">
-                <input matInput type="number" class="example-right-align" formControlName="valor">
-                <span matPrefix>R$&nbsp;</span>
-                <span matSuffix>.00</span>
-              </mat-form-field>
-          
-              <mat-form-field appearance="fill" style="margin-left: 20px; flex-grow: 2; margin-top: 3px;">
-                  <mat-label>Método de pagamento</mat-label>
-                  <mat-select formControlName="pagamento">
-                    <mat-option *ngFor="let metodo of ListaMetodosPagamento" [value]="metodo.Valor">
-                      {{metodo.Descricao}}
-                    </mat-option>
-                  </mat-select>
-              </mat-form-field>
-            
-            </div>
+        </mat-step>
 
-            <mat-form-field appearance="outline" style="width: 500px">
-              <input matInput type="number" class="example-right-align" formControlName="valorHoraExtra">
-              <span matPrefix>R$&nbsp;</span>
-              <span matSuffix>.00</span>
-            </mat-form-field>
-          </mat-step>
+        <mat-step label="Pagamento" state="chat">
+          <mat-form-field appearance="outline" style="width: 500px">
+            <mat-label>Valor</mat-label>
+            <input matInput type="number" class="example-right-align" formControlName="valor">
+            <span matPrefix>R$&nbsp;</span>
+            <span matSuffix>.00</span>
+          </mat-form-field>
 
+          <mat-form-field appearance="outline" style="width: 500px">
+            <mat-label>Valor por hora extra</mat-label>
+            <input matInput type="number" class="example-right-align" formControlName="valorHoraExtra">
+            <span matPrefix>R$&nbsp;</span>
+            <span matSuffix>.00</span>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="width: 500px">
+            <mat-label>Método de pagamento</mat-label>
+            <mat-select formControlName="pagamento">
+              <mat-option *ngFor="let metodo of ListaMetodosPagamento" [value]="metodo.Valor">
+                {{metodo.Descricao}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </mat-step>
       
       </mat-stepper>

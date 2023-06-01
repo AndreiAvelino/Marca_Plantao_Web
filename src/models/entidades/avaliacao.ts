@@ -13,8 +13,8 @@ export interface Avaliacao {
 }
 
 export interface AvaliacaoPlantao {
-    avaliacaoClinica: Avaliacao,
-    avaliacaoProfissional: Avaliacao
+    avaliacaoClinica: Avaliacao[],
+    avaliacaoProfissional: Avaliacao[]
 }
 
 export interface AdicionarAvaliacaoPlantaoProfissional {

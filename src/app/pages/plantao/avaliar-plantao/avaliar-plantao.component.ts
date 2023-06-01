@@ -12,6 +12,8 @@ import { ClinicaService } from 'src/services/clinica.service';
 import { PlantaoService } from 'src/services/plantao.service';
 import { Oferta } from 'src/models/entidades/oferta';
 import { OfertaService } from 'src/services/oferta.service';
+import { Rotas } from 'src/enum/enum';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -29,9 +31,9 @@ export class AvaliarPlantaoComponent extends PadraoComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private avaliarService: AvaliacaoService,
-    private clinicaService: ClinicaService,
     private plantaoService: PlantaoService,
-    private ofertaService: OfertaService
+    private ofertaService: OfertaService,
+    private router: Router
   ) {
     super();
   }
@@ -67,8 +69,9 @@ export class AvaliarPlantaoComponent extends PadraoComponent implements OnInit {
       .then((r) => {
         if(r.success){
           this.mensagem_sucesso('Avaliacao realizada!')
+          this.router.navigate([Rotas.HistoricoPlantao])
         } else {
-          r.errors.forEach(e => this.mensagem_sucesso(e))
+          r.errors.forEach(e => this.mensagem_erro(e))
         }
       })
       .catch((e: HttpErrorResponse) => this.mensagem_erro(e.message))

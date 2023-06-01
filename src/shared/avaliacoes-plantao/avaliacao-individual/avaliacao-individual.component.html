@@ -1,0 +1,32 @@
+<div *ngIf="layout == 'direita'" style="display: grid; grid-template-columns: 25% 75%; align-items:center;">
+    
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <mat-icon style="width: 70px; font-size: 70px; height: 70px;">{{icone}}</mat-icon>
+        <p> {{autor}} </p>
+    </div>
+
+    <div style="margin: 10px; padding: 10px; background-color: #ffffff; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius: 12px; word-wrap: break-word;">
+        <input-avaliacao [disabled]="true" [formControl]="formControlNota" tamanhoEstrela="25x"></input-avaliacao>    
+        
+        <p style="font-style: italic;">
+            "{{descricao}}"
+        </p>
+    </div>
+
+</div>
+
+<div *ngIf="layout == 'esquerda'" style="display: grid; grid-template-columns: 75% 25%; align-items:center;">
+
+    <div style="margin: 10px; padding: 10px; background-color: #ffffff; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius: 12px; word-wrap: break-word;">
+        <input-avaliacao [disabled]="true" [formControl]="formControlNota" tamanhoEstrela="25x"></input-avaliacao>    
+        
+        <p style="font-style: italic;">
+            "{{descricao}}"
+        </p>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <mat-icon style="width: 70px; font-size: 70px; height: 70px;">{{icone}}</mat-icon>
+        <p> {{autor}} </p>
+    </div>
+
+</div>
