@@ -4,7 +4,8 @@ import { Avaliacao } from "./avaliacao"
 export interface Clinica {
     id?: string,
     razaoSocial: string,
-    imagem: string
+    imagem: string,
+    sobre: string,
     endereco?: Endereco,
     avaliacoes: Avaliacao[]
 }

@@ -1,14 +1,14 @@
-<div style="margin: 20px; width: 90%; border: 1px solid #cecece; border-radius: 25px; padding: 10px">
+<div style="padding: 10px; box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;">
     <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-        <span style="font-weight: 550; font-size: 17px"> Nome da clínica </span>
+        <span style="font-weight: 550; font-size: 17px"> {{avaliacao.clinica}} </span>
         <div style="display: flex;">
-            <span style="margin-right: 5px; margin-top: 2px; font-size: 15px; font-weight: 500;"> {{Avaliacao.nota}} </span> 
+            <span style="margin-right: 5px; margin-top: 2px; font-size: 15px; font-weight: 500;"> {{avaliacao.nota}} </span> 
             <mat-icon style="color: yellow">star</mat-icon>
         </div>        
     </div>
     <div>
         <p [ngClass]="{'escondetexto': !verMais}" style="font-style: italic;">
-            "{{Avaliacao.descricao}}"
+            "{{avaliacao.descricao}}"
         </p>
     </div>
     <div *ngIf="!verMais" class="textoescondeaparece" (click)="VerMais()">

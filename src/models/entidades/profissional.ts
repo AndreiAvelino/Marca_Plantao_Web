@@ -12,4 +12,5 @@ export interface Profissional {
     cpf: string;
     especializacoes: Especializacao[];
     avaliacoes: Avaliacao[];
+    sobre: string;
 }

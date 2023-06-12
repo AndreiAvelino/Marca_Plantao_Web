@@ -18,9 +18,8 @@ export class InputImagemComponent implements ControlValueAccessor {
 
   @ViewChild("inputImg") inputImg; 
 
-  private innerValue: any;
-
-
+  public foto;
+  private innerValue: File;
   
   onChange: (v: any) => void = () => {}
 
@@ -37,6 +36,7 @@ export class InputImagemComponent implements ControlValueAccessor {
   constructor() { }
   writeValue(v: any): void {
     this.value = v;
+    this.foto = 'data:image/jpeg;base64,' + v
   }
 
   registerOnChange(fn: any): void {
@@ -60,16 +60,22 @@ export class InputImagemComponent implements ControlValueAccessor {
   }
 
   onSelectFile(event) { // called each time file input changes
+    this.value = event.target.files[0]
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
       reader.onload = (event) => { // called once readAsDataURL is completed
-        this.value = event.target.result;
+        this.foto = event.target.result;
+        console.log(this.foto)
       }
     }
   }
+
+  private hexToBase64(str) {
+    return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+}
 
 
 }

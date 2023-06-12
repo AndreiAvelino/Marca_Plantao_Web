@@ -1,103 +1,70 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, Input, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
 @Component({
   selector: 'app-adicionar-arquivo-produto',
   templateUrl: './adicionar-arquivo-produto.component.html',
-  styleUrls: ['./adicionar-arquivo-produto.component.scss']
+  styleUrls: ['./adicionar-arquivo-produto.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: AdicionarArquivoProdutoComponent,
+      multi: true
+    }
+  ]
 })
-export class AdicionarArquivoProdutoComponent implements OnInit {
+export class AdicionarArquivoProdutoComponent implements ControlValueAccessor {
   
-  private listaProdutosAdicionar;
   public arquivo;
+  private innerValue: File;
 
-  constructor(private _location: Location) { }
+  @Input('descricao') descricao: string
+  @Input('icon') icon: string; 
 
-  ngOnInit(): void {
+  onChange: (v: any) => void = () => {}
+
+  get value() {
+    return this.innerValue
   }
+
+  set value(v: any) {
+    this.innerValue = v;
+    this.onChange(v);
+  }
+
+
+  constructor() { }
+  writeValue(v: any): void {
+    this.value = v;
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+
+  }
+
 
   public AbrirCaixaArquivos() {
     document.getElementById('selectFiles').click();
   }
 
-  async ArquivosSelecionados(arquivos: any) {
-    this.arquivo = arquivos[0].name
+  async ArquivosSelecionados(event: any) {
+    this.arquivo = event.target.files[0].name
+    this.value = event.target.files[0]
   }
-
-  public upload(){
   
-    var files = (<HTMLInputElement>document.getElementById('selectFiles')).files;
-      
-    if (files.length <= 0) {
-      return false;
-    }
-    
-  
-    var fr = new FileReader();
-
-    // fr.onload = e => {
-    //   let result = JSON.parse(<string> e.target.result);
-
-    //   for(let i = 0; i < result.length; i++){
-    //     result[i]['id'] = '00000000-0000-0000-0000-000000000000'
-    //     result[i]['clienteId'] = this._localStorage.get_user_id()
-    //     result[i]['categoriaId'] = '00000000-0000-0000-0000-000000000000'
-    //   }
-
-    //   this.listaProdutosAdicionar = result;
-
-    //   this._produtoService.post({
-    //     produtoViewModels: this.listaProdutosAdicionar
-    //   })
-    //     .toPromise()
-    //     .then(r => {
-    //       this.mostrarMensagem(r)
-    //       this.voltar()
-    //     })
-    //     .catch(e => this.mostrarErros(e))
-    // }
-  
-
-    fr.onload = e => {
-      let result = JSON.parse(<string> e.target.result);
-
-      for(let i = 0; i < result.length; i++){
-        result[i]['id'] = '00000000-0000-0000-0000-000000000000'
-        result[i]['clienteId'] = '10'
-        result[i]['categoriaId'] = '00000000-0000-0000-0000-000000000000'
-      }
-
-      this.listaProdutosAdicionar = result;
-
-    }
-    
-  
-    fr.readAsText(files.item(0));
-  };
-
   public ExcluirArquivo(){
     (<HTMLInputElement>document.getElementById('selectFiles')).value = ""
     this.arquivo = "";
-
   }
 
-  // public mostrarErros(e): void{
-  //   if(e.error){
-  //     var erros = <Array<string>> (Object.values(e.error.errors))  
-  //     for(let i = 0; i < erros.length; i++){
-  //       this._snackBar.open(erros[i], 'Fechar');
-  //     }
-  //   } else {
-  //     this._snackBar.open(e.message, 'Fechar');
-  //   } 
-  // }
-
-  // public mostrarMensagem(r): void{
-  //   this._snackBar.open(r.data, 'Fechar');    
-  // }
-
-  // public voltar(): void{
-  //   this._location.back();
-  //  }
+  
 
 }

@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
-import { FormaPagamento } from 'src/enum/enum';
+import { FormaPagamento, Rotas } from 'src/enum/enum';
 import { MetodoPagamento } from 'src/models/entidades/@shared';
 import { Clinica } from 'src/models/entidades/clinica';
 import { AdicionarRemoverProfissionalOfertaDados, Oferta } from 'src/models/entidades/oferta';
@@ -27,7 +28,8 @@ export class CardOfertaComponent extends PadraoComponent implements OnInit {
 
   constructor(
     private ofertaService: OfertaService,
-    private clinicaService: ClinicaService
+    private clinicaService: ClinicaService,
+    private _router: Router
   ) {
     super();
   }
@@ -37,12 +39,11 @@ export class CardOfertaComponent extends PadraoComponent implements OnInit {
   }
   
   public onClickBtnVerClinica(): void {
-
+    this._router.navigate([Rotas.PerfilClinica],  {
+      queryParams: { id: this.oferta.clinicaId}
+    })
   }
 
-  public onClickBtnLocalizacao(): void {
-
-  }
 
   public async onClickBtnCandidatar(): Promise<void> {
     let adicionarCandidato = {

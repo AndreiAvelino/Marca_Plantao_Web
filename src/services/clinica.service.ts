@@ -16,4 +16,8 @@ export class ClinicaService {
     return this.httpClient.get<Response<Clinica>>(environment.api + "ObterClinica?Id=" + idClinica);
   }
 
+  public put(clinica: any): Observable<Response<Clinica>> {
+    return this.httpClient.put<Response<Clinica>>(environment.api + "AtualizarClinica", clinica);
+  }
+
 }

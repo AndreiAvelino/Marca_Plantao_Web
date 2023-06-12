@@ -9,17 +9,27 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
+import { PerfilClinicaComponent } from './perfil-clinica/perfil-clinica.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 const materialModules = [
   MatCardModule,
   MatInputModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDividerModule,
+  MatIconModule,
+  MatButtonModule
 ]
 
 @NgModule({
   declarations: [
-    ConfigurarClinicaComponent
+    ConfigurarClinicaComponent,
+    PerfilClinicaComponent
   ],
   imports: [
     ...materialModules,
@@ -27,7 +37,8 @@ const materialModules = [
     ReactiveFormsModule,
     CommonModule,
     SharedModule,
-    FormularioModule
+    FormularioModule,
+    NgxMaskModule
   ]
 })
 export class ClinicaModule { }

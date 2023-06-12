@@ -15,6 +15,9 @@ import { InfoPlantaoComponent } from './plantao/info-plantao/info-plantao.compon
 import { HistoricoPlantaoResolver } from './plantao/historico-plantao/historico-plantao.resolve';
 import { InfoOfertaComponent } from './oferta/info-oferta/info-oferta.component';
 import { PerfilUsuarioComponent } from './usuario/perfil-usuario/perfil-usuario.component';
+import { PerfilClinicaComponent } from './clinica/perfil-clinica/perfil-clinica.component';
+import { ConfigurarClinicaResolver } from './clinica/configurar-clinica/configurar-clinica.resolve';
+import { IndicadoresResolve } from './indicadores/indicadores.resolve';
 
 const routes: Routes = [
   {
@@ -33,7 +36,7 @@ const routes: Routes = [
       },
       {
         path: 'configuraroferta',
-        component: ConfigurarOfertaComponent,
+        component: ConfigurarOfertaComponent
       },
       {
         path: 'historicoplantao',
@@ -55,6 +58,7 @@ const routes: Routes = [
       {
         path: 'configurarclinica',
         component: ConfigurarClinicaComponent,
+        resolve: { clinica: ConfigurarClinicaResolver }
       },
       {
         path: 'inicio',
@@ -62,7 +66,8 @@ const routes: Routes = [
       },
       {
         path: 'indicadores',
-        component: IndicadoresComponent
+        component: IndicadoresComponent,
+        resolve: { indicadores: IndicadoresResolve }
       },
       {
         path: 'pesquisar-oferta',
@@ -71,6 +76,10 @@ const routes: Routes = [
       {
         path: 'perfilusuario',
         component: PerfilUsuarioComponent
+      },
+      {
+        path: 'perfilclinica',
+        component: PerfilClinicaComponent
       }
     ]
   }

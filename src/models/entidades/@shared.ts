@@ -2,7 +2,7 @@ import { UF } from "src/enum/enum";
 
 export interface Endereco {
     id?: string;
-    logradouro: string,
+    rua: string,
     cep: string,
     bairro?: string,
     cidade?: string,

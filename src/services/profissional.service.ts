@@ -22,7 +22,7 @@ export class ProfissionalService {
     return this.httpClient.get<Response<Profissional>>(environment.api + "ObterProfissional?Id=" + idProfissional);
   }
 
-  public put(profissional: Profissional): Observable<Response<Profissional>> {
+  public put(profissional: FormData): Observable<Response<Profissional>> {
     return this.httpClient.put<Response<Profissional>>(environment.api + "AtualizarProfissional", profissional);
   }
 

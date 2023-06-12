@@ -11,6 +11,8 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { AgendaModule } from './agenda/agenda.module';
 import { IndicadoresModule } from './indicadores/indicadores.module';
 import { HistoricoPlantaoResolver } from './plantao/historico-plantao/historico-plantao.resolve';
+import { ConfigurarClinicaResolver } from './clinica/configurar-clinica/configurar-clinica.resolve';
+import { IndicadoresResolve } from './indicadores/indicadores.resolve';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { HistoricoPlantaoResolver } from './plantao/historico-plantao/historico-
     IndicadoresModule
   ],
   providers: [
-    HistoricoPlantaoResolver
+    ConfigurarClinicaResolver,
+    HistoricoPlantaoResolver,
+    IndicadoresResolve
   ]
 })
 export class PagesModule { }

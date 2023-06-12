@@ -3,13 +3,13 @@
             *ngIf="!arquivo"
             (click)="AbrirCaixaArquivos()"
             color="primary"
-            style="width: 400px"><mat-icon>attach_file</mat-icon> Comprovante de pagamento
+            style="width: 100%;"><mat-icon>{{icon}}</mat-icon> {{descricao}}
     </button>
 
-    <div *ngIf="arquivo" style="display: flex; justify-content: space-between; background-color: #f5f5f5; height: 35px; width: 400px">
+    <div *ngIf="arquivo" style="display: flex; justify-content: space-between; background-color: #f5f5f5; height: 35px; width: 100%">
         <p style="color: #65c368; font-size: 15px; margin-top: 8px; margin-left: 5px"> {{arquivo}} </p>
         <mat-icon style="cursor: pointer; font-size: 17px; margin-top: 8px;" (click)="ExcluirArquivo()">close</mat-icon>
     </div>
     
-
-    <input type="file" id="selectFiles" value="Import" (change)="ArquivosSelecionados($event.target.files)" hidden/><br />
+  
+    <input type="file" id="selectFiles" value="Import" (change)="ArquivosSelecionados($event)" hidden/><br/>

@@ -8,11 +8,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { AvatarModule } from 'ngx-avatar';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from 'src/shared/shared.module';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { NgxMaskModule } from 'ngx-mask';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlterarPerfilUsuarioComponent } from './perfil-usuario/alterar-perfil-usuario/alterar-perfil-usuario.component';
+import { FormularioModule } from 'src/forms/formulario.module';
 
 @NgModule({
   declarations: [
-    PerfilUsuarioComponent
+    PerfilUsuarioComponent,
+    AlterarPerfilUsuarioComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +28,14 @@ import { SharedModule } from 'src/shared/shared.module';
     MatButtonModule,
     AvatarModule,
     MatIconModule,
-    SharedModule
+    SharedModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxMaskModule,
+    FormularioModule
   ],
   exports: [
     PerfilUsuarioComponent

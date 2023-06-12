@@ -17,7 +17,7 @@
       </div>
 
       <div *ngIf="isResponseLoginAdministrador()">
-        <img src="assets/fachada-niteroi-dor2.jpg" width="300">
+        <img [src]="retorna_imagem_clinica()" width="300">
 
         <div style="margin-top: 10px; display: flex; justify-content: center;">
           <span style="font-size: 20px; font-weight: 550;"> {{clinica.razaoSocial}} </span>
@@ -31,6 +31,11 @@
 
     <div *ngIf="isResponseLoginProfissional()" style="display: flex; justify-content: center;">
       <button mat-flat-button color="warn" style="position: fixed; bottom: 10px; width: 280px;" (click)="sair()">Sair</button>
+    </div>
+
+    
+    <div *ngIf="isResponseLoginAdministrador()" style="display: flex; justify-content: center;">
+      <button mat-flat-button color="primary" style="position: fixed; bottom: 10px; width: 280px;" (click)="editar_clinica()">Editar</button>
     </div>
 
   </mat-sidenav>

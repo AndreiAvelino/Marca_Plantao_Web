@@ -68,7 +68,8 @@ export enum Rotas {
     Cadastro = '/cadastro',
     InfoOferta = '/infooferta',
     InfoPlantao = '/infoplantao',
-    PerfilUsuario = '/perfilusuario'
+    PerfilUsuario = '/perfilusuario',
+    PerfilClinica = '/perfilclinica'
 }
 
 export enum TipoNotificacao {

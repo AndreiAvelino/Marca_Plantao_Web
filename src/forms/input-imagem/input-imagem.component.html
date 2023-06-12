@@ -1,9 +1,5 @@
 <mat-card style="margin: 30px; margin-right: 10px;">
-    <!-- <img  
-    [ngStyle]="value ? {'background-image': 'url(' + value + ')'} : {'background-image': 'url(assets/sem-foto.jpg)'}"
-    width="300" height="230"/> -->
-
-    <img [src]="value ? value : 'assets/sem-foto.jpg'" width="400" height="350"/>
+    <img [src]="foto ? foto : 'assets/sem-foto.jpg'" width="400" height="350"/>
     <input #inputImg style="display: none;" type='file' (change)="onSelectFile($event)">
 
     <br>

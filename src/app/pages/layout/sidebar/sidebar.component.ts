@@ -136,4 +136,16 @@ export class SidebarComponent extends PadraoComponent implements OnInit, AfterVi
     this._router.navigate([Rotas.PerfilUsuario])
   }
 
+  public editar_clinica(): void {
+    this._router.navigate([Rotas.ConfigurarClinica])
+  }
+
+  public retorna_imagem_clinica(): string {
+    if(this.clinica.imagem){
+      return 'data:image/jpeg;base64,' + this.clinica.imagem 
+    } else {
+      return "assets/sem-imagem-clinica.png";
+    }
+  }
+
 }

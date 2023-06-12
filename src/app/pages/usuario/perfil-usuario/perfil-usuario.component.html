@@ -1,69 +1,56 @@
-<mat-dialog-content>
+<div class="card-voltar">
+    <button (click)="alterar_perfil_usuario()" mat-stroked-button color="primary" style="margin-right: 10px;">Editar</button>
+</div>
 
-    <div class="content">
+<div class="content">
         
-        <div class="cabecalho">
-    
-            <div style="display: flex; justify-content: center;">
-                <ngx-avatar size="150" name="Magazine Luiza" src="/assets/site-magazine-luiza-reprodu-o-facebook.jpg"></ngx-avatar>
-            </div>
-    
-            <div>
-                <div>
-                    <span class="perfil-nome"> Magazine Luiza </span>
-                </div>
-                <div class="perfil-data-entrada">
-                    <span> Entrou em novembro de 2016 </span>
-                </div>
-            </div>
-    
+    <div class="cabecalho" *ngIf="profissional">
+ 
+        <div style="display: flex; justify-content: center;">
+            <ngx-avatar size="150" [name]="profissional.nome"></ngx-avatar>
+        </div>
+   
+        <div>
+            <span class="perfil-nome" *ngIf="profissional"> {{profissional.nome}} </span>
         </div>
     
-        <div class="info">
+    </div>
+    
+    <div class="info" *ngIf="profissional">
 
-            <div class="card" style="color: #ffffff">
-                <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-                    <mat-icon class="estrela">star</mat-icon> <span style="font-size: 20px; font-weight: 500; margin-left: 5px;"> 4,8 </span>
-                </div>
+        <div class="card" style="color: #ffffff; padding: 10px">
+            <div style="font-size: 18px; font-weight: 550; display: flex; justify-content: space-between;">
+                <span> CPF: </span> <span> {{profissional.cpf | mask: '000.000.000-00'}} </span>    
+            </div>        
+            <div style="font-size: 18px; font-weight: 550; margin-top: 10px; display: flex; justify-content: space-between;">
+                <span> CRM: </span> <span> {{profissional.crm}} </span>
+            </div>      
+        </div>
+
+        <div class="card center" style="background-color: #ffffff">
+            <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                <mat-icon class="estrela">star</mat-icon> <span style="font-size: 20px; font-weight: 500; margin-left: 5px;"> {{retorna_media()}} </span>
+            </div>
                 
-                <div> 
-                    <span style="font-size: 17px; font-weight: 500;">546</span> <span style="font-size: 17px;"> Plantoes realizados </span>
-                </div>
-
-                <div> 
-                    <span style="font-size: 17px; font-weight: 500;"> 400 </span> <span style="font-size: 17px;"> Avaliacoes </span> 
-                </div>                     
-            </div>
-    
-            <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-                <mat-tab label="Sobre">
-                    <p class="sobre">
-                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                    </p>
-                </mat-tab>
-            
-                <mat-tab label="Avaliações">
-                    <avaliacao-resumida></avaliacao-resumida>
-                    <avaliacao-resumida></avaliacao-resumida>
-                    <avaliacao-resumida></avaliacao-resumida>
-                </mat-tab>
-            
-            </mat-tab-group>
-    
+            <div> 
+                <span style="font-size: 17px; font-weight: 500;">{{retorna_quantidade_plantoes()}}</span> <span style="font-size: 17px;"> Plantoes realizados </span>
+            </div>                    
         </div>
-
+    
+ 
     </div>
 
-    
+    <div>
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" *ngIf="profissional">
+            <mat-tab label="Sobre">
+                <p class="sobre"> {{profissional.sobre}} </p>                 
+            </mat-tab>
+            
+            <mat-tab label="Avaliações">
+                <avaliacao-resumida *ngFor="let avaliacao of profissional.avaliacoes" [avaliacao]="avaliacao"></avaliacao-resumida>
+            </mat-tab>
+        </mat-tab-group>   
+    </div>
 
-</mat-dialog-content>
+</div>
 
-
-
-
-
-
-<!-- <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Voltar</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Escolher</button>
-</mat-dialog-actions> -->
