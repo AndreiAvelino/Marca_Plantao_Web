@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: "https://marcaplantao.database.windows.net/"
+  api: "https://marcaplantao.azurewebsites.net/"
 };

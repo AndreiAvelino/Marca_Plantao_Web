@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: "https://marcaplantao.database.windows.net/"
+  api: "https://marcaplantao.azurewebsites.net/"
   //api: "https://localhost:7046/"
 };
 
