@@ -8,28 +8,30 @@
         <img [src]="retorna_imagem_clinica()" class="responsive">
     </div>
 
-    <div style="display: flex; align-items: center; justify-content: center; background-color: #ffffff; height: 50px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; margin-top: 10px;">
-        <span *ngIf="clinica" style="color: #636363; font-size: 20px; font-weight: 550;"> {{clinica.razaoSocial}} </span>
-    </div>
-
-    <div style="background-color: #ffffff; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; margin-top: 10px;">
-
-        <div style="height: 50px; display: flex; align-items: center; margin-left: 10px">
-            <mat-icon style="color: #a3a3a3"> place</mat-icon> <span *ngIf="clinica" style="font-size: 16px;"> {{clinica.endereco.rua}}, {{clinica.endereco.bairro}}, {{clinica.endereco.cidade}} CEP: {{clinica.endereco.cep | mask: '00000-000'}} </span>
+    <div class="infos">
+        <div style="display: flex; align-items: center; justify-content: center; background-color: #ffffff; height: 50px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; margin-top: 10px;">
+            <span *ngIf="clinica" style="color: #636363; font-size: 20px; font-weight: 550;"> {{clinica.razaoSocial}} </span>
         </div>
-
-        <mat-divider></mat-divider>
-
-        <div *ngIf="clinica" style="height: 50px; display: flex; align-items: center; margin-left: 10px">
-            <mat-icon style="color: #a3a3a3">star</mat-icon> <span style="font-size: 16px;"> {{gerar_media_nota()}} </span>
+    
+        <div style="background-color: #ffffff; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; margin-top: 10px;">
+    
+            <div style="height: 50px; display: flex; align-items: center; margin-left: 10px">
+                <mat-icon style="color: #a3a3a3"> place</mat-icon> <span *ngIf="clinica" style="font-size: 16px;"> {{clinica.endereco.rua}}, {{clinica.endereco.bairro}}, {{clinica.endereco.cidade}} CEP: {{clinica.endereco.cep | mask: '00000-000'}} </span>
+            </div>
+    
+            <mat-divider></mat-divider>
+    
+            <div *ngIf="clinica" style="height: 50px; display: flex; align-items: center; margin-left: 10px">
+                <mat-icon style="color: #a3a3a3">star</mat-icon> <span style="font-size: 16px;"> {{gerar_media_nota()}} </span>
+            </div>
+    
+            <mat-divider></mat-divider>
+    
+            <div style="min-height: 50px; padding: 10px; text-align: justify; word-break: break-all;">
+                {{clinica.sobre}}
+            </div>
+    
         </div>
-
-        <mat-divider></mat-divider>
-
-        <div style="min-height: 50px; padding: 10px; text-align: justify; word-break: break-all;">
-            {{clinica.sobre}}
-        </div>
-
     </div>
 
 

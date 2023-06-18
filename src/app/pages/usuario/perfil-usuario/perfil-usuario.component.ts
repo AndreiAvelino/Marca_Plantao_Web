@@ -16,6 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class PerfilUsuarioComponent extends PadraoComponent implements OnInit {
 
   public profissional: Profissional
+  public imagem;
 
   constructor(
     private router: Router,
@@ -24,9 +25,11 @@ export class PerfilUsuarioComponent extends PadraoComponent implements OnInit {
     super();
   }
 
-  ngOnInit(): void {
-    this.profissionalService.get(this.usuarioLogado.id).toPromise()
+  async ngOnInit(): Promise<void> {
+    await this.profissionalService.get(this.usuarioLogado.id).toPromise()
       .then(x => this.profissional = x.data)
+
+    this.gera_imagem_usuario();
   }
 
   public Fechar(): void {
@@ -69,7 +72,7 @@ export class PerfilUsuarioComponent extends PadraoComponent implements OnInit {
     if(profissional){
 
       const formData: FormData = new FormData();
-      formData.append('Imagem', profissional.imagem)
+      formData.append('Imagem', profissional.imagem ? profissional.imagem : this.profissional.imagem)
       formData.append('Id', this.profissional.id)
       formData.append('Nome', this.profissional.nome)
       formData.append('DataNascimento', this.profissional.dataNascimento)
@@ -89,9 +92,34 @@ export class PerfilUsuarioComponent extends PadraoComponent implements OnInit {
         })
         .then(() => this.profissional = profissional)
         .catch((e: HttpErrorResponse) => this.mensagem_erro(e.message))
+
+      if(profissional.imagem){
+        this.renderizar_imagem(profissional.imagem);
+      }
     }
 
 
+  }
+
+  public renderizar_imagem(imagem): void {
+    var reader = new FileReader();
+    reader.readAsDataURL(imagem); 
+          reader.onload = (event) => { 
+      this.gera_imagem_usuario(event.target.result)
+    }
+  }
+
+  public gera_imagem_usuario(imagem?): void {
+    if(imagem){
+      this.imagem = imagem
+      return 
+    } 
+    if(this.profissional.imagem){
+      this.imagem = 'data:image/jpeg;base64,' + this.profissional.imagem 
+      return
+    }
+
+    this.imagem = null
   }
 
 }

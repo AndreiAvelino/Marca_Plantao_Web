@@ -21,6 +21,7 @@
   justify-content: center;
   width: 100%;
   bottom: 20px;
+  margin-top: 20px;
   position: absolute;
 
   &-finalizar {    
@@ -45,4 +46,28 @@
 .stepper-conteudo {
   width: 100%; 
   margin-top: 20px;
+}
+
+.header {
+  background-color: #ffffff;
+  height: 65px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagina {
+  background-color: #6eb762;
+  height: calc(100vh - 65px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background-color: #ffffff;
+  height: calc(100% - 20px);
+  width: calc(100% - 20px);
 }

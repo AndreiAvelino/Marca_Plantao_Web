@@ -1,9 +1,9 @@
-import { Rotas, TipoNotificacao } from "src/enum/enum";
+import { ComponenteNotificacao, Rotas, TipoNotificacao } from "src/enum/enum";
 
 export interface Notificacao {
-    Id: string,
-    Descricao: string,
-    Tipo: TipoNotificacao,
-    Rota?: Rotas,
-    idRotaNotificacao?: number
+    id: string,
+    mensagem: string,
+    tipoMensagem: TipoNotificacao,
+    componente: ComponenteNotificacao,
+    data?: any
 }

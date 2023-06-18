@@ -1,4 +1,4 @@
-<div *ngIf="verifica_usuario_administrador()" style="display: grid; grid-template-columns: 15% 85%;">
+<div *ngIf="layout_mes()" style="display: grid; grid-template-columns: 15% 85%;">
 
     <div style="margin: 10px;">
         <data-agenda [calendario]="calendario"
@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<div *ngIf="verifica_usuario_profissional()" style="background-color: #fff; padding: 3px">
+<div *ngIf="layout_dia()" style="background-color: #fff; padding: 3px">
     <data-agenda [calendario]="calendario"
                  layout="profissional"></data-agenda>
 

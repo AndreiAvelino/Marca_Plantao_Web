@@ -59,23 +59,17 @@ export class InputImagemComponent implements ControlValueAccessor {
     this.value = "";
   }
 
-  onSelectFile(event) { // called each time file input changes
+  onSelectFile(event) {
     this.value = event.target.files[0]
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      reader.readAsDataURL(event.target.files[0]); 
 
-      reader.onload = (event) => { // called once readAsDataURL is completed
+      reader.onload = (event) => { 
         this.foto = event.target.result;
-        console.log(this.foto)
       }
     }
   }
-
-  private hexToBase64(str) {
-    return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
-}
-
 
 }

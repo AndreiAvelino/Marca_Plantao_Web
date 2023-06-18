@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { Corevento, StatusPlantao, TipoEvento } from 'src/enum/enum';
@@ -46,6 +46,10 @@ interface Event {
   extendedProps: Object
 }
 
+enum Layout {
+  DIA,
+  MES
+}
 
 @Component({
   selector: 'app-agenda',
@@ -53,6 +57,13 @@ interface Event {
   styleUrls: ['./agenda.component.scss']
 })
 export class AgendaComponent extends PadraoComponent implements OnInit {
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.checar_layout()
+  }
+
+  private layout: Layout
 
   @ViewChild('calendario') calendario: FullCalendarComponent
   public calendarOptions: CalendarOptions = null
@@ -81,7 +92,7 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.get_all_evento();
-    this.criar_calendario();
+    this.checar_layout();
   }
 
   //#region METODOS DE GERACAO DE EVENTOS 
@@ -160,41 +171,7 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   //#endregion
 
   //#region METODOS REFERENTES AO CALENDARIO
-  private criar_calendario(): void {
- 
-    if(this.verifica_usuario_administrador()){
-      this.calendarOptions = {
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-        eventClick: (e => this.onEventoClick(e)),
-        dateClick: (e => this.criar_oferta(e)),
-        height: "84vh",
-        headerToolbar: {
-          left:   '',
-          center: '',
-          right:  ''
-        },
-        locale: 'pt-br',
-        initialView: 'dayGridMonth',
-        eventSources: this.eventos           
-      };   
-    }
-
-    if(this.verifica_usuario_profissional()){
-      this.calendarOptions = {
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-        height: "83vh",
-        headerToolbar: {
-          left:   '',
-          center: '',
-          right:  ''
-        },
-        locale: 'pt-br',
-        initialView: 'timeGridWeek',
-        eventSources: this.eventos           
-      }; 
-    }
-
-  }
+  
   
   private atualizar_eventos(): void {
     this.calendario.eventSources = this.eventos
@@ -214,6 +191,10 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   //#region METODOS REFERETES AS ACOES AO CLICAR EM UM EVENTO
   private onEventoClick(e: EventClickArg): void {
+    if(this.isResponseLoginProfissional(this.usuarioLogado)){
+      return;
+    }
+
     switch(e.event.extendedProps.tipo){
       case TipoEvento.Oferta:  this.abrirBottonSheetOferta(e);
               break;
@@ -477,6 +458,9 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
 
   //#region METODOS DE CRUD DE OFERTA
   private async criar_oferta(e: DateClickArg): Promise<void> {
+    if(this.isResponseLoginProfissional(this.usuarioLogado)){
+      return;
+    }
 
     if(moment(e.dateStr).format("yyyy-MM-DD") < this.gerar_data_hora_atual("yyyy-MM-DD")){
       this.mensagem_erro("Não é possível criar ofetas para datas anteriores")
@@ -609,12 +593,53 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
         }
       })
 
-
-
- 
-
-
   }
-  
+
+  private checar_layout(){
+    if(window.innerWidth >= 900){
+      this.layout = Layout.MES
+
+      this.calendarOptions = {
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+        eventClick: (e => this.onEventoClick(e)),
+        dateClick: (e => this.criar_oferta(e)),
+        height: "84vh",
+        headerToolbar: {
+          left:   '',
+          center: '',
+          right:  ''
+        },
+         locale: 'pt-br',
+         initialView: 'dayGridMonth',
+         eventSources: this.eventos           
+      };   
+
+
+
+    } else {
+      this.layout = Layout.DIA
+
+      this.calendarOptions = {
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+        height: "83vh",
+        headerToolbar: {
+          left:   '',
+          center: '',
+          right:  ''
+        },
+        locale: 'pt-br',
+        initialView: 'timeGridWeek',
+        eventSources: this.eventos  
+      }
+    }
+  }
+
+  public layout_dia(): boolean {
+    return this.layout == Layout.DIA
+  }
+
+  public layout_mes(): boolean {
+    return this.layout == Layout.MES
+  }
 
 }

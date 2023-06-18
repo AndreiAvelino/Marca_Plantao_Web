@@ -16,3 +16,15 @@
   transition: all 0.3s ease-out;
 }
  
+
+@media screen and (min-width: 800px) {
+  .content {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    margin: 20px;
+  }
+
+  .infos {
+    margin: 10px;
+  }
+}

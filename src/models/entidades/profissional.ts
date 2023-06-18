@@ -7,7 +7,7 @@ export interface Profissional {
     dataNascimento: string;
     genero: string;
     telefone: string;
-    imagem: string;
+    imagem: any;
     crm: string;
     cpf: string;
     especializacoes: Especializacao[];

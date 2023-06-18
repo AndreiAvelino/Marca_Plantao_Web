@@ -72,10 +72,15 @@ export enum Rotas {
     PerfilClinica = '/perfilclinica'
 }
 
+export enum ComponenteNotificacao {
+    PlantaoProfissional = 'PlantaoProfissional',
+    PlantaoClinica = 'PlantaoClinica'
+}
+
 export enum TipoNotificacao {
-    Alerta,
-    Informacao,
-    Urgente
+    Alerta = "Alerta",
+    Informacao = "Informacao",
+    Urgente = "Urgente"
 }
 
 export enum TamanhoColunaTabela {

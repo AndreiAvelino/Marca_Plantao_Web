@@ -148,8 +148,6 @@ export class ConfigurarClinicaComponent extends PadraoComponent implements OnIni
   }
 
   private gerar_formulario(): void {
-    console.log(this.clinica)
-
     this.formulario = this.formBuilder.group({
       id: this.clinica.id,
       razaoSocial: this.clinica.razaoSocial,

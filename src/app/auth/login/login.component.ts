@@ -52,7 +52,10 @@ export class LoginComponent extends PadraoComponent implements OnInit {
     this.logando = true;
 
     await this.loginService.login(this.formulario.value).toPromise()
-      .then(x => this.inserir_cookie("usuario", JSON.stringify(x.data)))
+      .then(x => this.inserir_cookie("usuario", JSON.stringify({
+        ...x.data,
+        imagem: null
+      })))
       .then(() => this.router.navigate([Rotas.Inicio]))
       .catch((e: HttpErrorResponse) => this.mensagem_erro(e.error))
 

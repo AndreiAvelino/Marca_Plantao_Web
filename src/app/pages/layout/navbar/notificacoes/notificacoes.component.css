@@ -1,3 +1,9 @@
 mat-icon {
     transform: scale(1.4);
 }
+
+::ng-deep.mat-menu-panel {
+    max-width: none !important;
+    word-break: break-all !important;
+    line-break: auto !important;
+}

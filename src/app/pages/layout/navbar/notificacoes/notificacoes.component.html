@@ -1,15 +1,15 @@
-<button [disabled]="[].length == 0" mat-icon-button [matMenuTriggerFor]="menu" matBadgeColor="warn">
+<button [disabled]="ListaNotificacoes.length == 0" mat-icon-button [matMenuTriggerFor]="menu" matBadgeColor="warn" [matBadge]="ListaNotificacoes.length">
     <mat-icon> notifications </mat-icon>
 </button>
 
 <mat-menu #menu="matMenu">
-    <button *ngFor="let notificacao of []" mat-menu-item (click)="RealizarAcao(notificacao)">
+    <button *ngFor="let notificacao of ListaNotificacoes" mat-menu-item>
 
-        <mat-icon *ngIf="notificacao.Tipo == 0" style="color: yellow;">warning</mat-icon>
-        <mat-icon *ngIf="notificacao.Tipo == 1" style="color: green">notifications_none</mat-icon>
-        <mat-icon *ngIf="notificacao.Tipo == 2" style="color: red">error</mat-icon>
+        <mat-icon *ngIf="notificacao.tipoMensagem == 'Alerta'" style="color: yellow;">warning</mat-icon>
+        <mat-icon *ngIf="notificacao.tipoMensagem == 'Informacao'" style="color: green">notifications_none</mat-icon>
+        <mat-icon *ngIf="notificacao.tipoMensagem == 'Urgente'" style="color: red">error</mat-icon>
 
-        <span>{{notificacao.Descricao}}</span>
+        <span>{{notificacao.mensagem}}</span>
     </button>
 </mat-menu>
 

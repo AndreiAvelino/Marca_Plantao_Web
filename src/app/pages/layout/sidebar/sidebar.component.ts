@@ -148,4 +148,11 @@ export class SidebarComponent extends PadraoComponent implements OnInit, AfterVi
     }
   }
 
+  public retorna_imagem_usuario(): string {
+    if(this.profissional.imagem){
+      return 'data:image/jpeg;base64,' + this.profissional.imagem 
+    } 
+    return null;
+  }
+
 }
