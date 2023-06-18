@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: "http://joaoremix3-001-site1.atempurl.com/"
+  api: "https://joaoremix3-001-site1.atempurl.com/"
   //api: "https://localhost:7046/"
 };
 
