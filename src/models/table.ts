@@ -1,7 +1,13 @@
+export enum Medida {
+    Pixel = "px",
+    Porcentagem = "%"
+}
+
 export interface ColunaTabela {
     Chave: String,
     Descricao: String
     Tamanho?: String
+    Medida?: Medida
 }
   
 

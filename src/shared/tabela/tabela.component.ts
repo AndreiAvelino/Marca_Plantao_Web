@@ -11,7 +11,6 @@ import { ColunaTabela, Tabela } from 'src/models/table';
 })
 export class TabelaComponent implements AfterViewInit, OnChanges {
 
-
   @Input("Tabela") Tabela: Tabela;
 
   @Output() EmiteClickBotaoAlterar = new EventEmitter();
@@ -112,6 +111,10 @@ export class TabelaComponent implements AfterViewInit, OnChanges {
 
   public ColunasInformacoes(): Array<ColunaTabela> {
     return this.Colunas.filter(c => c.Chave != "Alterar").filter(c => c.Chave != "Excluir").filter(x => x.Chave != "Acoes")
+  }
+
+  public retorna_medida(coluna: ColunaTabela): string {
+    return coluna.Tamanho + (coluna.Medida ? coluna.Medida : '%')
   }
 
 }

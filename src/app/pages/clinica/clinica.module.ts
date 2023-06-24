@@ -12,6 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { PerfilClinicaComponent } from './perfil-clinica/perfil-clinica.component';
 import { NgxMaskModule } from 'ngx-mask';
@@ -23,7 +24,8 @@ const materialModules = [
   MatSelectModule,
   MatDividerModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule,
+  MatTabsModule
 ]
 
 @NgModule({

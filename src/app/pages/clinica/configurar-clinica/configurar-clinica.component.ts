@@ -1,10 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { Clinica } from 'src/models/entidades/clinica';
+import { ColunaTabela, Tabela } from 'src/models/table';
 import { ClinicaService } from 'src/services/clinica.service';
+import { CriarUsuarioAdministradorComponent } from '../../usuario/criar-usuario-administrador/criar-usuario-administrador.component';
+import { switchMap } from 'rxjs/operators';
+import { Response } from 'src/models/response';
+import { AdministradoresPorClinica } from 'src/models/entidades/clinica';
+import { LoginService } from 'src/services/login.service';
 
 interface UF {
   id: number,
@@ -17,6 +23,26 @@ interface UF {
   styleUrls: ['./configurar-clinica.component.css']
 })
 export class ConfigurarClinicaComponent extends PadraoComponent implements OnInit {
+
+  public Colunas: Array<ColunaTabela> = [
+    {
+      Chave: "email",
+      Descricao: "E-mail",
+      Tamanho: "10000"
+    },
+
+  ]
+
+  public Tabela: Tabela = {
+    Registros: [],
+    Colunas: this.Colunas,
+    BotaoAlterar: false,
+    BotaoExcluir: false,
+    BotaoLinha: false,
+    BotaoAcoes: false,
+    Filtro: false,
+    Margem: "10px"
+  }
 
   public ufs: UF[] = [
     {
@@ -137,13 +163,16 @@ export class ConfigurarClinicaComponent extends PadraoComponent implements OnIni
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private clinicaService: ClinicaService
+    private clinicaService: ClinicaService,
+    private loginService: LoginService,
+    private changeDetectorRefs: ChangeDetectorRef
   ){ 
     super();
   }
 
   ngOnInit(): void {
     this.clinica = this.route.snapshot.data.clinica
+    this.Tabela.Registros = this.clinica.listaAdministradoresPorClinica
     this.gerar_formulario();
   }
 
@@ -190,6 +219,54 @@ export class ConfigurarClinicaComponent extends PadraoComponent implements OnIni
       })
       .catch((e: HttpErrorResponse) => this.mensagem_erro(e.message))
       
+  }
+
+  public criar_usuario(): void {
+    if(this.isResponseLoginAdministrador(this.usuarioLogado)){
+      this.dialog.open(CriarUsuarioAdministradorComponent, {
+        data: this.usuarioLogado.clinicaId
+      })
+      .afterClosed()
+      .pipe(
+        switchMap((x) => this.loginService.registrar_administrador(x))
+      )
+      .toPromise()
+      .then(() => this.mensagem_sucesso("Usuario cadastrado!"))
+      .then(() => this.administradores_por_clinica())
+      .catch((e: HttpErrorResponse) => this.imprimir_erro(e))
+    } 
+  }
+
+  private imprimir_erro(e: HttpErrorResponse): void {
+    if(e.error?.errors?.Password){
+      e.error.errors.Password.forEach(e => this.mensagem_erro(e))
+      return;
+    }
+
+    if(e.error?.errors?.ConfirmPassword){
+      e.error.errors.Password.forEach(e => this.mensagem_erro(e))
+      return;
+    }
+
+    e.error.errors.forEach(e => this.mensagem_erro(e))
+  }
+
+  private async administradores_por_clinica(): Promise<void> {
+    if(this.isResponseLoginAdministrador(this.usuarioLogado)){
+        await this.clinicaService.administradores_por_clinica(this.usuarioLogado.clinicaId).toPromise()
+          .then((x: Response<AdministradoresPorClinica[]>) => {
+            this.Tabela = {
+              ...this.Tabela,
+              Registros: x.data
+            }
+          })
+    }  
+  }
+
+  public verificar_usuario_master(): boolean {
+    if(this.isResponseLoginAdministrador(this.usuarioLogado)){
+      return this.usuarioLogado.master   
+    }  
   }
 
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { Response } from 'src/models/response';
-import { Clinica } from 'src/models/entidades/clinica';
+import { AdministradoresPorClinica, Clinica } from 'src/models/entidades/clinica';
 import { ClinicaService } from 'src/services/clinica.service';
 
 @Injectable({
@@ -21,6 +21,7 @@ export class ConfigurarClinicaResolver extends PadraoComponent implements Resolv
 
     async resolve(): Promise<Clinica> {              
         await this.get_clinica();
+        await this.administradores_por_clinica();
         return this.clinica
     }
 
@@ -30,4 +31,12 @@ export class ConfigurarClinicaResolver extends PadraoComponent implements Resolv
               .then((x: Response<Clinica>) => this.clinica = x.data)
         }  
     }
+
+    private async administradores_por_clinica(): Promise<void> {
+        if(this.isResponseLoginAdministrador(this.usuarioLogado)){
+            await this.clinicaService.administradores_por_clinica(this.usuarioLogado.clinicaId).toPromise()
+              .then((x: Response<AdministradoresPorClinica[]>) => this.clinica.listaAdministradoresPorClinica = x.data)
+        }  
+    }
+
 }

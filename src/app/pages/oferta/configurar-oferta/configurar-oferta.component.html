@@ -8,7 +8,7 @@
 
           <mat-form-field appearance="fill" style="width: 100%; margin-top: 20px;">
             <mat-label>Titulo</mat-label>
-            <input matInput formControlName="titulo">
+            <input matInput formControlName="titulo" maxlength="60">
           </mat-form-field>
         
 
@@ -83,16 +83,14 @@
         <mat-step label="Pagamento" state="chat">
           <mat-form-field appearance="outline" style="width: 500px">
             <mat-label>Valor</mat-label>
-            <input matInput type="number" class="example-right-align" formControlName="valor">
+            <input matInput type="number" class="example-right-align" formControlName="valor" max="10000" min="0">
             <span matPrefix>R$&nbsp;</span>
-            <span matSuffix>.00</span>
           </mat-form-field>
 
           <mat-form-field appearance="outline" style="width: 500px">
             <mat-label>Valor por hora extra</mat-label>
-            <input matInput type="number" class="example-right-align" formControlName="valorHoraExtra">
+            <input matInput type="number" class="example-right-align" formControlName="valorHoraExtra" max="10000" min="0">
             <span matPrefix>R$&nbsp;</span>
-            <span matSuffix>.00</span>
           </mat-form-field>
 
           <mat-form-field appearance="fill" style="width: 500px">

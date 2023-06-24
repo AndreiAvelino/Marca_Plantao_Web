@@ -8,4 +8,12 @@ export interface Clinica {
     sobre: string,
     endereco?: Endereco,
     avaliacoes: Avaliacao[]
+    listaAdministradoresPorClinica?: AdministradoresPorClinica[]
+}
+
+export interface AdministradoresPorClinica {
+    clinicaId: string;
+    email: string;
+    id: string;
+    master: boolean;
 }

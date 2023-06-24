@@ -4,7 +4,7 @@
       <mat-card-title> {{Tabela.Titulo}} </mat-card-title>
     </mat-card-header>
 
-    <hr>
+    <hr *ngIf="Tabela.Titulo">
 
     <mat-form-field appearance="outline" *ngIf="Tabela.Filtro" style="width: 50%">
       <mat-label>Filtro</mat-label>
@@ -25,12 +25,11 @@
       <ng-container *ngFor="let Coluna of ColunasInformacoes()" [matColumnDef]="Coluna.Chave">
 
         <th mat-header-cell 
-            [ngStyle]="{'width' : Coluna.Tamanho + '%'}"
-            style="min-width: 100px"  
+            [ngStyle]="{'width' : retorna_medida(Coluna)}"
             *matHeaderCellDef
             mat-sort-header> {{Coluna.Descricao}} </th>
             
-        <td mat-cell class="coluna-pequena" *matCellDef="let row" [ngSwitch]="Coluna.Chave">           
+        <td mat-cell *matCellDef="let row"             [ngStyle]="{'width' : Coluna.Tamanho + 'px'}" [ngSwitch]="Coluna.Chave">           
 
           {{row[Coluna.Chave]}}
 

@@ -14,11 +14,13 @@ import { NgxMaskModule } from 'ngx-mask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlterarPerfilUsuarioComponent } from './perfil-usuario/alterar-perfil-usuario/alterar-perfil-usuario.component';
 import { FormularioModule } from 'src/forms/formulario.module';
+import { CriarUsuarioAdministradorComponent } from './criar-usuario-administrador/criar-usuario-administrador.component';
 
 @NgModule({
   declarations: [
     PerfilUsuarioComponent,
-    AlterarPerfilUsuarioComponent
+    AlterarPerfilUsuarioComponent,
+    CriarUsuarioAdministradorComponent
   ],
   imports: [
     CommonModule,
