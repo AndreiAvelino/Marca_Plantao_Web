@@ -14,8 +14,6 @@ export class OfertaService {
 
   public get_all(dataInicio?: string, dataFinal?: string, valorInicial?: number, valorFinal?: number, turno?: string): Observable<Response<Oferta[]>> {
 
-    console.log(dataInicio, dataFinal, valorInicial, valorFinal, turno)
-
     let params = new HttpParams()
 
     if(dataInicio || dataFinal || valorInicial || valorFinal || turno){

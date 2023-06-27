@@ -24,7 +24,6 @@ export class PesquisarOfertaComponent implements OnInit {
       width: '500px'
     })
     .afterClosed()
-    .pipe(tap(x => console.log(x)))
     .subscribe((x) => this.get_all(
         x.dataInicial, 
         x.dataFinal,

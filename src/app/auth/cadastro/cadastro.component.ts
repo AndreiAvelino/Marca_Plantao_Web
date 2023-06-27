@@ -69,8 +69,6 @@ export class CadastroComponent extends PadraoComponent implements OnInit, AfterV
       cpf: null,
       especializacoes: []
     })
-
-    this.formulario.valueChanges.subscribe(x => console.log(this.formulario.valid))
   }
 
   public async cadastrarUsuario(): Promise<void> {
@@ -85,7 +83,7 @@ export class CadastroComponent extends PadraoComponent implements OnInit, AfterV
         }
       })
       .then(() => this.redirecionar())
-      .catch((e: HttpErrorResponse) => this.mensagem_erro(e.message))
+      .catch((e) => e.error.errors.forEach(m => this.mensagem_erro(m)))
       .finally(() => this.logando = false)
   }
 

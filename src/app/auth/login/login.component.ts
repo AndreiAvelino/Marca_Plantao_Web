@@ -58,7 +58,6 @@ export class LoginComponent extends PadraoComponent implements OnInit {
       })))
       .then(() => this.router.navigate([Rotas.Inicio]))
       .catch((e: HttpErrorResponse) => {
-        console.log(e)
         this.mensagem_erro(e.error)
       })
 

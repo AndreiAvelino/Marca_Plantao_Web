@@ -225,7 +225,6 @@ export class IndicadoresComponent {
     let grafico = [];
 
     [1,2,3,4,5,6,7,8,9,10,11,12].forEach(x => {
-      console.log(plantaoxmes.find(p => p.mes == x))
       grafico.push({
         mes: this.retorna_mes(x),
         quantidade: plantaoxmes.find(p => p.mes == x) ? plantaoxmes.find(p => p.mes == x).quantidade : 0
