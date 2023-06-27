@@ -3,7 +3,7 @@
 </button>
 
 <mat-menu #menu="matMenu">
-    <button *ngFor="let notificacao of ListaNotificacoes" mat-menu-item>
+    <button *ngFor="let notificacao of ListaNotificacoes" mat-menu-item (click)="ver_plantao(notificacao)">
 
         <mat-icon *ngIf="notificacao.tipoMensagem == 'Alerta'" style="color: yellow;">warning</mat-icon>
         <mat-icon *ngIf="notificacao.tipoMensagem == 'Informacao'" style="color: green">notifications_none</mat-icon>

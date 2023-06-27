@@ -63,7 +63,7 @@ export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit
       return {
         ...x,
         dataInicial: this.retorna_legivel_de_yyyymmddhhmmss(x.dataInicial),
-        dataFinal: this.retorna_legivel_de_yyyymmddhhmmss(x.dataFinal),
+        dataFinal: x.dataFinal ? this.retorna_legivel_de_yyyymmddhhmmss(x.dataFinal) : "-",
         status: this.retorna_status_plantao(x.status)
       }
     })

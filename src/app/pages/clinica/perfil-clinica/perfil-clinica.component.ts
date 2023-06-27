@@ -35,7 +35,12 @@ export class PerfilClinicaComponent implements OnInit {
   }
 
   public gerar_media_nota(): number {
-    return this.clinica.avaliacoes.map(x => x.nota).reduce((a, b) => a + b, 0) / this.clinica.avaliacoes.length
+    if(this.clinica.avaliacoes.length > 0){
+      return this.clinica.avaliacoes.map(x => x.nota).reduce((a, b) => a + b, 0) / this.clinica.avaliacoes.length
+    } else {
+      return 0
+    }
+    
   }
 
   public voltar(): void {

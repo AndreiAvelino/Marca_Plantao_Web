@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Especializacao } from 'src/models/entidades/especializacao';
@@ -15,11 +16,10 @@ export class FiltrarListaOfertaComponent implements OnInit {
   public formulario: FormGroup
   public ListaEspecializacao: Observable<Especializacao[]> = this.especializacaoService.get_all().pipe(map(x => x.data));  
 
-  
-
   constructor(
     private formBuilder: FormBuilder,
-    private especializacaoService: EspecializacaoService
+    private especializacaoService: EspecializacaoService,
+    public dialogRef: MatDialogRef<FiltrarListaOfertaComponent>
   ) {
     this.criar_formulario();
   }
@@ -28,8 +28,8 @@ export class FiltrarListaOfertaComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       mostrarOfertasCandidatadas: false,
       turno: "12h",
-      valorInicial: 200,
-      valorFinal: 3000,
+      valorInicial: 0,
+      valorFinal: 0,
       dataInicial: null,
       dataFinal: null,
       especializacoes: []
@@ -37,6 +37,10 @@ export class FiltrarListaOfertaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  public fechar(): void {
+    this.dialogRef.close(this.formulario.value)
   }
 
 }

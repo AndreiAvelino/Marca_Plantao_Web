@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -12,8 +12,36 @@ export class OfertaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public get_all(): Observable<Response<Oferta[]>> {
-    return this.httpClient.get<Response<Oferta[]>>(environment.api + "ObterTodasOfertas");
+  public get_all(dataInicio?: string, dataFinal?: string, valorInicial?: number, valorFinal?: number, turno?: string): Observable<Response<Oferta[]>> {
+
+    console.log(dataInicio, dataFinal, valorInicial, valorFinal, turno)
+
+    let params = new HttpParams()
+
+    if(dataInicio || dataFinal || valorInicial || valorFinal || turno){
+
+      if(dataInicio){
+        params = params.append('dataInicio', dataInicio);
+      }
+
+      if(dataFinal){
+        params = params.append('dataFinal', dataFinal);
+      }
+
+      if(valorInicial){
+        params = params.append('valorInicial', valorInicial);
+      }
+
+      if(valorFinal){
+        params = params.append('valorFinal', valorFinal);
+      }
+
+      if(turno){
+        params = params.append('turno', turno);
+      }
+    }
+
+    return this.httpClient.get<Response<Oferta[]>>(environment.api + "ObterTodasOfertas", { params: params });
   }
 
   public get(idOferta: string): Observable<Response<Oferta>> {

@@ -1,5 +1,5 @@
 <form [formGroup]="formulario">
-    <mat-accordion>
+    <!-- <mat-accordion>
         <mat-expansion-panel class="mat-elevation-z0">        
             <mat-expansion-panel-header>                        
                 <mat-panel-title> <span style="font-weight: 500;">Ordenar por</span> </mat-panel-title>
@@ -14,7 +14,7 @@
             </div>
 
         </mat-expansion-panel>
-    </mat-accordion>
+    </mat-accordion> -->
 
     <mat-accordion>
         <mat-expansion-panel class="mat-elevation-z0">        
@@ -36,6 +36,51 @@
     <mat-accordion>
         <mat-expansion-panel class="mat-elevation-z0">        
             <mat-expansion-panel-header>                        
+                <mat-panel-title> <span style="font-weight: 500;">Valor</span> </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <app-input type="number"
+                       formControlName="valorInicial"
+                       [label]="'Valor Inicial'"
+                       [control]="formulario.controls.valorInicial">
+            </app-input>
+
+              
+            <app-input type="number"
+                       formControlName="valorFinal"
+                       [label]="'Valor inicial'"
+                       [control]="formulario.controls.valorFinal">
+            </app-input>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0">        
+            <mat-expansion-panel-header>                        
+                <mat-panel-title> <span style="font-weight: 500;">Data</span> </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <app-input type="date"
+                       formControlName="dataInicial"
+                       [label]="'Data Inicial'"
+                       [control]="formulario.controls.dataInicial">
+            </app-input>
+
+              
+            <app-input type="date"
+                       formControlName="dataFinal"
+                       [label]="'Data Final'"
+                       [control]="formulario.controls.dataFinal">
+            </app-input>
+
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <!-- <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0">        
+            <mat-expansion-panel-header>                        
                 <mat-panel-title> <span style="font-weight: 500;">Especialização</span></mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -51,92 +96,11 @@
             </div>  
 
         </mat-expansion-panel>
-    </mat-accordion>
+    </mat-accordion> -->
 
-    <mat-checkbox formControlName="mostrarOfertasCandidatadas">Mostrar ofertas que estou candidatado</mat-checkbox>
+    <!-- <mat-checkbox formControlName="mostrarOfertasCandidatadas">Mostrar ofertas que estou candidatado</mat-checkbox> -->
 </form>
 
-<button style="width: 100%; height: 35px; background-color: #65c368; color: white; border-radius: 5px; border: #65c368 solid 1px;"> Concluir </button>
+<button style="width: 100%; height: 35px; background-color: #65c368; color: white; border-radius: 5px; border: #65c368 solid 1px;" (click)="fechar()"> Concluir </button>
 
 
-
-
-
-
-<!-- 
-<div class="botoes">
-
-    <span class="titulo">Ordenar por</span>
-
-    <div class="botoes-ordenar">
-    
-        <div class="botao-ordenar">
-            <button mat-mini-fab color="primary">
-                <mat-icon>calendar_today</mat-icon>
-            </button>
-            <span> Mais recentes </span>
-        </div>
-    
-        <div class="botao-ordenar">
-            <button mat-mini-fab color="primary">
-                <mat-icon> attach_money</mat-icon>
-            </button>
-            <span> Maior valor </span>
-        </div>
-    
-        <div class="botao-ordenar">
-            <button mat-mini-fab color="primary">
-                <mat-icon>star</mat-icon>
-            </button>
-            <span> Melhor avaliação </span>
-        </div>
-        
-    </div>
-
-</div>
-
-
-<form [formGroup]="formulario">
-
-    <div class="turno">
-        <span class="titulo"> Turno </span>
-        <mat-radio-group formControlName="turno">
-            <mat-radio-button value="12h">12h</mat-radio-button>
-            <br>
-            <mat-radio-button value="24h">24h</mat-radio-button>
-        </mat-radio-group>    
-    </div>
-
-    <br>
-
-    <div class="especializacao">
-        <span class="titulo"> Especialização </span>
-        <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Especialização</mat-label>
-            <mat-select formControlName="especializacoes" multiple>
-              <mat-option *ngFor="let especializacao of ListaEspecializacao | async" [value]="especializacao.id">
-                {{especializacao.descricao}}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>    
-    </div>        
-
-    <br> -->
-
-    <!-- <div style="display: flex">
-        <mat-form-field appearance="fill">
-          <mat-label>Data de inicio</mat-label>
-          <input matInput type="date" formControlName="dataInicial">
-        </mat-form-field>
-      </div>
-  
-      <div style="display: flex">
-        <mat-form-field appearance="fill">
-          <mat-label>Data de fim</mat-label>
-          <input matInput type="date" formControlName="dataFinal">
-        </mat-form-field>
-      </div>   -->
-<!-- 
-
-</form>
- -->

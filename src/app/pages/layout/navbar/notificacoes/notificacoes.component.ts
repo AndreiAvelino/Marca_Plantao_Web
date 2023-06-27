@@ -37,9 +37,12 @@ export class NotificacoesComponent extends PadraoComponent implements OnInit {
   }
 
   private ver_plantao(linha: any): void{
-    this.router.navigate([Rotas.InfoPlantao],  {
-      queryParams: { id: linha.id}
-    })
+    // this.router.navigate([Rotas.InfoPlantao],  {
+    //   queryParams: { id: linha.id}
+    // })
+
+    this.notificacaoService.delete(linha.id).toPromise()
+      .then(() => this.ListaNotificacoes = this.ListaNotificacoes.filter(x => x.id != linha.id))
   }
 
 }
