@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -10,15 +11,19 @@ import { Rotas } from 'src/enum/enum';
 import { Especializacao } from 'src/models/entidades/especializacao';
 import { EspecializacaoService } from 'src/services/especializacao.service';
 import { LoginService } from 'src/services/login.service';
+import { MyErrorStateMatcher } from './mather';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.scss']
 })
+
+
 export class CadastroComponent extends PadraoComponent implements OnInit, AfterViewInit {
 
   @ViewChild("stepper") stepper: MatStepper;
+  matcher = new MyErrorStateMatcher();
 
   public formulario: FormGroup
   public logando: boolean = false;
@@ -53,7 +58,7 @@ export class CadastroComponent extends PadraoComponent implements OnInit, AfterV
   private gerarFormulario(): void {
     this.formulario = this.formBuilder.group({
       email: null,
-      password: null,
+      password: [null, [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
       confirmPassword: null,
       nome: null,
       dataNascimento: null,
@@ -64,13 +69,21 @@ export class CadastroComponent extends PadraoComponent implements OnInit, AfterV
       cpf: null,
       especializacoes: []
     })
+
+    this.formulario.valueChanges.subscribe(x => console.log(this.formulario.valid))
   }
 
   public async cadastrarUsuario(): Promise<void> {
     this.logando = true;
 
     await this.loginService.registrar_usuario(this.formulario.value).toPromise()
-      .then(x => this.inserir_cookie("usuario", JSON.stringify(x.data)))
+      .then(x => {
+        if(x.success){
+          this.inserir_cookie("usuario", JSON.stringify(x.data))
+        } else {
+          x.errors.forEach(e => this.mensagem_erro(e)) 
+        }
+      })
       .then(() => this.redirecionar())
       .catch((e: HttpErrorResponse) => this.mensagem_erro(e.message))
       .finally(() => this.logando = false)
@@ -79,5 +92,6 @@ export class CadastroComponent extends PadraoComponent implements OnInit, AfterV
   private redirecionar(): void {
     this.router.navigate([Rotas.Inicio])
   }
+
 
 }

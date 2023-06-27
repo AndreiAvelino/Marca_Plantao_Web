@@ -50,18 +50,25 @@
                        [label]="'E-mail'"
                        [control]="formulario.controls.email">
             </app-input>
+            
     
-            <app-input formControlName="password"
-                       type="password"
-                       [label]="'Senha'"
-                       [control]="formulario.controls.password">
-            </app-input>
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Senha</mat-label>
+              <input type="password" matInput formControlName="password" [errorStateMatcher]="matcher">
+ 
+              <mat-error *ngIf="formulario.get('password').hasError('pattern')" style="display: flex; flex-direction: column;" >
+                <span> A senha deve conter ao menos uma letra maiuscula </span>
+                <span> A senha deve conter ao menos uma letra minuscula </span>
+                <span> A senha deve conter ao menos um caracter especial </span>
+                <span> A senha deve conter numeros </span>
+              </mat-error>
+            </mat-form-field>
     
-            <app-input formControlName="confirmPassword"
-                       type="password"
-                       [label]="'Confirmar senha'"
-                       [control]="formulario.controls.password">
-            </app-input>
+
+            <mat-form-field [ngClass]="formulario.get('password').hasError('pattern') && formulario.get('password') ? 'aumentamargen': ''" appearance="outline" style="width: 100%;">
+              <mat-label>Confirmar Senha</mat-label>
+              <input type="password" matInput formControlName="confirmPassword">
+            </mat-form-field>
           </div>
         </mat-step>
   
@@ -103,7 +110,8 @@
 
             <button class="button-finalizar"
                     mat-stroked-button
-                    (click)="cadastrarUsuario()">
+                    (click)="cadastrarUsuario()"
+                    [disabled]="!formulario.valid">
               <div *ngIf="!logando" class="button-finalizar-label">
                 <p>Finalizar</p>
               </div>
