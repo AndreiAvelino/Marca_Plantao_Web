@@ -57,39 +57,94 @@ export class CadastroComponent extends PadraoComponent implements OnInit, AfterV
 
   private gerarFormulario(): void {
     this.formulario = this.formBuilder.group({
-      email: null,
+      email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
-      confirmPassword: null,
-      nome: null,
-      dataNascimento: null,
-      genero: null,
-      telefone: null,
-      imagem: null,
-      crm: null,
-      cpf: null,
-      especializacoes: []
+      confirmPassword: [null, [Validators.required]],
+      nome: [null, [Validators.required]],
+      dataNascimento: [null, [Validators.required]],
+      genero: [null, [Validators.required]],
+      telefone: [null, [Validators.required]],
+      imagem: [null, [Validators.required]],
+      crm: [null, [Validators.required]],
+      cpf: [null, [Validators.required]],
+      especializacoes: [[], [Validators.required]]
     })
   }
 
   public async cadastrarUsuario(): Promise<void> {
-    this.logando = true;
 
-    await this.loginService.registrar_usuario(this.formulario.value).toPromise()
-      .then(x => {
-        if(x.success){
-          this.inserir_cookie("usuario", JSON.stringify(x.data))
-        } else {
-          x.errors.forEach(e => this.mensagem_erro(e)) 
-        }
-      })
-      .then(() => this.redirecionar())
-      .catch((e) => e.error.errors.forEach(m => this.mensagem_erro(m)))
-      .finally(() => this.logando = false)
+    if(this.checarCampos()){
+      this.logando = true;
+
+      await this.loginService.registrar_usuario(this.formulario.value).toPromise()
+        .then(x => {
+          if(x.success){
+            this.inserir_cookie("usuario", JSON.stringify(x.data))
+          } else {
+            x.errors.forEach(e => this.mensagem_erro(e)) 
+          }
+        })
+        .then(() => this.redirecionar())
+        .catch((e) => e.error.errors.forEach(m => this.mensagem_erro(m)))
+        .finally(() => this.logando = false)
+    }
+   
   }
 
   private redirecionar(): void {
     this.router.navigate([Rotas.Inicio])
   }
 
+  private checarCampos(): boolean {
+    let valido = true
 
+    if(!this.formulario.get('email').valid){
+      valido = false
+      this.mensagem_erro('O campo email está incorreto')
+    }
+    if(!this.formulario.get('password').valid){
+      valido = false
+      this.mensagem_erro('O campo senha deve ser informado')
+    }
+    if(!this.formulario.get('confirmPassword').valid){
+      valido = false
+      this.mensagem_erro('O campo confirmar deve ser informado')
+    }
+    if(!this.formulario.get('nome').valid){
+      valido = false
+      this.mensagem_erro('O campo nome deve ser informado')
+    }
+    if(!this.formulario.get('dataNascimento').valid){
+      valido = false
+      this.mensagem_erro('O campo data de nascimento deve ser informado')
+    }
+    if(!this.formulario.get('genero').valid){
+      valido = false
+      this.mensagem_erro('O campo genero deve ser informado')
+    }
+    if(!this.formulario.get('telefone').valid){
+      valido = false
+      this.mensagem_erro('O campo telefone deve ser informado')
+    }
+    if(!this.formulario.get('crm').valid){
+      valido = false
+      this.mensagem_erro('O campo CRM deve ser informado')
+    }
+    if(!this.formulario.get('cpf').valid){
+      valido = false
+      this.mensagem_erro('O campo CPF deve ser informado')
+    }
+    if(this.formulario.get('especializacoes').value.length == 0){
+      valido = false
+      this.mensagem_erro('Informe ao menos uma especialização')
+    }
+    if(this.formulario.get('password').value != this.formulario.get('confirmPassword').value){
+      valido = false
+      this.mensagem_erro('As senhas informadas nao coincidem')
+    }
+
+
+    return valido;
+  }
+  
 }
