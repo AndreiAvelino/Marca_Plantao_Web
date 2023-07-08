@@ -25,11 +25,11 @@
       <ng-container *ngFor="let Coluna of ColunasInformacoes()" [matColumnDef]="Coluna.Chave">
 
         <th mat-header-cell 
-            [ngStyle]="{'width' : retorna_medida(Coluna)}"
+            [ngStyle]="{'width' : retorna_medida(Coluna), 'min-width' : retorna_medida(Coluna)}"
             *matHeaderCellDef
             mat-sort-header> {{Coluna.Descricao}} </th>
             
-        <td mat-cell *matCellDef="let row"             [ngStyle]="{'width' : Coluna.Tamanho + 'px'}" [ngSwitch]="Coluna.Chave">           
+        <td mat-cell *matCellDef="let row" [ngStyle]="{'width' : retorna_medida(Coluna), 'min-width' : retorna_medida(Coluna)}" [ngSwitch]="Coluna.Chave">           
 
           {{row[Coluna.Chave]}}
 

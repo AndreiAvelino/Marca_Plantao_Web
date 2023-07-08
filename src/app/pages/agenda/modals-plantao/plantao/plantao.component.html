@@ -70,7 +70,7 @@
                     <span style="font-weight: 500;"> Hora extra realizada: </span> <span> {{plantao.horaExtra ? plantao.horaExtra : '-'}} </span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <span style="font-weight: 500;"> Descontos: </span> <span style="color: red"> {{plantao.desconto ? plantao.desconto : '-'}} </span>
+                    <span style="font-weight: 500;"> Descontos: </span> <span style="color: red"> {{plantao.desconto ? 'R$ ' + plantao.desconto : '-'}} </span>
                 </div>
             </div>
 
@@ -116,8 +116,15 @@
 
 
 
-    <mat-tab label="Avaliações">        
-        <avaliacoes-plantao [idPlantao]="plantao.id"
+    <mat-tab label="Avaliações">   
+
+        <div *ngIf="plantao.status != 2" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 20px;">
+            <span style="font-size: 20px; font-weight: 600; margin-bottom: 10px;"> Não há avaliações disponíveis </span>
+            <span> As avaliações somente estão disponível ao finalizar o plantão </span>
+        </div>
+        
+        <avaliacoes-plantao *ngIf="plantao.status == 2"
+                            [idPlantao]="plantao.id"
                             layout="clinica"
                             [AutorProfissional]="profissional.nome">            
         </avaliacoes-plantao>

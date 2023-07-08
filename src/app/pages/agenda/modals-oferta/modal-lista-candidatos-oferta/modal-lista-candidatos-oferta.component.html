@@ -2,7 +2,7 @@
     <mat-list-item *ngFor="let candidato of candidatos" role="listitem" style="height: 60px">
         <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;"> 
             <div style="display: flex; align-items: center;">
-                <ngx-avatar [src]="candidato.src ? candidato.src : ''" [name]="candidato.nome"></ngx-avatar>
+                <ngx-avatar [src]="candidato.src ? candidato.src : ''" [name]="candidato.nome" [src]="retorna_imagem_usuario(candidato.imagem)"></ngx-avatar>
                 <span style="margin-left: 15px">{{candidato.nome}}</span>
             </div>
             <div>

@@ -68,6 +68,8 @@ export class InfoPlantaoComponent implements OnInit {
   }
 
   public retorna_status_plantao(index: number): string {
+    if(!index) return
+
     switch(index){
       case StatusPlantao.NaoIniciado: return "Não inciado";
       case StatusPlantao.Andamento:   return "Em andamento";
@@ -77,6 +79,8 @@ export class InfoPlantaoComponent implements OnInit {
   }
 
   public retorna_status_pagamento(index: number): string {
+    if(!index) return
+
     switch(index){
       case StatusPagamento.Pendente: return "Pendente";
       case StatusPagamento.Efetuado: return "Efetuado";
@@ -84,6 +88,8 @@ export class InfoPlantaoComponent implements OnInit {
   }
 
   public retorna_metodo_pagamento(index: number): string {
+    if(!index) return
+
     switch(index){
       case FormaPagamento.Pix: return "Pix";
       case FormaPagamento.Dinheiro: return "Dinheiro";
@@ -93,7 +99,7 @@ export class InfoPlantaoComponent implements OnInit {
   }
 
   public retorna_data_final_plantao(): string {
-    if(this.plantao.status == StatusPlantao.Finalizado){
+    if(this.plantao?.status == StatusPlantao.Finalizado){
       return moment(this.plantao.dataFinal).format('DD/MM/yy HH:mm')
     } else {
       return "-"
@@ -101,7 +107,9 @@ export class InfoPlantaoComponent implements OnInit {
   }
 
   public retorna_total_a_pagar(): number {
-    return parseFloat(this.oferta.valor) + (this.plantao.horaExtra ? parseInt(this.plantao.horaExtra) * parseFloat(this.oferta.valorHoraExtra) : 0) - (this.plantao.desconto ? parseFloat(this.plantao.desconto) : 0)       
+    if(!this.oferta && !this.plantao) return
+
+    return parseFloat(this.oferta?.valor) + (this.plantao?.horaExtra ? parseInt(this.plantao?.horaExtra) * parseFloat(this.oferta?.valorHoraExtra) : 0) - (this.plantao?.desconto ? parseFloat(this.plantao?.desconto) : 0)       
   }
 
 

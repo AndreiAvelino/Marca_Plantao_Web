@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
-import { AdicionarAvaliacaoPlantaoProfissional } from 'src/models/entidades/avaliacao';
+import { AdicionarAvaliacaoPlantaoProfissional, AvaliacaoPlantao } from 'src/models/entidades/avaliacao';
 import { AvaliacaoService } from 'src/services/avaliacao.service';
 import { Response } from 'src/models/response';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Plantao } from 'src/models/entidades/plantao';
-import { Clinica } from 'src/models/entidades/clinica';
 import { Observable } from 'rxjs';
-import { ClinicaService } from 'src/services/clinica.service';
 import { PlantaoService } from 'src/services/plantao.service';
 import { Oferta } from 'src/models/entidades/oferta';
 import { OfertaService } from 'src/services/oferta.service';
@@ -44,9 +42,17 @@ export class AvaliarPlantaoComponent extends PadraoComponent implements OnInit {
     await this.get_plantao(this.retorna_id_url()).toPromise()
       .then((x: Response<Plantao>) => this.plantao = x.data)
 
+    await this.get_avaliacoes(this.plantao.id).toPromise()
+      .then((x: Response<AvaliacaoPlantao>) => {
+        if(x.data.avaliacaoProfissional.length > 0){
+          this.mensagem_erro('Avaliação já foi realizada')
+          this.router.navigate([Rotas.HistoricoPlantao])
+        }
+      })
+
     await this.get_oferta(this.plantao.ofertaId).toPromise()
-      .then((x: Response<Oferta>) => this.oferta = x.data)
-    
+      .then((x: Response<Oferta>) => this.oferta = x.data)  
+
   }
 
   private criar_formulario(): void {
@@ -88,5 +94,9 @@ export class AvaliarPlantaoComponent extends PadraoComponent implements OnInit {
 
   private get_oferta(id: string): Observable<Response<Oferta>> {
     return this.ofertaService.get(id)
+  }
+
+  private get_avaliacoes(id: string): Observable<Response<AvaliacaoPlantao>> {
+    return this.avaliarService.get(id);
   }
 }

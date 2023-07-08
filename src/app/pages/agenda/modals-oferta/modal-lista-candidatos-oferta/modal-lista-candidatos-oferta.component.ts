@@ -46,11 +46,11 @@ export class ModalListaCandidatosOfertaComponent extends PadraoComponent impleme
     })
   }
 
-  // public retorna_imagem_usuario(): string {
-  //   if(this.profissional.imagem){
-  //     return 'data:image/jpeg;base64,' + this.profissional.imagem 
-  //   } 
-  //   return null;
-  // }
+  public retorna_imagem_usuario(imagem): string {
+    if(imagem){
+      return 'data:image/jpeg;base64,' + imagem 
+    } 
+    return null;
+  }
 
 }

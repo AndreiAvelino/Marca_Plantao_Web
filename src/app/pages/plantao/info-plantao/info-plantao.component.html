@@ -6,16 +6,16 @@
     <mat-tab label="Sobre">
         <div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Status: </span> <span> {{retorna_status_plantao(plantao.status)}} </span> 
+                <span style="font-weight: 500;"> Status: </span> <span> {{retorna_status_plantao(plantao?.status)}} </span> 
             </div>
         </div>
         
         <div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Clinica: </span> <span> {{clinica.razaoSocial}} </span> 
+                <span style="font-weight: 500;"> Clinica: </span> <span> {{clinica?.razaoSocial}} </span> 
             </div>
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Data de inicio: </span> <span> {{plantao.dataInicial | date: 'dd/MM/yyyy HH:mm'}} </span>
+                <span style="font-weight: 500;"> Data de inicio: </span> <span> {{plantao?.dataInicial | date: 'dd/MM/yyyy HH:mm'}} </span>
             </div>
             <div style="display: flex; justify-content: space-between;">
                 <span style="font-weight: 500;"> Data de fim: </span> <span> {{retorna_data_final_plantao()}} </span>
@@ -24,32 +24,32 @@
         
         <div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Cidade: </span> <span> {{clinica.endereco.cidade}} </span> 
+                <span style="font-weight: 500;"> Cidade: </span> <span> {{clinica?.endereco.cidade}} </span> 
             </div>
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Bairro: </span> <span> {{clinica.endereco.bairro}} </span> 
+                <span style="font-weight: 500;"> Bairro: </span> <span> {{clinica?.endereco.bairro}} </span> 
             </div>
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Rua: </span> <span> {{clinica.endereco.rua}} </span> 
+                <span style="font-weight: 500;"> Rua: </span> <span> {{clinica?.endereco.rua}} </span> 
             </div>
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> CEP: </span> <span> {{clinica.endereco.cep}} </span> 
+                <span style="font-weight: 500;"> CEP: </span> <span> {{clinica?.endereco.cep}} </span> 
             </div>
         </div>
         
         
         <div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Valor ofertado  </span> <span> R$ {{oferta.valor}} </span> 
+                <span style="font-weight: 500;"> Valor ofertado  </span> <span> R$ {{oferta?.valor}} </span> 
             </div>
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Valor por hora extra: </span> <span> R$ {{oferta.valorHoraExtra}} </span> 
+                <span style="font-weight: 500;"> Valor por hora extra: </span> <span> R$ {{oferta?.valorHoraExtra}} </span> 
             </div>
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Hora extra realizada: </span> <span> {{plantao.horaExtra ? plantao.horaExtra + ' horas' : '-'}} </span> 
+                <span style="font-weight: 500;"> Hora extra realizada: </span> <span> {{plantao?.horaExtra ? plantao.horaExtra + ' horas' : '-'}} </span> 
             </div>
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Descontos: </span> <span style="color: red">  {{plantao.desconto ? 'R$ ' + plantao.desconto : '-' }} </span>
+                <span style="font-weight: 500;"> Descontos: </span> <span style="color: red">  {{plantao?.desconto ? 'R$ ' + plantao.desconto : '-' }} </span>
             </div>
             <div style="display: flex; justify-content: space-between;">
                 <span style="font-weight: 500;"> Total: </span> <span style="color: blue"> R$ {{retorna_total_a_pagar()}} </span>
@@ -58,19 +58,20 @@
         
         <div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Situacao: </span> <span> {{retorna_status_plantao(plantao.statusPagamento)}} </span>
+                <span style="font-weight: 500;"> Situacao: </span> <span> {{retorna_status_plantao(plantao?.statusPagamento)}} </span>
             </div>
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Forma de pagamento: </span> <span> {{retorna_metodo_pagamento(oferta.pagamento)}} </span>
+                <span style="font-weight: 500;"> Forma de pagamento: </span> <span> {{retorna_metodo_pagamento(oferta?.pagamento)}} </span>
             </div>
             <div style="display: flex; justify-content: space-between;">
-                <span style="font-weight: 500;"> Data do pagamento: </span> <span> {{plantao.dataPagamento | date: 'dd/MM/yyyy HH:mm'}} </span>
+                <span style="font-weight: 500;"> Data do pagamento: </span> <span> {{plantao?.dataPagamento | date: 'dd/MM/yyyy HH:mm'}} </span>
             </div>
         </div>
     </mat-tab>
     <mat-tab label="Avaliações">
         
-        <avaliacoes-plantao [idPlantao]="plantao.id"
+        <avaliacoes-plantao *ngIf="plantao"
+                            [idPlantao]="plantao.id"
                             layout="profissional">            
         </avaliacoes-plantao>
 

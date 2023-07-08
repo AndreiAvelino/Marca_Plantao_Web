@@ -4,41 +4,41 @@
 
 <div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
     <div style="display: flex; justify-content: space-between;">
-        <span style="font-weight: 500;"> Clinica: </span> <span> {{clinica.razaoSocial}} </span> 
+        <span style="font-weight: 500;"> Clinica: </span> <span> {{clinica?.razaoSocial}} </span> 
     </div>
 
     <div style="display: flex; justify-content: space-between;">
-        <span style="font-weight: 500;"> Data de inicio: </span> <span> {{oferta.dataInicial | date: 'dd/MM/yyyy HH:mm'}} </span>
+        <span style="font-weight: 500;"> Data de inicio: </span> <span> {{oferta?.dataInicial | date: 'dd/MM/yyyy HH:mm'}} </span>
     </div>
     <div style="display: flex; justify-content: space-between;">
-        <span style="font-weight: 500;"> Data de fim: </span> <span> {{oferta.dataFinal | date: 'dd/MM/yyyy HH:mm'}} </span>
+        <span style="font-weight: 500;"> Data de fim: </span> <span> {{oferta?.dataFinal | date: 'dd/MM/yyyy HH:mm'}} </span>
     </div> 
 </div>
 
 <div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
     <div style="display: flex; justify-content: space-between;">
-        <span style="font-weight: 500;"> Valor ofertado  </span> <span> R$ {{oferta.valor}} </span> 
+        <span style="font-weight: 500;"> Valor ofertado  </span> <span> R$ {{oferta?.valor}} </span> 
     </div>
     <div style="display: flex; justify-content: space-between;">
-        <span style="font-weight: 500;"> Valor por hora extra: </span> <span> R$ {{oferta.valorHoraExtra}} </span> 
+        <span style="font-weight: 500;"> Valor por hora extra: </span> <span> R$ {{oferta?.valorHoraExtra}} </span> 
     </div>
     <div style="display: flex; justify-content: space-between;">
-        <span style="font-weight: 500;"> Forma de pagamento: </span> <span> {{retorna_metodo_pagamento(oferta.pagamento)}} </span>
+        <span style="font-weight: 500;"> Forma de pagamento: </span> <span> {{oferta ? retorna_metodo_pagamento(oferta.pagamento) : '-' }} </span>
     </div>
 </div>
 
 
 <div style="font-size: 17px; margin-top: 50px; margin: 15px" class="card red">
     <div style="display: flex; justify-content: space-between;">
-        <span style="font-weight: 500;"> Cidade: </span> <span> {{clinica.endereco.cidade}} </span> 
+        <span style="font-weight: 500;"> Cidade: </span> <span> {{clinica?.endereco.cidade}} </span> 
     </div>
     <div style="display: flex; justify-content: space-between;">
-        <span style="font-weight: 500;"> Bairro: </span> <span> {{clinica.endereco.bairro}} </span> 
+        <span style="font-weight: 500;"> Bairro: </span> <span> {{clinica?.endereco.bairro}} </span> 
     </div>
     <div style="display: flex; justify-content: space-between;">
-        <span style="font-weight: 500;"> Rua: </span> <span> {{clinica.endereco.rua}} </span> 
+        <span style="font-weight: 500;"> Rua: </span> <span> {{clinica?.endereco.rua}} </span> 
     </div>
     <div style="display: flex; justify-content: space-between;">
-        <span style="font-weight: 500;"> CEP: </span> <span> {{clinica.endereco.cep}} </span> 
+        <span style="font-weight: 500;"> CEP: </span> <span> {{clinica?.endereco.cep}} </span> 
     </div>
 </div>

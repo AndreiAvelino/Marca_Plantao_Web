@@ -1,10 +1,11 @@
-import {  Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { Rotas, TipoEvento } from 'src/enum/enum';
 import { AdicionarRemoverProfissionalOfertaDados, Oferta } from 'src/models/entidades/oferta';
-import { ColunaTabela, Tabela } from 'src/models/table';
+import { ColunaTabela, Medida, Tabela } from 'src/models/table';
 import { OfertaService } from 'src/services/oferta.service';
 import { BotoesOpcoesListagemOfertaComponent, OpcoesOferta } from './botoes-opcoes-listagem-oferta/botoes-opcoes-listagem-oferta.component';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -16,7 +17,7 @@ import { Evento } from 'src/models/entidades/evento';
   templateUrl: './listagem-oferta.component.html',
   styleUrls: ['./listagem-oferta.component.css']
 })
-export class ListagemOfertaComponent extends PadraoComponent implements OnInit {
+export class ListagemOfertaComponent extends PadraoComponent implements OnInit, AfterContentChecked {
 
   private ofertas: Array<Oferta> = []
 
@@ -24,12 +25,14 @@ export class ListagemOfertaComponent extends PadraoComponent implements OnInit {
     {
       Chave: "razaoSocial",
       Descricao: "Clínica",
-      Tamanho: "70"
+      Tamanho: "130",
+      Medida: Medida.Pixel
     },
     {
       Chave: "dataInicial",
       Descricao: "Data do plantão",
-      Tamanho: "30"
+      Tamanho: "130",
+      Medida: Medida.Pixel
     }
   ]
 
@@ -47,6 +50,7 @@ export class ListagemOfertaComponent extends PadraoComponent implements OnInit {
   }
 
   constructor(
+    private cdref: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
     private _bottomSheet: MatBottomSheet,
@@ -62,6 +66,10 @@ export class ListagemOfertaComponent extends PadraoComponent implements OnInit {
         dataInicial: this.retorna_legivel_de_yyyymmddhhmmss(x.dataInicial),
       }
     })
+  }
+
+  ngAfterContentChecked(): void {
+    this.cdref.detectChanges();
   }
 
   public async abrir_sheet(linha: any): Promise<void>{

@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Rotas, StatusPlantao, TipoEvento } from 'src/enum/enum';
 import { Evento } from 'src/models/entidades/evento';
-import { ColunaTabela, Tabela } from 'src/models/table';
+import { ColunaTabela, Medida, Tabela } from 'src/models/table';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BotoesOpcoesHistoricoPlantaoComponent, OpcoesPlantao } from './botoes-opcoes-historico-plantao/botoes-opcoes-historico-plantao.component';
+
 @Component({
   selector: 'app-historico-plantao',
   templateUrl: './historico-plantao.component.html',
   styleUrls: ['./historico-plantao.component.css']
 })
-export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit {
+export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit, AfterContentChecked {
 
   public eventos: Evento[]
 
@@ -19,22 +21,26 @@ export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit
     {
       Chave: "razaoSocial",
       Descricao: "Clínica",
-      Tamanho: "55"
+      Tamanho: "30",
+      Medida: Medida.Pixel
     },
     {
       Chave: "status",
       Descricao: "Status",
-      Tamanho: "15"
+      Tamanho: "80",
+      Medida: Medida.Pixel
     },
     {
       Chave: "dataInicial",
       Descricao: "Data inicial",
-      Tamanho: "15"
+      Tamanho: "130",
+      Medida: Medida.Pixel
     },
     {
       Chave: "dataFinal",
       Descricao: "Data final",
-      Tamanho: "15"
+      Tamanho: "130",
+      Medida: Medida.Pixel
     }
   ]
 
@@ -47,10 +53,11 @@ export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit
     BotaoAcoes: true,
     Filtro: false,
     Titulo: "Historico de plantões",
-    Margem: "10px"
+    Margem: "10px",
   }
   
   constructor(
+    private cdref: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
     private _bottomSheet: MatBottomSheet
@@ -68,6 +75,11 @@ export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit
       }
     })
   }
+
+  ngAfterContentChecked(): void {
+    this.cdref.detectChanges();
+  }
+
   public retorna_status_plantao(index: number): string {
     switch(index){
       case StatusPlantao.NaoIniciado: return "Não inciado";

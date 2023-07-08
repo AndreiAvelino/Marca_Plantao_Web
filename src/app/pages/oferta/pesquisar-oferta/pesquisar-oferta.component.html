@@ -1,5 +1,11 @@
-<div class="cards">
-    <card-oferta [oferta]="oferta" *ngFor="let oferta of ofertas"></card-oferta>
+<div class="cards" *ngIf="ofertas.length > 1">
+    <card-oferta [oferta]="oferta" *ngFor="let oferta of ofertas" (emitirCandiatura)="filtrarOfertas($event)"></card-oferta>
+</div>
+<div class="cards" *ngIf="ofertas.length == 0" style="display: flex; justify-content: center;">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <span style="font-size: 20px; font-weight: 600; margin-bottom: 10px;"> Não há ofertas disponíveis </span>
+        <span> Por favor volte mais tarde </span>
+    </div>
 </div>
 
 <botoes-opcoes-oferta (emiteClickBotao)="onClickBotaoFiltro()"></botoes-opcoes-oferta>

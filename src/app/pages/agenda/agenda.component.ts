@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { Corevento, StatusPlantao, TipoEvento } from 'src/enum/enum';
@@ -32,6 +32,7 @@ import { InicializarPlantaoComponent } from './modals-plantao/inicializar-planta
 import { OpcoesAgendaComponent } from './componentes-agenda/opcoes-agenda/opcoes-agenda.component';
 import { OpcoesAgendaModalComponent } from './componentes-agenda/opcoes-agenda-modal/opcoes-agenda-modal.component';
 import { PerfilUsuarioComponent } from '../usuario/perfil-usuario/perfil-usuario.component';
+import { ChangeDetectorRef } from '@angular/core';
 
 interface EventSource {
   id: string
@@ -56,7 +57,7 @@ enum Layout {
   templateUrl: './agenda.component.html',
   styleUrls: ['./agenda.component.scss']
 })
-export class AgendaComponent extends PadraoComponent implements OnInit {
+export class AgendaComponent extends PadraoComponent implements OnInit, AfterContentChecked {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -80,8 +81,9 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
       plantao_finalizado: true
     }
   }
-
+  
   constructor(
+    private cdref: ChangeDetectorRef,
     private _bottomSheet: MatBottomSheet,
     private agendaService: AgendaService,
     private ofertaService: OfertaService,
@@ -90,9 +92,14 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
     super();
   }
 
+
   async ngOnInit(): Promise<void> {
     await this.get_all_evento();
     this.checar_layout();
+  }
+
+  ngAfterContentChecked(): void {
+    this.cdref.detectChanges();
   }
 
   //#region METODOS DE GERACAO DE EVENTOS 
@@ -481,6 +488,17 @@ export class AgendaComponent extends PadraoComponent implements OnInit {
   }
 
   private async alterar_oferta(e: EventClickArg): Promise<void> {
+
+    let oferta
+
+    await this.get_oferta(e.event.id)
+      .then(x => oferta = x.data)
+
+    if(oferta.profissionais.length > 0){
+      this.mensagem_erro(`A oferta possui ${oferta.profissionais.length} ${oferta.profissionais.length == 1 ? 'candidato' : 'candidatos'}, não é possível altera-la`)
+      return;
+    }
+
     await this.get_oferta(e.event.id)
       .then(x => this.modal_oferta(x.data))
       .then(x => this.put_oferta(x))

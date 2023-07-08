@@ -48,7 +48,7 @@ export class PerfilClinicaComponent implements OnInit {
   }
 
   public retorna_imagem_clinica(): string {
-    if(this.clinica.imagem){
+    if(this.clinica?.imagem){
       return 'data:image/jpeg;base64,' + this.clinica.imagem 
     } else {
       return "assets/sem-imagem-clinica.png";

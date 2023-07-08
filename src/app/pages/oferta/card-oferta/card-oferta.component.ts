@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,6 +13,7 @@ import { ClinicaService } from 'src/services/clinica.service';
 import { OfertaService } from 'src/services/oferta.service';
 
 
+
 @Component({
   selector: 'card-oferta',
   templateUrl: './card-oferta.component.html',
@@ -20,6 +21,7 @@ import { OfertaService } from 'src/services/oferta.service';
 })
 export class CardOfertaComponent extends PadraoComponent implements OnInit {
 
+  @Output() emitirCandiatura = new EventEmitter();
   @Input() oferta: Oferta;
 
   public mostrarOferta: boolean = false;
@@ -52,10 +54,12 @@ export class CardOfertaComponent extends PadraoComponent implements OnInit {
     } as AdicionarRemoverProfissionalOfertaDados
 
 
-    this.ofertaService.adicionar_candidato_oferta(adicionarCandidato).toPromise()
+    await this.ofertaService.adicionar_candidato_oferta(adicionarCandidato).toPromise()
       .then(() => this.mensagem_sucesso("Candidatura realizada!"))
       .catch((e: HttpErrorResponse) => this.mensagem_erro(e.error.errors))
-      
+    
+    this.emitirCandiatura.emit(this.oferta.id)
+
   }
 
   public onClickBtnVerOferta(oferta: Oferta): void {
