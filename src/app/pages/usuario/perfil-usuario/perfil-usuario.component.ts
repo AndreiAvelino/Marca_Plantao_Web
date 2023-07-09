@@ -46,11 +46,11 @@ export class PerfilUsuarioComponent extends PadraoComponent implements OnInit {
   }
 
   public retorna_media(): number {
-    if(this.profissional.avaliacoes.length == 0){
+    if(this.avaliacoes.length == 0){
       return 0
     }
 
-    return this.profissional.avaliacoes.map(x => x.nota).reduce((a, b) => a + b, 0) / this.profissional.avaliacoes.length    
+    return this.avaliacoes.map(x => x.nota).reduce((a, b) => a + b, 0) / this.avaliacoes.length    
   }
 
   public retorna_quantidade_plantoes(): number {
