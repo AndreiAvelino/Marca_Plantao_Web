@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Oferta } from 'src/models/entidades/oferta';
 import { OfertaService } from 'src/services/oferta.service';
-import { FiltrarListaOfertaComponent } from '../filtrar-lista-oferta/filtrar-lista-oferta.component';
+import { FiltrarListaOfertaComponent, Filtro } from '../filtrar-lista-oferta/filtrar-lista-oferta.component';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { AgendaService } from 'src/services/agenda.service';
 import { Evento } from 'src/models/entidades/evento';
 import { Response } from 'src/models/response';
 import { TipoEvento } from 'src/enum/enum';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pesquisar-oferta',
@@ -18,6 +19,13 @@ export class PesquisarOfertaComponent extends PadraoComponent implements OnInit 
 
   public ofertas: Oferta[] = [];
   public ofertasCadidatadas: Evento[] = []
+  public filtros: Filtro = {
+    turno: "",
+    valorInicial: "0",
+    valorFinal: "5000",
+    dataInicial: "",
+    dataFinal: ""
+  }
 
   constructor(
     private ofertaService: OfertaService,
@@ -34,10 +42,24 @@ export class PesquisarOfertaComponent extends PadraoComponent implements OnInit 
 }
 
   public filtrar_lista_oferta(): void {
+    console.log(this.filtros)
+
     this.dialog.open(FiltrarListaOfertaComponent, {
-      width: '500px'
+      width: '500px',
+      data: this.filtros
     })
     .afterClosed()
+    .pipe(
+      tap((x) => {
+        this.filtros = {
+          turno: x.turno,
+          dataInicial: x.dataInicio,
+          dataFinal: x.dataFinal,
+          valorInicial: x.valorInicial,
+          valorFinal: x.valorFinal
+        }
+      })
+    )
     .subscribe((x) => this.get_all(
         x?.dataInicial, 
         x?.dataFinal,

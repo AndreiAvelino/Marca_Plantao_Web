@@ -1,4 +1,4 @@
-<div class="cards" *ngIf="ofertas.length > 1">
+<div class="cards" *ngIf="ofertas.length >= 1">
     <card-oferta [oferta]="oferta" *ngFor="let oferta of ofertas" (emitirCandiatura)="filtrarOfertas($event)"></card-oferta>
 </div>
 <div class="cards" *ngIf="ofertas.length == 0" style="display: flex; justify-content: center;">

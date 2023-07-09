@@ -7,6 +7,7 @@ import { ProfissionalService } from 'src/services/profissional.service';
 import { FormControl } from '@angular/forms';
 import { AlterarPerfilUsuarioComponent } from './alterar-perfil-usuario/alterar-perfil-usuario.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AvaliacaoService } from 'src/services/avaliacao.service';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -17,10 +18,12 @@ export class PerfilUsuarioComponent extends PadraoComponent implements OnInit {
 
   public profissional: Profissional
   public imagem;
+  public avaliacoes
 
   constructor(
     private router: Router,
-    private profissionalService: ProfissionalService
+    private profissionalService: ProfissionalService,
+    private avaliacaoService: AvaliacaoService
   ) {
     super();
   }
@@ -28,6 +31,9 @@ export class PerfilUsuarioComponent extends PadraoComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.profissionalService.get(this.usuarioLogado.id).toPromise()
       .then(x => this.profissional = x.data)
+
+    await this.avaliacaoService.get_avaliacoes(this.usuarioLogado.id).toPromise()
+      .then(x => this.avaliacoes = x.data)
 
     this.gera_imagem_usuario();
   }

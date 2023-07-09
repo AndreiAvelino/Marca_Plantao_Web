@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PadraoComponent } from 'src/app/@padrao/padrao.component';
 import { Clinica } from 'src/models/entidades/clinica';
-import { ColunaTabela, Tabela } from 'src/models/table';
+import { ColunaTabela, Medida, Tabela } from 'src/models/table';
 import { ClinicaService } from 'src/services/clinica.service';
 import { CriarUsuarioAdministradorComponent } from '../../usuario/criar-usuario-administrador/criar-usuario-administrador.component';
 import { switchMap } from 'rxjs/operators';
@@ -28,7 +28,8 @@ export class ConfigurarClinicaComponent extends PadraoComponent implements OnIni
     {
       Chave: "email",
       Descricao: "E-mail",
-      Tamanho: "10000"
+      Tamanho: "1300",
+      Medida: Medida.Pixel
     },
 
   ]

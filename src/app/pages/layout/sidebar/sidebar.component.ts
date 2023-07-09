@@ -129,7 +129,7 @@ export class SidebarComponent extends PadraoComponent implements OnInit, AfterVi
 
   public sair(){
     this.remover_cookie("usuario");
-    this._router.navigate([Rotas.Login])
+    this._router.navigate([Rotas.Login]).finally(() => window.location.reload())
   }
 
   public perfil_usuario(): void {

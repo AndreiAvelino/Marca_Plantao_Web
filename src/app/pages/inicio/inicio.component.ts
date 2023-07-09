@@ -64,7 +64,7 @@ export class InicioComponent extends PadraoComponent {
     this.cards.push({
       color: "3px solid" + Corevento.Plantao_Finalizado,
       data: eventos.filter(x => x.tipo == TipoEvento.Plantao && x.status == StatusPlantao.Finalizado).length,
-      info: "Plantoes a finalizados"
+      info: "Plantoes finalizados"
     })
 
   }

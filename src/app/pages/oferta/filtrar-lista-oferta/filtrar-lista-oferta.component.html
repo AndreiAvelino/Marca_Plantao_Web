@@ -27,6 +27,8 @@
                     <mat-radio-button value="12h">12h</mat-radio-button>
                     <br>
                     <mat-radio-button value="24h">24h</mat-radio-button>
+                    <br>
+                    <mat-radio-button value="">Ambos</mat-radio-button>
                 </mat-radio-group>    
             </div>
 
@@ -41,14 +43,14 @@
 
             <app-input type="number"
                        formControlName="valorInicial"
-                       [label]="'Valor Inicial'"
+                       [label]="'Valor inicial'"
                        [control]="formulario.controls.valorInicial">
             </app-input>
 
               
             <app-input type="number"
                        formControlName="valorFinal"
-                       [label]="'Valor inicial'"
+                       [label]="'Valor final'"
                        [control]="formulario.controls.valorFinal">
             </app-input>
 

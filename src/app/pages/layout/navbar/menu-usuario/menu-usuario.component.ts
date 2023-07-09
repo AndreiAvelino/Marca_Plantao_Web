@@ -29,7 +29,7 @@ export class MenuUsuarioComponent extends PadraoComponent implements OnInit {
 
   public sair(){
     this.remover_cookie("usuario");
-    this._router.navigate([Rotas.Login])
+    this._router.navigate([Rotas.Login]).finally(() => window.location.reload())
   }
 
   public mudar_foto(){

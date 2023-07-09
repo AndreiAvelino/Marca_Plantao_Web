@@ -69,8 +69,9 @@ export class InfoOfertaComponent implements OnInit {
     switch(index){
       case FormaPagamento.Pix: return "Pix";
       case FormaPagamento.Dinheiro: return "Dinheiro";
-      case FormaPagamento.Cartao: return "Cartão";
       case FormaPagamento.Cheque: return "Cheque";
+      case FormaPagamento.Credito: return "Cartão de crédito";
+      case FormaPagamento.Debito: return "Cartão de débito";
     }
   }
 

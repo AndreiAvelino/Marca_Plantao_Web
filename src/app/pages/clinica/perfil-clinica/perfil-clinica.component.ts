@@ -34,11 +34,11 @@ export class PerfilClinicaComponent implements OnInit {
     return url.searchParams.get("id");
   }
 
-  public gerar_media_nota(): number {
+  public gerar_media_nota(): string {
     if(this.clinica.avaliacoes.length > 0){
-      return this.clinica.avaliacoes.map(x => x.nota).reduce((a, b) => a + b, 0) / this.clinica.avaliacoes.length
+      return (this.clinica.avaliacoes.map(x => x.nota).reduce((a, b) => a + b, 0) / this.clinica.avaliacoes.length).toFixed(2)
     } else {
-      return 0
+      return "-"
     }
     
   }

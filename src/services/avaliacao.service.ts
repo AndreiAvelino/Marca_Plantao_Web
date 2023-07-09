@@ -16,7 +16,13 @@ export class AvaliacaoService {
     return this.httpClient.get<Response<AvaliacaoPlantao>>(environment.api + "ObterAvaliacaoPlantao?Id=" + idPlantao);
   }
 
+  public get_avaliacoes(idPlantao: string): Observable<Response<AvaliacaoPlantao>> {
+    return this.httpClient.get<Response<AvaliacaoPlantao>>(environment.api + "ObterAvaliacaoClinicaParaProfissional?Id=" + idPlantao);
+  }
+
   public put(avaliacao: AdicionarAvaliacaoPlantaoProfissional): Observable<Response<AdicionarAvaliacaoPlantaoProfissional>> {
     return this.httpClient.put<Response<AdicionarAvaliacaoPlantaoProfissional>>(environment.api + "AdicionarAvaliacaoPlantaoProfissional", avaliacao);
   }
+
+
 }

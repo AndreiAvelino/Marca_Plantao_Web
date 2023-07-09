@@ -68,10 +68,11 @@ export class CardOfertaComponent extends PadraoComponent implements OnInit {
 
   public retornaMetodoPagamento(metodoPagamento: FormaPagamento): string{
     switch(metodoPagamento){
-      case FormaPagamento.Pix:      return "Pix" 
-      case FormaPagamento.Dinheiro: return "Dinheiro"
-      case FormaPagamento.Cartao:   return "Cartão"
-      case FormaPagamento.Cheque:   return "Cheque"
+      case FormaPagamento.Pix: return "Pix";
+      case FormaPagamento.Dinheiro: return "Dinheiro";
+      case FormaPagamento.Cheque: return "Cheque";
+      case FormaPagamento.Credito: return "Cartão de crédito";
+      case FormaPagamento.Debito: return "Cartão de débito";
     }
 
   } 

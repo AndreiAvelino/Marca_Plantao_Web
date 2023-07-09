@@ -43,8 +43,9 @@ export enum StatusPagamento {
 export enum FormaPagamento {
     Pix = 0,
     Dinheiro = 1,
-    Cartao = 2,
-    Cheque = 3
+    Cheque = 2,
+    Credito = 3,
+    Debito = 4
 }
 
 export enum Corevento {

@@ -21,7 +21,7 @@ export class HistoricoPlantaoComponent extends PadraoComponent implements OnInit
     {
       Chave: "razaoSocial",
       Descricao: "Clínica",
-      Tamanho: "30",
+      Tamanho: "130",
       Medida: Medida.Pixel
     },
     {
